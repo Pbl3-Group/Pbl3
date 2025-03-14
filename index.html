@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFlex - Tìm việc bán thời gian & thời vụ</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-briefcase"></i>
+                    Job<span>Flex</span>
+                </a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Trang chủ</a></li>
+                    <li><a href="#">Việc làm</a></li>
+                    <li><a href="#">Hồ sơ & CV</a></li>
+                    <li><a href="#">Cẩm nang nghề nghiệp</a></li>
+                    <li><a href="#">Đăng tuyển</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="#" class="login-btn" id="loginBtn">Đăng nhập</a>
+                    <a href="#" class="register-btn" id="registerBtn">Đăng ký</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Tìm kiếm việc làm bán thời gian & thời vụ</h1>
+            <p>Nền tảng kết nối ứng viên và nhà tuyển dụng hàng đầu cho công việc bán thời gian và thời vụ</p>
+            <div class="search-box">
+                <input type="text" placeholder="Chức danh, kỹ năng hoặc công ty">
+                <select>
+                    <option value="">Địa điểm</option>
+                    <option value="hanoi">Hà Nội</option>
+                    <option value="hcm">TP. Hồ Chí Minh</option>
+                    <option value="danang">Đà Nẵng</option>
+                    <option value="binhduong">Bình Dương</option>
+                    <option value="bacninh">Bắc Ninh</option>
+                    <option value="dongnai">Đồng Nai</option>
+                    <option value="hungyen">Hưng Yên</option>
+                    <option value="haiduong">Hải Dương</option>
+                    <option value="haiphong">Hải Phòng</option>
+                    <option value="angiang">An Giang</option>
+                    <option value="baria-vungtau">Bà Rịa - Vũng Tàu</option>
+                    <option value="bacgiang">Bắc Giang</option>
+                    <option value="backan">Bắc Kạn</option>
+                    <option value="baclieu">Bạc Liêu</option>
+                    <option value="bentre">Bến Tre</option>
+                    <option value="binhdinh">Bình Định</option>
+                    <option value="binhphuoc">Bình Phước</option>
+                    <option value="binhthuan">Bình Thuận</option>
+                    <option value="camau">Cà Mau</option>
+                    <option value="cantho">Cần Thơ</option>
+                    <option value="caobang">Cao Bằng</option>
+                    <option value="cuulong">Cửu Long</option>
+                    <option value="daklak">Đắk Lắk</option>
+                    <option value="dacnong">Đắc Nông</option>
+                    <option value="dienbien">Điện Biên</option>
+                    <option value="dongthap">Đồng Tháp</option>
+                    <option value="gialai">Gia Lai</option>
+                    <option value="hagiang">Hà Giang</option>
+                    <option value="hanam">Hà Nam</option>
+                    <option value="hatinh">Hà Tĩnh</option>
+                    <option value="haugiang">Hậu Giang</option>
+                    <option value="hoabinh">Hòa Bình</option>
+                    <option value="khanhhoa">Khánh Hòa</option>
+                    <option value="kiengiang">Kiên Giang</option>
+                    <option value="kontum">Kon Tum</option>
+                    <option value="laichau">Lai Châu</option>
+                    <option value="lamdong">Lâm Đồng</option>
+                    <option value="langson">Lạng Sơn</option>
+                    <option value="laocai">Lào Cai</option>
+                    <option value="longan">Long An</option>
+                    <option value="namdinh">Nam Định</option>
+                    <option value="nghean">Nghệ An</option>
+                    <option value="ninhbinh">Ninh Bình</option>
+                    <option value="ninhthuan">Ninh Thuận</option>
+                    <option value="phutho">Phú Thọ</option>
+                    <option value="phuyen">Phú Yên</option>
+                    <option value="quangbinh">Quảng Bình</option>
+                    <option value="quangnam">Quảng Nam</option>
+                    <option value="quangngai">Quảng Ngãi</option>
+                    <option value="quangninh">Quảng Ninh</option>
+                    <option value="quangtri">Quảng Trị</option>
+                    <option value="soctrang">Sóc Trăng</option>
+                    <option value="sonla">Sơn La</option>
+                    <option value="tayninh">Tây Ninh</option>
+                    <option value="thaibinh">Thái Bình</option>
+                    <option value="thainguyen">Thái Nguyên</option>
+                    <option value="thanhhoa">Thanh Hóa</option>
+                    <option value="thuathienhue">Thừa Thiên Huế</option>
+                    <option value="tiengiang">Tiền Giang</option>
+                    <option value="toanquoc">Toàn Quốc</option>
+                </select>
+                <select>
+                    <option value="">Loại hình</option>
+                    <option value="parttime">Bán thời gian</option>
+                    <option value="temporary">Thời vụ</option>
+                    <option value="freelance">Freelance</option>
+                </select>
+                <button type="submit">Tìm kiếm</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tại sao chọn JobFlex?</h2>
+                <p>Nền tảng kết nối thông minh và hiệu quả giữa ứng viên và nhà tuyển dụng</p>
+            </div>
+            <div class="features-container">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Tìm kiếm thông minh</h3>
+                    <p>Hệ thống tìm kiếm nâng cao với nhiều bộ lọc giúp bạn tìm được công việc phù hợp nhất</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Nhận việc ngay</h3>
+                    <p>Chức năng Auto-Accept cho phép ứng viên nhận việc thời vụ ngay lập tức mà không cần chờ duyệt</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Uy tín & An toàn</h3>
+                    <p>Hệ thống đánh giá hai chiều giúp xây dựng môi trường làm việc minh bạch và đáng tin cậy</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Vai trò linh hoạt</h3>
+                    <p>Dễ dàng chuyển đổi giữa vai trò ứng viên và nhà tuyển dụng khi cần thiết</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Chat trực tiếp</h3>
+                    <p>Trao đổi trực tiếp với nhà tuyển dụng hoặc ứng viên để làm rõ thông tin công việc</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Thông báo thông minh</h3>
+                    <p>Nhận thông báo về các công việc phù hợp với hồ sơ và kỹ năng của bạn</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Listings -->
+    <section class="job-listings">
+        <div class="container">
+            <div class="section-title">
+                <h2>Công việc nổi bật</h2>
+                <p>Khám phá các cơ hội việc làm bán thời gian và thời vụ hấp dẫn</p>
+            </div>
+            <div class="job-filters">
+                <div class="filter-group">
+                    <label for="location">Địa điểm</label>
+                    <select id="location">
+                        <option value="">Địa điểm</option>
+                        <option value="hanoi">Hà Nội</option>
+                        <option value="hcm">TP. Hồ Chí Minh</option>
+                        <option value="danang">Đà Nẵng</option>
+                        <option value="binhduong">Bình Dương</option>
+                        <option value="bacninh">Bắc Ninh</option>
+                        <option value="dongnai">Đồng Nai</option>
+                        <option value="hungyen">Hưng Yên</option>
+                        <option value="haiduong">Hải Dương</option>
+                        <option value="haiphong">Hải Phòng</option>
+                        <option value="angiang">An Giang</option>
+                        <option value="baria-vungtau">Bà Rịa - Vũng Tàu</option>
+                        <option value="bacgiang">Bắc Giang</option>
+                        <option value="backan">Bắc Kạn</option>
+                        <option value="baclieu">Bạc Liêu</option>
+                        <option value="bentre">Bến Tre</option>
+                        <option value="binhdinh">Bình Định</option>
+                        <option value="binhphuoc">Bình Phước</option>
+                        <option value="binhthuan">Bình Thuận</option>
+                        <option value="camau">Cà Mau</option>
+                        <option value="cantho">Cần Thơ</option>
+                        <option value="caobang">Cao Bằng</option>
+                        <option value="cuulong">Cửu Long</option>
+                        <option value="daklak">Đắk Lắk</option>
+                        <option value="dacnong">Đắc Nông</option>
+                        <option value="dienbien">Điện Biên</option>
+                        <option value="dongthap">Đồng Tháp</option>
+                        <option value="gialai">Gia Lai</option>
+                        <option value="hagiang">Hà Giang</option>
+                        <option value="hanam">Hà Nam</option>
+                        <option value="hatinh">Hà Tĩnh</option>
+                        <option value="haugiang">Hậu Giang</option>
+                        <option value="hoabinh">Hòa Bình</option>
+                        <option value="khanhhoa">Khánh Hòa</option>
+                        <option value="kiengiang">Kiên Giang</option>
+                        <option value="kontum">Kon Tum</option>
+                        <option value="laichau">Lai Châu</option>
+                        <option value="lamdong">Lâm Đồng</option>
+                        <option value="langson">Lạng Sơn</option>
+                        <option value="laocai">Lào Cai</option>
+                        <option value="longan">Long An</option>
+                        <option value="namdinh">Nam Định</option>
+                        <option value="nghean">Nghệ An</option>
+                        <option value="ninhbinh">Ninh Bình</option>
+                        <option value="ninhthuan">Ninh Thuận</option>
+                        <option value="phutho">Phú Thọ</option>
+                        <option value="phuyen">Phú Yên</option>
+                        <option value="quangbinh">Quảng Bình</option>
+                        <option value="quangnam">Quảng Nam</option>
+                        <option value="quangngai">Quảng Ngãi</option>
+                        <option value="quangninh">Quảng Ninh</option>
+                        <option value="quangtri">Quảng Trị</option>
+                        <option value="soctrang">Sóc Trăng</option>
+                        <option value="sonla">Sơn La</option>
+                        <option value="tayninh">Tây Ninh</option>
+                        <option value="thaibinh">Thái Bình</option>
+                        <option value="thainguyen">Thái Nguyên</option>
+                        <option value="thanhhoa">Thanh Hóa</option>
+                        <option value="thuathienhue">Thừa Thiên Huế</option>
+                        <option value="tiengiang">Tiền Giang</option>
+                        <option value="toanquoc">Toàn Quốc</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="job-type">Loại hình</label>
+                    <select id="job-type">
+                        <option value="">Tất cả loại hình</option>
+                        <option value="parttime">Bán thời gian</option>
+                        <option value="temporary">Thời vụ</option>
+                        <option value="freelance">Freelance</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="category">Ngành nghề</label>
+                    <select id="category">
+                        <option value="">Tất cả ngành nghề</option>
+                        <option value="f&b">F&B / Nhà hàng</option>
+                        <option value="retail">Bán lẻ / Cửa hàng</option>
+                        <option value="education">Giáo dục</option>
+                        <option value="admin">Hành chính / Văn phòng</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="salary">Mức lương</label>
+                    <select id="salary">
+                        <option value="">Tất cả mức lương</option>
+                        <option value="0-2m">Dưới 2 triệu</option>
+                        <option value="2-5m">2 - 5 triệu</option>
+                        <option value="5m+">Trên 5 triệu</option>
+                    </select>
+                </div>
+            </div>
+            <div class="jobs-container">
+                <div class="job-card">
+                    <div class="job-details">
+                        <h3 class="job-title">Nhân viên phục vụ bàn cuối tuần</h3>
+                        <div class="company-name">
+                            <i class="fas fa-building"></i> Nhà Hàng Sunshine
+                        </div>
+                        <p>Cần tuyển nhân viên phục vụ làm việc các buổi tối cuối tuần. Không yêu cầu kinh nghiệm, sẽ được đào tạo.</p>
+                        <div class="job-meta">
+                            <div>
+                                <i class="fas fa-map-marker-alt"></i> Quận 1, TP.HCM
+                            </div>
+                            <div>
+                                <i class="fas fa-money-bill-wave"></i> 35,000 VNĐ/giờ
+                            </div>
+                            <div>
+                                <i class="far fa-clock"></i> Bán thời gian
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Về chúng tôi</h4>
+                <ul>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Hỏi đáp</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Điều khoản dịch vụ</a></li>
+                    <li><a href="#">Quy chế hoạt động</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Liên kết nhanh</h4>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Tìm việc</a></li>
+                    <li><a href="#">Đăng tin tuyển dụng</a></li>
+                    <li><a href="#">Bảng giá dịch vụ</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <ul>
+                    <li><a href="#">Hướng dẫn sử dụng</a></li>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Điều khoản sử dụng</a></li>
+                    <li><a href="#">Quy chế hoạt động</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Liên hệ</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Q. Liên Chiểu, TP. Đà Nẵng</p>
+                <p><i class="fas fa-phone"></i> 0123456789</p>
+                <p><i class="fas fa-envelope"></i> pbl3@jobflex.com.vn</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 JobFlex. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </div>
+</footer>
