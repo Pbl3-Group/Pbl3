@@ -16,7 +16,7 @@
     <title>Sign up & Sign in Form</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container sign-up-mode">
       <div class="forms-container">
         <div class="signin-signup">
           <!-- Sign-up form (Đăng ký) displayed first -->
@@ -229,7 +229,7 @@
 
               <div class="form-step" id="step5">
                 <div class="step-header">
-                  <span></span>
+                  <a class="skip-link" data-skip="5">Có thể bỏ qua</a>
                   <h3 class="step-title">Thành phố</h3>
                 </div>
                 
@@ -248,7 +248,7 @@
                 
                 <div class="input-field">
                   <i class="fas fa-city"></i>
-                  <select name="city" required>
+                  <select name="city">
                     <option value="" disabled selected>Thành phố</option>
                     <option value="hanoi">Hà Nội</option>
                     <option value="hcm">TP. Hồ Chí Minh</option>
@@ -257,6 +257,9 @@
                     <option value="other">Khác</option>
                   </select>
                 </div>
+                
+                <!-- Add this error message element -->
+                <div class="error-message" id="city-error"></div>
                 
                 <div class="form-navigation">
                   <button type="button" class="btn prev-step">Quay lại</button>
@@ -341,125 +344,124 @@
     <script src="../js/app.js"></script>
     <script>
       $(document).ready(function() {
-        // Initialize datepicker
-        $("#dob").datepicker({
-          dateFormat: "mm/dd/yy",
-          changeMonth: true,
-          changeYear: true,
-          yearRange: "-100:+0",
-          maxDate: "-18Y" // Ensure user is at least 18 years old
-        });
+  // Initialize datepicker
+  $("#dob").datepicker({
+    dateFormat: "mm/dd/yy",
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-100:+0",
+    maxDate: "-18Y" // Ensure user is at least 18 years old
+  });
 
-        let currentStep = 1;
-        const totalSteps = 5;
+  let currentStep = 1;
+  const totalSteps = 5;
 
-        // Update progress bar
-        function updateProgress() {
-          const progress = (currentStep / totalSteps) * 100;
-          $('.progress').css('width', progress + '%');
-          $('.step-dot').removeClass('active');
-          $('.step-dot').slice(0, currentStep).addClass('active');
-        }
+  // Update progress bar
+  function updateProgress() {
+    const progress = (currentStep / totalSteps) * 100;
+    $('.progress').css('width', progress + '%');
+    $('.step-dot').removeClass('active');
+    $('.step-dot').slice(0, currentStep).addClass('active');
+  }
 
-        // Show specific step
-        function showStep(step) {
-          $('.form-step').removeClass('active');
-          $(`#step${step}`).addClass('active');
-          currentStep = step;
-          updateProgress();
-        }
+  // Show specific step
+  function showStep(step) {
+    $('.form-step').removeClass('active');
+    $(`#step${step}`).addClass('active');
+    currentStep = step;
+    updateProgress();
+  }
 
-        // Validation functions
-        function validatePhone(phone) {
-          return /^\d{10,11}$/.test(phone);
-        }
+  // Validation functions
+  function validatePhone(phone) {
+    return /^\d{10,11}$/.test(phone);
+  }
 
-        function validateEmailOrFacebook(contact) {
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          const fbRegex = /^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9(\.\?)?]/;
-          return emailRegex.test(contact) || fbRegex.test(contact);
-        }
+  function validateEmailOrFacebook(contact) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const fbRegex = /^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9(\.\?)?]/;
+    return emailRegex.test(contact) || fbRegex.test(contact);
+  }
 
-        function validateStep1() {
-          const fullName = $('input[name="fullName"]').val();
-          const gender = $('input[name="gender"]:checked').val();
-          const phone = $('input[name="phone"]').val();
-          const dob = $('input[name="dob"]').val();
-          const contact = $('input[name="email"]').val();
-          const password = $('input[name="password"]').val();
-          const confirmPassword = $('input[name="confirmPassword"]').val();
-          const terms = $('input[name="terms"]').is(':checked');
+  function validateStep1() {
+    const fullName = $('input[name="fullName"]').val();
+    const gender = $('input[name="gender"]:checked').val();
+    const phone = $('input[name="phone"]').val();
+    const dob = $('input[name="dob"]').val();
+    const contact = $('input[name="email"]').val();
+    const password = $('input[name="password"]').val();
+    const confirmPassword = $('input[name="confirmPassword"]').val();
+    const terms = $('input[name="terms"]').is(':checked');
 
-          let errorMessage = '';
+    let errorMessage = '';
 
-          if (!fullName) errorMessage = 'Vui lòng nhập họ tên';
-          else if (!gender) errorMessage = 'Vui lòng chọn giới tính';
-          else if (!phone || !validatePhone(phone)) errorMessage = 'Số điện thoại phải có 10-11 chữ số';
-          else if (!dob) errorMessage = 'Vui lòng chọn ngày sinh';
-          else if (!contact || !validateEmailOrFacebook(contact)) errorMessage = 'Email hoặc link Facebook không hợp lệ';
-          else if (!password) errorMessage = 'Vui lòng nhập mật khẩu';
-          else if (!confirmPassword || password !== confirmPassword) errorMessage = 'Mật khẩu không khớp';
-          else if (!terms) errorMessage = 'Vui lòng đồng ý với điều khoản';
+    if (!fullName) errorMessage = 'Vui lòng nhập họ tên';
+    else if (!gender) errorMessage = 'Vui lòng chọn giới tính';
+    else if (!phone || !validatePhone(phone)) errorMessage = 'Số điện thoại phải có 10-11 chữ số';
+    else if (!dob) errorMessage = 'Vui lòng chọn ngày sinh';
+    else if (!contact || !validateEmailOrFacebook(contact)) errorMessage = 'Email hoặc link Facebook không hợp lệ';
+    else if (!password) errorMessage = 'Vui lòng nhập mật khẩu';
+    else if (!confirmPassword || password !== confirmPassword) errorMessage = 'Mật khẩu không khớp';
+    else if (!terms) errorMessage = 'Vui lòng đồng ý với điều khoản';
 
-          $('#error-message').text(errorMessage).toggle(!!errorMessage);
-          return !errorMessage;
-        }
+    $('#error-message').text(errorMessage).toggle(!!errorMessage);
+    return !errorMessage;
+  }
 
-        // Real-time password match validation
-        $('#confirmPassword').on('input', function() {
-          const password = $('#password').val();
-          const confirmPassword = $(this).val();
-          const error = password !== confirmPassword;
-          $('#passwordMatchError').toggle(error);
-        });
+  // Real-time password match validation
+  $('#confirmPassword').on('input', function() {
+    const password = $('#password').val();
+    const confirmPassword = $(this).val();
+    const error = password !== confirmPassword;
+    $('#passwordMatchError').toggle(error);
+  });
 
-        // Navigation buttons
-        $('.register-step').click(function() {
-          if (validateStep1()) {
-            showStep(2);
-          }
-        });
+  // Navigation buttons
+  $('.register-step').click(function() {
+    if (validateStep1()) {
+      showStep(2);
+    }
+  });
 
-        $('.prev-step').click(function() {
-          showStep(currentStep - 1);
-        });
+  $('.prev-step').click(function() {
+    showStep(currentStep - 1);
+  });
 
-        $('.next-step').click(function() {
-          if (currentStep === 3) {
-            const cv = $('#cvUpload').val();
-            if (!cv && !$(this).hasClass('skip')) {
-              $('#error-message').text('Vui lòng upload CV hoặc bỏ qua').show();
-              return;
-            }
-          }
-          showStep(currentStep + 1);
-        });
+  $('.next-step').click(function() {
+    // Fixed: Remove CV upload validation
+    showStep(currentStep + 1);
+  });
 
-        $('.skip-link').click(function() {
-          const skipTo = $(this).data('skip');
-          showStep(skipTo);
-        });
+  $('.skip-link').click(function() {
+    const skipTo = $(this).data('skip');
+    showStep(skipTo);
+  });
 
-        $('form.sign-up-form').submit(function(e) {
-          e.preventDefault();
-          const city = $('select[name="city"]').val();
-          if (!city) {
-            $('#error-message').text('Vui lòng chọn thành phố').show();
-            return;
-          }
-          alert('Đăng ký thành công!');
-          // window.location.href = 'success.html';
-        });
+  // Add the error message element to step5
+  if (!$('#city-error').length) {
+    $('#step5 .input-field').after('<div class="error-message" id="city-error"></div>');
+  }
 
-        // Toggle password visibility
-        $('.toggle-password').click(function() {
-          const target = $(this).data('target');
-          const input = $(`#${target}`);
-          const type = input.attr('type') === 'password' ? 'text' : 'password';
-          input.attr('type', type);
-          $(this).toggleClass('fa-eye fa-eye-slash');
-        });
-      });
+  // Fixed form submission handler
+  $('form.sign-up-form').submit(function(e) {
+    e.preventDefault();
+    
+    // Check if a city is selected
+    // If city is selected, proceed with submission
+    $('#city-error').hide();
+    alert('Đăng ký thành công!');
+    // window.location.href = 'success.html';
+  });
+
+  // Toggle password visibility
+  $('.toggle-password').click(function() {
+    const target = $(this).data('target');
+    const input = $(`#${target}`);
+    const type = input.attr('type') === 'password' ? 'text' : 'password';
+    input.attr('type', type);
+    $(this).toggleClass('fa-eye fa-eye-slash');
+  });
+});
     </script>
   </body>
 </html>
