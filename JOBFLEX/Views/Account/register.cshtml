@@ -1,0 +1,280 @@
+@model JOBFLEX.Models.RegistrationViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="~/css/dangky.css" asp-append-version="true" />
+    <title>Đăng ký - JOBFLEX</title>
+</head>
+<body>
+    <div class="container sign-up-mode">
+        <div class="forms-container">
+            <div class="signin-signup">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "sign-up-form", id = "signupForm", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h2 class="title">Đăng ký</h2>
+                    <div class="form-container">
+                        <!-- Step 1 -->
+                        <div class="form-step active" id="step1">
+                            <div class="progress-container">
+                                <div class="progress-bar"><div class="progress" style="width: 20%"></div></div>
+                                <div class="step-indicator">
+                                    <div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
+                                </div>
+                            </div>
+                            <div class="name-gender-container">
+                                <div class="input-field name-field">
+                                    <i class="fas fa-user"></i>
+                                    @Html.TextBoxFor(m => m.FullName, new { placeholder = "Họ tên", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "error-message" })
+                                </div>
+                                <div class="gender-container">
+                                    <label class="gender-label">
+                                        @Html.RadioButtonFor(m => m.Gender, "Nam", new { required = "required" }) Nam
+                                    </label>
+                                    <label class="gender-label">
+                                        @Html.RadioButtonFor(m => m.Gender, "Nữ") Nữ
+                                    </label>
+                                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "error-message" })
+                                </div>
+                            </div>
+                            <div class="phone-dob-container">
+                                <div class="input-field phone-field">
+                                    <i class="fas fa-phone"></i>
+                                    @Html.TextBoxFor(m => m.Phone, new { placeholder = "SĐT", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "error-message" })
+                                </div>
+                                <div class="input-field dob-field">
+                                    <i class="fas fa-calendar"></i>
+                                    @Html.TextBoxFor(m => m.DateOfBirth, "{0:MM/dd/yyyy}", new { placeholder = "mm/dd/yyyy", id = "dob", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "error-message" })
+                                </div>
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-envelope"></i>
+                                @Html.TextBoxFor(m => m.EmailOrFacebook, new { placeholder = "email/facebook", required = "required" })
+                                @Html.ValidationMessageFor(m => m.EmailOrFacebook, "", new { @class = "error-message" })
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-lock"></i>
+                                @Html.PasswordFor(m => m.Password, new { placeholder = "Mật khẩu", required = "required", id = "password" })
+                                <i class="fas fa-eye toggle-password" data-target="password"></i>
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error-message" })
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-lock"></i>
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Nhập lại mật khẩu", required = "required", id = "confirmPassword" })
+                                <i class="fas fa-eye toggle-password" data-target="confirmPassword"></i>
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "error-message" })
+                            </div>
+                            <div class="checkbox-field">
+                                @Html.CheckBoxFor(m => m.TermsAgreed, new { id = "terms", required = "required" })
+                                <label for="terms">Điều khoản</label>
+                                @Html.ValidationMessageFor(m => m.TermsAgreed, "", new { @class = "error-message" })
+                            </div>
+                            <div class="error-message" id="error-message">
+                                @Html.ValidationSummary(true, "", new { @class = "error-message" })
+                            </div>
+                            <div class="form-navigation center">
+                                <button type="button" class="btn register-step">Tiếp theo</button>
+                            </div>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="form-step" id="step2">
+                            <div class="step-header">
+                                <a class="skip-link" data-skip="3">Có thể bỏ qua</a>
+                                <h3 class="step-title">Nhập mô tả</h3>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar"><div class="progress" style="width: 40%"></div></div>
+                                <div class="step-indicator">
+                                    <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
+                                </div>
+                            </div>
+                            <div class="input-field description-field">
+                                <i class="fas fa-pen"></i>
+                                @Html.TextAreaFor(m => m.Description, new { placeholder = "Mô tả" })
+                            </div>
+                            <div class="form-navigation">
+                                <button type="button" class="btn prev-step">Quay lại</button>
+                                <button type="button" class="btn next-step">Tiếp theo</button>
+                            </div>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="form-step" id="step3">
+                            <div class="step-header">
+                                <a class="skip-link" data-skip="4">Có thể bỏ qua</a>
+                                <h3 class="step-title">Upload CV</h3>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar"><div class="progress" style="width: 60%"></div></div>
+                                <div class="step-indicator">
+                                    <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div>
+                                </div>
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-file-upload"></i>
+                                @Html.TextBoxFor(m => m.CV, new { type = "file", id = "cvUpload" })
+                            </div>
+                            <div class="form-navigation">
+                                <button type="button" class="btn prev-step">Quay lại</button>
+                                <button type="button" class="btn next-step">Tiếp theo</button>
+                            </div>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="form-step" id="step4">
+                            <div class="step-header">
+                                <a class="skip-link" data-skip="5">Có thể bỏ qua</a>
+                                <h3 class="step-title">Thời gian làm việc</h3>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
+                                <div class="step-indicator">
+                                    <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot"></div>
+                                </div>
+                            </div>
+                            <div class="schedule-table">
+                                <table>
+                                    <thead>
+                                        <tr><th></th><th>Thứ 2</th><th>Thứ 3</th><th>Thứ 4</th><th>Thứ 5</th><th>Thứ 6</th><th>Thứ 7</th><th>CN</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Sáng</td>
+                                            <td><input type="checkbox" name="Schedule" value="Mon-Morning" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Tue-Morning" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Wed-Morning" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Thu-Morning" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Fri-Morning" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Sat-Morning" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Sun-Morning" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Chiều</td>
+                                            <td><input type="checkbox" name="Schedule" value="Mon-Afternoon" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Tue-Afternoon" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Wed-Afternoon" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Thu-Afternoon" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Fri-Afternoon" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Sat-Afternoon" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Sun-Afternoon" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tối</td>
+                                            <td><input type="checkbox" name="Schedule" value="Mon-Evening" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Tue-Evening" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Wed-Evening" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Thu-Evening" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Fri-Evening" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Sat-Evening" /></td>
+                                            <td><input type="checkbox" name="Schedule" value="Sun-Evening" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-navigation">
+                                <button type="button" class="btn prev-step">Quay lại</button>
+                                <button type="button" class="btn next-step">Tiếp theo</button>
+                            </div>
+                        </div>
+                        <!-- Step 5 -->
+                        <div class="form-step" id="step5">
+                            <div class="step-header">
+                                <h3 class="step-title">Thành phố</h3>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar"><div class="progress" style="width: 100%"></div></div>
+                                <div class="step-indicator">
+                                    <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div>
+                                </div>
+                            </div>
+                            <div class="input-field">
+                                <i class="fas fa-city"></i>
+                                @Html.DropDownListFor(m => m.City, new SelectList(new[] { "", "Hà Nội", "TP. Hồ Chí Minh", "Đà Nẵng", "Cần Thơ", "Khác" }), "Thành phố", new { required = "required" })
+                                @Html.ValidationMessageFor(m => m.City, "", new { @class = "error-message" })
+                            </div>
+                            <div class="form-navigation">
+                                <button type="button" class="btn prev-step">Quay lại</button>
+                                <button type="submit" class="btn solid">Hoàn thành</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="social-text">Hoặc đăng ký bằng mạng xã hội</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="panels-container">
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Welcome to JobFlex!</h3>
+                    <p>Tạo hồ sơ ấn tượng và kết nối với cơ hội việc làm phù hợp.</p>
+                    <p>Đã có tài khoản?</p>
+                    <a href="@Url.Action("Login", "Account")" class="btn transparent">Đăng nhập</a>
+                </div>
+                <img src="~/assets/img/register.svg" class="image" alt="" />
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/app.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $("#dob").datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0",
+                maxDate: "-18Y"
+            });
+
+            let currentStep = 1;
+            const totalSteps = 5;
+
+            function updateProgress() {
+                const progress = (currentStep / totalSteps) * 100;
+                $('.progress').css('width', progress + '%');
+                $('.step-dot').removeClass('active');
+                $('.step-dot').slice(0, currentStep).addClass('active');
+            }
+
+            function showStep(step) {
+                $('.form-step').removeClass('active');
+                $(`#step${step}`).addClass('active');
+                currentStep = step;
+                updateProgress();
+            }
+
+            $('.register-step').click(function () {
+                if ($('#signupForm').valid()) {
+                    showStep(2);
+                }
+            });
+            $('.prev-step').click(function () { showStep(currentStep - 1); });
+            $('.next-step').click(function () { showStep(currentStep + 1); });
+            $('.skip-link').click(function () { showStep($(this).data('skip')); });
+
+            $('.toggle-password').click(function () {
+                const target = $(this).data('target');
+                const input = $(`#${target}`);
+                input.attr('type', input.attr('type') === 'password' ? 'text' : 'password');
+                $(this).toggleClass('fa-eye fa-eye-slash');
+            });
+        });
+    </script>
+</body>
+</html>

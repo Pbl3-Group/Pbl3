@@ -1,0 +1,67 @@
+@model JOBFLEX.Models.LoginViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/dangnhap.css" asp-append-version="true" />
+    <title>Đăng nhập - JOBFLEX</title>
+</head>
+<body>
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <form method="post" class="sign-in-form">
+                    @Html.AntiForgeryToken()
+                    <h2 class="title">Đăng nhập</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="username" placeholder="Email hoặc SĐT" required />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" placeholder="Mật khẩu" id="sign-in-password" required />
+                        <i class="fas fa-eye toggle-password" data-target="sign-in-password"></i>
+                    </div>
+                    <input type="submit" value="Đăng nhập" class="btn solid" />
+                    <p class="social-text">Hoặc đăng nhập bằng mạng xã hội</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                    </div>
+                    @if (ViewBag.Error != null)
+                    {
+                        <p class="error-message">@ViewBag.Error</p>
+                    }
+                </form>
+            </div>
+        </div>
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Welcome back!</h3>
+                    <p>Tạo hồ sơ ấn tượng và kết nối với cơ hội việc làm phù hợp.</p>
+                    <p>Chưa có tài khoản?</p>
+                    <a href="@Url.Action("Register", "Account")" class="btn transparent">Đăng ký</a>
+                </div>
+                <img src="~/assets/img/log.svg" class="image" alt="" />
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/app.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $('.toggle-password').click(function () {
+                const target = $(this).data('target');
+                const input = $(`#${target}`);
+                input.attr('type', input.attr('type') === 'password' ? 'text' : 'password');
+                $(this).toggleClass('fa-eye fa-eye-slash');
+            });
+        });
+    </script>
+</body>
+</html>
