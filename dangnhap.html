@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFlex - Đăng nhập</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dangnhap.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="login-card">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <span>JobFlex</span>
+            </div>
+            
+            <h1>Đăng Nhập</h1>
+            <p class="welcome-text">Chào mừng trở lại! Vui lòng nhập thông tin của bạn để truy cập tài khoản.</p>
+            
+            <div class="social-login">
+                <button class="google-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google">
+                    Đăng nhập với Google
+                </button>
+                <button class="other-btn">
+                    <i class="fa-brands fa-apple"></i>
+                </button>
+            </div>
+            
+            <div class="divider">
+                <span>hoặc</span>
+            </div>
+            
+            <form>
+                <div class="form-group">
+                    <!-- <label for="username">Username or Email Address</label> -->
+                    <label for="identifier">Số Điện Thoại hoặc Email</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="username" placeholder="Nhập số điện thoại hoặc email">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="password-header">
+                        <label for="password">Mật Khẩu</label>
+                        <a href="forgot-password.html" class="forgot-link">Quên mật khẩu?</a>
+                    </div>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" placeholder="Nhập mật khẩu">
+                        <button type="button" class="toggle-password">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="remember-me">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="remember">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">Ghi nhớ đăng nhập</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="sign-in-btn">
+                    <span>Đăng Nhập</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+            
+            <div class="register-link">
+                <span>Chưa có tài khoản?</span> <a href="dangky.html">Đăng ký miễn phí</a>
+            </div>
+        </div>
+        
+        <div class="illustration" id="background-image">
+            <div class="overlay"></div>
+            
+            <div class="particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            
+            <div class="illustration-content">
+                <h2>Tìm công việc mơ ước của bạn</h2>
+                <p>Kết nối với hàng nghìn nhà tuyển dụng để có cơ hội phù hợp với kỹ năng và nguyện vọng của bạn.</p>
+                <div class="testimonial">
+                    <div class="quote">
+                        <i class="fa-solid fa-quote-left"></i>
+                    </div>
+                    <p>"JobFlex helped me find the perfect position in just two weeks. The platform is intuitive and the job matching is incredibly accurate!"</p>
+                    <div class="user-info">
+                        <div class="avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="user-details">
+                            <h4>Sarah Johnson</h4>
+                            <span>Software Developer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        document.querySelector('.toggle-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+        
+        // Add floating animation to sign-in button
+        setInterval(function() {
+            const btn = document.querySelector('.sign-in-btn');
+            btn.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.25)';
+            
+            setTimeout(function() {
+                btn.style.boxShadow = '0 6px 16px rgba(37, 99, 235, 0.35)';
+            }, 1000);
+        }, 2000);
+    </script>
+</body>
+</html>
