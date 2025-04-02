@@ -134,17 +134,126 @@
             <!-- Form 4: Thời gian làm việc -->
             <div class="form-step" id="form-step4">
                 <h2>Thời gian mong muốn làm việc</h2>
-                <div class="form-group">
-                    <label>Chọn các khung giờ phù hợp với bạn</label>
-                    <div class="time-slots">
-                        <div class="time-slot">Sáng (8h-12h)</div>
-                        <div class="time-slot">Chiều (13h-17h)</div>
-                        <div class="time-slot">Tối (18h-22h)</div>
-                        <div class="time-slot">Cả ngày</div>
-                        <div class="time-slot">Linh hoạt</div>
-                        <div class="time-slot">Cuối tuần</div>
-                    </div>
+<div class="form-group">
+    <label>Chọn các khung giờ phù hợp với bạn</label>
+    <div class="schedule-container">
+        <!-- Header: Các ngày trong tuần -->
+        <div class="schedule-header">
+            <div class="day">Thứ 2</div>
+            <div class="day">Thứ 3</div>
+            <div class="day">Thứ 4</div>
+            <div class="day">Thứ 5</div>
+            <div class="day">Thứ 6</div>
+            <div class="day">Thứ 7</div>
+            <div class="day">CN</div>
+        </div>
+        <!-- Body: Các khung giờ -->
+        <div class="schedule-body">
+            <div class="time-row">
+                <div class="time-label">Sáng (8h-12h)</div>
+                <div class="time-slot">
+                    <input type="checkbox" id="mon-morning" name="schedule[mon][morning]" checked hidden>
+                    <label for="mon-morning" class="time-slot-label available"></label>
                 </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="tue-morning" name="schedule[tue][morning]" checked hidden>
+                    <label for="tue-morning" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="wed-morning" name="schedule[wed][morning]" checked hidden>
+                    <label for="wed-morning" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="thu-morning" name="schedule[thu][morning]" checked hidden>
+                    <label for="thu-morning" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="fri-morning" name="schedule[fri][morning]" hidden>
+                    <label for="fri-morning" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sat-morning" name="schedule[sat][morning]" hidden>
+                    <label for="sat-morning" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sun-morning" name="schedule[sun][morning]" hidden>
+                    <label for="sun-morning" class="time-slot-label unavailable"></label>
+                </div>
+            </div>
+            <div class="time-row">
+                <div class="time-label">Chiều (13h-17h)</div>
+                <div class="time-slot">
+                    <input type="checkbox" id="mon-afternoon" name="schedule[mon][afternoon]" hidden>
+                    <label for="mon-afternoon" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="tue-afternoon" name="schedule[tue][afternoon]" hidden>
+                    <label for="tue-afternoon" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="wed-afternoon" name="schedule[wed][afternoon]" hidden>
+                    <label for="wed-afternoon" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="thu-afternoon" name="schedule[thu][afternoon]" hidden>
+                    <label for="thu-afternoon" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="fri-afternoon" name="schedule[fri][afternoon]" hidden>
+                    <label for="fri-afternoon" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sat-afternoon" name="schedule[sat][afternoon]" checked hidden>
+                    <label for="sat-afternoon" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sun-afternoon" name="schedule[sun][afternoon]" checked hidden>
+                    <label for="sun-afternoon" class="time-slot-label available"></label>
+                </div>
+            </div>
+            <div class="time-row">
+                <div class="time-label">Tối (18h-22h)</div>
+                <div class="time-slot">
+                    <input type="checkbox" id="mon-evening" name="schedule[mon][evening]" checked hidden>
+                    <label for="mon-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="tue-evening" name="schedule[tue][evening]" checked hidden>
+                    <label for="tue-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="wed-evening" name="schedule[wed][evening]" checked hidden>
+                    <label for="wed-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="thu-evening" name="schedule[thu][evening]" checked hidden>
+                    <label for="thu-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="fri-evening" name="schedule[fri][evening]" checked hidden>
+                    <label for="fri-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sat-evening" name="schedule[sat][evening]" checked hidden>
+                    <label for="sat-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sun-evening" name="schedule[sun][evening]" checked hidden>
+                    <label for="sun-evening" class="time-slot-label available"></label>
+                </div>
+            </div>
+        </div>
+        <!-- Legend: Chú thích màu sắc -->
+        <div class="schedule-legend">
+            <div class="legend-item">
+                <span class="legend-color available"></span> Có thể làm việc
+            </div>
+            <div class="legend-item">
+                <span class="legend-color unavailable"></span> Không thể làm việc
+            </div>
+        </div>
+    </div>
+</div>
 
                 <div class="form-group">
                     <label for="city">Thành phố bạn muốn làm việc</label>
