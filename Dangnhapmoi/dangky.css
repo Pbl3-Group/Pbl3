@@ -1,0 +1,1671 @@
+:root {
+    --primary-color: #4661F2;
+    --primary-light: #5A75FF;
+    --primary-dark: #3B52CF;
+    --accent-color: #f59e0b;
+    --light-color: #dbeafe;
+    --dark-color: #1e3a8a;
+    --text-color: #1f2937;
+    --text-secondary: #6b7280;
+    --background-color: #f3f4f6;
+    --white-color: #ffffff;
+    --border-color: #e5e7eb;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --success-color: #10b981;
+    --success-light: #d1fae5;
+    --error-color: #ef4444;
+    --error-light: #fee2e2;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    /* Đảm bảo không có khoảng trống ở bên ngoài */
+    min-height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    width: 100%;
+}
+
+.form-side {
+    width: 60%;
+    height: 100vh;
+    padding: 0 3vw; /* Giảm padding để thu nhỏ không gian */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--white-color);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.18);
+    overflow-y: auto; /* Thêm thanh cuộn nếu nội dung vượt quá */
+}
+
+
+.back-link {
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s;
+    line-height: 2;
+}
+
+.back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.back-link i {
+    margin-right: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 12px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.logo-text::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin-top: 4px;
+}
+
+h1 {
+    font-size: 28px;
+    color: var(--text-color);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 20px;
+    color: var(--text-color);
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.welcome-text {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.icon-input {
+    position: relative;
+}
+
+.icon-input i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+.icon-input input {
+    padding-left: 40px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 16px;
+    align-items: flex-end;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.form-row .form-group.gender-group {
+    flex: 0 0 auto; /* Không cho phần giới tính mở rộng */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-row .form-group.gender-group label {
+    margin-bottom: 0; /* Bỏ margin-bottom để căn chỉnh với input họ tên */
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-image: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.social-login {
+    margin: 20px 0;
+    position: relative;
+    text-align: center;
+}
+
+.social-login::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    z-index: 1;
+}
+
+.social-login span {
+    background-color: #f9fafb;
+    padding: 0 16px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    position: relative;
+    z-index: 2;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    background-color: #f3f4f6;
+}
+
+.social-btn img {
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 16px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+}
+
+.radio-option input {
+    margin-right: 8px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.checkbox-group input {
+    margin-right: 10px;
+    width: 18px; /* Tăng kích thước checkbox */
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary-color); /* Màu checkbox khi được chọn */
+    border-radius: 4px;
+}
+
+.checkbox-group label {
+    font-size: 14px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.checkbox-group label:hover {
+    color: var(--primary-color);
+}
+
+.checkbox-group a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.checkbox-group a:hover {
+    text-decoration: underline;
+}
+
+.footer-text {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 20px;
+}
+
+.footer-text a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}
+
+.steps-container {
+    margin-bottom: 20px;
+}
+
+.steps-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    position: relative;
+}
+
+.step {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    z-index: 1;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.step.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.step.completed {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.steps-indicator::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    right: 30px;
+    height: 2px;
+    background-color: #E5E7EB;
+    z-index: 0;
+}
+
+.step-label {
+    position: absolute;
+    top: 36px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    width: 120px;
+    text-align: center;
+    transform: translateX(-50%);
+    line-height: 1.5;
+    left: 50%;
+}
+
+/* Các form con */
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: #f3f4f6;
+}
+
+.testimonial {
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 24px;
+    border-radius: 16px;
+    max-width: 80%;
+}
+
+.testimonial-content {
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+    font-style: italic;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+}
+
+.testimonial-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin-right: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonial-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-info h4 {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.testimonial-info p {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .image-side {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .form-side {
+        padding: 0 2vw;
+    }
+}
+
+.city-select {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.success-message {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--success-color);
+    color: white;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.time-slot {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.time-slot:hover, .time-slot.selected {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.upload-cv {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.upload-cv:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(79, 70, 229, 0.05);
+}
+
+.upload-cv i {
+    font-size: 30px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.upload-cv p {
+    margin: 5px 0;
+    color: var(--text-secondary);
+}
+
+.upload-cv input {
+    display: none;
+}
+
+.illustration {
+    flex: 1;
+    background-image: url('pexels-photo-3184423.webp');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Các lớp phủ với hiệu ứng nâng cao */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+                rgba(70, 97, 242, 0.7), 
+                rgba(59, 82, 207, 0.75));
+    animation: gradientShift 15s infinite alternate;
+    backdrop-filter: blur(2px);
+    z-index: 0;
+}
+
+@keyframes gradientShift {
+    0% {
+        background: linear-gradient(135deg, 
+                    rgba(70, 97, 242, 0.7), 
+                    rgba(59, 82, 207, 0.75));
+    }
+    50% {
+        background: linear-gradient(135deg, 
+                    rgba(90, 117, 255, 0.65), 
+                    rgba(70, 97, 242, 0.7));
+    }
+    100% {
+        background: linear-gradient(135deg, 
+                    rgba(70, 97, 242, 0.7), 
+                    rgba(59, 82, 207, 0.75));
+    }
+}
+
+.illustration::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, 
+                rgba(255, 255, 255, 0.2) 0%, 
+                rgba(255, 255, 255, 0) 70%);
+    animation: pulse 15s infinite ease-in-out;
+    z-index: 1;
+}
+
+.illustration::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(ellipse at center, 
+                rgba(255, 255, 255, 0.12) 0%, 
+                rgba(255, 255, 255, 0) 70%);
+    animation: pulse2 18s infinite ease-in-out;
+    z-index: 1;
+}
+
+/* Cải tiến hiệu ứng hạt */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    box-shadow: 0 0 12px 3px rgba(255, 255, 255, 0.35);
+    animation: float 15s infinite linear;
+}
+
+/* Tăng thêm số lượng hạt */
+.particle:nth-child(1) {
+    top: 20%;
+    left: 20%;
+    width: 5px;
+    height: 5px;
+    animation-duration: 20s;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    top: 60%;
+    left: 80%;
+    width: 9px;
+    height: 9px;
+    animation-duration: 22s;
+    animation-delay: 1s;
+}
+
+.particle:nth-child(3) {
+    top: 40%;
+    left: 40%;
+    width: 6px;
+    height: 6px;
+    animation-duration: 25s;
+    animation-delay: 2s;
+}
+
+.particle:nth-child(4) {
+    top: 80%;
+    left: 10%;
+    width: 7px;
+    height: 7px;
+    animation-duration: 18s;
+    animation-delay: 1.5s;
+}
+
+.particle:nth-child(5) {
+    top: 10%;
+    left: 70%;
+    width: 8px;
+    height: 8px;
+    animation-duration: 24s;
+    animation-delay: 3s;
+}
+
+.particle:nth-child(6) {
+    top: 30%;
+    left: 90%;
+    width: 6px;
+    height: 6px;
+    animation-duration: 19s;
+    animation-delay: 2s;
+}
+
+.particle:nth-child(7) {
+    top: 70%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    animation-duration: 21s;
+    animation-delay: 1s;
+}
+
+.particle:nth-child(8) {
+    top: 15%;
+    left: 30%;
+    width: 7px;
+    height: 7px;
+    animation-duration: 23s;
+    animation-delay: 0.5s;
+}
+
+.particle:nth-child(9) {
+    top: 25%;
+    left: 60%;
+    width: 4px;
+    height: 4px;
+    animation-duration: 26s;
+    animation-delay: 2.5s;
+}
+
+.particle:nth-child(10) {
+    top: 55%;
+    left: 25%;
+    width: 6px;
+    height: 6px;
+    animation-duration: 19s;
+    animation-delay: 0.8s;
+}
+
+.particle:nth-child(11) {
+    top: 35%;
+    left: 85%;
+    width: 5px;
+    height: 5px;
+    animation-duration: 17s;
+    animation-delay: 1.3s;
+}
+
+.particle:nth-child(12) {
+    top: 65%;
+    left: 35%;
+    width: 8px;
+    height: 8px;
+    animation-duration: 24s;
+    animation-delay: 2.2s;
+}
+
+.particle:nth-child(13) {
+    top: 85%;
+    left: 75%;
+    width: 4px;
+    height: 4px;
+    animation-duration: 20s;
+    animation-delay: 1.8s;
+}
+
+.particle:nth-child(14) {
+    top: 45%;
+    left: 15%;
+    width: 7px;
+    height: 7px;
+    animation-duration: 22s;
+    animation-delay: 0.3s;
+}
+
+.particle:nth-child(15) {
+    top: 75%;
+    left: 65%;
+    width: 6px;
+    height: 6px;
+    animation-duration: 19s;
+    animation-delay: 2.7s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    25% {
+        transform: translateY(-100px) translateX(50px) rotate(90deg);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(-180px) translateX(-50px) rotate(180deg);
+        opacity: 0.7;
+    }
+    75% {
+        transform: translateY(-250px) translateX(100px) rotate(270deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-320px) translateX(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.35;
+    }
+    50% {
+        transform: translate(5%, 5%) scale(1.25);
+        opacity: 0.55;
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.35;
+    }
+}
+
+@keyframes pulse2 {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.25;
+    }
+    30% {
+        transform: translate(-3%, -3%) scale(1.15);
+        opacity: 0.35;
+    }
+    60% {
+        transform: translate(3%, 3%) scale(1.25);
+        opacity: 0.45;
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.25;
+    }
+}
+
+/* Cải tiến nội dung minh họa bằng hiệu ứng glassmorphism */
+.illustration-content {
+    position: relative;
+    z-index: 2;
+    max-width: 75%;
+    text-align: center;
+    color: var(--white-color);
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(15px);
+    border-radius: 28px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25),
+                inset 0 2px 4px rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transform: translateY(0);
+    transition: all 0.5s ease;
+}
+
+.illustration-content:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35),
+                inset 0 2px 4px rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.illustration-content h2 {
+    font-size: 34px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    background: linear-gradient(to right, #ffffff, #e2e8f0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+    display: inline-block;
+}
+
+.illustration-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 4px;
+    background: linear-gradient(to right, var(--accent-color), var(--primary-light));
+    border-radius: 4px;
+}
+
+/* Thêm hiệu ứng glowing cho thẻ testimonial */
+.testimonial {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    padding: 32px;
+    margin-top: 36px;
+    text-align: left;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25),
+                inset 0 1px 3px rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transform: perspective(1000px) rotateX(-2deg) rotateY(3deg);
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Thêm hiệu ứng glow cho testimonial */
+.testimonial::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0) 70%);
+    transform: rotate(30deg);
+    transition: all 0.5s ease;
+}
+
+.testimonial:hover {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3),
+                inset 0 1px 4px rgba(255, 255, 255, 0.25);
+}
+
+.testimonial:hover::before {
+    transform: rotate(0deg);
+}
+
+.quote {
+    color: var(--accent-color);
+    font-size: 28px;
+    margin-bottom: 12px;
+    position: relative;
+    display: inline-block;
+}
+
+.quote::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 40px;
+    width: 32px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.35);
+    border-radius: 1px;
+}
+
+.testimonial-content {
+    margin-bottom: 22px;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.testimonial-user {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-color), #fbbf24);
+    margin-right: 14px;
+    border: 3px solid rgba(255, 255, 255, 0.45);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 3px;
+}
+
+.user-position {
+    font-size: 13px;
+    opacity: 0.85;
+}
+.floating-object {
+    position: absolute;
+    z-index: 1;
+    border-radius: 50%;
+    opacity: 0.15;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    animation: floatObject 20s infinite ease-in-out;
+}
+
+.floating-object:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    top: 10%;
+    right: 15%;
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-light));
+    animation-duration: 25s;
+    animation-delay: 1s;
+}
+
+.floating-object:nth-child(2) {
+    width: 120px;
+    height: 120px;
+    bottom: 20%;
+    left: 8%;
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+    animation-duration: 22s;
+    animation-delay: 0s;
+}
+
+.floating-object:nth-child(3) {
+    width: 60px;
+    height: 60px;
+    top: 65%;
+    right: 28%;
+    background: linear-gradient(135deg, var(--success-color), var(--primary-color));
+    animation-duration: 30s;
+    animation-delay: 2s;
+}
+
+@keyframes floatObject {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(90deg);
+    }
+    50% {
+        transform: translateY(0) rotate(180deg);
+    }
+    75% {
+        transform: translateY(20px) rotate(270deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+/* Thêm animated stripes cho decoration */
+.animated-stripes {
+    position: absolute;
+    width: 200px;
+    height: 400px;
+    top: 50%;
+    right: -100px;
+    transform: translateY(-50%);
+    overflow: hidden;
+    opacity: 0.07;
+    z-index: 0;
+}
+
+.stripe {
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    background-color: var(--primary-color);
+    transform: skewX(-30deg);
+}
+
+.stripe:nth-child(1) {
+    left: 0;
+    animation: stripeMove 8s infinite linear;
+}
+
+.stripe:nth-child(2) {
+    left: 40px;
+    background-color: var(--accent-color);
+    animation: stripeMove 8s infinite linear 1s;
+}
+
+.stripe:nth-child(3) {
+    left: 80px;
+    animation: stripeMove 8s infinite linear 2s;
+}
+
+.stripe:nth-child(4) {
+    left: 120px;
+    background-color: var(--accent-color);
+    animation: stripeMove 8s infinite linear 3s;
+}
+
+.stripe:nth-child(5) {
+    left: 160px;
+    animation: stripeMove 8s infinite linear 4s;
+}
+
+@keyframes stripeMove {
+    0% {
+        transform: skewX(-30deg) translateY(0);
+    }
+    50% {
+        transform: skewX(-30deg) translateY(30px);
+    }
+    100% {
+        transform: skewX(-30deg) translateY(0);
+    }
+}
+
+/* Hiệu ứng glowing dots trang trí */
+.glowing-dots {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    z-index: 0;
+    opacity: 0.7;
+}
+
+.glowing-dot {
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    box-shadow: 0 0 15px var(--primary-light);
+    animation: pulse 3s infinite;
+}
+
+.glowing-dot:nth-child(1) {
+    width: 10px;
+    height: 10px;
+    top: 0;
+    left: 0;
+    animation-delay: 0s;
+}
+
+.glowing-dot:nth-child(2) {
+    width: 6px;
+    height: 6px;
+    top: 20px;
+    left: 20px;
+    animation-delay: 0.5s;
+}
+
+.glowing-dot:nth-child(3) {
+    width: 8px;
+    height: 8px;
+    top: 10px;
+    left: 40px;
+    animation-delay: 1s;
+}
+
+.glowing-dot:nth-child(4) {
+    width: 12px;
+    height: 12px;
+    top: 30px;
+    left: 10px;
+    animation-delay: 1.5s;
+}
+
+/* Thêm card shape decorations */
+.card-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    overflow: hidden;
+    opacity: 0.03;
+}
+
+.card-shape {
+    position: absolute;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    transform: rotate(45deg);
+}
+
+.card-shape:nth-child(1) {
+    width: 40px;
+    height: 40px;
+    top: 10%;
+    left: 20%;
+}
+
+.card-shape:nth-child(2) {
+    width: 60px;
+    height: 60px;
+    top: 20%;
+    right: 10%;
+    background-color: var(--accent-color);
+}
+
+.card-shape:nth-child(3) {
+    width: 30px;
+    height: 30px;
+    bottom: 15%;
+    left: 15%;
+    background-color: var(--primary-dark);
+}
+
+.card-shape:nth-child(4) {
+    width: 50px;
+    height: 50px;
+    bottom: 25%;
+    right: 20%;
+    background-color: var(--accent-color);
+}
+
+/* Thêm wave effect ở dưới cùng */
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0v46.29c47.79 22.2 103.59 32.17 158 28 70.36-5.37 136.33-33.31 206.8-37.5 73.84-4.36 147.54 16.88 218.2 35.26 69.27 18 138.3 24.88 209.4 13.08 36.15-6 69.85-17.84 104.45-29.34C989.49 25 1113-14.29 1200 52.47V0H0z" fill="rgba(70, 97, 242, 0.1)"></path></svg>');
+    background-size: 50% 100%;
+    animation: waveAnimation 15s linear infinite;
+}
+
+.wave:nth-child(2) {
+    bottom: 0;
+    animation: waveAnimation 10s linear -5s infinite;
+    opacity: 0.5;
+}
+
+.wave:nth-child(3) {
+    bottom: 0;
+    animation: waveAnimation 25s linear -2s infinite;
+    opacity: 0.2;
+}
+
+@keyframes waveAnimation {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Custom scrollbar cho form nếu cần */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Thêm hiệu ứng loading cho nút đăng nhập (sẽ hiện khi click) */
+.loading-spinner {
+    display: none; /* Mặc định ẩn, sẽ hiển thị khi submit form */
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Thêm hover effects cho form elements */
+.form-element-hover {
+    position: relative;
+    overflow: hidden;
+}
+
+.form-element-hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.5s ease;
+}
+
+.form-element-hover:hover::after,
+.form-element-hover:focus-within::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Cải tiến tooltip khi nhập sai */
+.tooltip {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    background-color: var(--error-light);
+    color: var(--error-color);
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+.tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+}
+
+/* Thêm hiệu ứng focus cho các input fields */
+.focus-input {
+    overflow: hidden;
+}
+
+.focus-input::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background-color: var(--primary-color);
+    transition: height 0.3s ease;
+}
+
+.focus-input:focus-within::before {
+    height: 100%;
+}
+
+/* Bổ sung thêm responsive layouts */
+@media (max-width: 1400px) {
+    .login-card {
+        padding: 0 4vw;
+    }
+    
+    .form-container {
+        max-width: 80px;
+    }
+    
+    .illustration-content {
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .login-card {
+        width: 65%;
+    }
+    
+    .illustration {
+        flex: 0.54;
+    }
+    
+    .illustration-content {
+        max-width: 85%;
+    }
+    
+    .floating-object:nth-child(3) {
+        display: none;
+    }
+}
+
+@media (max-width: 1000px) {
+    .login-card {
+        width: 70%;
+    }
+    
+    .illustration {
+        flex: 0.43;
+    }
+    
+    .form-container {
+        max-width: 100%;
+    }
+    
+    .floating-object:nth-child(2) {
+        display: none;
+    }
+    
+    .animated-stripes {
+        opacity: 0.04;
+    }
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        height: 100vh;
+        max-width: none;
+    }
+    
+    .login-card {
+        width: 100%;
+        padding: 30px 5vw;
+        order: 2;
+        height: auto;
+        flex: 1;
+        display: flex;
+        align-items: center;
+    }
+    
+    .illustration {
+        height: 35vh;
+        order: 1;
+        flex: 0;
+    }
+    
+    .form-container {
+        max-width: 50px;
+    }
+    
+    .welcome-text {
+        max-width: 400px;
+    }
+    
+    .floating-object {
+        display: none;
+    }
+    
+    .animated-stripes {
+        display: none;
+    }
+    
+    .illustration-content {
+        max-width: 90%;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .login-card {
+        padding: 24px 5vw;
+    }
+    
+    .illustration {
+        height: 30vh;
+    }
+    
+    .logo {
+        font-size: 24px;
+    }
+    
+    .logo-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+    
+    h1 {
+        font-size: 30px;
+    }
+    
+    .welcome-text {
+        font-size: 14px;
+        margin-bottom: 26px;
+    }
+    
+    .social-login {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .google-btn, .other-btn {
+        width: 100%;
+        height: 45px;
+    }
+    
+    .illustration-content h2 {
+        font-size: 28px;
+    }
+    
+    .testimonial {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .illustration {
+        height: 25vh;
+    }
+    
+    .form-container {
+        max-width: 100%;
+    }
+    
+    h1 {
+        font-size: 26px;
+    }
+    
+    .welcome-text {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .illustration-content {
+        padding: 20px;
+    }
+    
+    .testimonial {
+        padding: 20px;
+        margin-top: 20px;
+    }
+    
+    .testimonial-content {
+        font-size: 14px;
+    }
+    
+    .avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .user-name {
+        font-size: 14px;
+    }
+    
+    .user-position {
+        font-size: 12px;
+    }
+}
+
+.dark-mode {
+    --primary-color: #6366F1;
+    --primary-light: #818CF8;
+    --primary-dark: #4F46E5;
+    --accent-color: #F59E0B;
+    --light-color: #1E293B;
+    --dark-color: #0F172A;
+    --text-color: #E2E8F0;
+    --text-secondary: #94A3B8;
+    --background-color: #0F172A;
+    --white-color: #1E293B;
+    --border-color: #334155;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --success-color: #10B981;
+    --success-light: #064E3B;
+    --error-color: #EF4444;
+    --error-light: #7F1D1D;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    transform: rotate(30deg);
+}
+
+/* Thêm các elements trang trí mới cho login card */
+.decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.05;
+    background-color: var(--primary-color);
+}
+
+.decoration-circle:nth-child(1) {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    right: -150px;
+}
+
+.decoration-circle:nth-child(2) {
+    width: 200px;
+    height: 200px;
+    bottom: -100px;
+    left: -100px;
+    background-color: var(--accent-color);
+}
