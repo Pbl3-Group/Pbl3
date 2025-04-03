@@ -1,67 +1,138 @@
-@model JOBFLEX.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Đăng nhập";
+    Layout = null;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFlex - Đăng nhập</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="~/css/dangnhap.css" asp-append-version="true" />
-    <title>Đăng nhập - JOBFLEX</title>
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
 </head>
 <body>
     <div class="container">
-        <div class="forms-container">
-            <div class="signin-signup">
-                <form method="post" class="sign-in-form">
-                    @Html.AntiForgeryToken()
-                    <h2 class="title">Đăng nhập</h2>
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="username" placeholder="Email hoặc SĐT" required />
+        <div class="login-card">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <span>JobFlex</span>
+            </div>
+            
+            <h1>Đăng Nhập</h1>
+            <p class="welcome-text">Chào mừng trở lại! Vui lòng nhập thông tin của bạn để truy cập tài khoản.</p>
+            <div class="social-login">
+                <button class="google-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google">
+                    Đăng nhập với Google
+                </button>
+                <button class="other-btn">
+                    <i class="fa-brands fa-facebook"></i>
+                </button>
+            </div>
+            
+            <div class="divider">
+                <span>hoặc</span>
+            </div>
+            
+            <form method="post" action="@Url.Action("Login", "Account")">
+                <div class="form-group">
+                    <label for="identifier">Số Điện Thoại hoặc Email</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="identifier" name="EmailOrPhone" placeholder="Nhập số điện thoại hoặc email" required />
                     </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="password" placeholder="Mật khẩu" id="sign-in-password" required />
-                        <i class="fas fa-eye toggle-password" data-target="sign-in-password"></i>
+                </div>
+                
+                <div class="form-group">
+                    <div class="password-header">
+                        <label for="password">Mật Khẩu</label>
+                        <a href="@Url.Action("ForgotPassword", "Account")" class="forgot-link">Quên mật khẩu?</a>
                     </div>
-                    <input type="submit" value="Đăng nhập" class="btn solid" />
-                    <p class="social-text">Hoặc đăng nhập bằng mạng xã hội</p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" name="Password" placeholder="Nhập mật khẩu" required />
+                        <button type="button" class="toggle-password">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
                     </div>
-                    @if (ViewBag.Error != null)
-                    {
-                        <p class="error-message">@ViewBag.Error</p>
-                    }
-                </form>
+                </div>
+                
+                <div class="remember-me">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="remember" name="RememberMe" />
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">Ghi nhớ đăng nhập</span>
+                    </label>
+                </div>
+                <!-- Hiển thị thông báo lỗi nếu có -->
+                @if (ViewBag.Error != null)
+                {
+                    <div class="error-message" id="error-message">
+                        @ViewBag.Error
+                    </div>
+                }
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var errorMessage = document.getElementById("error-message");
+                        if (errorMessage) {
+                            errorMessage.style.display = "block";
+                            errorMessage.style.animation = "fadeIn 1s";
+
+                            setTimeout(function () {
+                                errorMessage.style.display = "none";
+                            }, 5000);
+                        }
+                    });
+                </script>
+                <button type="submit" class="sign-in-btn">
+                    <span>Đăng Nhập</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+            
+            <div class="register-link">
+                <span>Chưa có tài khoản?</span> <a href="@Url.Action("Register", "Account")">Đăng ký miễn phí</a>
             </div>
         </div>
-        <div class="panels-container">
-            <div class="panel left-panel">
-                <div class="content">
-                    <h3>Welcome back!</h3>
-                    <p>Tạo hồ sơ ấn tượng và kết nối với cơ hội việc làm phù hợp.</p>
-                    <p>Chưa có tài khoản?</p>
-                    <a href="@Url.Action("Register", "Account")" class="btn transparent">Đăng ký</a>
+        
+        <div class="illustration" id="background-image">
+            <div class="overlay"></div>
+            
+            <div class="particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            
+            <div class="illustration-content">
+                <h2>Tìm công việc mơ ước của bạn</h2>
+                <p>Kết nối với hàng nghìn nhà tuyển dụng để có cơ hội phù hợp với kỹ năng và nguyện vọng của bạn.</p>
+                <div class="testimonial">
+                    <div class="quote">
+                        <i class="fa-solid fa-quote-left"></i>
+                    </div>
+                    <p>"JobFlex helped me find the perfect position in just two weeks. The platform is intuitive and the job matching is incredibly accurate!"</p>
+                    <div class="user-info">
+                        <div class="avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="user-details">
+                            <h4>Sarah Johnson</h4>
+                            <span>Software Developer</span>
+                        </div>
+                    </div>
                 </div>
-                <img src="~/assets/img/log.svg" class="image" alt="" />
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="~/js/app.js" asp-append-version="true"></script>
-    <script>
-        $(document).ready(function () {
-            $('.toggle-password').click(function () {
-                const target = $(this).data('target');
-                const input = $(`#${target}`);
-                input.attr('type', input.attr('type') === 'password' ? 'text' : 'password');
-                $(this).toggleClass('fa-eye fa-eye-slash');
-            });
-        });
-    </script>
 </body>
 </html>

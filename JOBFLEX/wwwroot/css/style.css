@@ -1,0 +1,507 @@
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+  }
+  
+  a {
+    color: #0077cc;
+  }
+  
+  .btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+  }
+  
+  .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+  }
+  
+  .border-top {
+    border-top: 1px solid #e5e5e5;
+  }
+  .border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  .box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  }
+  
+  button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+  }
+  
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+  }
+  /* Biến CSS toàn cục */
+  :root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --dark-color: #34495e;
+    --light-color: #ecf0f1;
+    --text-color: #333;
+    --hover-transition: all 0.3s ease;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+  }
+  
+  /* Reset CSS cơ bản */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Header và Navigation */
+  .navbar {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-brand {
+    color: white !important;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: var(--hover-transition);
+  }
+  
+  .navbar-brand:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  
+  .navbar-nav {
+    margin-left: auto;
+  }
+  
+  .nav-link {
+    color: white !important;
+    font-weight: 600;
+    margin: 0 10px;
+    padding: 10px 15px !important;
+    border-radius: var(--border-radius);
+    transition: var(--hover-transition);
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+  }
+  
+  .navbar-toggler {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  /* Container chính */
+  .container {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  /* Footer */
+  .footer {
+    background: var(--dark-color) !important;
+    color: white;
+    padding: 20px 0 !important;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  /* Nút và các thành phần tương tác */
+  .btn {
+    border-radius: var(--border-radius);
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: var(--hover-transition);
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+  }
+  
+  /* Card và khung */
+  .card {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--hover-transition);
+    border: none;
+    margin-bottom: 1.5rem;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .card-header {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    padding: 1rem;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  /* Form và Input */
+  .form-control {
+    border-radius: var(--border-radius);
+    padding: 12px;
+    border: 1px solid #ddd;
+    transition: var(--hover-transition);
+  }
+  
+  .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+  }
+  
+  /* Bảng */
+  .table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 1.5rem;
+  }
+  
+  .table th, .table td {
+    padding: 12px 15px;
+    border: none;
+  }
+  
+  .table thead th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    text-align: left;
+  }
+  
+  .table tbody tr {
+    background-color: white;
+    transition: var(--hover-transition);
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  
+  /* Hiệu ứng */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Job listing styles */
+  .job-card {
+    border-left: 4px solid var(--primary-color);
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--hover-transition);
+  }
+  
+  .job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    border-left-color: var(--secondary-color);
+  }
+  
+  .job-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-bottom: 10px;
+  }
+  
+  .job-company {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+  
+  .job-location {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+    margin-bottom: 10px;
+  }
+  
+  .job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
+  }
+  
+  .job-tag {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--primary-color);
+    border-radius: 20px;
+    padding: 5px 12px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    transition: var(--hover-transition);
+  }
+  
+  .job-tag:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+    }
+    
+    .nav-link {
+      margin: 5px 0;
+    }
+    
+    .job-tags {
+      flex-direction: column;
+    }
+    
+    .job-tag {
+      margin-bottom: 5px;
+    }
+  }
+  
+  /* Hero section for homepage */
+  .hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/Content/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 5rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+    border-radius: var(--border-radius);
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    animation: fadeIn 1s ease;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    animation: fadeIn 1.5s ease;
+  }
+  
+  .search-box {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .search-input {
+    border: none;
+    padding: 15px;
+    font-size: 1.1rem;
+  }
+  
+  /* Breadcrumbs */
+  .breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .breadcrumb-item a {
+    color: var(--primary-color);
+    transition: var(--hover-transition);
+  }
+  
+  .breadcrumb-item a:hover {
+    color: var(--secondary-color);
+    text-decoration: none;
+  }
+  
+  /* Badges */
+  .badge {
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-weight: 600;
+    transition: var(--hover-transition);
+  }
+  
+  .badge-primary {
+    background-color: var(--primary-color);
+  }
+  
+  .badge-success {
+    background-color: var(--secondary-color);
+  }
+  
+  .badge-danger {
+    background-color: var(--accent-color);
+  }
+  
+  /* Pagination */
+  .pagination .page-item .page-link {
+    border: none;
+    color: var(--primary-color);
+    border-radius: var(--border-radius);
+    margin: 0 3px;
+    transition: var(--hover-transition);
+  }
+  
+  .pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .pagination .page-item .page-link:hover {
+    background-color: #e9ecef;
+    transform: translateY(-2px);
+  }
+  
+  /* Loading animation */
+  .loading {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(52, 152, 219, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Modal hiện đại */
+  .modal-content {
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+  }
+  
+  .modal-title {
+    font-weight: 600;
+  }
+  
+  .modal-footer {
+    border: none;
+  }
+  
+  /* Alert boxes */
+  .alert {
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: var(--box-shadow);
+    padding: 15px 20px;
+  }
+  
+  .alert-success {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #27ae60;
+    border-left: 4px solid var(--secondary-color);
+  }
+  
+  .alert-danger {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #c0392b;
+    border-left: 4px solid var(--accent-color);
+  }
+  
+  .alert-info {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #2980b9;
+    border-left: 4px solid var(--primary-color);
+  }

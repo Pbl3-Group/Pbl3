@@ -5,36 +5,36 @@
       "PackagePath": "staticwebassets/JOBFLEX.bundle.scp.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/assets/img/log.svg",
-      "PackagePath": "staticwebassets/assets/img/log.svg"
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/assets/img/pexels-photo-3184423.webp",
+      "PackagePath": "staticwebassets/assets/img/pexels-photo-3184423.webp"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/assets/img/register.svg",
-      "PackagePath": "staticwebassets/assets/img/register.svg"
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/assets/img/pexels-photo-6340699.webp",
+      "PackagePath": "staticwebassets/assets/img/pexels-photo-6340699.webp"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/dangky.css",
-      "PackagePath": "staticwebassets/css/dangky.css"
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/ForgotPassword.css",
+      "PackagePath": "staticwebassets/css/ForgotPassword.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/dangnhap.css",
-      "PackagePath": "staticwebassets/css/dangnhap.css"
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/Login.css",
+      "PackagePath": "staticwebassets/css/Login.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/site.css",
-      "PackagePath": "staticwebassets/css/site.css"
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/Register.css",
+      "PackagePath": "staticwebassets/css/Register.css"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/style.css",
+      "PackagePath": "staticwebassets/css/style.css"
     },
     {
       "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/js/app.js",
-      "PackagePath": "staticwebassets/js/app.js"
-    },
-    {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/js/signup.js",
-      "PackagePath": "staticwebassets/js/signup.js"
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/js/Login.js",
+      "PackagePath": "staticwebassets/js/Login.js"
     },
     {
       "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/js/site.js",
@@ -225,12 +225,12 @@
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
-      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js",
-      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
     },
     {
       "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation/LICENSE.md",
@@ -267,18 +267,6 @@
     {
       "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
-    },
-    {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/dist/jquery.slim.js",
-      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.slim.js"
-    },
-    {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/dist/jquery.slim.min.js",
-      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.slim.min.js"
-    },
-    {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/dist/jquery.slim.min.map",
-      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.slim.min.map"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.JOBFLEX.Microsoft.AspNetCore.StaticWebAssets.props",

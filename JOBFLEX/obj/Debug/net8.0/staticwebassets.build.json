@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iImB6cUALrLxjK3B3C6+OfJmIFk9HV1C3joHYaIz8iI=",
+  "Hash": "d/7crWwkxcadInnKvs0pQruimEQ82bd/+7XFU10/piA=",
   "Source": "JOBFLEX",
   "BasePath": "_content/JOBFLEX",
   "Mode": "Default",
@@ -55,12 +55,12 @@
       "OriginalItemSpec": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/obj/Debug/net8.0/scopedcss/projectbundle/JOBFLEX.bundle.scp.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/assets/img/log.svg",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/assets/img/pexels-photo-3184423.webp",
       "SourceId": "JOBFLEX",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
       "BasePath": "_content/JOBFLEX",
-      "RelativePath": "assets/img/log.svg",
+      "RelativePath": "assets/img/pexels-photo-3184423.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -71,15 +71,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/assets/img/log.svg"
+      "OriginalItemSpec": "wwwroot/assets/img/pexels-photo-3184423.webp"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/assets/img/register.svg",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/assets/img/pexels-photo-6340699.webp",
       "SourceId": "JOBFLEX",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
       "BasePath": "_content/JOBFLEX",
-      "RelativePath": "assets/img/register.svg",
+      "RelativePath": "assets/img/pexels-photo-6340699.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -90,15 +90,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/assets/img/register.svg"
+      "OriginalItemSpec": "wwwroot/assets/img/pexels-photo-6340699.webp"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/dangky.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/ForgotPassword.css",
       "SourceId": "JOBFLEX",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
       "BasePath": "_content/JOBFLEX",
-      "RelativePath": "css/dangky.css",
+      "RelativePath": "css/ForgotPassword.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -109,15 +109,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/css/dangky.css"
+      "OriginalItemSpec": "wwwroot/css/ForgotPassword.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/dangnhap.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/Login.css",
       "SourceId": "JOBFLEX",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
       "BasePath": "_content/JOBFLEX",
-      "RelativePath": "css/dangnhap.css",
+      "RelativePath": "css/Login.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -128,15 +128,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/css/dangnhap.css"
+      "OriginalItemSpec": "wwwroot/css/Login.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/site.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/Register.css",
       "SourceId": "JOBFLEX",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
       "BasePath": "_content/JOBFLEX",
-      "RelativePath": "css/site.css",
+      "RelativePath": "css/Register.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -147,7 +147,26 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/css/site.css"
+      "OriginalItemSpec": "wwwroot/css/Register.css"
+    },
+    {
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/style.css",
+      "SourceId": "JOBFLEX",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
+      "BasePath": "_content/JOBFLEX",
+      "RelativePath": "css/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/style.css"
     },
     {
       "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/favicon.ico",
@@ -169,12 +188,12 @@
       "OriginalItemSpec": "wwwroot/favicon.ico"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/js/app.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/js/Login.js",
       "SourceId": "JOBFLEX",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
       "BasePath": "_content/JOBFLEX",
-      "RelativePath": "js/app.js",
+      "RelativePath": "js/Login.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -185,26 +204,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/app.js"
-    },
-    {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/js/signup.js",
-      "SourceId": "JOBFLEX",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
-      "BasePath": "_content/JOBFLEX",
-      "RelativePath": "js/signup.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/signup.js"
+      "OriginalItemSpec": "wwwroot/js/Login.js"
     },
     {
       "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/js/site.js",
@@ -1081,12 +1081,12 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/LICENSE"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "SourceId": "JOBFLEX",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
       "BasePath": "_content/JOBFLEX",
-      "RelativePath": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
+      "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1097,15 +1097,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
+      "OriginalItemSpec": "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "SourceId": "JOBFLEX",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
       "BasePath": "_content/JOBFLEX",
-      "RelativePath": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js",
+      "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1116,7 +1116,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
+      "OriginalItemSpec": "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
     },
     {
       "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
@@ -1288,63 +1288,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/lib/jquery/dist/jquery.min.map"
-    },
-    {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/dist/jquery.slim.js",
-      "SourceId": "JOBFLEX",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
-      "BasePath": "_content/JOBFLEX",
-      "RelativePath": "lib/jquery/dist/jquery.slim.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/lib/jquery/dist/jquery.slim.js"
-    },
-    {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/dist/jquery.slim.min.js",
-      "SourceId": "JOBFLEX",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
-      "BasePath": "_content/JOBFLEX",
-      "RelativePath": "lib/jquery/dist/jquery.slim.min.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/lib/jquery/dist/jquery.slim.min.js"
-    },
-    {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/dist/jquery.slim.min.map",
-      "SourceId": "JOBFLEX",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/",
-      "BasePath": "_content/JOBFLEX",
-      "RelativePath": "lib/jquery/dist/jquery.slim.min.map",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/lib/jquery/dist/jquery.slim.min.map"
     },
     {
       "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/LICENSE.txt",

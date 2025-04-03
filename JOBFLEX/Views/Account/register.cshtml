@@ -1,279 +1,404 @@
-@model JOBFLEX.Models.RegistrationViewModel
-
+@{
+    ViewData["Title"] = "Đăng ký";
+    Layout = null;
+}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="~/css/dangky.css" asp-append-version="true" />
-    <title>Đăng ký - JOBFLEX</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFlex - Đăng ký</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Register.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="container sign-up-mode">
-        <div class="forms-container">
-            <div class="signin-signup">
-                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "sign-up-form", id = "signupForm", enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <h2 class="title">Đăng ký</h2>
-                    <div class="form-container">
-                        <!-- Step 1 -->
-                        <div class="form-step active" id="step1">
-                            <div class="progress-container">
-                                <div class="progress-bar"><div class="progress" style="width: 20%"></div></div>
-                                <div class="step-indicator">
-                                    <div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
-                                </div>
-                            </div>
-                            <div class="name-gender-container">
-                                <div class="input-field name-field">
-                                    <i class="fas fa-user"></i>
-                                    @Html.TextBoxFor(m => m.FullName, new { placeholder = "Họ tên", required = "required" })
-                                    @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "error-message" })
-                                </div>
-                                <div class="gender-container">
-                                    <label class="gender-label">
-                                        @Html.RadioButtonFor(m => m.Gender, "Nam", new { required = "required" }) Nam
-                                    </label>
-                                    <label class="gender-label">
-                                        @Html.RadioButtonFor(m => m.Gender, "Nữ") Nữ
-                                    </label>
-                                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "error-message" })
-                                </div>
-                            </div>
-                            <div class="phone-dob-container">
-                                <div class="input-field phone-field">
-                                    <i class="fas fa-phone"></i>
-                                    @Html.TextBoxFor(m => m.Phone, new { placeholder = "SĐT", required = "required" })
-                                    @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "error-message" })
-                                </div>
-                                <div class="input-field dob-field">
-                                    <i class="fas fa-calendar"></i>
-                                    @Html.TextBoxFor(m => m.DateOfBirth, "{0:MM/dd/yyyy}", new { placeholder = "mm/dd/yyyy", id = "dob", required = "required" })
-                                    @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "error-message" })
-                                </div>
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-envelope"></i>
-                                @Html.TextBoxFor(m => m.EmailOrFacebook, new { placeholder = "email/facebook", required = "required" })
-                                @Html.ValidationMessageFor(m => m.EmailOrFacebook, "", new { @class = "error-message" })
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-lock"></i>
-                                @Html.PasswordFor(m => m.Password, new { placeholder = "Mật khẩu", required = "required", id = "password" })
-                                <i class="fas fa-eye toggle-password" data-target="password"></i>
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error-message" })
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-lock"></i>
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Nhập lại mật khẩu", required = "required", id = "confirmPassword" })
-                                <i class="fas fa-eye toggle-password" data-target="confirmPassword"></i>
-                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "error-message" })
-                            </div>
-                            <div class="checkbox-field">
-                                @Html.CheckBoxFor(m => m.TermsAgreed, new { id = "terms", required = "required" })
-                                <label for="terms">Điều khoản</label>
-                                @Html.ValidationMessageFor(m => m.TermsAgreed, "", new { @class = "error-message" })
-                            </div>
-                            <div class="error-message" id="error-message">
-                                @Html.ValidationSummary(true, "", new { @class = "error-message" })
-                            </div>
-                            <div class="form-navigation center">
-                                <button type="button" class="btn register-step">Tiếp theo</button>
-                            </div>
-                        </div>
-                        <!-- Step 2 -->
-                        <div class="form-step" id="step2">
-                            <div class="step-header">
-                                <a class="skip-link" data-skip="3">Có thể bỏ qua</a>
-                                <h3 class="step-title">Nhập mô tả</h3>
-                            </div>
-                            <div class="progress-container">
-                                <div class="progress-bar"><div class="progress" style="width: 40%"></div></div>
-                                <div class="step-indicator">
-                                    <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
-                                </div>
-                            </div>
-                            <div class="input-field description-field">
-                                <i class="fas fa-pen"></i>
-                                @Html.TextAreaFor(m => m.Description, new { placeholder = "Mô tả" })
-                            </div>
-                            <div class="form-navigation">
-                                <button type="button" class="btn prev-step">Quay lại</button>
-                                <button type="button" class="btn next-step">Tiếp theo</button>
-                            </div>
-                        </div>
-                        <!-- Step 3 -->
-                        <div class="form-step" id="step3">
-                            <div class="step-header">
-                                <a class="skip-link" data-skip="4">Có thể bỏ qua</a>
-                                <h3 class="step-title">Upload CV</h3>
-                            </div>
-                            <div class="progress-container">
-                                <div class="progress-bar"><div class="progress" style="width: 60%"></div></div>
-                                <div class="step-indicator">
-                                    <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div>
-                                </div>
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-file-upload"></i>
-                                @Html.TextBoxFor(m => m.CV, new { type = "file", id = "cvUpload" })
-                            </div>
-                            <div class="form-navigation">
-                                <button type="button" class="btn prev-step">Quay lại</button>
-                                <button type="button" class="btn next-step">Tiếp theo</button>
-                            </div>
-                        </div>
-                        <!-- Step 4 -->
-                        <div class="form-step" id="step4">
-                            <div class="step-header">
-                                <a class="skip-link" data-skip="5">Có thể bỏ qua</a>
-                                <h3 class="step-title">Thời gian làm việc</h3>
-                            </div>
-                            <div class="progress-container">
-                                <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
-                                <div class="step-indicator">
-                                    <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot"></div>
-                                </div>
-                            </div>
-                            <div class="schedule-table">
-                                <table>
-                                    <thead>
-                                        <tr><th></th><th>Thứ 2</th><th>Thứ 3</th><th>Thứ 4</th><th>Thứ 5</th><th>Thứ 6</th><th>Thứ 7</th><th>CN</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Sáng</td>
-                                            <td><input type="checkbox" name="Schedule" value="Mon-Morning" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Tue-Morning" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Wed-Morning" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Thu-Morning" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Fri-Morning" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Sat-Morning" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Sun-Morning" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Chiều</td>
-                                            <td><input type="checkbox" name="Schedule" value="Mon-Afternoon" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Tue-Afternoon" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Wed-Afternoon" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Thu-Afternoon" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Fri-Afternoon" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Sat-Afternoon" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Sun-Afternoon" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tối</td>
-                                            <td><input type="checkbox" name="Schedule" value="Mon-Evening" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Tue-Evening" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Wed-Evening" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Thu-Evening" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Fri-Evening" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Sat-Evening" /></td>
-                                            <td><input type="checkbox" name="Schedule" value="Sun-Evening" /></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="form-navigation">
-                                <button type="button" class="btn prev-step">Quay lại</button>
-                                <button type="button" class="btn next-step">Tiếp theo</button>
-                            </div>
-                        </div>
-                        <!-- Step 5 -->
-                        <div class="form-step" id="step5">
-                            <div class="step-header">
-                                <h3 class="step-title">Thành phố</h3>
-                            </div>
-                            <div class="progress-container">
-                                <div class="progress-bar"><div class="progress" style="width: 100%"></div></div>
-                                <div class="step-indicator">
-                                    <div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div><div class="step-dot active"></div>
-                                </div>
-                            </div>
-                            <div class="input-field">
-                                <i class="fas fa-city"></i>
-                                @Html.DropDownListFor(m => m.City, new SelectList(new[] { "", "Hà Nội", "TP. Hồ Chí Minh", "Đà Nẵng", "Cần Thơ", "Khác" }), "Thành phố", new { required = "required" })
-                                @Html.ValidationMessageFor(m => m.City, "", new { @class = "error-message" })
-                            </div>
-                            <div class="form-navigation">
-                                <button type="button" class="btn prev-step">Quay lại</button>
-                                <button type="submit" class="btn solid">Hoàn thành</button>
-                            </div>
-                        </div>
+    <div class="login-container">
+        <div class="form-side">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="logo-text">JobFlex</div>
+            </a>
+
+            <h1>Đăng Ký</h1>
+            <p class="welcome-text">Chào mừng! Hãy tạo tài khoản để bắt đầu tìm kiếm công việc mơ ước của bạn.</p>
+
+            <div class="steps-container">
+                <div class="steps-indicator">
+                    <div class="step active" id="step1">
+                        1
+                        <div class="step-label">Thông tin cơ bản</div>
                     </div>
-                    <p class="social-text">Hoặc đăng ký bằng mạng xã hội</p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                    <div class="step" id="step2">
+                        2
+                        <div class="step-label">Mô tả bản thân</div>
                     </div>
-                }
+                    <div class="step" id="step3">
+                        3
+                        <div class="step-label">Upload CV</div>
+                    </div>
+                    <div class="step" id="step4">
+                        4
+                        <div class="step-label">Thời gian</div>
+                    </div>
+                    <div class="step" id="step5">
+                        5
+                        <div class="step-label">Hoàn thành</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form 1: Thông tin cơ bản -->
+            <div class="form-step active" id="form-step1">
+                <h2>Thông tin cơ bản</h2>
+                <div class="form-group">
+                    <label for="fullname">Họ tên</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="Nhập họ tên đầy đủ">
+                </div>
+
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="gender-male" name="gender" value="male">
+                        <label for="gender-male">Nam</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="gender-female" name="gender" value="female">
+                        <label for="gender-female">Nữ</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Nhập số điện thoại">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthdate">Ngày sinh</label>
+                        <input type="date" id="birthdate" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email hoặc Facebook</label>
+                    <input type="email" id="email" class="form-control" placeholder="Nhập email hoặc liên kết Facebook">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" class="form-control" placeholder="Tạo mật khẩu mới">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Nhập lại mật khẩu</label>
+                    <input type="password" id="confirm-password" class="form-control" placeholder="Nhập lại mật khẩu">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms">
+                    <label for="terms">Tôi đồng ý với điều khoản dịch vụ và chính sách bảo mật</label>
+                </div>
+
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="nextStep(1)">Tiếp tục</button>
+                </div>
+            </div>
+
+            <!-- Form 2: Mô tả bản thân -->
+            <div class="form-step" id="form-step2">
+                <h2>Mô tả bản thân</h2>
+                <div class="form-group">
+                    <label for="description">Mô tả về bản thân và kỹ năng của bạn</label>
+                    <textarea id="description" class="form-control" placeholder="Hãy viết một vài dòng về bản thân, kỹ năng, kinh nghiệm và sở thích của bạn..."></textarea>
+                </div>
+
+                <div class="buttons-container">
+                    <button class="btn btn-secondary" onclick="prevStep(2)">Quay lại</button>
+                    <button class="btn btn-primary" onclick="nextStep(2)">Tiếp tục</button>
+                </div>
+            </div>
+
+            <!-- Form 3: Upload CV -->
+            <div class="form-step" id="form-step3">
+                <h2>Tải lên CV của bạn</h2>
+                <div class="upload-cv">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Kéo thả file hoặc click để tải lên</h3>
+                    <p>Hỗ trợ PDF, DOC, DOCX (Tối đa 5MB)</p>
+                    <input type="file" id="cv-upload" accept=".pdf,.doc,.docx">
+                </div>
+
+                <div class="buttons-container">
+                    <button class="btn btn-secondary" onclick="prevStep(3)">Quay lại</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)">Bỏ qua</button>
+                </div>
+            </div>
+
+            <!-- Form 4: Thời gian làm việc -->
+            <div class="form-step" id="form-step4">
+                <h2>Thời gian mong muốn làm việc</h2>
+<div class="form-group">
+    <label>Chọn các khung giờ phù hợp với bạn</label>
+    <div class="schedule-container">
+        <!-- Header: Các ngày trong tuần -->
+        <div class="schedule-header">
+            <div class="day">Thứ 2</div>
+            <div class="day">Thứ 3</div>
+            <div class="day">Thứ 4</div>
+            <div class="day">Thứ 5</div>
+            <div class="day">Thứ 6</div>
+            <div class="day">Thứ 7</div>
+            <div class="day">CN</div>
+        </div>
+        <!-- Body: Các khung giờ -->
+        <div class="schedule-body">
+            <div class="time-row">
+                <div class="time-label">Sáng (8h-12h)</div>
+                <div class="time-slot">
+                    <input type="checkbox" id="mon-morning" name="schedule[mon][morning]" checked hidden>
+                    <label for="mon-morning" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="tue-morning" name="schedule[tue][morning]" checked hidden>
+                    <label for="tue-morning" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="wed-morning" name="schedule[wed][morning]" checked hidden>
+                    <label for="wed-morning" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="thu-morning" name="schedule[thu][morning]" checked hidden>
+                    <label for="thu-morning" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="fri-morning" name="schedule[fri][morning]" hidden>
+                    <label for="fri-morning" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sat-morning" name="schedule[sat][morning]" hidden>
+                    <label for="sat-morning" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sun-morning" name="schedule[sun][morning]" hidden>
+                    <label for="sun-morning" class="time-slot-label unavailable"></label>
+                </div>
+            </div>
+            <div class="time-row">
+                <div class="time-label">Chiều (13h-17h)</div>
+                <div class="time-slot">
+                    <input type="checkbox" id="mon-afternoon" name="schedule[mon][afternoon]" hidden>
+                    <label for="mon-afternoon" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="tue-afternoon" name="schedule[tue][afternoon]" hidden>
+                    <label for="tue-afternoon" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="wed-afternoon" name="schedule[wed][afternoon]" hidden>
+                    <label for="wed-afternoon" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="thu-afternoon" name="schedule[thu][afternoon]" hidden>
+                    <label for="thu-afternoon" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="fri-afternoon" name="schedule[fri][afternoon]" hidden>
+                    <label for="fri-afternoon" class="time-slot-label unavailable"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sat-afternoon" name="schedule[sat][afternoon]" checked hidden>
+                    <label for="sat-afternoon" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sun-afternoon" name="schedule[sun][afternoon]" checked hidden>
+                    <label for="sun-afternoon" class="time-slot-label available"></label>
+                </div>
+            </div>
+            <div class="time-row">
+                <div class="time-label">Tối (18h-22h)</div>
+                <div class="time-slot">
+                    <input type="checkbox" id="mon-evening" name="schedule[mon][evening]" checked hidden>
+                    <label for="mon-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="tue-evening" name="schedule[tue][evening]" checked hidden>
+                    <label for="tue-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="wed-evening" name="schedule[wed][evening]" checked hidden>
+                    <label for="wed-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="thu-evening" name="schedule[thu][evening]" checked hidden>
+                    <label for="thu-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="fri-evening" name="schedule[fri][evening]" checked hidden>
+                    <label for="fri-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sat-evening" name="schedule[sat][evening]" checked hidden>
+                    <label for="sat-evening" class="time-slot-label available"></label>
+                </div>
+                <div class="time-slot">
+                    <input type="checkbox" id="sun-evening" name="schedule[sun][evening]" checked hidden>
+                    <label for="sun-evening" class="time-slot-label available"></label>
+                </div>
             </div>
         </div>
-        <div class="panels-container">
-            <div class="panel right-panel">
-                <div class="content">
-                    <h3>Welcome to JobFlex!</h3>
-                    <p>Tạo hồ sơ ấn tượng và kết nối với cơ hội việc làm phù hợp.</p>
-                    <p>Đã có tài khoản?</p>
-                    <a href="@Url.Action("Login", "Account")" class="btn transparent">Đăng nhập</a>
+        <!-- Legend: Chú thích màu sắc -->
+        <div class="schedule-legend">
+            <div class="legend-item">
+                <span class="legend-color available"></span> Có thể làm việc
+            </div>
+            <div class="legend-item">
+                <span class="legend-color unavailable"></span> Không thể làm việc
+            </div>
+        </div>
+    </div>
+</div>
+
+                <div class="form-group">
+                    <label for="city">Thành phố bạn muốn làm việc</label>
+                    <div class="city-select">
+                        <input type="text" id="city" class="form-control" placeholder="Chọn thành phố" onclick="toggleCityDropdown()">
+                        <div id="cityDropdown" class="dropdown-content">
+                            <a href="#" onclick="selectCity('Hà Nội')">Hà Nội</a>
+                            <a href="#" onclick="selectCity('Hồ Chí Minh')">Hồ Chí Minh</a>
+                            <a href="#" onclick="selectCity('Đà Nẵng')">Đà Nẵng</a>
+                            <a href="#" onclick="selectCity('Hải Phòng')">Hải Phòng</a>
+                            <a href="#" onclick="selectCity('Cần Thơ')">Cần Thơ</a>
+                            <a href="#" onclick="selectCity('Huế')">Huế</a>
+                        </div>
+                    </div>
                 </div>
-                <img src="~/assets/img/register.svg" class="image" alt="" />
+
+                <div class="buttons-container">
+                    <button class="btn btn-secondary" onclick="prevStep(4)">Quay lại</button>
+                    <button class="btn btn-primary" onclick="nextStep(4)">Tiếp tục</button>
+                </div>
+            </div>
+
+            <!-- Form 5: Hoàn thành -->
+            <div class="form-step" id="form-step5">
+                <div class="success-message">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h2>Đăng ký thành công!</h2>
+                    <p>Chúc mừng! Bạn đã hoàn thành việc tạo hồ sơ trên JobFlex.</p>
+                    <p>Bạn có thể bắt đầu tìm kiếm công việc phù hợp ngay bây giờ.</p>
+                </div>
+
+                <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="window.location.href='index.html'">Bắt đầu tìm việc</button>
+                </div>
+            </div>
+
+            <p class="footer-text">
+                Đã có tài khoản?<a href="@Url.Action("Login", "Account")">Đăng nhập</a>
+            </p>
+        </div>
+
+        <div class="illustration" id="background-image">
+            <div class="overlay"></div>
+            
+            <div class="particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            
+            <div class="illustration-content">
+                <h2>Tìm công việc mơ ước của bạn</h2>
+                <p>Kết nối với hàng nghìn nhà tuyển dụng để có cơ hội phù hợp với kỹ năng và nguyện vọng của bạn.</p>
+                <div class="testimonial">
+                    <div class="quote">
+                        <i class="fa-solid fa-quote-left"></i>
+                    </div>
+                    <p>"JobFlex helped me find the perfect position in just two weeks. The platform is intuitive and the job matching is incredibly accurate!"</p>
+                    <div class="user-info">
+                        <div class="avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="user-details">
+                            <h4>Sarah Johnson</h4>
+                            <span>Software Developer</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/js/app.js" asp-append-version="true"></script>
     <script>
-        $(document).ready(function () {
-            $("#dob").datepicker({
-                dateFormat: "mm/dd/yy",
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "-100:+0",
-                maxDate: "-18Y"
-            });
-
-            let currentStep = 1;
-            const totalSteps = 5;
-
-            function updateProgress() {
-                const progress = (currentStep / totalSteps) * 100;
-                $('.progress').css('width', progress + '%');
-                $('.step-dot').removeClass('active');
-                $('.step-dot').slice(0, currentStep).addClass('active');
+        function nextStep(currentStep) {
+            // Ẩn form hiện tại
+            document.getElementById('form-step' + currentStep).classList.remove('active');
+            
+            // Hiện form tiếp theo
+            document.getElementById('form-step' + (currentStep + 1)).classList.add('active');
+            
+            // Cập nhật trạng thái các step
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.getElementById('step' + currentStep).classList.add('completed');
+            document.getElementById('step' + (currentStep + 1)).classList.add('active');
+        }
+        
+        function prevStep(currentStep) {
+            // Ẩn form hiện tại
+            document.getElementById('form-step' + currentStep).classList.remove('active');
+            
+            // Hiện form trước đó
+            document.getElementById('form-step' + (currentStep - 1)).classList.add('active');
+            
+            // Cập nhật trạng thái các step
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.getElementById('step' + (currentStep - 1)).classList.remove('completed');
+            document.getElementById('step' + (currentStep - 1)).classList.add('active');
+        }
+        
+        // Xử lý chọn thành phố
+        function toggleCityDropdown() {
+            document.getElementById("cityDropdown").style.display = document.getElementById("cityDropdown").style.display === "block" ? "none" : "block";
+        }
+        
+        function selectCity(city) {
+            document.getElementById("city").value = city;
+            document.getElementById("cityDropdown").style.display = "none";
+        }
+        
+        // Đóng dropdown khi click ra ngoài
+        window.onclick = function(event) {
+            if (!event.target.matches('#city')) {
+                document.getElementById("cityDropdown").style.display = "none";
             }
-
-            function showStep(step) {
-                $('.form-step').removeClass('active');
-                $(`#step${step}`).addClass('active');
-                currentStep = step;
-                updateProgress();
+        }
+        
+        // Xử lý chọn time slot
+        const timeSlots = document.querySelectorAll('.time-slot');
+        timeSlots.forEach(slot => {
+            slot.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
+        
+        // Xử lý upload CV
+        document.querySelector('.upload-cv').addEventListener('click', function() {
+            document.getElementById('cv-upload').click();
+        });
+        
+        document.getElementById('cv-upload').addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const fileName = this.files[0].name;
+                document.querySelector('.upload-cv h3').textContent = fileName;
             }
-
-            $('.register-step').click(function () {
-                if ($('#signupForm').valid()) {
-                    showStep(2);
-                }
-            });
-            $('.prev-step').click(function () { showStep(currentStep - 1); });
-            $('.next-step').click(function () { showStep(currentStep + 1); });
-            $('.skip-link').click(function () { showStep($(this).data('skip')); });
-
-            $('.toggle-password').click(function () {
-                const target = $(this).data('target');
-                const input = $(`#${target}`);
-                input.attr('type', input.attr('type') === 'password' ? 'text' : 'password');
-                $(this).toggleClass('fa-eye fa-eye-slash');
-            });
         });
     </script>
 </body>

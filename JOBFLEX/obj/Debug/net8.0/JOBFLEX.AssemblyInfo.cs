@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JOBFLEX")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c1505b52abfe7f33d984771c51aab84d6df212c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+676ce49c8d8639d5f54db8234159ff980014f3aa")]
 [assembly: System.Reflection.AssemblyProductAttribute("JOBFLEX")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JOBFLEX")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
