@@ -1,0 +1,1304 @@
+
+/* Base styles - Harmonized Color Palette */
+:root {
+  /* Primary colors - Refined blue palette */
+  --primary-color:rgb(63, 155, 211);      /* Main blue, slightly adjusted for better harmony */
+  --primary-dark: #3a49da;       /* Darker blue for hover states */
+  --primary-light: #eef0ff;      /* Lighter blue for backgrounds, softened */
+  
+  /* Secondary colors */
+  --secondary-color: #fff4d4;    /* Warmer tone for better contrast with blue */
+  
+  /* Text colors - Adjusted for better readability */
+  --text-dark:rgb(8, 10, 13);          /* Slightly darker for better contrast */
+  --text-light:rgb(49, 106, 184);         /* Adjusted for WCAG compliance */
+  --text-lighter:rgb(230, 240, 245);       /* Lighter text for tertiary information */
+  
+  /* Neutrals */
+  --white: #ffffff;
+
+  /* Status colors - Adjusted for harmony */
+  --success: #10b981;            /* Greener success color */
+  --warning: #f59e0b;            /* Warm orange for warnings */
+  --danger: #ef4444;             /* Bright red for danger/errors */
+  
+  /* Shadows - Enhanced for depth */
+  --border-radius: 0.5rem;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+line-height: 1.5;
+color: var(--text-dark);
+background-color: var(--gray-50);
+}
+
+.container {
+width: 100%;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 1rem;
+}
+
+a {
+text-decoration: none;
+color: var(--text-light);
+transition: color 0.3s ease;
+}
+
+a:hover {
+color: var(--primary-color);
+}
+
+img {
+max-width: 100%;
+height: auto;
+}
+
+ul {
+list-style: none;
+}
+
+/* Button styles - Enhanced with more subtle transitions */
+.btn {
+display: inline-block;
+padding: 0.5rem 1rem;
+border-radius: var(--border-radius);
+font-weight: 500;
+cursor: pointer;
+transition: all 0.3s ease;
+border: none;
+text-align: center;
+}
+
+.sign-in-btn {
+background-color: var(--primary-dark);
+color: var(--white);
+box-shadow: 0 2px 4px rgba(58, 73, 218, 0.3);
+}
+
+.sign-in-btn:hover {
+background-color: var(--primary-color);
+color: var(--white);
+transform: translateY(-1px);
+box-shadow: 0 4px 6px rgba(58, 73, 218, 0.4);
+}
+
+.apply-btn {
+background-color: var(--primary-color);
+color: var(--white);
+padding: 0.5rem 1.5rem;
+width: 100%;
+margin-top: 1rem;
+box-shadow: 0 2px 4px rgba(67, 97, 238, 0.25);
+}
+
+.apply-btn:hover {
+background-color: var(--primary-dark);
+transform: translateY(-2px);
+box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+}
+
+.apply-btn-sm {
+background-color: var(--primary-color);
+color: var(--white);
+padding: 0.375rem 1rem;
+font-size: 0.875rem;
+box-shadow: 0 2px 4px rgba(67, 97, 238, 0.25);
+}
+
+.apply-btn-sm:hover {
+background-color: var(--primary-dark);
+transform: translateY(-1px);
+box-shadow: 0 3px 6px rgba(67, 97, 238, 0.3);
+}
+
+/* Header styles - Enhanced with subtle shadows */
+header {
+background-color: var(--white);
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.header-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1rem 0;
+}
+
+.logo {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--primary-dark);
+position: relative;
+}
+
+/* Logo effect */
+.logo::after {
+content: '';
+position: absolute;
+width: 100%;
+height: 3px;
+bottom: -5px;
+left: 0;
+background-color: var(--primary-color);
+transform: scaleX(0);
+transform-origin: bottom right;
+transition: transform 0.3s ease-out;
+}
+
+.logo:hover::after {
+transform: scaleX(1);
+transform-origin: bottom left;
+}
+
+.main-nav {
+display: flex;
+gap: 1.5rem;
+}
+
+.main-nav a {
+font-weight: 500;
+position: relative;
+padding: 0.25rem 0;
+}
+
+/* Navigation link effects */
+.main-nav a::after {
+content: '';
+position: absolute;
+width: 100%;
+height: 2px;
+bottom: -2px;
+left: 0;
+background-color: var(--primary-color);
+transform: scaleX(0);
+transform-origin: bottom right;
+transition: transform 0.3s ease-out;
+}
+
+.main-nav a:hover::after {
+transform: scaleX(1);
+transform-origin: bottom left;
+}
+
+.main-nav a.active {
+color: var(--primary-color);
+}
+
+.main-nav a.active::after {
+transform: scaleX(1);
+}
+
+.user-actions {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+
+.user-profile {
+position: relative;
+display: flex;
+align-items: center;
+}
+
+.avatar {
+width: 32px;
+height: 32px;
+border-radius: 50%;
+object-fit: cover;
+cursor: pointer;
+border: 2px solid transparent;
+transition: all 0.3s ease;
+}
+
+.avatar:hover {
+border-color: var(--primary-light);
+transform: scale(1.05);
+}
+
+.dropdown {
+display: none;
+position: absolute;
+top: 100%;
+right: 0;
+background-color: var(--white);
+box-shadow: var(--shadow-md);
+border-radius: var(--border-radius);
+padding: 0.5rem 0;
+min-width: 200px;
+z-index: 10;
+border: 1px solid var(--gray-100);
+animation: fadeIn 0.2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+from { 
+  opacity: 0;
+  transform: translateY(5px);
+}
+to { 
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+
+.dropdown a {
+display: block;
+padding: 0.5rem 1rem;
+transition: all 0.2s ease;
+}
+
+.dropdown a:hover {
+background-color: var(--primary-light);
+color: var(--primary-dark);
+padding-left: 1.25rem;
+}
+
+.user-profile:hover .dropdown {
+display: block;
+}
+
+      
+/* Hero Section */
+.hero-section {
+position: relative;
+padding: 80px 0;
+background-color: var(--light-bg);
+border-radius: 0 0 50% 50%/0 0 100px 100px;
+margin-bottom: 100px;
+overflow: hidden;
+animation: fadeIn 1.2s ease;
+}
+
+.background-image {
+position: absolute;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+background-image: url('assets/img/candidate.webp');
+background-size: cover;
+background-position: center bottom;
+opacity: 4;
+z-index: 1;
+animation: slowZoom 25s infinite alternate ease-in-out;
+}
+
+.background-image::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: #2a2887;
+opacity: 0.7;
+z-index: -1;
+pointer-events: none;
+}
+
+.blob {
+position: absolute;
+z-index: 0;
+border-radius: 50%;
+opacity: 0.2;
+}
+
+.blob-1 {
+width: 300px;
+height: 300px;
+background-color: var(--secondary-color);
+top: -100px;
+right: 10%;
+animation: float 10s ease-in-out infinite;
+}
+
+.blob-2 {
+width: 200px;
+height: 200px;
+background-color: var(--primary-color);
+bottom: -50px;
+left: 5%;
+animation: float 12s ease-in-out infinite reverse;
+}
+
+.shape {
+position: absolute;
+z-index: 0;
+}
+
+.shape-1 {
+width: 30px;
+height: 30px;
+border: 3px solid var(--secondary-color);
+top: 20%;
+left: 10%;
+transform: rotate(45deg);
+animation: spin 20s linear infinite;
+}
+
+.shape-2 {
+width: 20px;
+height: 20px;
+background-color: var(--primary-color);
+bottom: 30%;
+right: 15%;
+transform: rotate(30deg);
+animation: bounce 5s ease infinite;
+}
+
+.hero-content {
+display: flex;
+align-items: center;
+position: relative;
+z-index: 2;
+}
+
+.hero-text {
+flex: 1;
+padding-right: 50px;
+animation: fadeInLeft 1.2s ease;
+}
+
+.hero-title {
+font-size: 3rem;
+margin-bottom: 15px;
+line-height: 1.2;
+}
+
+.hero-title .highlight {
+color: var(--primary-color);
+font-weight: 700;
+position: relative;
+display: inline-block;
+}
+
+.hero-title .highlight::after {
+content: '';
+position: absolute;
+bottom: 5px;
+left: 0;
+width: 100%;
+height: 8px;
+background-color: rgba(78, 115, 223, 0.2);
+z-index: -1;
+animation: widthGrow 1.5s ease;
+}
+
+.hero-description {
+color: rgb(223, 235, 241);
+margin-bottom: 30px;
+font-size: 1.1rem;
+animation: fadeIn 1.8s ease;
+}
+
+/* Cải thiện thanh tìm kiếm chuyển động */
+.search-box {
+display: flex;
+background-color: var(--white);
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+margin-bottom: 20px;
+animation: pulse 3s infinite alternate ease-in-out;
+transition: all 0.4s;
+position: relative;
+}
+
+.search-box::before {
+content: '';
+position: absolute;
+left: -100%;
+top: 0;
+width: 50%;
+height: 100%;
+background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.6), 
+    transparent);
+animation: searchLight 4s infinite;
+}
+
+.search-box:hover {
+box-shadow: 0 10px 35px rgba(78, 115, 223, 0.25);
+transform: translateY(-5px) scale(1.02);
+}
+
+.search-input {
+flex: 1;
+padding: 15px;
+border: none;
+outline: none;
+font-size: 1rem;
+transition: all 0.3s;
+animation: blink 5s infinite;
+}
+
+.search-input::placeholder {
+color: #aaa;
+transition: color 0.3s;
+}
+
+.search-input:focus::placeholder {
+color: #ccc;
+}
+
+.search-btn {
+background-color: var(--primary-color);
+color: var(--white);
+border: none;
+padding: 0 25px;
+cursor: pointer;
+font-size: 1.1rem;
+transition: all 0.4s;
+position: relative;
+overflow: hidden;
+animation: colorShift 6s infinite alternate;
+}
+
+.search-btn:hover {
+background-color: #3a5bc7;
+padding: 0 30px;
+}
+
+.search-btn i {
+position: relative;
+z-index: 2;
+animation: bounce 2s infinite;
+}
+
+.search-btn::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+animation: shine 3s infinite;
+}
+
+/* Phần còn lại của CSS */
+.popular-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+margin-top: 20px;
+animation: fadeIn 2.2s ease;
+}
+
+.tag {
+background-color: var(--white);
+padding: 5px 15px;
+border-radius: 20px;
+font-size: 0.9rem;
+color: var(--text-color);
+text-decoration: none;
+transition: all 0.4s;
+position: relative;
+overflow: hidden;
+}
+
+.tag:hover {
+background-color: var(--primary-color);
+color: var(--white);
+transform: translateY(-3px);
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image {
+flex: 1;
+position: relative;
+animation: fadeInRight 1.2s ease;
+}
+
+.stats-card {
+background-color: var(--white);
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+width: 100%;
+z-index: 3;
+transition: all 0.4s;
+animation: fadeInUp 1.8s ease;
+}
+
+.stats-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.stat-items {
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+}
+
+.stat-item {
+margin: 10px 0;
+flex: 1;
+min-width: 120px;
+position: relative;
+padding: 0 10px;
+animation: fadeIn 2.5s ease;
+}
+
+.stat-item:not(:last-child)::after {
+content: '';
+position: absolute;
+right: 0;
+top: 10%;
+height: 80%;
+width: 1px;
+background-color: #e0e0e0;
+}
+
+.stat-number {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--primary-color);
+position: relative;
+display: inline-block;
+animation: countUp 2.5s ease-out;
+}
+
+.stat-label {
+font-size: 0.9rem;
+color: #5a6a72;
+}
+
+/* Keyframes cho các animation */
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+
+@keyframes fadeInLeft {
+from { 
+    opacity: 0;
+    transform: translateX(-50px);
+}
+to { 
+    opacity: 1;
+    transform: translateX(0);
+}
+}
+
+@keyframes fadeInRight {
+from { 
+    opacity: 0;
+    transform: translateX(50px);
+}
+to { 
+    opacity: 1;
+    transform: translateX(0);
+}
+}
+
+@keyframes fadeInUp {
+from { 
+    opacity: 0;
+    transform: translateY(30px);
+}
+to { 
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+@keyframes slowZoom {
+from { transform: scale(1); }
+to { transform: scale(1.1); }
+}
+
+@keyframes float {
+0% { transform: translateY(0); }
+50% { transform: translateY(-20px); }
+100% { transform: translateY(0); }
+}
+
+@keyframes spin {
+from { transform: rotate(45deg); }
+to { transform: rotate(405deg); }
+}
+
+@keyframes bounce {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-15px); }
+}
+
+@keyframes widthGrow {
+from { width: 0; }
+to { width: 100%; }
+}
+
+@keyframes countUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animation mới cho thanh tìm kiếm */
+@keyframes pulse {
+0% { transform: scale(1); }
+100% { transform: scale(1.03); }
+}
+
+@keyframes searchLight {
+0% { left: -100%; }
+100% { left: 200%; }
+}
+
+@keyframes shine {
+0% { left: -100%; }
+20% { left: 100%; }
+100% { left: 100%; }
+}
+
+@keyframes blink {
+0%, 100% { box-shadow: 0 0 0 transparent inset; }
+50% { box-shadow: 0 0 10px rgba(78, 115, 223, 0.2) inset; }
+}
+
+@keyframes colorShift {
+0% { background-color: var(--primary-color); }
+50% { background-color: #2a2887; }
+100% { background-color: var(--primary-color); }
+}
+
+/* Category section styles - Enhanced with hover effects */
+.category-section {
+padding: 4rem 0;
+background-color: var(--white);
+position: relative;
+overflow: hidden;
+}
+
+/* Subtle background pattern */
+.category-section::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-image: radial-gradient(var(--gray-100) 1px, transparent 1px);
+background-size: 20px 20px;
+opacity: 0.5;
+z-index: 0;
+}
+
+.section-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 2rem;
+position: relative;
+z-index: 1;
+}
+
+.section-header h2 {
+font-size: 1.875rem;
+font-weight: 700;
+color: var(--text-dark);
+position: relative;
+}
+
+/* Section title decoration */
+.section-header h2::after {
+content: '';
+display: block;
+width: 60px;
+height: 3px;
+background: linear-gradient(90deg, var(--primary-color), transparent);
+margin-top: 8px;
+border-radius: 2px;
+}
+
+.view-all {
+color: var(--primary-color);
+font-weight: 500;
+padding: 0.5rem 1rem;
+border-radius: var(--border-radius);
+transition: all 0.3s ease;
+border: 1px solid transparent;
+}
+
+.view-all:hover {
+background-color: var(--primary-light);
+border-color: var(--primary-color);
+}
+
+.category-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+gap: 1.25rem;
+position: relative;
+z-index: 1;
+}
+
+.category-card {
+background-color: var(--primary-light);
+padding: 1.5rem;
+border-radius: var(--border-radius);
+text-align: center;
+transition: all 0.3s ease;
+border: 1px solid rgba(255, 255, 255, 0.8);
+position: relative;
+overflow: hidden;
+}
+
+.category-card::before {
+content: '';
+position: absolute;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: radial-gradient(circle, rgba(67, 97, 238, 0.1) 0%, transparent 70%);
+opacity: 0;
+transition: opacity 0.3s ease;
+transform: translate(-50%, -50%);
+z-index: 0;
+}
+
+.category-card:hover {
+transform: translateY(-5px);
+box-shadow: var(--shadow-md);
+border-color: rgba(67, 97, 238, 0.2);
+}
+
+.category-card:hover::before {
+opacity: 1;
+}
+
+.category-card i {
+font-size: 1.5rem;
+color: var(--primary-color);
+margin-bottom: 0.75rem;
+position: relative;
+z-index: 1;
+transition: transform 0.3s ease;
+}
+
+.category-card:hover i {
+transform: scale(1.2);
+color: var(--primary-dark);
+}
+
+.category-card h3 {
+font-size: 1rem;
+font-weight: 600;
+margin-bottom: 0.5rem;
+position: relative;
+z-index: 1;
+}
+
+.category-card p {
+color: var(--text-light);
+font-size: 0.875rem;
+position: relative;
+z-index: 1;
+}
+
+/* Job section styles - Enhanced with better contrast */
+.job-section {
+  padding: 4rem 0;
+  background-color: var(--secondary-color);
+  background-image: linear-gradient(to bottom, var(--secondary-color), #fffbf0);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle pattern overlay */
+.job-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(45deg, rgba(67, 97, 238, 0.03) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(67, 97, 238, 0.03) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(67, 97, 238, 0.03) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(67, 97, 238, 0.03) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+/* Thiết lập container cho slider */
+.job-slider-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  padding: 0 60px; /* Tạo khoảng cách cho mũi tên */
+}
+
+/* Thiết lập nút mũi tên */
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  color: var(--primary-color);
+}
+
+.arrow-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Vị trí các nút mũi tên */
+.prev-btn {
+  left: 10px; /* Đẩy xa hơn khỏi job-card */
+}
+
+.next-btn {
+  right: 10px; /* Đẩy xa hơn khỏi job-card */
+}
+
+/* Thiết lập lại job-grid để làm việc với slider */
+.job-grid {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  width: 100%;
+  gap: 1.5rem;
+  padding: 10px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.job-card {
+  flex: 0 0 calc(25% - 1.125rem);
+  min-width: 250px;
+  background-color: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card hover effect */
+.job-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gray-100);
+}
+
+.job-card:hover::after {
+  transform: scaleX(1);
+}
+
+.job-tag {
+  display: inline-block;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.job-card:hover .job-tag {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.job-card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  transition: color 0.3s ease;
+}
+
+.job-card:hover h3 {
+  color: var(--primary-color);
+}
+
+.company {
+  color: var(--text-light);
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.job-desc {
+  color: var(--text-dark);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.job-meta div {
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.job-meta i {
+  margin-right: 0.25rem;
+  color: var(--primary-color);
+}
+
+/* Enhanced company avatar */
+.company-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.job-card:hover .company-avatar {
+  border-color: var(--primary-light);
+  box-shadow: 0 3px 8px rgba(67, 97, 238, 0.15);
+}
+
+.company-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.job-card:hover .company-logo {
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .job-card {
+    flex: 0 0 calc(33.33% - 1rem);
+  }
+  
+  .job-slider-container {
+    padding: 0 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .job-card {
+    flex: 0 0 calc(50% - 0.75rem);
+  }
+  
+  .arrow-btn {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .job-slider-container {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .job-card {
+    flex: 0 0 calc(100% - 0.5rem);
+  }
+  
+  .arrow-btn {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .job-slider-container {
+    padding: 0 35px;
+  }
+}
+/* Featured section styles - Enhanced gradients */
+.featured-section {
+padding: 4rem 0;
+background-image: linear-gradient(to bottom, var(--gray-50), var(--primary-light));
+position: relative;
+overflow: hidden;
+}
+
+/* Add subtle animated background */
+.featured-section::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: 
+  radial-gradient(circle at 20% 30%, rgba(67, 97, 238, 0.05) 0%, transparent 50%),
+  radial-gradient(circle at 80% 70%, rgba(67, 97, 238, 0.05) 0%, transparent 50%);
+z-index: 0;
+}
+
+.job-list {
+display: flex;
+flex-direction: column;
+gap: 1.25rem;
+position: relative;
+z-index: 1;
+}
+
+.job-list-item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1.5rem;
+background-color: var(--white);
+border-left: 4px solid var(--primary-color);
+border-radius: var(--border-radius);
+box-shadow: var(--shadow-sm);
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+}
+
+/* Enhanced hover effect */
+.job-list-item::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(45deg, rgba(67, 97, 238, 0.02) 0%, transparent 70%);
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+.job-list-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-left-color: var(--primary-dark);
+  background-color: var(--primary-light);
+}
+
+.job-info {
+  flex: 1;
+}
+
+.job-info h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--text-dark);
+}
+
+.location {
+  color: var(--text-light);
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.location i {
+  margin-right: 0.25rem;
+  color: var(--primary-color);
+}
+
+.job-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.job-salary {
+  font-weight: 700;
+  color: var(--primary-dark);
+  font-size: 1.1rem;
+}
+
+.job-type {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--white);
+  background-color: var(--primary-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+/* Các màu sắc khác nhau cho các loại công việc */
+.job-type.full-time {
+  background-color: var(--primary-color);
+}
+
+.job-type.part-time {
+  background-color: var(--success);
+}
+
+.job-type.contract {
+  background-color: var(--warning);
+}
+
+.job-type.remote {
+  background-color: var(--text-light);
+}
+
+/* Thêm trạng thái hover cho loại công việc */
+.job-type:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Thêm màu xen kẽ cho các mục công việc */
+.job-list-item:nth-child(odd) {
+  background-color: var(--white);
+}
+
+.job-list-item:nth-child(even) {
+  background-color: var(--gray-50);
+}
+
+/* Thêm trạng thái hover cho loại công việc */
+.job-type:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    background-color: #212529;
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #adb5bd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: white;
+    padding-left: 5px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    transition: all 0.3s;
+}
+
+.social-links a:hover {
+    background-color: var(--primary);
+    transform: translateY(-5px);
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    color: #adb5bd;
+}

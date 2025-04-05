@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>JobFlex - Find Your Perfect Job</title>
+  <link href="ungvien.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+          <div class="logo">JobFlex</div>
+          <nav class="main-nav">
+            <a href="#" class="active">
+              <i class="fas fa-home"></i>
+              Trang chủ
+            </a>
+            <a href="#">
+              <i class="fas fa-bookmark"></i>
+              Công việc đã lưu
+            </a>
+            <a href="#">
+              <i class="fas fa-file-alt"></i>
+              Công việc đang ứng tuyển
+            </a>
+            <a href="#">
+              <i class="fas fa-bell"></i>
+              Thông báo
+            </a>
+            <a href="#">
+              <i class="fas fa-envelope"></i>
+              Tin nhắn
+            </a>
+          </nav>
+          <div class="user-actions">
+            <div class="user-profile">
+              <div class="avatar-container">
+                <!-- <img src="avatar.webp" alt="User Avatar" class="avatar"> -->
+                <i class="fas fa-user-circle avatar-icon"></i>
+              </div>
+              <div class="dropdown">
+                <a href="job.html">
+                  <i class="fas fa-id-card"></i>
+                  Xem thông tin cá nhân
+                </a>
+                <a href="#">
+                  <i class="fas fa-exchange-alt"></i>
+                  Chuyển sang chế độ tuyển dụng
+                </a>
+                <a href="#">
+                  <i class="fas fa-sign-out-alt"></i>
+                  Thoát
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+  <main>
+    <section class="hero-section">
+        <div class="background-image"></div>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Tìm việc <span class="highlight">Bán thời gian</span> và <span class="highlight">Thời vụ</span> phù hợp</h1>
+                    <p class="hero-description">Khám phá hàng nghìn cơ hội việc làm linh hoạt, phù hợp với lịch trình và kỹ năng của bạn. Bắt đầu hành trình mới ngay hôm nay!</p>
+                    
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="Tìm kiếm công việc..." />
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <div class="popular-tags">
+                        <span>Phổ biến:</span>
+                        <a href="#" class="tag">Nhà hàng</a>
+                        <a href="#" class="tag">Bán hàng</a>
+                        <a href="#" class="tag">Gia sư</a>
+                        <a href="#" class="tag">Shipper</a>
+                        <a href="#" class="tag">Cuối tuần</a>
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="stats-card">
+                        <div class="stat-items">
+                            <div class="stat-item">
+                                <div class="stat-number">5,200+</div>
+                                <div class="stat-label">Công việc đang tuyển</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">1,800+</div>
+                                <div class="stat-label">Công việc bán thời gian</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">950+</div>
+                                <div class="stat-label">Việc làm thời vụ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="category-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Top ngành nghề nổi bật</h2>
+            <a href="#" class="view-all">Xem tất cả <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="category-grid">
+            <div class="category-card">
+              <i class="fas fa-laptop-code"></i>
+              <h3>IT-Công nghệ thông tin</h3>
+              <p>500 việc làm</p>
+            </div>
+            <div class="category-card">
+              <i class="fas fa-utensils"></i>
+              <h3>Nhà hàng - Khách sạn</h3>
+              <p>600 việc làm</p>
+            </div>
+            <div class="category-card">
+              <i class="fas fa-chart-line"></i>
+              <h3>Tài chính - Ngân hàng</h3>
+              <p>350 việc làm</p>
+            </div>
+            <div class="category-card">
+              <i class="fas fa-building"></i>
+              <h3>Bất động sản</h3>
+              <p>200 việc làm</p>
+            </div>
+            <div class="category-card">
+              <i class="fas fa-graduation-cap"></i>
+              <h3>Giáo dục - Đào tạo</h3>
+              <p>150 việc làm</p>
+            </div>
+            <div class="category-card">
+              <i class="fas fa-industry"></i>
+              <h3>Sản xuất - Vận hành</h3>
+              <p>250 việc làm</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <section class="job-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Công việc tốt nhất</h2>
+          <a href="#" class="view-all">Xem tất cả <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <!-- Thêm wrapper cho slider -->
+        <div class="job-slider-container">
+          <!-- Mũi tên bên trái -->
+          <button class="arrow-btn prev-btn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          
+          <div class="job-grid">
+            <div class="job-card">
+              <!-- Avatar với hình ảnh -->
+              <div class="company-avatar">
+                <img src="logoenglish.jpg" alt="SpeakWell Logo" class="company-logo">
+              </div>
+              <div class="job-tag">Bán thời gian</div>
+              <h3>Gia sư Tiếng Anh bán thời gian</h3>
+              <div class="company">Trung tâm Anh ngữ SpeakWell</div>
+              <p class="job-desc">Dạy tiếng Anh cho học sinh tiểu học và THCS.</p>
+              <div class="job-meta">
+                <div><i class="fas fa-map-marker-alt"></i> TP Hồ Chí Minh</div>
+                <div><i class="fas fa-money-bill-wave"></i> 30,000đ/giờ</div>
+                <div><i class="fas fa-users"></i> 3 vị trí</div>
+              </div>
+              <button class="btn apply-btn">Ứng tuyển ngay</button>
+            </div>
+            <div class="job-card">
+              <!-- Avatar với hình ảnh -->
+              <div class="company-avatar">
+                <img src="logoenglish.jpg" alt="SpeakWell Logo" class="company-logo">
+              </div>
+              <div class="job-tag">Bán thời gian</div>
+              <h3>Gia sư Tiếng Anh bán thời gian</h3>
+              <div class="company">Trung tâm Anh ngữ SpeakWell</div>
+              <p class="job-desc">Dạy tiếng Anh cho học sinh tiểu học và THCS.</p>
+              <div class="job-meta">
+                <div><i class="fas fa-map-marker-alt"></i> TP Hồ Chí Minh</div>
+                <div><i class="fas fa-money-bill-wave"></i> 30,000đ/giờ</div>
+                <div><i class="fas fa-users"></i> 3 vị trí</div>
+              </div>
+              <button class="btn apply-btn">Ứng tuyển ngay</button>
+            </div>
+            <div class="job-card">
+              <!-- Avatar với hình ảnh -->
+              <div class="company-avatar">
+                <img src="logoenglish.jpg" alt="SpeakWell Logo" class="company-logo">
+              </div>
+              <div class="job-tag">Bán thời gian</div>
+              <h3>Gia sư Tiếng Anh bán thời gian</h3>
+              <div class="company">Trung tâm Anh ngữ SpeakWell</div>
+              <p class="job-desc">Dạy tiếng Anh cho học sinh tiểu học và THCS.</p>
+              <div class="job-meta">
+                <div><i class="fas fa-map-marker-alt"></i> TP Hồ Chí Minh</div>
+                <div><i class="fas fa-money-bill-wave"></i> 30,000đ/giờ</div>
+                <div><i class="fas fa-users"></i> 3 vị trí</div>
+              </div>
+              <button class="btn apply-btn">Ứng tuyển ngay</button>
+            </div>
+            <div class="job-card">
+              <!-- Avatar với hình ảnh -->
+              <div class="company-avatar">
+                <img src="images/eventpro-logo.png" alt="EventPro Logo" class="company-logo">
+              </div>
+              <div class="job-tag">Bán thời gian</div>
+              <h3>Nhân viên thiết kế backdrop</h3>
+              <div class="company">EventPro Solutions</div>
+              <p class="job-desc">Thiết kế backdrop, banner cho sự kiện.</p>
+              <div class="job-meta">
+                <div><i class="fas fa-map-marker-alt"></i> Hà Nội</div>
+                <div><i class="fas fa-money-bill-wave"></i> 30,000đ/giờ</div>
+                <div><i class="fas fa-users"></i> 1 vị trí</div>
+              </div>
+              <button class="btn apply-btn">Ứng tuyển ngay</button>
+            </div>
+            <div class="job-card">
+              <!-- Avatar với hình ảnh -->
+              <div class="company-avatar">
+                <img src="cafe.webp" alt="Cafe Melody Logo" class="company-logo">
+              </div>
+              <div class="job-tag">Bán thời gian</div>
+              <h3>Nhân viên pha chế cuối tuần</h3>
+              <div class="company">Cafe Melody</div>
+              <p class="job-desc">Tuyển nhân viên pha chế có kinh nghiệm làm việc vào cuối tuần.</p>
+              <div class="job-meta">
+                <div><i class="fas fa-map-marker-alt"></i> TP Hồ Chí Minh</div>
+                <div><i class="fas fa-money-bill-wave"></i> 28,000đ/giờ</div>
+                <div><i class="fas fa-users"></i> 2 vị trí</div>
+              </div>
+              <button class="btn apply-btn">Ứng tuyển ngay</button>
+            </div>
+            <div class="job-card">
+              <!-- Avatar với hình ảnh -->
+              <div class="company-avatar">
+                <img src="images/eventpro-logo.png" alt="EventPro Logo" class="company-logo">
+              </div>
+              <div class="job-tag">Thời vụ</div>
+              <h3>Nhân viên tổ chức sự kiện thời vụ</h3>
+              <div class="company">EventPro Solutions</div>
+              <p class="job-desc">Hỗ trợ chuẩn bị và tổ chức sự kiện cuối tuần.</p>
+              <div class="job-meta">
+                <div><i class="fas fa-map-marker-alt"></i> Hà Nội</div>
+                <div><i class="fas fa-money-bill-wave"></i> 28,000đ/giờ</div>
+                <div><i class="fas fa-users"></i> 4 vị trí</div>
+              </div>
+              <button class="btn apply-btn">Ứng tuyển ngay</button>
+            </div>
+          </div>
+          
+          <!-- Mũi tên bên phải -->
+          <button class="arrow-btn next-btn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const jobGrid = document.querySelector('.job-grid');
+          const prevBtn = document.querySelector('.prev-btn');
+          const nextBtn = document.querySelector('.next-btn');
+          
+          // Số lượng card hiển thị dựa trên chiều rộng màn hình
+          const getVisibleCards = () => {
+            if (window.innerWidth > 992) return 4;
+            if (window.innerWidth > 768) return 3;
+            if (window.innerWidth > 576) return 2;
+            return 1;
+          };
+          
+          // Tính toán chiều rộng của mỗi card cộng với khoảng cách
+          const getCardWidth = () => {
+            const card = document.querySelector('.job-card');
+            if (!card) return 0;
+            
+            const cardStyle = window.getComputedStyle(card);
+            const cardWidth = card.offsetWidth;
+            const marginRight = parseInt(cardStyle.marginRight) || 20; // Giá trị gap trong CSS
+            
+            return cardWidth + marginRight;
+          };
+          
+          // Xử lý sự kiện click nút Prev
+          prevBtn.addEventListener('click', function() {
+            const cardWidth = getCardWidth();
+            jobGrid.scrollBy({
+              left: -cardWidth * getVisibleCards(),
+              behavior: 'smooth'
+            });
+          });
+          
+          // Xử lý sự kiện click nút Next
+          nextBtn.addEventListener('click', function() {
+            const cardWidth = getCardWidth();
+            jobGrid.scrollBy({
+              left: cardWidth * getVisibleCards(),
+              behavior: 'smooth'
+            });
+          });
+          
+          // Kiểm tra và ẩn/hiện các nút điều hướng dựa trên vị trí cuộn
+          const checkScrollButtons = () => {
+            const isAtStart = jobGrid.scrollLeft <= 0;
+            const isAtEnd = jobGrid.scrollLeft + jobGrid.clientWidth >= jobGrid.scrollWidth - 5;
+            
+            prevBtn.style.opacity = isAtStart ? '0.5' : '1';
+            prevBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
+            
+            nextBtn.style.opacity = isAtEnd ? '0.5' : '1';
+            nextBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+          };
+          
+          // Theo dõi sự kiện cuộn
+          jobGrid.addEventListener('scroll', checkScrollButtons);
+          
+          // Theo dõi sự kiện thay đổi kích thước cửa sổ
+          window.addEventListener('resize', checkScrollButtons);
+          
+          // Kiểm tra ban đầu
+          checkScrollButtons();
+        });
+    </script>
+    </section>
+    <section class="featured-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Công việc phù hợp</h2>
+          <a href="#" class="view-all">Xem tất cả <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="job-list">
+          <div class="job-list-item">
+            <div class="job-info">
+              <h3>Nhân viên giao hàng bán thời gian</h3>
+              <div class="company">FastGo Express</div>
+              <div class="location"><i class="fas fa-map-marker-alt"></i> Cần Thơ</div>
+              <div class="job-desc">Giao hàng trong nội thành Cần Thơ, làm việc linh hoạt theo ca.</div>
+            </div>
+            <div class="job-actions">
+              <div class="job-salary">25,000đ/giờ</div>
+              <div class="job-type">Bán thời gian</div>
+              <button class="btn apply-btn-sm">Ứng tuyển</button>
+            </div>
+          </div>
+          <div class="job-list-item">
+            <div class="job-info">
+              <h3>Nhân viên bán hàng thời trang</h3>
+              <div class="company">Thời trang BlueStar</div>
+              <div class="location"><i class="fas fa-map-marker-alt"></i> Khánh Hòa</div>
+              <div class="job-desc">Tuyển nhân viên bán hàng thời trang, tư vấn khách hàng, trưng bày sản phẩm.</div>
+            </div>
+            <div class="job-actions">
+              <div class="job-salary">22,000đ/giờ</div>
+              <div class="job-type">Bán thời gian</div>
+              <button class="btn apply-btn-sm">Ứng tuyển</button>
+            </div>
+          </div>
+          <div class="job-list-item">
+            <div class="job-info">
+              <h3>Nhân viên phục vụ bàn ca sáng</h3>
+              <div class="company">Nhà hàng Phố Xưa</div>
+              <div class="location"><i class="fas fa-map-marker-alt"></i> Hà Nội</div>
+              <div class="job-desc">Nhà hàng Phố Xưa cần tuyển nhân viên phục vụ bàn ca sáng từ 8h-14h.</div>
+            </div>
+            <div class="job-actions">
+              <div class="job-salary">22,000đ/giờ</div>
+              <div class="job-type">Bán thời gian</div>
+              <button class="btn apply-btn-sm">Ứng tuyển</button>
+            </div>
+          </div>
+          <div class="job-list-item">
+            <div class="job-info">
+              <h3>Nhân viên phục vụ bàn buổi tối</h3>
+              <div class="company">Cafe Melody</div>
+              <div class="location"><i class="fas fa-map-marker-alt"></i> TP Hồ Chí Minh</div>
+              <div class="job-desc">Cần tuyển nhân viên phục vụ bàn cho ca tối tại Cafe Melody.</div>
+            </div>
+            <div class="job-actions">
+              <div class="job-salary">25,000đ/giờ</div>
+              <div class="job-type">Bán thời gian</div>
+              <button class="btn apply-btn-sm">Ứng tuyển</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Về chúng tôi</h4>
+                <ul>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Hỏi đáp</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Điều khoản dịch vụ</a></li>
+                    <li><a href="#">Quy chế hoạt động</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Liên kết nhanh</h4>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Tìm việc</a></li>
+                    <li><a href="#">Đăng tin tuyển dụng</a></li>
+                    <li><a href="#">Bảng giá dịch vụ</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <ul>
+                    <li><a href="#">Hướng dẫn sử dụng</a></li>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Điều khoản sử dụng</a></li>
+                    <li><a href="#">Quy chế hoạt động</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Liên hệ</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Q. Liên Chiểu, TP. Đà Nẵng</p>
+                <p><i class="fas fa-phone"></i> 0123456789</p>
+                <p><i class="fas fa-envelope"></i> pbl3@jobflex.com.vn</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 JobFlex. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
