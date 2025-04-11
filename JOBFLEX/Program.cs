@@ -27,6 +27,7 @@ builder.Services.AddDbContext<HeThongTimViecContext>(options =>
 var app = builder.Build();
 
 // Sử dụng Session trong middleware
+// Removed redundant services.AddSession();
 app.UseSession(); // Đây là phần thêm vào để đảm bảo session hoạt động
 
 // Configure the HTTP request pipeline.

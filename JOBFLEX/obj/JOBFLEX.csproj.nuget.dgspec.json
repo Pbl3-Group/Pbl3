@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/JOBFLEX.csproj": {}
+    "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/JOBFLEX.csproj": {}
   },
   "projects": {
-    "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/JOBFLEX.csproj": {
+    "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/JOBFLEX.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/JOBFLEX.csproj",
+        "projectUniqueName": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/JOBFLEX.csproj",
         "projectName": "JOBFLEX",
-        "projectPath": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/JOBFLEX.csproj",
+        "projectPath": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/JOBFLEX.csproj",
         "packagesPath": "/Users/nguyenthanhhuyen/.nuget/packages/",
-        "outputPath": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/obj/",
+        "outputPath": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/nguyenthanhhuyen/.nuget/NuGet/NuGet.Config"
@@ -47,6 +47,10 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "DocumentFormat.OpenXml": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.13, )"
@@ -65,9 +69,21 @@
               "target": "Package",
               "version": "[8.3.0, )"
             },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.7.3, )"
+            },
+            "PdfSharpCore": {
+              "target": "Package",
+              "version": "[1.3.67, )"
+            },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[8.0.3, )"
+            },
+            "UglyToad.PdfPig": {
+              "target": "Package",
+              "version": "[1.7.0-custom-5, )"
             }
           },
           "imports": [

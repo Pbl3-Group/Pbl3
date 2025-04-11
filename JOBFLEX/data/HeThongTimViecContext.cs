@@ -343,7 +343,7 @@ namespace HeThongTimViec.Data
             // Cấu hình bảng CVs
             modelBuilder.Entity<CV>(entity =>
             {
-                entity.ToTable("cvs");
+                entity.ToTable("CV");
                 entity.HasKey(cv => cv.CvId);
                 entity.Property(cv => cv.CvId).HasColumnName("cv_id").ValueGeneratedOnAdd();
                 entity.Property(cv => cv.UserId).HasColumnName("user_id").IsRequired();

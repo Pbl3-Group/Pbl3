@@ -1,272 +1,340 @@
 {
   "Files": [
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/obj/Debug/net8.0/scopedcss/projectbundle/JOBFLEX.bundle.scp.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/obj/Debug/net8.0/scopedcss/projectbundle/JOBFLEX.bundle.scp.css",
       "PackagePath": "staticwebassets/JOBFLEX.bundle.scp.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/assets/img/pexels-photo-3184423.webp",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/candidate.webp",
+      "PackagePath": "staticwebassets/assets/img/candidate.webp"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/coffee1.jpg",
+      "PackagePath": "staticwebassets/assets/img/coffee1.jpg"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/df34c29a097271b601f4381680eeb497.jpg",
+      "PackagePath": "staticwebassets/assets/img/df34c29a097271b601f4381680eeb497.jpg"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/ec28a3db05e9c0c8ecef1e5c43b9927d.jpg",
+      "PackagePath": "staticwebassets/assets/img/ec28a3db05e9c0c8ecef1e5c43b9927d.jpg"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/ga.jpg",
+      "PackagePath": "staticwebassets/assets/img/ga.jpg"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/grab.jpg",
+      "PackagePath": "staticwebassets/assets/img/grab.jpg"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/k1.jpg",
+      "PackagePath": "staticwebassets/assets/img/k1.jpg"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/pexels-altabena-10142683.jpg",
+      "PackagePath": "staticwebassets/assets/img/pexels-altabena-10142683.jpg"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/pexels-fauxels-3184286.jpg",
+      "PackagePath": "staticwebassets/assets/img/pexels-fauxels-3184286.jpg"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/pexels-fauxels-3184292.jpg",
+      "PackagePath": "staticwebassets/assets/img/pexels-fauxels-3184292.jpg"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/pexels-fauxels-3184360.jpg",
+      "PackagePath": "staticwebassets/assets/img/pexels-fauxels-3184360.jpg"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/pexels-photo-3184423.webp",
       "PackagePath": "staticwebassets/assets/img/pexels-photo-3184423.webp"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/assets/img/pexels-photo-6340699.webp",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/assets/img/pexels-photo-6340699.webp",
       "PackagePath": "staticwebassets/assets/img/pexels-photo-6340699.webp"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/ForgotPassword.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/css/ForgotPassword.css",
       "PackagePath": "staticwebassets/css/ForgotPassword.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/Login.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/css/Login.css",
       "PackagePath": "staticwebassets/css/Login.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/Register.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/css/Register.css",
       "PackagePath": "staticwebassets/css/Register.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/css/style.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/css/style.css",
       "PackagePath": "staticwebassets/css/style.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/favicon.ico",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/css/ungvien.css",
+      "PackagePath": "staticwebassets/css/ungvien.css"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/js/Login.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/js/Login.js",
       "PackagePath": "staticwebassets/js/Login.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/js/site.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/js/register.js",
+      "PackagePath": "staticwebassets/js/register.js"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/LICENSE",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/LICENSE",
       "PackagePath": "staticwebassets/lib/bootstrap"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation/LICENSE.md",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery-validation/LICENSE.md",
       "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery-validation/dist/additional-methods.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
       "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/LICENSE.txt",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery/LICENSE.txt",
       "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/dist/jquery.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery/dist/jquery.js",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/dist/jquery.min.js",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery/dist/jquery.min.js",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
     },
     {
-      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/wwwroot/lib/jquery/dist/jquery.min.map",
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/uploads/20a92c32-e4d8-4bc6-a9d6-36f46ce0afec_Màu be và Nâu Khối Màu Cấp độ Cơ bản Người mới Sơ yếu lý lịch.pdf",
+      "PackagePath": "staticwebassets/uploads/20a92c32-e4d8-4bc6-a9d6-36f46ce0afec_Màu be và Nâu Khối Màu Cấp độ Cơ bản Người mới Sơ yếu lý lịch.pdf"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/uploads/4a36e783-9964-470c-91a4-b51a0c664d19_Màu be và Nâu Khối Màu Cấp độ Cơ bản Người mới Sơ yếu lý lịch.pdf",
+      "PackagePath": "staticwebassets/uploads/4a36e783-9964-470c-91a4-b51a0c664d19_Màu be và Nâu Khối Màu Cấp độ Cơ bản Người mới Sơ yếu lý lịch.pdf"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/uploads/528e0517-dcde-4d76-8c88-0b5725cc343c_Màu be và Nâu Khối Màu Cấp độ Cơ bản Người mới Sơ yếu lý lịch.pdf",
+      "PackagePath": "staticwebassets/uploads/528e0517-dcde-4d76-8c88-0b5725cc343c_Màu be và Nâu Khối Màu Cấp độ Cơ bản Người mới Sơ yếu lý lịch.pdf"
+    },
+    {
+      "Id": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/uploads/594ae41e-dec7-425d-92d8-9738b16a27eb_Màu be và Nâu Khối Màu Cấp độ Cơ bản Người mới Sơ yếu lý lịch.pdf",
+      "PackagePath": "staticwebassets/uploads/594ae41e-dec7-425d-92d8-9738b16a27eb_Màu be và Nâu Khối Màu Cấp độ Cơ bản Người mới Sơ yếu lý lịch.pdf"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.JOBFLEX.Microsoft.AspNetCore.StaticWebAssets.props",

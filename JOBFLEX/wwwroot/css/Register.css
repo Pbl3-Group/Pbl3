@@ -284,19 +284,89 @@ h2 {
 }
 
 .radio-group {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 16px;
-}
-
-.radio-option {
-    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .radio-group > label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 6px;
+    font-size: 14px; /* Giữ nguyên kích thước */
+  }
+  
+  .radio-option {
+    display: inline-flex;
     align-items: center;
-}
-
-.radio-option input {
-    margin-right: 8px;
-}
+    margin-right: 20px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .radio-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .radio-option label {
+    padding: 8px 16px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    background-color: var(--white-color);
+    color: var(--text-secondary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+  
+  .radio-option label:hover {
+    border-color: var(--primary-light);
+    background-color: var(--light-color);
+    color: var(--primary-color);
+  }
+  
+  .radio-option input[type="radio"]:checked + label {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(70, 97, 242, 0.3);
+  }
+  
+  .radio-option input[type="radio"]:focus + label {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+  }
+  /* Animation for when selecting */
+  @keyframes selectPulse {
+    0% {
+      transform: scale(0.95);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .radio-option input[type="radio"]:checked + label {
+    animation: selectPulse 0.3s ease;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 600px) {
+    .radio-option {
+      margin-bottom: 10px;
+      margin-right: 10px;
+    }
+    
+    .radio-option label {
+      padding: 8px 12px;
+    }
+  }
 
 .checkbox-group {
     display: flex;
@@ -1844,5 +1914,73 @@ textarea.form-control {
     .day {
       font-size: 13px;
       padding: 12px 5px;
+    }
+  }
+   
+  .confirmation-details {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+  
+  .confirmation-details p {
+    margin: 0;
+    padding: 14px 0;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    align-items: baseline;
+  }
+  
+  .confirmation-details p:last-child {
+    border-bottom: none;
+  }
+  
+  .confirmation-details strong {
+    width: 200px;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  
+  .confirmation-details span {
+    flex: 1;
+    color: #34495e;
+    font-size: 15px;
+    word-break: break-word;
+  }
+  
+  .confirmation-details span:empty::after {
+    content: "—";
+    color: #95a5a6;
+  }
+  
+  .confirmation-details::before {
+    content: "Thông tin xác nhận";
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+  }
+  
+  @media (max-width: 600px) {
+    .confirmation-details {
+      padding: 20px;
+      margin: 15px;
+    }
+    
+    .confirmation-details p {
+      flex-direction: column;
+    }
+    
+    .confirmation-details strong {
+      width: 100%;
+      margin-bottom: 4px;
     }
   }

@@ -8,16 +8,16 @@ namespace HeThongTimViec.Models
         public int UserId { get; set; }
         public required string HoTen { get; set; }
         public GioiTinhEnum GioiTinh { get; set; }
-        public required string Email { get; set; }
-        public required string FacebookLink { get; set; }
+        public string ? Email { get; set; }
+        public string ? FacebookLink { get; set; }
         public required string MatKhau { get; set; }
         public DateTime NgaySinh { get; set; }
         public required string SDT { get; set; }
         public ThanhPhoEnum? ThanhPho { get; set; }
         public VaiTroEnum VaiTro { get; set; } = VaiTroEnum.Ung_Vien;
         public TrangThaiEnum TrangThai { get; set; } = TrangThaiEnum.Chap_Thuan;
-        public required string Avatar { get; set; }
-        public required string MoTa { get; set; }
+        public string? Avatar { get; set; } = "default_avatar.png";
+        public string? MoTa { get; set; }
         public DateTime NgayTao { get; set; } = DateTime.UtcNow;
 
         // Navigation properties

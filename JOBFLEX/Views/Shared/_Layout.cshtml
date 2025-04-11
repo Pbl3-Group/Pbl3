@@ -1,53 +1,125 @@
 ﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewBag.Title - JobFlex</title>
-    <!-- Liên kết đến file CSS -->
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
-    <!-- Nếu dùng Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFlex - Tìm việc bán thời gian & thời vụ</title>
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Thanh điều hướng -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">JobFlex</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Chuyển đổi điều hướng">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Trang Chủ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/About">Giới Thiệu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/Contact">Liên Hệ</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Nội dung chính -->
-    <div class="container">
-        @RenderBody()
-    </div>
-
-    <!-- Chân trang -->
-    <footer class="footer mt-auto py-3 bg-light">
+    <header>
         <div class="container">
-            <p>© @DateTime.Now.Year - JobFlex</p>
+            <nav>
+                <a href="@Url.Action("Index", "Home")" class="logo">
+                    <i class="fas fa-briefcase"></i>
+                    Job<span>Flex</span>
+                </a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="@Url.Action("Index", "Home")" class="active">Trang chủ</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">Việc làm</a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-search"></i>
+                                <span>Tìm việc làm</span>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Việc làm đã ứng tuyển</span>
+                                <span class="hot-badge"></span>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="far fa-heart"></i>
+                                <span>Việc làm đã lưu</span>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user-check"></i>
+                                <span>Việc làm phù hợp</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li><a href="#">Hồ sơ & CV</a></li>
+                    <li><a href="#">Cẩm nang nghề nghiệp</a></li>
+                    <li><a href="#">Đăng tuyển</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="#" class="login-btn" id="loginBtn">Đăng nhập</a>
+                    <a href="#" class="register-btn" id="registerBtn">Đăng ký</a>
+                </div>
+                <script>
+                    document.getElementById("loginBtn").addEventListener("click", function(event) {
+                        event.preventDefault();
+                        window.location.href = "/Account/Login";
+                    });
+                    document.getElementById("registerBtn").addEventListener("click", function(event) {
+                        event.preventDefault();
+                        window.location.href = "/Account/Register";
+                    });
+                </script>
+            </nav>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>Về chúng tôi</h4>
+                    <ul>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="#">Hỏi đáp</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản dịch vụ</a></li>
+                        <li><a href="#">Quy chế hoạt động</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên kết nhanh</h4>
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                        <li><a href="#">Tìm việc</a></li>
+                        <li><a href="#">Đăng tin tuyển dụng</a></li>
+                        <li><a href="#">Bảng giá dịch vụ</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Hỗ trợ</h4>
+                    <ul>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Quy chế hoạt động</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên hệ</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Q. Liên Chiểu, TP. Đà Nẵng</p>
+                    <p><i class="fas fa-phone"></i> 0123456789</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:support@jobflex.com">support@jobflex.com</a></p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 JobFlex. Tất cả quyền được bảo lưu.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- File JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Chèn script bổ sung nếu có -->
-    @RenderSection("scripts", required: false)
+    <script src="~/js/site.js"></script>
 </body>
 </html>

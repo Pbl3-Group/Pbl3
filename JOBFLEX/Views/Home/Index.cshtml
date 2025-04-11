@@ -1,1 +1,827 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    ViewData["Title"] = "JobFlex - Tìm việc bán thời gian & thời vụ";
+}
+
+<section class="hero">
+    <div class="light-particles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="gradient-overlay"></div>
+    <div class="container">
+        <h1>Tìm kiếm việc làm bán thời gian & thời vụ</h1>
+        <p>Nền tảng hàng đầu kết nối ứng viên với nhà tuyển dụng, mang đến cơ hội việc làm bán thời gian và thời vụ linh hoạt, thu nhập hấp dẫn và phù hợp với mọi nhu cầu</p>
+        <div class="search-box">
+            <input type="text" placeholder="Tìm kiếm công việc phù hợp với bạn">
+            <select>
+                <option value="">Địa điểm</option>
+                <option value="an_giang">An Giang</option>
+                <option value="ba_ria_vung_tau">Bà Rịa - Vũng Tàu</option>
+                <option value="bac_lieu">Bạc Liêu</option>
+                <option value="bac_giang">Bắc Giang</option>
+                <option value="bac_kan">Bắc Kạn</option>
+                <option value="bac_ninh">Bắc Ninh</option>
+                <option value="ben_tre">Bến Tre</option>
+                <option value="binh_duong">Bình Dương</option>
+                <option value="binh_dinh">Bình Định</option>
+                <option value="binh_phuoc">Bình Phước</option>
+                <option value="binh_thuan">Bình Thuận</option>
+                <option value="ca_mau">Cà Mau</option>
+                <option value="cao_bang">Cao Bằng</option>
+                <option value="can_tho">Cần Thơ</option>
+                <option value="da_nang">Đà Nẵng</option>
+                <option value="dak_lak">Đắk Lắk</option>
+                <option value="dak_nong">Đắk Nông</option>
+                <option value="dien_bien">Điện Biên</option>
+                <option value="dong_nai">Đồng Nai</option>
+                <option value="dong_thap">Đồng Tháp</option>
+                <option value="gia_lai">Gia Lai</option>
+                <option value="ha_giang">Hà Giang</option>
+                <option value="ha_nam">Hà Nam</option>
+                <option value="ha_noi">Hà Nội</option>
+                <option value="ha_tinh">Hà Tĩnh</option>
+                <option value="hai_duong">Hải Dương</option>
+                <option value="hai_phong">Hải Phòng</option>
+                <option value="hau_giang">Hậu Giang</option>
+                <option value="hoa_binh">Hòa Bình</option>
+                <option value="hung_yen">Hưng Yên</option>
+                <option value="khanh_hoa">Khánh Hòa</option>
+                <option value="kien_giang">Kiên Giang</option>
+                <option value="kon_tum">Kon Tum</option>
+                <option value="lai_chau">Lai Châu</option>
+                <option value="lam_dong">Lâm Đồng</option>
+                <option value="lang_son">Lạng Sơn</option>
+                <option value="lao_cai">Lào Cai</option>
+                <option value="long_an">Long An</option>
+                <option value="nam_dinh">Nam Định</option>
+                <option value="nghe_an">Nghệ An</option>
+                <option value="ninh_binh">Ninh Bình</option>
+                <option value="ninh_thuan">Ninh Thuận</option>
+                <option value="phu_tho">Phú Thọ</option>
+                <option value="phu_yen">Phú Yên</option>
+                <option value="quang_binh">Quảng Bình</option>
+                <option value="quang_nam">Quảng Nam</option>
+                <option value="quang_ngai">Quảng Ngãi</option>
+                <option value="quang_ninh">Quảng Ninh</option>
+                <option value="quang_tri">Quảng Trị</option>
+                <option value="soc_trang">Sóc Trăng</option>
+                <option value="son_la">Sơn La</option>
+                <option value="tay_ninh">Tây Ninh</option>
+                <option value="thai_binh">Thái Bình</option>
+                 <option value="thai_nguyen">Thái Nguyên</option>
+                <option value="thanh_hoa">Thanh Hóa</option>
+                <option value="thua_thien_hue">Thừa Thiên Huế</option>
+                <option value="tien_giang">Tiền Giang</option>
+                <option value="tp_hcm">TP Hồ Chí Minh</option>
+                <option value="tra_vinh">Trà Vinh</option>
+                <option value="tuyen_quang">Tuyên Quang</option>
+                <option value="vinh_long">Vĩnh Long</option>
+                <option value="vinh_phuc">Vĩnh Phúc</option>
+                <option value="yen_bai">Yên Bái</option>
+                </select>
+            <select>
+                <option value="">Loại hình</option>
+                <option value="part-time">Bán thời gian</option>
+                <option value="temporary">Thời vụ</option>
+            </select>
+            <button type="submit">Tìm kiếm</button>
+        </div>
+    </div>
+</section>
+
+<section class="job-listings">
+  <div class="container">
+    <!-- Header with lightning icon and title -->
+    <div class="job-listings-header">
+      <div class="job-listings-icon">
+        <i class="fas fa-bolt"></i>
+      </div>
+      <h2 class="job-listings-title">Việc làm tuyển gấp</h2>
+    </div>
+    
+    <!-- Tabs -->
+    <div class="job-listings-tabs">
+      <div class="job-tab active">Tất cả</div>
+      <div class="job-tab">Sinh viên</div>
+      <div class="job-tab">Cuối tuần</div>
+      <div class="job-tab">Online</div>
+      <div class="job-tab">Theo ca</div>
+    </div>
+    
+    <!-- Job listings grid -->
+    <div class="job-listings-container">
+      <!-- Job Card 1 -->
+      <div class="job-card">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Highland Coffee">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">Nhân Viên Phục Vụ Cuối Tuần</h3>
+          <p class="job-company">Highland Coffee - Chi nhánh Đà Nẵng</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">25.000 - 30.000đ/giờ</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>T7-CN (8h-17h)</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>15/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag">Sinh viên</span>
+            <span class="tag">Cuối tuần</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 2 -->
+      <div class="job-card">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Công Ty TNHH GrabExpress">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">Tài Xế Giao Hàng Part-time</h3>
+          <p class="job-company">Công Ty TNHH GrabExpress</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">80.000 - 200.000đ/ngày</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>Linh hoạt</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>20/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag">Theo ca</span>
+            <span class="tag">Linh hoạt</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 3 -->
+      <div class="job-card hot-job">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Công Ty Cổ phần Tâm Quang Minh">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">Cộng Tác Viên Thiết Kế Nội Thất</h3>
+          <p class="job-company">Công Ty Cổ phần Tâm Quang Minh</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">5 - 8 triệu/tháng</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>15h-20h hàng ngày</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>30/05/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag hot">Hot</span>
+            <span class="tag">Sinh viên</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 4 -->
+      <div class="job-card">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Công Ty TNHH In Ấn AB">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">Nhân Viên In Ấn - Part-time</h3>
+          <p class="job-company">Công Ty TNHH In Ấn AB</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">3.5 triệu/tháng</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>18h-22h (T2-T6)</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>10/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag">Buổi tối</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 5 -->
+      <div class="job-card">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Trung Tâm Anh Ngữ Oxford">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">Trợ Giảng Tiếng Anh Part-time</h3>
+          <p class="job-company">Trung Tâm Anh Ngữ Oxford</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">50.000đ/giờ</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>18h-21h (T3,T5,T7)</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>12/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag">Sinh viên</span>
+            <span class="tag">Giáo dục</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 6 -->
+      <div class="job-card">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Công ty CP Thương mại điện tử Sendo">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">CTV Chăm Sóc Khách Hàng Online</h3>
+          <p class="job-company">Công ty CP Thương mại điện tử Sendo</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">4 - 6 triệu/tháng</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>Linh hoạt (4h/ngày)</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>18/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag">Online</span>
+            <span class="tag">Linh hoạt</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 7 -->
+      <div class="job-card">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Công Ty CP Du Lịch Sunworld">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">Hướng Dẫn Viên Cuối Tuần</h3>
+          <p class="job-company">Công Ty CP Du Lịch Sunworld - Bà Nà Hills</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">400.000đ/ngày</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>T7-CN (8h-17h)</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>25/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag">Cuối tuần</span>
+            <span class="tag">Du lịch</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 8 -->
+      <div class="job-card hot-job">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Công Ty TNHH Giao Hàng Nhanh">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">Nhân Viên Kho Part-time</h3>
+          <p class="job-company">Công Ty TNHH Giao Hàng Nhanh - Chi nhánh Đà Nẵng</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">25.000đ/giờ</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>Ca sáng/chiều/tối</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>08/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag hot">Hot</span>
+            <span class="tag">Theo ca</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 9 -->
+      <div class="job-card">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Công Ty CP Đầu Tư Và Thương Mại Quốc Tế VCC">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">CTV Kinh Doanh Online</h3>
+          <p class="job-company">Công Ty CP Đầu Tư Và Thương Mại Quốc Tế VCC</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">3 - 8 triệu/tháng</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>Linh hoạt</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>16/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag">Online</span>
+            <span class="tag">Hoa hồng</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 10 -->
+      <div class="job-card">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Nhà Hàng Hải Sản Bé Mặn">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">Phục Vụ Bàn Buổi Tối</h3>
+          <p class="job-company">Nhà Hàng Hải Sản Bé Mặn</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">30.000đ/giờ + tip</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>17h-22h (hàng ngày)</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>10/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag">Buổi tối</span>
+            <span class="tag">Nhà hàng</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 11 -->
+      <div class="job-card">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Nhà sách Phương Nam">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">Nhân Viên Bán Hàng Part-time</h3>
+          <p class="job-company">Nhà sách Phương Nam - TTTM Vincom Đà Nẵng</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">22.000đ/giờ</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>Ca 4h (luân phiên)</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>14/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag">Sinh viên</span>
+            <span class="tag">Theo ca</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Job Card 12 -->
+      <div class="job-card">
+        <div class="job-logo">
+          <img src="/assets/img/pexels-altabena-10142683.jpg" alt="Công Ty TNHH Giáo Dục Apax Leaders">
+        </div>
+        <div class="job-details">
+          <h3 class="job-title">Gia Sư Tiếng Anh Part-time</h3>
+          <p class="job-company">Công Ty TNHH Giáo Dục Apax Leaders</p>
+          <div class="job-meta">
+            <div class="salary-info">
+              <i class="fas fa-coins"></i>
+              <span class="salary-range">80.000 - 120.000đ/giờ</span>
+            </div>
+            <div class="schedule-info">
+              <i class="far fa-clock"></i>
+              <span>18h-20h (T2,T4,T6)</span>
+            </div>
+            <div class="deadline-info">
+              <i class="far fa-calendar-alt"></i>
+              <span>20/04/2025</span>
+            </div>
+          </div>
+          <div class="job-tags">
+            <span class="tag">Buổi tối</span>
+            <span class="tag">Giáo dục</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pagination dots -->
+    <div class="pagination">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    
+    <!-- Action button -->
+    <div class="text-center mt-4">
+      <button class="action-button">Xem thêm việc làm</button>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+    <div class="section-title">
+        <h2>Tại sao chọn JobFlex?</h2>
+        <p>Nền tảng kết nối thông minh và hiệu quả giữa ứng viên và nhà tuyển dụng</p>
+    </div>
+    <div class="container">
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-search"></i></div>
+                <h3>Tìm kiếm thông minh</h3>
+                <p>Hệ thống tìm kiếm nâng cao với nhiều bộ lọc giúp bạn tìm được công việc phù hợp nhất</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <h3>Nhận việc ngay</h3>
+                <p>Chức năng Auto-Accept cho phép ứng viên nhận việc thời vụ ngay lập tức mà không cần chờ duyệt</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-user-shield"></i></div>
+                <h3>Uy tín & An toàn</h3>
+                <p>Hệ thống đánh giá hai chiều giúp xây dựng môi trường làm việc minh bạch và đáng tin cậy</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+                <h3>Vai trò linh hoạt</h3>
+                <p>Dễ dàng chuyển đổi giữa vai trò ứng viên và nhà tuyển dụng khi cần thiết</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-comments"></i></div>
+                <h3>Chat trực tiếp</h3>
+                <p>Trao đổi trực tiếp với nhà tuyển dụng hoặc ứng viên để làm rõ thông tin công việc</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Thông báo thông minh</h3>
+                <p>Nhận thông báo về các công việc phù hợp với hồ sơ và kỹ năng của bạn</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section --><!-- tiêu đề ban đầu-->
+<section class="top-companies">
+    <div class="section-title">
+        <h2>Thương hiệu lớn tiêu biểu</h2>
+        <p>Những thương hiệu tuyển dụng đa ngành đình đám với vị thế trên thị trường</p>
+    </div>
+    <div class="container">
+        <div class="top-companies-container">
+ <a href="https://yola.vn" class="company-card" target="_blank">
+    <div class="company-logo">
+        <img src="/assets/img/ec28a3db05e9c0c8ecef1e5c43b9927d.jpg" alt="YOLA Logo">
+    </div>
+    <div class="company-info">
+        <div class="company-name">YOLA Việt Nam</div>
+        <div class="company-industry">Giáo dục - Đào tạo</div>
+        <div class="company-jobs"><i class="fas fa-briefcase"></i> 3 việc làm</div>
+    </div>
+</a>
+
+<a href="https://mcdonalds.vn" class="company-card" target="_blank">
+    <div class="company-logo">
+        <img src="/assets/img/ga.jpg" alt="McDonald's Logo">
+    </div>
+    <div class="company-info">
+        <div class="company-name">McDonald's Việt Nam</div>
+        <div class="company-industry">Nhà hàng - Dịch vụ ăn uống</div>
+        <div class="company-jobs"><i class="fas fa-briefcase"></i> 5 việc làm</div>
+    </div>
+</a>
+
+<a href="https://www.grab.com/vn" class="company-card" target="_blank">
+    <div class="company-logo">
+        <img src="/assets/img/grab.jpg" alt="Grab Logo">
+    </div>
+    <div class="company-info">
+        <div class="company-name">Grab Việt Nam</div>
+        <div class="company-industry">Dịch vụ công nghệ - Giao thông</div>
+        <div class="company-jobs"><i class="fas fa-briefcase"></i> 8 việc làm</div>
+    </div>
+</a>
+
+<a href="https://shopee.vn" class="company-card" target="_blank">
+    <div class="company-logo">
+        <img src="/assets/img/df34c29a097271b601f4381680eeb497.jpg" alt="">
+    </div>
+    <div class="company-info">
+        <div class="company-name">Shopee Việt Nam</div>
+        <div class="company-industry">Thương mại điện tử</div>
+        <div class="company-jobs"><i class="fas fa-briefcase"></i> 10 việc làm</div>
+    </div>
+</a>
+
+ <a href="https://circlek.com.vn" class="company-card" target="_blank">
+    <div class="company-logo">
+        <img src="/assets/img/k1.jpg" alt="Circle K Logo">
+    </div>
+    <div class="company-info">
+        <div class="company-name">Circle K Việt Nam</div>
+        <div class="company-industry">Bán lẻ - Cửa hàng tiện lợi</div>
+        <div class="company-jobs"><i class="fas fa-briefcase"></i> 5 việc làm</div>
+    </div>
+</a>
+
+<a href="https://www.highlandscoffee.com.vn" class="company-card" target="_blank">
+    <div class="company-logo">
+        <img src="/assets/img/coffee1.jpg" alt="Highlands Coffee Logo">
+    </div>
+    <div class="company-info">
+        <div class="company-name">Highlands Coffee</div>
+        <div class="company-industry">Café - Đồ uống</div>
+        <div class="company-jobs"><i class="fas fa-briefcase"></i> 6 việc làm</div>
+    </div>
+</a>
+
+</div>
+        <div class="top-companies-footer">
+            <a href="#">Mở rộng <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+<!-- Registration Steps Section -->
+<section class="registration-steps">
+    <div class="container">
+        <div class="section-title">
+            <h2>Bắt đầu ngay với JobFlex</h2>
+            <p>Các bước đơn giản để bắt đầu tìm kiếm cơ hội việc làm phù hợp</p>
+        </div>
+        <div class="steps-container">
+            <a href="/Account/Login" class="step-card">
+                <div class="step-icon blue-bg">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+                <h3>Đăng nhập</h3>
+                <p>Để khám phá ngay tất cả các tính năng hữu ích</p>
+            </a>
+            <a href="/Account/register" class="step-card">
+                <div class="step-icon orange-bg">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3>Đăng ký</h3>
+                <p>Trở thành một thành viên nổi bật với hồ sơ tốt nhất</p>
+            </a>
+            <a href="/Account/Login" class="step-card">
+                <div class="step-icon pink-bg">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>Hoàn thiện hồ sơ</h3>
+                <p>Tạo hồ sơ miễn phí, có ngay việc làm ưng ý</p>
+            </a>
+            <a href="/Account/Login" class="step-card">
+                <div class="step-icon red-bg">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3>Đăng tin</h3>
+                <p>Tiếp cận với các ứng viên một cách nhanh chóng</p>
+            </a>
+        </div>
+        <div class="steps-footer">
+            <a href="/register" class="cta-button">Bắt đầu ngay hôm nay</a>
+        </div>
+    </div>
+</section>
+<section class="second-hero">
+        <div class="container">
+            <div class="second-hero-content">
+                <div class="second-hero-image">
+                    <div class="worker-image-container">
+                        <div class="worker-image-bg"></div>
+                        <img src="https://images.unsplash.com/photo-1560264280-88b68371db39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Người làm việc thời vụ" class="worker-image" />
+                    </div>
+                </div>
+                
+                <div class="second-hero-text">
+                    <h2 class="second-title">Nâng cao thu nhập với cơ hội việc làm <span class="second-highlight">Thời vụ</span></h2>
+                    <p class="hero-description">Khám phá hàng trăm cơ hội việc làm thời vụ hấp dẫn với mức thu nhập cạnh tranh. Chúng tôi liên kết bạn với các nhà tuyển dụng uy tín, giúp bạn tận dụng thời gian rảnh để gia tăng thu nhập và tích lũy kinh nghiệm quý báu.</p>
+                    <a href="https://izion24.com.vn/tin-tuc/tai-chinh/top-viec-lam-them-cho-sinh-vien-linh-hoat-kiem-them-thu-nhap" class="cta-button">Tìm hiểu thêm</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="popular-categories">
+  <div class="container">
+    <div class="section-title">
+      <h2>Lĩnh vực phổ biến</h2>
+      <p>Khám phá các ngành nghề được tìm kiếm nhiều nhất</p>
+    </div>
+    
+    <div class="categories-grid">
+      <div class="category-card">
+        <i class="fas fa-utensils"></i>
+        <h3>Nhà hàng - F&B</h3>
+        <p>152 công việc</p>
+      </div>
+      <!-- Thêm các category khác tương tự -->
+    </div>
+  </div>
+</section>
+
+<!-- listing job-->
+<section class="job-listings">
+    <div class="container">
+        <div class="section-title">
+            <h2>Công việc nổi bật</h2>
+            <p>Khám phá các cơ hội việc làm bán thời gian và thời vụ hấp dẫn</p>
+        </div>
+        <div class="job-filters">
+            <div class="filter-group">
+                <label for="location">Địa điểm</label>
+                <select id="location">
+                    <option value="">Địa điểm</option>
+                    <option value="hanoi">Hà Nội</option>
+                    <option value="hcm">TP. Hồ Chí Minh</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="job-type">Loại hình</label>
+                <select id="job-type">
+                    <option value="">Tất cả loại hình</option>
+                    <option value="parttime">Bán thời gian</option>
+                    <option value="temporary">Thời vụ</option>
+                    <option value="freelance">Freelance</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="category">Ngành nghề</label>
+                <select id="category">
+                    <option value="">Tất cả ngành nghề</option>
+                    <option value="f&b">F&B / Nhà hàng</option>
+                    <option value="retail">Bán lẻ / Cửa hàng</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="salary">Mức lương</label>
+                <select id="salary">
+                    <option value="">Tất cả mức lương</option>
+                    <option value="0-2m">Dưới 2 triệu</option>
+                    <option value="2-5m">2 - 5 triệu</option>
+                    <option value="5m+">Trên 5 triệu</option>
+                </select>
+            </div>
+        </div>
+        <div class="jobs-container">
+            <!-- Công việc hiện có -->
+            <div class="job-card">
+                <div class="job-details">
+                    <h3 class="job-title">Nhân viên phục vụ bàn cuối tuần</h3>
+                    <div class="company-name">
+                        <i class="fas fa-building"></i> Nhà Hàng Sunshine
+                    </div>
+                    <p>Cần tuyển nhân viên phục vụ làm việc các buổi tối cuối tuần. Không yêu cầu kinh nghiệm, sẽ được đào tạo.</p>
+                    <div class="job-meta">
+                        <div><i class="fas fa-map-marker-alt"></i> Quận 1, TP.HCM</div>
+                        <div><i class="fas fa-money-bill-wave"></i> 35,000 VNĐ/giờ</div>
+                        <div><i class="far fa-clock"></i> Bán thời gian</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Công việc mở nhất -->
+            <div class="job-card">
+                <div class="job-details">
+                    <h3 class="job-title">Nhân viên bán hàng thời vụ</h3>
+                    <div class="company-name">
+                        <i class="fas fa-building"></i> Cửa Hàng Minh Anh
+                    </div>
+                    <p>Tuyển nhân viên bán hàng thời vụ cho dịp lễ Tết. Ưu tiên ứng viên năng động, có kinh nghiệm bán hàng.</p>
+                    <div class="job-meta">
+                        <div><i class="fas fa-map-marker-alt"></i> Quận Ba Đình, Hà Nội</div>
+                        <div><i class="fas fa-money-bill-wave"></i> 40,000 VNĐ/giờ</div>
+                        <div><i class="far fa-clock"></i> Thời vụ</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Công việc phù hợp -->
+            <div class="job-card">
+                <div class="job-details">
+                    <h3 class="job-title">Nhân viên giao hàng bán thời gian</h3>
+                    <div class="company-name">
+                        <i class="fas fa-building"></i> Công Ty Giao Hàng Nhanh
+                    </div>
+                    <p>Tuyển nhân viên giao hàng bán thời gian, làm việc theo ca linh hoạt. Có hỗ trợ xe và xăng.</p>
+                    <div class="job-meta">
+                        <div><i class="fas fa-map-marker-alt"></i> Quận 7, TP.HCM</div>
+                        <div><i class="fas fa-money-bill-wave"></i> 50,000 VNĐ/giờ</div>
+                        <div><i class="far fa-clock"></i> Bán thời gian</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Công việc đa lưu -->
+            <div class="job-card">
+                <div class="job-details">
+                    <h3 class="job-title">Nhân viên kho thời vụ</h3>
+                    <div class="company-name">
+                        <i class="fas fa-building"></i> Kho Hàng Đại Phát
+                    </div>
+                    <p>Tuyển nhân viên kho thời vụ, làm việc trong 1 tháng. Công việc nhẹ nhàng, không yêu cầu kinh nghiệm.</p>
+                    <div class="job-meta">
+                        <div><i class="fas fa-map-marker-alt"></i> Quận Long Biên, Hà Nội</div>
+                        <div><i class="fas fa-money-bill-wave"></i> 30,000 VNĐ/giờ</div>
+                        <div><i class="far fa-clock"></i> Thời vụ</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Công việc từ Top 5 ngành nghề nổi bật (Kinh doanh - bán hàng) -->
+            <div class="job-card">
+                <div class="job-details">
+                    <h3 class="job-title">Nhân viên bán hàng tại cửa hàng</h3>
+                    <div class="company-name">
+                        <i class="fas fa-building"></i> Siêu Thị Mini Hạnh Phúc
+                    </div>
+                    <p>Tuyển nhân viên bán hàng tại cửa hàng, làm việc theo ca. Ưu tiên ứng viên có kỹ năng giao tiếp tốt.</p>
+                    <div class="job-meta">
+                        <div><i class="fas fa-map-marker-alt"></i> Quận Cầu Giấy, Hà Nội</div>
+                        <div><i class="fas fa-money-bill-wave"></i> 45,000 VNĐ/giờ</div>
+                        <div><i class="far fa-clock"></i> Bán thời gian</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Top Companies Section (Thương hiệu lớn tiêu biểu) -->
+<!-- Thêm phần Lĩnh vực phổ biến -->
+
+<!-- Thêm phần Đánh giá -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-title">
+      <h2>Phản hồi từ người dùng</h2>
+      <p>Những trải nghiệm thực tế của ứng viên và nhà tuyển dụng</p>
+    </div>
+
+    <div class="testimonial-slider">
+      <!-- Các testimonial card -->
+    </div>
+  </div>
+</section>
+
+
+

@@ -193,7 +193,7 @@ namespace JOBFLEX.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("cvs", (string)null);
+                    b.ToTable("CV", (string)null);
                 });
 
             modelBuilder.Entity("HeThongTimViec.Models.JobPost", b =>

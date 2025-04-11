@@ -8,6 +8,7 @@ USE HETHONGTIMVIEC;
 SET NAMES utf8mb4;
 SET CHARACTER SET utf8mb4;
 SET collation_connection = 'utf8mb4_unicode_ci';
+
 -- Xóa các bảng nếu đã tồn tại
 DROP TABLE IF EXISTS saved_jobs;
 DROP TABLE IF EXISTS notifications;
@@ -16,18 +17,19 @@ DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS applications;
 DROP TABLE IF EXISTS job_posts;
 DROP TABLE IF EXISTS password_reset;
-DROP TABLE IF EXISTS company_members;
-DROP TABLE IF EXISTS companies;
+DROP TABLE IF EXISTS business_members;
+DROP TABLE IF EXISTS businesses;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS CV;
 DROP TABLE IF EXISTS work_availability;
+
 -- Bảng người dùng
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,  
     Ho_ten VARCHAR(255) NOT NULL,  
     gioi_tinh ENUM('Nam', 'Nữ') NOT NULL,  
     email VARCHAR(320) UNIQUE DEFAULT NULL,  
-    facebook_id VARCHAR(255) UNIQUE DEFAULT NULL,  
+    facebook_link VARCHAR(255) UNIQUE DEFAULT NULL,  
     mat_khau VARCHAR(60) NOT NULL,
     Ngay_sinh DATE DEFAULT NULL,  
     SDT VARCHAR(10) NOT NULL UNIQUE,  
@@ -40,8 +42,8 @@ CREATE TABLE users (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=10000;
 
 -- Bảng công ty
-CREATE TABLE companies (
-    company_id INT AUTO_INCREMENT PRIMARY KEY,  
+CREATE TABLE businesses (
+    business_id INT AUTO_INCREMENT PRIMARY KEY, -- Thay company_id thành business_id
     owner_id INT NOT NULL,  
     ten VARCHAR(255) NOT NULL,  
     SDT VARCHAR(10) NOT NULL UNIQUE,  
@@ -62,7 +64,7 @@ CREATE TABLE companies (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=20000;
 
 -- Bảng CV
-CREATE TABLE CV(
+CREATE TABLE CV (
     cv_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,  
     file_path VARCHAR(255) NOT NULL,  -- Lưu đường dẫn file CV
@@ -81,15 +83,15 @@ CREATE TABLE work_availability (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Bảng thành viên công ty
-CREATE TABLE company_members (
+CREATE TABLE business_members (
     member_id INT AUTO_INCREMENT PRIMARY KEY,  
-    company_id INT NOT NULL,
+    business_id INT NOT NULL, -- Thay company_id thành business_id
     user_id INT NOT NULL,
     vai_tro ENUM('Nhân viên', 'Quản lý') DEFAULT 'Nhân viên',
     tinh_trang ENUM('Đang hoạt động', 'Tạm ngừng', 'Bị cấm') DEFAULT 'Đang hoạt động',
     tham_gia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(company_id, user_id),
-    FOREIGN KEY (company_id) REFERENCES companies(company_id) ON DELETE CASCADE,
+    UNIQUE(business_id, user_id), -- Thay company_id thành business_id
+    FOREIGN KEY (business_id) REFERENCES businesses(business_id) ON DELETE CASCADE, -- Thay company_id thành business_id
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -98,9 +100,9 @@ CREATE TABLE password_reset (
     password_reset_id INT AUTO_INCREMENT PRIMARY KEY,  
     SDT VARCHAR(10) NOT NULL,  
     email VARCHAR(255) DEFAULT NULL,  
-    facebook_id VARCHAR(255) DEFAULT NULL,  
+    facebook_link VARCHAR(255) DEFAULT NULL,  
     ngay_yeu_cau TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
-    CONSTRAINT chk_email_or_facebook_reset CHECK (email IS NOT NULL OR facebook_id IS NOT NULL),  
+    CONSTRAINT chk_email_or_facebook_reset CHECK (email IS NOT NULL OR facebook_link IS NOT NULL),  
     FOREIGN KEY (SDT) REFERENCES users(SDT) ON DELETE CASCADE  
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -108,7 +110,7 @@ CREATE TABLE password_reset (
 CREATE TABLE job_posts (
     job_id INT AUTO_INCREMENT PRIMARY KEY,  
     user_id INT DEFAULT NULL,  
-    company_id INT DEFAULT NULL,  
+    business_id INT DEFAULT NULL, -- Thay company_id thành business_id
     tieu_de VARCHAR(255) NOT NULL,  
     mo_ta TEXT NOT NULL,  
     yeu_cau TEXT DEFAULT NULL,  
@@ -123,7 +125,7 @@ CREATE TABLE job_posts (
     ngay_dang TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
     ngay_het_han TIMESTAMP NOT NULL,  
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (company_id) REFERENCES companies(company_id) ON DELETE SET NULL ON UPDATE CASCADE
+    FOREIGN KEY (business_id) REFERENCES businesses(business_id) ON DELETE SET NULL ON UPDATE CASCADE -- Thay company_id thành business_id
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Bảng ứng tuyển
@@ -189,9 +191,9 @@ CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_SDT ON users(SDT);
 CREATE INDEX idx_users_vai_tro ON users(vai_tro);
 
--- Bảng companies: INDEX giúp tìm kiếm nhanh theo tên công ty và mã số thuế
-CREATE INDEX idx_companies_ten ON companies(ten);
-CREATE INDEX idx_companies_ma_so_thue ON companies(ma_so_thue);
+-- Bảng businesses: INDEX giúp tìm kiếm nhanh theo tên công ty và mã số thuế
+CREATE INDEX idx_businesses_ten ON businesses(ten);
+CREATE INDEX idx_businesses_ma_so_thue ON businesses(ma_so_thue);
 
 -- Bảng CV: INDEX giúp tìm nhanh CV theo user_id
 CREATE INDEX idx_CV_user ON CV(user_id);
@@ -200,12 +202,12 @@ CREATE INDEX idx_CV_user ON CV(user_id);
 CREATE INDEX idx_work_user ON work_availability(user_id);
 CREATE INDEX idx_work_ngay ON work_availability(ngay);
 
--- Bảng company_members: INDEX giúp tìm nhanh nhân sự trong công ty
-CREATE INDEX idx_company_members_company ON company_members(company_id);
-CREATE INDEX idx_company_members_user ON company_members(user_id);
+-- Bảng business_members: INDEX giúp tìm nhanh nhân sự trong công ty
+CREATE INDEX idx_business_members_business ON business_members(business_id); -- Thay idx_business_members_company thành idx_business_members_business
+CREATE INDEX idx_business_members_user ON business_members(user_id);
 
 -- Bảng job_posts: INDEX giúp tìm nhanh công việc theo công ty, loại công việc, lương, và thành phố
-CREATE INDEX idx_jobs_company ON job_posts(company_id);
+CREATE INDEX idx_jobs_business ON job_posts(business_id); -- Thay idx_jobs_company thành idx_jobs_business
 CREATE INDEX idx_jobs_loai_cv ON job_posts(loai_cv);
 CREATE INDEX idx_jobs_muc_luong ON job_posts(muc_luong);
 CREATE INDEX idx_jobs_thanh_pho ON job_posts(thanh_pho);

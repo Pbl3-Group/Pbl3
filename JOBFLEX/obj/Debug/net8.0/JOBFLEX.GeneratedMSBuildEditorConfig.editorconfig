@@ -9,55 +9,59 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = JOBFLEX
 build_property.RootNamespace = JOBFLEX
-build_property.ProjectDir = /Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/
+build_property.ProjectDir = /Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX
+build_property.MSBuildProjectDirectory = /Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/Account/ForgotPassword.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Gb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/Account/Login.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/Account/Register.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/Home/Index.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/Home/Privacy.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/Shared/Error.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/Shared/_ValidationScriptsPartial.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/Users/Index.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/UngVien/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5nVmllbi9pbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlcnMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/_ViewImports.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/_ViewStart.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/PBL3/Pbl3/JOBFLEX/Views/Shared/_Layout.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-8477cvvmyx

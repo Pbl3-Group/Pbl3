@@ -6,7 +6,7 @@ namespace HeThongTimViec.Models
     {
         public int CvId { get; set; }
         public int UserId { get; set; }
-        public required string FilePath { get; set; }
+        public string? FilePath { get; set; }
 
         // Navigation properties
         public required User User { get; set; }

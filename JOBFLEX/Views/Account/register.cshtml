@@ -1,7 +1,10 @@
+@model HeThongTimViec.Models.RegisterViewModel
+@using HeThongTimViec.Models
 @{
     ViewData["Title"] = "Đăng ký";
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -11,11 +14,54 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Register.css" asp-append-version="true" />
+    <style>
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .validation-summary {
+            color: red;
+            margin-bottom: 20px;
+        }
+        .schedule-container {
+            margin-top: 10px;
+        }
+        .city-select {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .confirmation-details {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .confirmation-details p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
         <div class="form-side">
-            <a href="index.html" class="logo">
+            <a href="@Url.Action("Index", "Home")" class="logo">
                 <div class="logo-icon">
                     <i class="fas fa-briefcase"></i>
                 </div>
@@ -24,6 +70,11 @@
 
             <h1>Đăng Ký</h1>
             <p class="welcome-text">Chào mừng! Hãy tạo tài khoản để bắt đầu tìm kiếm công việc mơ ước của bạn.</p>
+
+            <!-- Hiển thị thông báo lỗi chung -->
+            <div class="validation-summary">
+                @Html.ValidationSummary(true, "", new { @class = "error" })
+            </div>
 
             <div class="steps-container">
                 <div class="steps-indicator">
@@ -50,260 +101,371 @@
                 </div>
             </div>
 
-            <!-- Form 1: Thông tin cơ bản -->
-            <div class="form-step active" id="form-step1">
-                <h2>Thông tin cơ bản</h2>
-                <div class="form-group">
-                    <label for="fullname">Họ tên</label>
-                    <input type="text" id="fullname" class="form-control" placeholder="Nhập họ tên đầy đủ">
-                </div>
+            <!-- Form POST duy nhất -->
+            <form method="post" action="@Url.Action("RegisterUser", "Account")" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
 
-                <div class="radio-group">
-                    <div class="radio-option">
-                        <input type="radio" id="gender-male" name="gender" value="male">
-                        <label for="gender-male">Nam</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" id="gender-female" name="gender" value="female">
-                        <label for="gender-female">Nữ</label>
-                    </div>
-                </div>
-
-                <div class="form-row">
+                <!-- Bước 1: Thông tin cơ bản -->
+                <div class="form-step active" id="form-step1">
+                    <h2>Thông tin cơ bản</h2>
                     <div class="form-group">
-                        <label for="phone">Số điện thoại</label>
-                        <input type="tel" id="phone" class="form-control" placeholder="Nhập số điện thoại">
+                        <label for="HoTen">Họ tên</label>
+                        <input type="text" id="HoTen" name="HoTen" class="form-control" placeholder="Nhập họ tên đầy đủ" value="@Model?.HoTen" required />
+                        <span class="error">@Html.ValidationMessageFor(m => m.HoTen, "", new { @class = "error" })</span>
                     </div>
-                    <div class="form-group">
-                        <label for="birthdate">Ngày sinh</label>
-                        <input type="date" id="birthdate" class="form-control">
+
+                    <div class="radio-group">
+                        <label>Giới tính</label>
+                        <div class="radio-option">
+                            <input type="radio" id="gender-male" name="GioiTinh" value="Nam" @(Model?.GioiTinh == GioiTinhEnum.Nam ? "checked" : "") required />
+                            <label for="gender-male">Nam</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="gender-female" name="GioiTinh" value="Nu" @(Model?.GioiTinh == GioiTinhEnum.Nu ? "checked" : "") />
+                            <label for="gender-female">Nữ</label>
+                        </div>
+                        <span class="error">@Html.ValidationMessageFor(m => m.GioiTinh, "", new { @class = "error" })</span>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="email">Email hoặc Facebook</label>
-                    <input type="email" id="email" class="form-control" placeholder="Nhập email hoặc liên kết Facebook">
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" id="password" class="form-control" placeholder="Tạo mật khẩu mới">
-                </div>
-
-                <div class="form-group">
-                    <label for="confirm-password">Nhập lại mật khẩu</label>
-                    <input type="password" id="confirm-password" class="form-control" placeholder="Nhập lại mật khẩu">
-                </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="terms" name="terms">
-                    <label for="terms">Tôi đồng ý với điều khoản dịch vụ và chính sách bảo mật</label>
-                </div>
-
-                <div class="buttons-container">
-                    <button class="btn btn-primary" onclick="nextStep(1)">Tiếp tục</button>
-                </div>
-            </div>
-
-            <!-- Form 2: Mô tả bản thân -->
-            <div class="form-step" id="form-step2">
-                <h2>Mô tả bản thân</h2>
-                <div class="form-group">
-                    <label for="description">Mô tả về bản thân và kỹ năng của bạn</label>
-                    <textarea id="description" class="form-control" placeholder="Hãy viết một vài dòng về bản thân, kỹ năng, kinh nghiệm và sở thích của bạn..."></textarea>
-                </div>
-
-                <div class="buttons-container">
-                    <button class="btn btn-secondary" onclick="prevStep(2)">Quay lại</button>
-                    <button class="btn btn-primary" onclick="nextStep(2)">Tiếp tục</button>
-                </div>
-            </div>
-
-            <!-- Form 3: Upload CV -->
-            <div class="form-step" id="form-step3">
-                <h2>Tải lên CV của bạn</h2>
-                <div class="upload-cv">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <h3>Kéo thả file hoặc click để tải lên</h3>
-                    <p>Hỗ trợ PDF, DOC, DOCX (Tối đa 5MB)</p>
-                    <input type="file" id="cv-upload" accept=".pdf,.doc,.docx">
-                </div>
-
-                <div class="buttons-container">
-                    <button class="btn btn-secondary" onclick="prevStep(3)">Quay lại</button>
-                    <button class="btn btn-primary" onclick="nextStep(3)">Bỏ qua</button>
-                </div>
-            </div>
-
-            <!-- Form 4: Thời gian làm việc -->
-            <div class="form-step" id="form-step4">
-                <h2>Thời gian mong muốn làm việc</h2>
-<div class="form-group">
-    <label>Chọn các khung giờ phù hợp với bạn</label>
-    <div class="schedule-container">
-        <!-- Header: Các ngày trong tuần -->
-        <div class="schedule-header">
-            <div class="day">Thứ 2</div>
-            <div class="day">Thứ 3</div>
-            <div class="day">Thứ 4</div>
-            <div class="day">Thứ 5</div>
-            <div class="day">Thứ 6</div>
-            <div class="day">Thứ 7</div>
-            <div class="day">CN</div>
-        </div>
-        <!-- Body: Các khung giờ -->
-        <div class="schedule-body">
-            <div class="time-row">
-                <div class="time-label">Sáng (8h-12h)</div>
-                <div class="time-slot">
-                    <input type="checkbox" id="mon-morning" name="schedule[mon][morning]" checked hidden>
-                    <label for="mon-morning" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="tue-morning" name="schedule[tue][morning]" checked hidden>
-                    <label for="tue-morning" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="wed-morning" name="schedule[wed][morning]" checked hidden>
-                    <label for="wed-morning" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="thu-morning" name="schedule[thu][morning]" checked hidden>
-                    <label for="thu-morning" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="fri-morning" name="schedule[fri][morning]" hidden>
-                    <label for="fri-morning" class="time-slot-label unavailable"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="sat-morning" name="schedule[sat][morning]" hidden>
-                    <label for="sat-morning" class="time-slot-label unavailable"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="sun-morning" name="schedule[sun][morning]" hidden>
-                    <label for="sun-morning" class="time-slot-label unavailable"></label>
-                </div>
-            </div>
-            <div class="time-row">
-                <div class="time-label">Chiều (13h-17h)</div>
-                <div class="time-slot">
-                    <input type="checkbox" id="mon-afternoon" name="schedule[mon][afternoon]" hidden>
-                    <label for="mon-afternoon" class="time-slot-label unavailable"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="tue-afternoon" name="schedule[tue][afternoon]" hidden>
-                    <label for="tue-afternoon" class="time-slot-label unavailable"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="wed-afternoon" name="schedule[wed][afternoon]" hidden>
-                    <label for="wed-afternoon" class="time-slot-label unavailable"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="thu-afternoon" name="schedule[thu][afternoon]" hidden>
-                    <label for="thu-afternoon" class="time-slot-label unavailable"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="fri-afternoon" name="schedule[fri][afternoon]" hidden>
-                    <label for="fri-afternoon" class="time-slot-label unavailable"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="sat-afternoon" name="schedule[sat][afternoon]" checked hidden>
-                    <label for="sat-afternoon" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="sun-afternoon" name="schedule[sun][afternoon]" checked hidden>
-                    <label for="sun-afternoon" class="time-slot-label available"></label>
-                </div>
-            </div>
-            <div class="time-row">
-                <div class="time-label">Tối (18h-22h)</div>
-                <div class="time-slot">
-                    <input type="checkbox" id="mon-evening" name="schedule[mon][evening]" checked hidden>
-                    <label for="mon-evening" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="tue-evening" name="schedule[tue][evening]" checked hidden>
-                    <label for="tue-evening" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="wed-evening" name="schedule[wed][evening]" checked hidden>
-                    <label for="wed-evening" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="thu-evening" name="schedule[thu][evening]" checked hidden>
-                    <label for="thu-evening" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="fri-evening" name="schedule[fri][evening]" checked hidden>
-                    <label for="fri-evening" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="sat-evening" name="schedule[sat][evening]" checked hidden>
-                    <label for="sat-evening" class="time-slot-label available"></label>
-                </div>
-                <div class="time-slot">
-                    <input type="checkbox" id="sun-evening" name="schedule[sun][evening]" checked hidden>
-                    <label for="sun-evening" class="time-slot-label available"></label>
-                </div>
-            </div>
-        </div>
-        <!-- Legend: Chú thích màu sắc -->
-        <div class="schedule-legend">
-            <div class="legend-item">
-                <span class="legend-color available"></span> Có thể làm việc
-            </div>
-            <div class="legend-item">
-                <span class="legend-color unavailable"></span> Không thể làm việc
-            </div>
-        </div>
-    </div>
-</div>
-
-                <div class="form-group">
-                    <label for="city">Thành phố bạn muốn làm việc</label>
-                    <div class="city-select">
-                        <input type="text" id="city" class="form-control" placeholder="Chọn thành phố" onclick="toggleCityDropdown()">
-                        <div id="cityDropdown" class="dropdown-content">
-                            <a href="#" onclick="selectCity('Hà Nội')">Hà Nội</a>
-                            <a href="#" onclick="selectCity('Hồ Chí Minh')">Hồ Chí Minh</a>
-                            <a href="#" onclick="selectCity('Đà Nẵng')">Đà Nẵng</a>
-                            <a href="#" onclick="selectCity('Hải Phòng')">Hải Phòng</a>
-                            <a href="#" onclick="selectCity('Cần Thơ')">Cần Thơ</a>
-                            <a href="#" onclick="selectCity('Huế')">Huế</a>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="SDT">Số điện thoại</label>
+                            <input type="tel" id="SDT" name="SDT" class="form-control" placeholder="Nhập số điện thoại" value="@Model?.SDT" required />
+                            <span class="error">@Html.ValidationMessageFor(m => m.SDT, "", new { @class = "error" })</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="NgaySinh">Ngày sinh</label>
+                            <input type="date" id="NgaySinh" name="NgaySinh" class="form-control" value="@(Model?.NgaySinh.ToString("yyyy-MM-dd"))" required />
+                            <span class="error">@Html.ValidationMessageFor(m => m.NgaySinh, "", new { @class = "error" })</span>
                         </div>
                     </div>
-                </div>
 
-                <div class="buttons-container">
-                    <button class="btn btn-secondary" onclick="prevStep(4)">Quay lại</button>
-                    <button class="btn btn-primary" onclick="nextStep(4)">Tiếp tục</button>
-                </div>
-            </div>
-
-            <!-- Form 5: Hoàn thành -->
-            <div class="form-step" id="form-step5">
-                <div class="success-message">
-                    <div class="success-icon">
-                        <i class="fas fa-check"></i>
+                    <div class="form-group">
+                        <label for="Email">Email (không bắt buộc)</label>
+                        <input type="email" id="Email" name="Email" class="form-control" placeholder="Nhập email" value="@Model?.Email" />
+                        <span class="error">@Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })</span>
                     </div>
-                    <h2>Đăng ký thành công!</h2>
-                    <p>Chúc mừng! Bạn đã hoàn thành việc tạo hồ sơ trên JobFlex.</p>
-                    <p>Bạn có thể bắt đầu tìm kiếm công việc phù hợp ngay bây giờ.</p>
+
+                    <div class="form-group">
+                        <label for="FacebookLink">Liên kết Facebook (không bắt buộc)</label>
+                        <input type="url" id="FacebookLink" name="FacebookLink" class="form-control" placeholder="Nhập liên kết Facebook" value="@Model?.FacebookLink" />
+                        <span class="error">@Html.ValidationMessageFor(m => m.FacebookLink, "", new { @class = "error" })</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MatKhau">Mật khẩu</label>
+                        <input type="password" id="MatKhau" name="MatKhau" class="form-control" placeholder="Tạo mật khẩu mới" required />
+                        <span class="error">@Html.ValidationMessageFor(m => m.MatKhau, "", new { @class = "error" })</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="NhapLaiMatKhau">Nhập lại mật khẩu</label>
+                        <input type="password" id="NhapLaiMatKhau" name="NhapLaiMatKhau" class="form-control" placeholder="Nhập lại mật khẩu" required />
+                        <span class="error">@Html.ValidationMessageFor(m => m.NhapLaiMatKhau, "", new { @class = "error" })</span>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required />
+                        <label for="terms">Tôi đồng ý với điều khoản dịch vụ và chính sách bảo mật</label>
+                    </div>
+
+                    <div class="buttons-container">
+                        <button type="button" class="btn btn-primary" onclick="nextStep(1)">Tiếp tục</button>
+                    </div>
                 </div>
 
-                <div class="buttons-container">
-                    <button class="btn btn-primary" onclick="window.location.href='index.html'">Bắt đầu tìm việc</button>
+                <!-- Bước 2: Mô tả bản thân -->
+                <div class="form-step" id="form-step2">
+                    <h2>Mô tả bản thân</h2>
+                    <div class="form-group">
+                        <label for="MoTa">Mô tả về bản thân và kỹ năng của bạn</label>
+                        <textarea id="MoTa" name="MoTa" class="form-control" placeholder="Hãy viết một vài dòng về bản thân, kỹ năng, kinh nghiệm và sở thích của bạn...">@Model?.MoTa</textarea>
+                        <span class="error">@Html.ValidationMessageFor(m => m.MoTa, "", new { @class = "error" })</span>
+                    </div>
+
+                    <div class="buttons-container">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Quay lại</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Tiếp tục</button>
+                    </div>
                 </div>
-            </div>
+
+                <!-- Bước 3: Upload CV -->
+                <div class="form-step" id="form-step3">
+                    <h2>Tải lên CV của bạn</h2>
+                    <div class="upload-cv">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Kéo thả file hoặc click để tải lên</h3>
+                        <p>Hỗ trợ PDF, DOC, DOCX (Tối đa 5MB)</p>
+                        <input type="file" id="CVFile" name="CVFile" accept=".pdf,.doc,.docx" />
+                        <span class="error">@Html.ValidationMessageFor(m => m.CVFile, "", new { @class = "error" })</span>
+                    </div>
+
+                    <div class="buttons-container">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Quay lại</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(3)">Bỏ qua</button>
+                    </div>
+                </div>
+
+                <!-- Bước 4: Thời gian làm việc -->
+                <div class="form-step" id="form-step4">
+                    <h2>Thời gian mong muốn làm việc</h2>
+                    <div class="form-group">
+                        <label>Chọn các khung giờ phù hợp với bạn</label>
+                        <div class="schedule-container">
+                            <!-- Header: Các ngày trong tuần -->
+                            <div class="schedule-header">
+                                <div class="day">Thời gian</div>
+                                <div class="day">Thứ 2</div>
+                                <div class="day">Thứ 3</div>
+                                <div class="day">Thứ 4</div>
+                                <div class="day">Thứ 5</div>
+                                <div class="day">Thứ 6</div>
+                                <div class="day">Thứ 7</div>
+                                <div class="day">CN</div>
+                            </div>
+                            <!-- Body: Các khung giờ -->
+                            <div class="schedule-body">
+                                <div class="time-row">
+                                    <div class="time-label">Sáng (8h-12h)</div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="mon-morning" name="WorkAvailabilities[0].Ngay" value="Thu_2" />
+                                        <input type="hidden" name="WorkAvailabilities[0].ThoiGian" value="" data-thoigian="Sang" />
+                                        <label for="mon-morning" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="tue-morning" name="WorkAvailabilities[1].Ngay" value="Thu_3" />
+                                        <input type="hidden" name="WorkAvailabilities[1].ThoiGian" value="" data-thoigian="Sang" />
+                                        <label for="tue-morning" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="wed-morning" name="WorkAvailabilities[2].Ngay" value="Thu_4" />
+                                        <input type="hidden" name="WorkAvailabilities[2].ThoiGian" value="" data-thoigian="Sang" />
+                                        <label for="wed-morning" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="thu-morning" name="WorkAvailabilities[3].Ngay" value="Thu_5" />
+                                        <input type="hidden" name="WorkAvailabilities[3].ThoiGian" value="" data-thoigian="Sang" />
+                                        <label for="thu-morning" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="fri-morning" name="WorkAvailabilities[4].Ngay" value="Thu_6" />
+                                        <input type="hidden" name="WorkAvailabilities[4].ThoiGian" value="" data-thoigian="Sang" />
+                                        <label for="fri-morning" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="sat-morning" name="WorkAvailabilities[5].Ngay" value="Thu_7" />
+                                        <input type="hidden" name="WorkAvailabilities[5].ThoiGian" value="" data-thoigian="Sang" />
+                                        <label for="sat-morning" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="sun-morning" name="WorkAvailabilities[6].Ngay" value="Chu_Nhat" />
+                                        <input type="hidden" name="WorkAvailabilities[6].ThoiGian" value="" data-thoigian="Sang" />
+                                        <label for="sun-morning" class="time-slot-label unavailable"></label>
+                                    </div>
+                                </div>
+                                <div class="time-row">
+                                    <div class="time-label">Chiều (13h-17h)</div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="mon-afternoon" name="WorkAvailabilities[7].Ngay" value="Thu_2" />
+                                        <input type="hidden" name="WorkAvailabilities[7].ThoiGian" value="" data-thoigian="Chieu" />
+                                        <label for="mon-afternoon" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="tue-afternoon" name="WorkAvailabilities[8].Ngay" value="Thu_3" />
+                                        <input type="hidden" name="WorkAvailabilities[8].ThoiGian" value="" data-thoigian="Chieu" />
+                                        <label for="tue-afternoon" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="wed-afternoon" name="WorkAvailabilities[9].Ngay" value="Thu_4" />
+                                        <input type="hidden" name="WorkAvailabilities[9].ThoiGian" value="" data-thoigian="Chieu" />
+                                        <label for="wed-afternoon" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="thu-afternoon" name="WorkAvailabilities[10].Ngay" value="Thu_5" />
+                                        <input type="hidden" name="WorkAvailabilities[10].ThoiGian" value="" data-thoigian="Chieu" />
+                                        <label for="thu-afternoon" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="fri-afternoon" name="WorkAvailabilities[11].Ngay" value="Thu_6" />
+                                        <input type="hidden" name="WorkAvailabilities[11].ThoiGian" value="" data-thoigian="Chieu" />
+                                        <label for="fri-afternoon" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="sat-afternoon" name="WorkAvailabilities[12].Ngay" value="Thu_7" />
+                                        <input type="hidden" name="WorkAvailabilities[12].ThoiGian" value="" data-thoigian="Chieu" />
+                                        <label for="sat-afternoon" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="sun-afternoon" name="WorkAvailabilities[13].Ngay" value="Chu_Nhat" />
+                                        <input type="hidden" name="WorkAvailabilities[13].ThoiGian" value="" data-thoigian="Chieu" />
+                                        <label for="sun-afternoon" class="time-slot-label unavailable"></label>
+                                    </div>
+                                </div>
+                                <div class="time-row">
+                                    <div class="time-label">Tối (18h-22h)</div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="mon-evening" name="WorkAvailabilities[14].Ngay" value="Thu_2" />
+                                        <input type="hidden" name="WorkAvailabilities[14].ThoiGian" value="" data-thoigian="Toi" />
+                                        <label for="mon-evening" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="tue-evening" name="WorkAvailabilities[15].Ngay" value="Thu_3" />
+                                        <input type="hidden" name="WorkAvailabilities[15].ThoiGian" value="" data-thoigian="Toi" />
+                                        <label for="tue-evening" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="wed-evening" name="WorkAvailabilities[16].Ngay" value="Thu_4" />
+                                        <input type="hidden" name="WorkAvailabilities[16].ThoiGian" value="" data-thoigian="Toi" />
+                                        <label for="wed-evening" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="thu-evening" name="WorkAvailabilities[17].Ngay" value="Thu_5" />
+                                        <input type="hidden" name="WorkAvailabilities[17].ThoiGian" value="" data-thoigian="Toi" />
+                                        <label for="thu-evening" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="fri-evening" name="WorkAvailabilities[18].Ngay" value="Thu_6" />
+                                        <input type="hidden" name="WorkAvailabilities[18].ThoiGian" value="" data-thoigian="Toi" />
+                                        <label for="fri-evening" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="sat-evening" name="WorkAvailabilities[19].Ngay" value="Thu_7" />
+                                        <input type="hidden" name="WorkAvailabilities[19].ThoiGian" value="" data-thoigian="Toi" />
+                                        <label for="sat-evening" class="time-slot-label unavailable"></label>
+                                    </div>
+                                    <div class="time-slot">
+                                        <input type="checkbox" id="sun-evening" name="WorkAvailabilities[20].Ngay" value="Chu_Nhat" />
+                                        <input type="hidden" name="WorkAvailabilities[20].ThoiGian" value="" data-thoigian="Toi" />
+                                        <label for="sun-evening" class="time-slot-label unavailable"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Legend: Chú thích màu sắc -->
+                            <div class="schedule-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color available"></span> Có thể làm việc
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color unavailable"></span> Không thể làm việc
+                                </div>
+                            </div>
+                        </div>
+                        <span class="error">@Html.ValidationMessageFor(m => m.WorkAvailabilities, "", new { @class = "error" })</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ThanhPho">Thành phố bạn muốn làm việc</label>
+                        <div class="city-select">
+                            <input type="text" id="ThanhPho" name="ThanhPho" class="form-control" placeholder="Chọn thành phố" value="@Model?.ThanhPho" onclick="toggleCityDropdown()" readonly required />
+                            <div id="cityDropdown" class="dropdown-content">
+                                <a href="#" onclick="selectCity('An Giang')">An Giang</a>
+                                <a href="#" onclick="selectCity('Bà Rịa - Vũng Tàu')">Bà Rịa - Vũng Tàu</a>
+                                <a href="#" onclick="selectCity('Bạc Liêu')">Bạc Liêu</a>
+                                <a href="#" onclick="selectCity('Bắc Giang')">Bắc Giang</a>
+                                <a href="#" onclick="selectCity('Bắc Kạn')">Bắc Kạn</a>
+                                <a href="#" onclick="selectCity('Bắc Ninh')">Bắc Ninh</a>
+                                <a href="#" onclick="selectCity('Bến Tre')">Bến Tre</a>
+                                <a href="#" onclick="selectCity('Bình Dương')">Bình Dương</a>
+                                <a href="#" onclick="selectCity('Bình Định')">Bình Định</a>
+                                <a href="#" onclick="selectCity('Bình Phước')">Bình Phước</a>
+                                <a href="#" onclick="selectCity('Bình Thuận')">Bình Thuận</a>
+                                <a href="#" onclick="selectCity('Cà Mau')">Cà Mau</a>
+                                <a href="#" onclick="selectCity('Cao Bằng')">Cao Bằng</a>
+                                <a href="#" onclick="selectCity('Cần Thơ')">Cần Thơ</a>
+                                <a href="#" onclick="selectCity('Đà Nẵng')">Đà Nẵng</a>
+                                <a href="#" onclick="selectCity('Đắk Lắk')">Đắk Lắk</a>
+                                <a href="#" onclick="selectCity('Đắk Nông')">Đắk Nông</a>
+                                <a href="#" onclick="selectCity('Điện Biên')">Điện Biên</a>
+                                <a href="#" onclick="selectCity('Đồng Nai')">Đồng Nai</a>
+                                <a href="#" onclick="selectCity('Đồng Tháp')">Đồng Tháp</a>
+                                <a href="#" onclick="selectCity('Gia Lai')">Gia Lai</a>
+                                <a href="#" onclick="selectCity('Hà Giang')">Hà Giang</a>
+                                <a href="#" onclick="selectCity('Hà Nam')">Hà Nam</a>
+                                <a href="#" onclick="selectCity('Hà Nội')">Hà Nội</a>
+                                <a href="#" onclick="selectCity('Hà Tĩnh')">Hà Tĩnh</a>
+                                <a href="#" onclick="selectCity('Hải Dương')">Hải Dương</a>
+                                <a href="#" onclick="selectCity('Hải Phòng')">Hải Phòng</a>
+                                <a href="#" onclick="selectCity('Hậu Giang')">Hậu Giang</a>
+                                <a href="#" onclick="selectCity('Hòa Bình')">Hòa Bình</a>
+                                <a href="#" onclick="selectCity('Hưng Yên')">Hưng Yên</a>
+                                <a href="#" onclick="selectCity('Khánh Hòa')">Khánh Hòa</a>
+                                <a href="#" onclick="selectCity('Kiên Giang')">Kiên Giang</a>
+                                <a href="#" onclick="selectCity('Kon Tum')">Kon Tum</a>
+                                <a href="#" onclick="selectCity('Lai Châu')">Lai Châu</a>
+                                <a href="#" onclick="selectCity('Lâm Đồng')">Lâm Đồng</a>
+                                <a href="#" onclick="selectCity('Lạng Sơn')">Lạng Sơn</a>
+                                <a href="#" onclick="selectCity('Lào Cai')">Lào Cai</a>
+                                <a href="#" onclick="selectCity('Long An')">Long An</a>
+                                <a href="#" onclick="selectCity('Nam Định')">Nam Định</a>
+                                <a href="#" onclick="selectCity('Nghệ An')">Nghệ An</a>
+                                <a href="#" onclick="selectCity('Ninh Bình')">Ninh Bình</a>
+                                <a href="#" onclick="selectCity('Ninh Thuận')">Ninh Thuận</a>
+                                <a href="#" onclick="selectCity('Phú Thọ')">Phú Thọ</a>
+                                <a href="#" onclick="selectCity('Phú Yên')">Phú Yên</a>
+                                <a href="#" onclick="selectCity('Quảng Bình')">Quảng Bình</a>
+                                <a href="#" onclick="selectCity('Quảng Nam')">Quảng Nam</a>
+                                <a href="#" onclick="selectCity('Quảng Ngãi')">Quảng Ngãi</a>
+                                <a href="#" onclick="selectCity('Quảng Ninh')">Quảng Ninh</a>
+                                <a href="#" onclick="selectCity('Quảng Trị')">Quảng Trị</a>
+                                <a href="#" onclick="selectCity('Sóc Trăng')">Sóc Trăng</a>
+                                <a href="#" onclick="selectCity('Sơn La')">Sơn La</a>
+                                <a href="#" onclick="selectCity('Tây Ninh')">Tây Ninh</a>
+                                <a href="#" onclick="selectCity('Thái Bình')">Thái Bình</a>
+                                <a href="#" onclick="selectCity('Thái Nguyên')">Thái Nguyên</a>
+                                <a href="#" onclick="selectCity('Thanh Hóa')">Thanh Hóa</a>
+                                <a href="#" onclick="selectCity('Thừa Thiên Huế')">Thừa Thiên Huế</a>
+                                <a href="#" onclick="selectCity('Tiền Giang')">Tiền Giang</a>
+                                <a href="#" onclick="selectCity('TP. Hồ Chí Minh')">TP. Hồ Chí Minh</a>
+                                <a href="#" onclick="selectCity('Trà Vinh')">Trà Vinh</a>
+                                <a href="#" onclick="selectCity('Tuyên Quang')">Tuyên Quang</a>
+                                <a href="#" onclick="selectCity('Vĩnh Long')">Vĩnh Long</a>
+                                <a href="#" onclick="selectCity('Vĩnh Phúc')">Vĩnh Phúc</a>
+                                <a href="#" onclick="selectCity('Yên Bái')">Yên Bái</a>
+                            </div>
+                        </div>
+                        <span class="error">@Html.ValidationMessageFor(m => m.ThanhPho, "", new { @class = "error" })</span>
+                    </div>
+
+                    <div class="buttons-container">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(4)">Quay lại</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(4)">Tiếp tục</button>
+                    </div>
+                </div>
+
+                <!-- Bước 5: Hoàn thành -->
+                <div class="form-step" id="form-step5">
+                    <div class="success-message">
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h2>Xác nhận thông tin</h2>
+                        <p>Vui lòng kiểm tra lại thông tin trước khi hoàn tất đăng ký.</p>
+                    </div>
+                    <div class="confirmation-details">
+                        <p><strong>Họ tên:</strong> <span id="confirm-hoTen"></span></p>
+                        <p><strong>Giới tính:</strong> <span id="confirm-gioiTinh"></span></p>
+                        <p><strong>Số điện thoại:</strong> <span id="confirm-sdt"></span></p>
+                        <p><strong>Ngày sinh:</strong> <span id="confirm-ngaySinh"></span></p>
+                        <p><strong>Email:</strong> <span id="confirm-email"></span></p>
+                        <p><strong>Liên kết Facebook:</strong> <span id="confirm-facebookLink"></span></p>
+                        <p><strong>Mô tả:</strong> <span id="confirm-moTa"></span></p>
+                        <p><strong>Thành phố:</strong> <span id="confirm-thanhPho"></span></p>
+                        <p><strong>Khung giờ làm việc:</strong> <span id="confirm-workAvailabilities"></span></p>
+                    </div>
+                    <div class="buttons-container">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(5)">Quay lại</button>
+                        <button type="submit" class="btn btn-primary">Hoàn tất</button>
+                    </div>
+                </div>
+            </form>
 
             <p class="footer-text">
-                Đã có tài khoản?<a href="@Url.Action("Login", "Account")">Đăng nhập</a>
+                Đã có tài khoản? <a href="@Url.Action("Login", "Account")">Đăng nhập</a>
             </p>
         </div>
 
         <div class="illustration" id="background-image">
             <div class="overlay"></div>
-            
             <div class="particles">
                 <div class="particle"></div>
                 <div class="particle"></div>
@@ -314,7 +476,6 @@
                 <div class="particle"></div>
                 <div class="particle"></div>
             </div>
-            
             <div class="illustration-content">
                 <h2>Tìm công việc mơ ước của bạn</h2>
                 <p>Kết nối với hàng nghìn nhà tuyển dụng để có cơ hội phù hợp với kỹ năng và nguyện vọng của bạn.</p>
@@ -338,63 +499,165 @@
     </div>
 
     <script>
+        // Hàm ánh xạ giá trị thành tiếng Việt
+    function mapNgayToVietnamese(ngay) {
+        const ngayMap = {
+            'Thu_2': 'Thứ 2',
+            'Thu_3': 'Thứ 3',
+            'Thu_4': 'Thứ 4',
+            'Thu_5': 'Thứ 5',
+            'Thu_6': 'Thứ 6',
+            'Thu_7': 'Thứ 7',
+            'Chu_Nhat': 'Chủ Nhật'
+        };
+        return ngayMap[ngay] || ngay;
+    }
+
+    function mapThoiGianToVietnamese(thoiGian) {
+        const thoiGianMap = {
+            'Sang': 'Sáng',
+            'Chieu': 'Chiều',
+            'Toi': 'Tối'
+        };
+        return thoiGianMap[thoiGian] || thoiGian;
+    }
+
+    function mapGioiTinhToVietnamese(gioiTinh) {
+        const gioiTinhMap = {
+            'Nam': 'Nam',
+            'Nu': 'Nữ'
+        };
+        return gioiTinhMap[gioiTinh] || gioiTinh;
+    }
+    // Hàm định dạng ngày sinh
+    function formatDateToVietnamese(dateString) {
+        if (!dateString) return 'Không có';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('vi-VN', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    }
+
+    function mapThanhPhoToVietnamese(thanhPho) {
+        return thanhPho; // Đã là tiếng Việt trong form
+    }
+        // Hàm chuyển bước
         function nextStep(currentStep) {
-            // Ẩn form hiện tại
+            if (currentStep === 1) {
+                const hoTen = document.getElementById('HoTen').value;
+                const gioiTinh = document.querySelector('input[name="GioiTinh"]:checked');
+                const sdt = document.getElementById('SDT').value;
+                const ngaySinh = document.getElementById('NgaySinh').value;
+                const email = document.getElementById('Email').value;
+                const facebookLink = document.getElementById('FacebookLink').value;
+                const matKhau = document.getElementById('MatKhau').value;
+                const nhapLaiMatKhau = document.getElementById('NhapLaiMatKhau').value;
+                const terms = document.getElementById('terms').checked;
+
+                if (!hoTen || !gioiTinh || !sdt || !ngaySinh || (!email && !facebookLink) || !matKhau || !nhapLaiMatKhau) {
+                    alert('Vui lòng điền đầy đủ thông tin cơ bản.');
+                    return;
+                }
+                if (matKhau !== nhapLaiMatKhau) {
+                    alert('Mật khẩu không khớp.');
+                    return;
+                }
+                if (!terms) {
+                    alert('Vui lòng đồng ý với điều khoản dịch vụ.');
+                    return;
+                }
+            }
+
+            if (currentStep === 4) {
+                const selectedSlots = document.querySelectorAll('input[name*="WorkAvailabilities"][type="checkbox"]:checked');
+                if (selectedSlots.length === 0) {
+                    alert('Vui lòng chọn ít nhất một khung giờ làm việc.');
+                    return;
+                }
+
+                // Hiển thị thông tin trong bước xác nhận
+
+            document.getElementById('confirm-hoTen').textContent = document.getElementById('HoTen').value || 'Không có';
+            document.getElementById('confirm-gioiTinh').textContent = mapGioiTinhToVietnamese(document.querySelector('input[name="GioiTinh"]:checked')?.value || '');
+            document.getElementById('confirm-sdt').textContent = document.getElementById('SDT').value || 'Không có';
+            document.getElementById('confirm-ngaySinh').textContent = formatDateToVietnamese(document.getElementById('NgaySinh').value);
+            document.getElementById('confirm-email').textContent = document.getElementById('Email').value || 'Không có';
+            document.getElementById('confirm-facebookLink').textContent = document.getElementById('FacebookLink').value || 'Không có';
+            document.getElementById('confirm-moTa').textContent = document.getElementById('MoTa').value || 'Không có';
+            document.getElementById('confirm-thanhPho').textContent = mapThanhPhoToVietnamese(document.getElementById('ThanhPho').value);
+                // Hiển thị các khung giờ đã chọn dưới dạng tiếng Việt
+            let workAvailabilitiesText = '';
+            selectedSlots.forEach(slot => {
+                const index = slot.name.match(/\d+/)[0];
+                const ngay = slot.value;
+                const thoiGian = document.querySelector(`input[name="WorkAvailabilities[${index}].ThoiGian"]`).value;
+                if (ngay && thoiGian) {
+                    const ngayVietnamese = mapNgayToVietnamese(ngay);
+                    const thoiGianVietnamese = mapThoiGianToVietnamese(thoiGian);
+                    workAvailabilitiesText += `${ngayVietnamese} - ${thoiGianVietnamese}, `;
+                }
+            });
+            document.getElementById('confirm-workAvailabilities').textContent = workAvailabilitiesText.slice(0, -2) || 'Không có';
+        }
+
             document.getElementById('form-step' + currentStep).classList.remove('active');
-            
-            // Hiện form tiếp theo
             document.getElementById('form-step' + (currentStep + 1)).classList.add('active');
-            
-            // Cập nhật trạng thái các step
             document.getElementById('step' + currentStep).classList.remove('active');
             document.getElementById('step' + currentStep).classList.add('completed');
             document.getElementById('step' + (currentStep + 1)).classList.add('active');
         }
-        
+
         function prevStep(currentStep) {
-            // Ẩn form hiện tại
             document.getElementById('form-step' + currentStep).classList.remove('active');
-            
-            // Hiện form trước đó
             document.getElementById('form-step' + (currentStep - 1)).classList.add('active');
-            
-            // Cập nhật trạng thái các step
             document.getElementById('step' + currentStep).classList.remove('active');
             document.getElementById('step' + (currentStep - 1)).classList.remove('completed');
             document.getElementById('step' + (currentStep - 1)).classList.add('active');
         }
-        
-        // Xử lý chọn thành phố
+
+        // Xử lý dropdown thành phố
         function toggleCityDropdown() {
             document.getElementById("cityDropdown").style.display = document.getElementById("cityDropdown").style.display === "block" ? "none" : "block";
         }
-        
+
         function selectCity(city) {
-            document.getElementById("city").value = city;
+            document.getElementById("ThanhPho").value = city;
             document.getElementById("cityDropdown").style.display = "none";
         }
-        
-        // Đóng dropdown khi click ra ngoài
+
         window.onclick = function(event) {
-            if (!event.target.matches('#city')) {
+            if (!event.target.matches('#ThanhPho')) {
                 document.getElementById("cityDropdown").style.display = "none";
             }
         }
-        
-        // Xử lý chọn time slot
+
+        // Xử lý lịch làm việc
         const timeSlots = document.querySelectorAll('.time-slot');
         timeSlots.forEach(slot => {
-            slot.addEventListener('click', function() {
-                this.classList.toggle('selected');
+            const checkbox = slot.querySelector('input[name*="Ngay"]');
+            const timeInput = slot.querySelector('input[name*="ThoiGian"]');
+            const label = slot.querySelector('.time-slot-label');
+            const thoiGianValue = timeInput.getAttribute('data-thoigian');
+
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    timeInput.value = thoiGianValue;
+                } else {
+                    timeInput.value = "";
+                }
+                label.classList.toggle('available', this.checked);
+                label.classList.toggle('unavailable', !this.checked);
             });
         });
-        
+
         // Xử lý upload CV
         document.querySelector('.upload-cv').addEventListener('click', function() {
-            document.getElementById('cv-upload').click();
+            document.getElementById('CVFile').click();
         });
-        
-        document.getElementById('cv-upload').addEventListener('change', function() {
+
+        document.getElementById('CVFile').addEventListener('change', function() {
             if (this.files.length > 0) {
                 const fileName = this.files[0].name;
                 document.querySelector('.upload-cv h3').textContent = fileName;

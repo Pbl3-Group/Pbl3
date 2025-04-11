@@ -69,22 +69,18 @@ namespace HeThongTimViec.Models
         Kinh_Doanh_Ban_Hang, Thiet_Ke_Do_Hoa, Content_Viet_Lach, Tai_Chinh_Ke_Toan,
         Dien_Tu_Dien_Lanh, San_Xuat_Che_Bien, Thu_Cong_My_Nghe, Khac
     }
-
     public enum ThuEnum
     {
         T2, T3, T4, T5, T6, T7, CN
     }
-
     public enum TrangThaiApplicationEnum
     {
         Dang_Cho, Da_Chap_Nhan, Da_Tu_Choi
     }
-
     public enum TrangThaiReportEnum
     {
         Dang_Cho, Da_Xem_Xet
     }
-
     public enum TrangThaiNotificationEnum
     {
         Chua_Doc, Da_Doc
