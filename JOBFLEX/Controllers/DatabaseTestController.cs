@@ -4,10 +4,10 @@ using MySql.Data.MySqlClient;
 
 public class DatabaseTestController : Controller
 {
-  public IActionResult Index()
+    public IActionResult Index()
     {
         string connectionString = "Server=localhost;Database=HETHONGTIMVIEC;User Id=root;Password=Thanh7778;";
-        
+
         try
         {
             using (var connection = new MySqlConnection(connectionString))

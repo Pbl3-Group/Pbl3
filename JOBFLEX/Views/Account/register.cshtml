@@ -141,13 +141,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="Email">Email (không bắt buộc)</label>
+                        <label for="Email">Email</label>
                         <input type="email" id="Email" name="Email" class="form-control" placeholder="Nhập email" value="@Model?.Email" />
                         <span class="error">@Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })</span>
                     </div>
 
                     <div class="form-group">
-                        <label for="FacebookLink">Liên kết Facebook (không bắt buộc)</label>
+                        <label for="FacebookLink">Liên kết Facebook</label>
                         <input type="url" id="FacebookLink" name="FacebookLink" class="form-control" placeholder="Nhập liên kết Facebook" value="@Model?.FacebookLink" />
                         <span class="error">@Html.ValidationMessageFor(m => m.FacebookLink, "", new { @class = "error" })</span>
                     </div>

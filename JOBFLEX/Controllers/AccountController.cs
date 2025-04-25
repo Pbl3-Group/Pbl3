@@ -33,49 +33,61 @@ namespace HeThongTimViec.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(EmailOrPhone) || string.IsNullOrEmpty(Password))
-                {
-                    ViewBag.Error = "Vui lòng nhập đầy đủ thông tin";
-                    return View();
-                }
+            if (string.IsNullOrEmpty(EmailOrPhone) || string.IsNullOrEmpty(Password))
+            {
+                ViewBag.Error = "Vui lòng nhập đầy đủ thông tin";
+                return View();
+            }
 
-                if (!Regex.IsMatch(EmailOrPhone, @"^[\w\.-]+@[\w\.-]+\.\w+$") && !Regex.IsMatch(EmailOrPhone, @"^\d{10}$"))
-                {
-                    ViewBag.Error = "Email hoặc số điện thoại không hợp lệ";
-                    return View();
-                }
+            if (!Regex.IsMatch(EmailOrPhone, @"^[\w\.-]+@[\w\.-]+\.\w+$") && !Regex.IsMatch(EmailOrPhone, @"^\d{10}$"))
+            {
+                ViewBag.Error = "Email hoặc số điện thoại không hợp lệ";
+                return View();
+            }
 
-                var user = await _context.Users
-                    .FirstOrDefaultAsync(u => u.Email == EmailOrPhone || u.SDT == EmailOrPhone);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == EmailOrPhone || u.SDT == EmailOrPhone);
 
-                if (user == null)
-                {
-                    ViewBag.Error = "Tài khoản không tồn tại";
-                    return View();
-                }
+            if (user == null)
+            {
+                ViewBag.Error = "Tài khoản không tồn tại";
+                return View();
+            }
 
-                if (user.TrangThai == TrangThaiEnum.Bi_Cam)
-                {
-                    ViewBag.Error = "Tài khoản của bạn đã bị khóa";
-                    return View();
-                }
+            if (user.TrangThai == TrangThaiEnum.Bi_Cam)
+            {
+                ViewBag.Error = "Tài khoản của bạn đã bị khóa";
+                return View();
+            }
 
-                if (!BCrypt.Net.BCrypt.Verify(Password, user.MatKhau))
-                {
-                    ViewBag.Error = "Sai mật khẩu";
-                    return View();
-                }
+            if (!BCrypt.Net.BCrypt.Verify(Password, user.MatKhau))
+            {
+                ViewBag.Error = "Sai mật khẩu";
+                return View();
+            }
 
-                HttpContext.Session.SetInt32("UserId", user.UserId);
-                HttpContext.Session.SetString("UserRole", user.VaiTro.ToString());
+            HttpContext.Session.SetInt32("UserId", user.UserId);
+            HttpContext.Session.SetString("UserRole", user.VaiTro.ToString());
 
+            switch (user.VaiTro)
+            {
+                case VaiTroEnum.Ung_Vien:
                 return RedirectToAction("Index", "UngVien");
+                case VaiTroEnum.Nha_Tuyen_Dung:
+                return RedirectToAction("Index", "NhaTuyenDung");
+                case VaiTroEnum.Quan_Tri_Vien:
+                return RedirectToAction("Index", "Admin");
+                default:
+                _logger.LogWarning("Vai trò không hợp lệ cho người dùng {UserId}", user.UserId);
+                ViewBag.Error = "Vai trò không hợp lệ";
+                return View();
+            }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi đăng nhập với EmailOrPhone: {EmailOrPhone}", EmailOrPhone);
-                ViewBag.Error = "Đã xảy ra lỗi, vui lòng thử lại sau";
-                return View();
+            _logger.LogError(ex, "Lỗi khi đăng nhập với EmailOrPhone: {EmailOrPhone}", EmailOrPhone);
+            ViewBag.Error = "Đã xảy ra lỗi, vui lòng thử lại sau";
+            return View();
             }
         }
 

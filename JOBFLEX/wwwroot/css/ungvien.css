@@ -2,27 +2,27 @@
 /* Base styles - Harmonized Color Palette */
 :root {
   /* Primary colors - Refined blue palette */
-  --primary-color:rgb(63, 155, 211);      /* Main blue, slightly adjusted for better harmony */
+  --primary-color: #4763ee;      /* Updated to match the blue in screenshot */
   --primary-dark: #3a49da;       /* Darker blue for hover states */
-  --primary-light: #eef0ff;      /* Lighter blue for backgrounds, softened */
+  --primary-light: #f0f5ff;      /* Lighter blue for backgrounds, softened */
   
   /* Secondary colors */
-  --secondary-color: #fff4d4;    /* Warmer tone for better contrast with blue */
+  --secondary-color: #fff4d4;    /* Kept original */
   
   /* Text colors - Adjusted for better readability */
-  --text-dark:rgb(8, 10, 13);          /* Slightly darker for better contrast */
-  --text-light:rgb(49, 106, 184);         /* Adjusted for WCAG compliance */
-  --text-lighter:rgb(230, 240, 245);       /* Lighter text for tertiary information */
+  --text-dark: #212529;          /* Adjusted to match darker text in screenshot */
+  --text-light: #6c757d;         /* Adjusted to match screenshot */
+  --text-lighter: #e6f0f5;       /* Kept original */
   
   /* Neutrals */
   --white: #ffffff;
 
-  /* Status colors - Adjusted for harmony */
+  /* Status colors - Kept original */
   --success: #10b981;            /* Greener success color */
   --warning: #f59e0b;            /* Warm orange for warnings */
   --danger: #ef4444;             /* Bright red for danger/errors */
   
-  /* Shadows - Enhanced for depth */
+  /* Shadows - Kept original */
   --border-radius: 0.5rem;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -291,7 +291,7 @@ width: 100%;
 height: 100%;
 top: 0;
 left: 0;
-background-image: url('~assets/img/candidate.webp');
+background-image: url('candidate.webp');
 background-size: cover;
 background-position: center bottom;
 opacity: 4;
@@ -306,7 +306,7 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background-color: #2a2887;
+background-color: #4763ee;  /* Updated to match the blue in screenshot */
 opacity: 0.7;
 z-index: -1;
 pointer-events: none;
@@ -395,7 +395,7 @@ bottom: 5px;
 left: 0;
 width: 100%;
 height: 8px;
-background-color: rgba(78, 115, 223, 0.2);
+background-color: rgba(71, 99, 238, 0.2);  /* Updated to match new primary color */
 z-index: -1;
 animation: widthGrow 1.5s ease;
 }
@@ -407,7 +407,7 @@ font-size: 1.1rem;
 animation: fadeIn 1.8s ease;
 }
 
-/* Cải thiện thanh tìm kiếm chuyển động */
+/* Cáº£i thiá»‡n thanh tÃ¬m kiáº¿m chuyá»ƒn Ä‘á»™ng */
 .search-box {
 display: flex;
 background-color: var(--white);
@@ -435,7 +435,7 @@ animation: searchLight 4s infinite;
 }
 
 .search-box:hover {
-box-shadow: 0 10px 35px rgba(78, 115, 223, 0.25);
+box-shadow: 0 10px 35px rgba(71, 99, 238, 0.25);  /* Updated to match new primary color */
 transform: translateY(-5px) scale(1.02);
 }
 
@@ -472,7 +472,7 @@ animation: colorShift 6s infinite alternate;
 }
 
 .search-btn:hover {
-background-color: #3a5bc7;
+background-color: #3a49da;  /* Updated darker color */
 padding: 0 30px;
 }
 
@@ -493,7 +493,7 @@ background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transp
 animation: shine 3s infinite;
 }
 
-/* Phần còn lại của CSS */
+/* Pháº§n cÃ²n láº¡i cá»§a CSS */
 .popular-tags {
 display: flex;
 flex-wrap: wrap;
@@ -582,7 +582,7 @@ font-size: 0.9rem;
 color: #5a6a72;
 }
 
-/* Keyframes cho các animation */
+/* Keyframes cho cÃ¡c animation */
 @keyframes fadeIn {
 from { opacity: 0; }
 to { opacity: 1; }
@@ -652,7 +652,7 @@ from { opacity: 0; transform: translateY(20px); }
 to { opacity: 1; transform: translateY(0); }
 }
 
-/* Animation mới cho thanh tìm kiếm */
+/* Animation má»›i cho thanh tÃ¬m kiáº¿m */
 @keyframes pulse {
 0% { transform: scale(1); }
 100% { transform: scale(1.03); }
@@ -671,12 +671,12 @@ to { opacity: 1; transform: translateY(0); }
 
 @keyframes blink {
 0%, 100% { box-shadow: 0 0 0 transparent inset; }
-50% { box-shadow: 0 0 10px rgba(78, 115, 223, 0.2) inset; }
+50% { box-shadow: 0 0 10px rgba(71, 99, 238, 0.2) inset; }  /* Updated to match new primary color */
 }
 
 @keyframes colorShift {
 0% { background-color: var(--primary-color); }
-50% { background-color: #2a2887; }
+50% { background-color: #3a49da; }  /* Updated darker color */
 100% { background-color: var(--primary-color); }
 }
 
@@ -769,7 +769,7 @@ top: -50%;
 left: -50%;
 width: 200%;
 height: 200%;
-background: radial-gradient(circle, rgba(67, 97, 238, 0.1) 0%, transparent 70%);
+background: radial-gradient(circle, rgba(71, 99, 238, 0.1) 0%, transparent 70%);  /* Updated to match new primary color */
 opacity: 0;
 transition: opacity 0.3s ease;
 transform: translate(-50%, -50%);
@@ -779,7 +779,7 @@ z-index: 0;
 .category-card:hover {
 transform: translateY(-5px);
 box-shadow: var(--shadow-md);
-border-color: rgba(67, 97, 238, 0.2);
+border-color: rgba(71, 99, 238, 0.2);  /* Updated to match new primary color */
 }
 
 .category-card:hover::before {
@@ -833,27 +833,27 @@ z-index: 1;
   right: 0;
   bottom: 0;
   background-image: 
-    linear-gradient(45deg, rgba(67, 97, 238, 0.03) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(67, 97, 238, 0.03) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(67, 97, 238, 0.03) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(67, 97, 238, 0.03) 75%);
+    linear-gradient(45deg, rgba(71, 99, 238, 0.03) 25%, transparent 25%),  /* Updated to match new primary color */
+    linear-gradient(-45deg, rgba(71, 99, 238, 0.03) 25%, transparent 25%),  /* Updated to match new primary color */
+    linear-gradient(45deg, transparent 75%, rgba(71, 99, 238, 0.03) 75%),  /* Updated to match new primary color */
+    linear-gradient(-45deg, transparent 75%, rgba(71, 99, 238, 0.03) 75%);  /* Updated to match new primary color */
   background-size: 20px 20px;
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
   opacity: 0.4;
   z-index: 0;
 }
 
-/* Thiết lập container cho slider */
+/* Thiáº¿t láº­p container cho slider */
 .job-slider-container {
   position: relative;
   width: 100%;
   display: flex;
   align-items: center;
   z-index: 1;
-  padding: 0 60px; /* Tạo khoảng cách cho mũi tên */
+  padding: 0 60px; /* Táº¡o khoáº£ng cÃ¡ch cho mÅ©i tÃªn */
 }
 
-/* Thiết lập nút mũi tên */
+/* Thiáº¿t láº­p nÃºt mÅ©i tÃªn */
 .arrow-btn {
   position: absolute;
   top: 50%;
@@ -879,16 +879,16 @@ z-index: 1;
   box-shadow: var(--shadow-lg);
 }
 
-/* Vị trí các nút mũi tên */
+/* Vá»‹ trÃ­ cÃ¡c nÃºt mÅ©i tÃªn */
 .prev-btn {
-  left: 10px; /* Đẩy xa hơn khỏi job-card */
+  left: 10px; /* Äáº©y xa hÆ¡n khá»i job-card */
 }
 
 .next-btn {
-  right: 10px; /* Đẩy xa hơn khỏi job-card */
+  right: 10px; /* Äáº©y xa hÆ¡n khá»i job-card */
 }
 
-/* Thiết lập lại job-grid để làm việc với slider */
+/* Thiáº¿t láº­p láº¡i job-grid Ä‘á»ƒ lÃ m viá»‡c vá»›i slider */
 .job-grid {
   display: flex;
   overflow-x: hidden;
@@ -1023,7 +1023,7 @@ z-index: 1;
 
 .job-card:hover .company-avatar {
   border-color: var(--primary-light);
-  box-shadow: 0 3px 8px rgba(67, 97, 238, 0.15);
+  box-shadow: 0 3px 8px rgba(71, 99, 238, 0.15);  /* Updated to match new primary color */
 }
 
 .company-logo {
@@ -1186,7 +1186,7 @@ transition: opacity 0.3s ease;
   transition: all 0.2s ease;
 }
 
-/* Các màu sắc khác nhau cho các loại công việc */
+/* CÃ¡c mÃ u sáº¯c khÃ¡c nhau cho cÃ¡c loáº¡i cÃ´ng viá»‡c */
 .job-type.full-time {
   background-color: var(--primary-color);
 }
@@ -1203,13 +1203,13 @@ transition: opacity 0.3s ease;
   background-color: var(--text-light);
 }
 
-/* Thêm trạng thái hover cho loại công việc */
+/* ThÃªm tráº¡ng thÃ¡i hover cho loáº¡i cÃ´ng viá»‡c */
 .job-type:hover {
   opacity: 0.9;
   transform: scale(1.05);
 }
 
-/* Thêm màu xen kẽ cho các mục công việc */
+/* ThÃªm mÃ u xen káº½ cho cÃ¡c má»¥c cÃ´ng viá»‡c */
 .job-list-item:nth-child(odd) {
   background-color: var(--white);
 }
@@ -1218,7 +1218,7 @@ transition: opacity 0.3s ease;
   background-color: var(--gray-50);
 }
 
-/* Thêm trạng thái hover cho loại công việc */
+/* ThÃªm tráº¡ng thÃ¡i hover cho loáº¡i cÃ´ng viá»‡c */
 .job-type:hover {
   opacity: 0.9;
   transform: scale(1.05);

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Oi7l7WStRVCHzhmQ1gB6ZhfWkDojcYgQxGYXor5LNxA=",
+  "Hash": "9n1sAu787x7BnFWYvc0qacTj5X820ZB5fM1ftN/tb3k=",
   "Source": "JOBFLEX",
   "BasePath": "_content/JOBFLEX",
   "Mode": "Default",
@@ -319,6 +319,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/ForgotPassword.css"
+    },
+    {
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/css/Header4Ungvien.css",
+      "SourceId": "JOBFLEX",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/",
+      "BasePath": "_content/JOBFLEX",
+      "RelativePath": "css/Header4Ungvien.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/Header4Ungvien.css"
     },
     {
       "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/wwwroot/css/Login.css",

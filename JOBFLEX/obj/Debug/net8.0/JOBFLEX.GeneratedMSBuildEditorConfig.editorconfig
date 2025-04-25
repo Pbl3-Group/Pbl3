@@ -30,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Admin/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vaW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,12 +46,40 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Shared/_Layout4UngVien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQ0VW5nVmllbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/UngVien/applications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5nVmllbi9hcHBsaWNhdGlvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/UngVien/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5nVmllbi9pbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/UngVien/jobdetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5nVmllbi9qb2JkZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/UngVien/jobs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5nVmllbi9qb2JzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/UngVien/messages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5nVmllbi9tZXNzYWdlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/UngVien/reports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5nVmllbi9yZXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/UngVien/savedjobs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5nVmllbi9zYXZlZGpvYnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nguyenthanhhuyen/Pictures/tai_lieu/JOBFLEX/Views/Users/Index.cshtml]

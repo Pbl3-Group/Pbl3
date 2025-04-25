@@ -1,0 +1,344 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap&subset=vietnamese');
+
+:root {
+    --color-primary: #1e40af;
+    --color-navy: #0f172a;
+    --color-gray-100: #f8fafc;
+    --color-gray-200: #e2e8f0;
+    --color-gray-300: #cbd5e1;
+    --color-gray-400: #94a3b8;
+    --color-gray-500: #64748b;
+    --color-gray-600: #475569;
+    --color-yellow: #eab308;
+    --color-white: #ffffff;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --font-family: 'Be Vietnam Pro', Arial, sans-serif;
+    --transition-speed: 0.2s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--color-navy);
+    background-color: var(--color-gray-100);
+}
+
+/* Header Styles */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    border-bottom: 1px solid var(--color-gray-200);
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-sm);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.header-content {
+    display: flex;
+    height: 64px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo Section */
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 6px;
+    color: var(--color-primary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    margin-right: 8px;
+}
+
+.menu-toggle:hover {
+    background-color: var(--color-gray-100);
+}
+
+.menu-toggle:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.menu-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.briefcase-icon {
+    height: 24px;
+    width: 24px;
+    color: var(--color-primary);
+    margin-right: 8px;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-navy);
+    letter-spacing: -0.01em;
+}
+
+.logo-text-blue {
+    color: var(--color-primary);
+}
+
+/* Navigation */
+.main-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-200);
+    box-shadow: var(--shadow-md);
+    padding: 16px;
+    z-index: 40;
+}
+
+.main-nav.active {
+    display: flex;
+}
+
+.nav-link {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-navy);
+    text-decoration: none;
+    padding: 10px 0;
+    transition: color var(--transition-speed);
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--color-primary);
+}
+
+.nav-link.active {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+}
+
+/* User Actions */
+.right-section {
+    display: flex;
+    align-items: center;
+}
+
+.notification-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    position: relative;
+    color: var(--color-navy);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+    border-radius: 6px;
+    margin-right: 8px;
+}
+
+.notification-btn:hover {
+    color: var(--color-primary);
+    background-color: var(--color-gray-100);
+}
+
+.notification-btn:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.bell-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.notification-indicator {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: var(--color-yellow);
+    box-shadow: 0 0 0 2px var(--color-white);
+}
+
+.avatar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform var(--transition-speed);
+}
+
+.avatar-btn:hover {
+    transform: scale(1.05);
+}
+
+.avatar-btn:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.avatar-container {
+    display: flex;
+    overflow: hidden;
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+    border: 1px solid var(--color-gray-200);
+}
+
+.avatar-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Main and Footer */
+main {
+    padding: 24px 16px;
+    min-height: calc(100vh - 124px);
+}
+
+footer {
+    background: var(--color-gray-100);
+    border-top: 1px solid var(--color-gray-200);
+    padding: 16px;
+    text-align: center;
+    color: var(--color-gray-500);
+    font-size: 14px;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    .main-nav {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        width: auto;
+        background: transparent;
+        border-bottom: none;
+        box-shadow: none;
+        padding: 0;
+        gap: 8px;
+        margin-left: 24px;
+    }
+
+    .nav-link {
+        padding: 6px 8px;
+        position: relative;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-primary);
+        transition: width var(--transition-speed);
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+    .nav-link.active::after {
+        width: 100%;
+    }
+
+    /* Left align the logo and navigation */
+    .left-section {
+        display: flex;
+        align-items: center;
+    }
+    
+    .header-content {
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 24px;
+    }
+
+    .main-nav {
+        gap: 16px;
+    }
+
+    .nav-link {
+        font-size: 16px;
+    }
+}
