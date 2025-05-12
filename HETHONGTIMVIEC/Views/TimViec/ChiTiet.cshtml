@@ -1,0 +1,373 @@
+@model HeThongTimViec.ViewModels.TimViec.ChiTietTinTuyenDungViewModel
+@using HeThongTimViec.Models
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
+@{
+    ViewData["Title"] = $"Chi tiết: {Model.TieuDe}";
+    var requestToken = antiforgery.GetAndStoreTokens(Context).RequestToken;
+    var userIsAuthenticated = User.Identity?.IsAuthenticated ?? false;
+    var returnUrl = Context.Request.Path + Context.Request.QueryString; // Lấy URL hiện tại để quay lại sau khi login
+}
+
+<div class="container mt-4 mb-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb small bg-light p-2 rounded">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="TimViec" class="text-decoration-none">Tìm việc</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.TieuDe</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- Cột nội dung chính -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1 class="h4 mb-0 text-white">@Model.TieuDe</h1>
+                        @if (Model.TinGap)
+                        {
+                            <span class="badge bg-danger rounded-pill px-2 py-1"><i class="fas fa-fire me-1"></i>GẤP</span>
+                        }
+                    </div>
+                </div>
+                
+                <div class="card-body p-4">
+                    <!-- Lương và nút hành động -->
+                    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                        <div class="text-success fw-bold fs-5">
+                            <i class="fas fa-dollar-sign me-1"></i>@Model.MucLuongDisplay
+                            <small class="text-muted fw-normal ms-1">(@Model.LoaiLuongDisplay)</small>
+                        </div>
+                        <div class="job-actions-detail">
+                            @if (userIsAuthenticated)
+                            {
+                                if (Model.DaLuu)
+                                {
+                                    <button id="btnSaveToggleDetail" class="btn btn-sm btn-success btn-unsave-job me-2" data-id="@Model.Id" title="Bỏ lưu tin này">
+                                        <i class="fas fa-heart fa-fw me-1"></i>Đã lưu
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button id="btnSaveToggleDetail" class="btn btn-sm btn-outline-success btn-save-job me-2" data-id="@Model.Id" title="Lưu tin này">
+                                        <i class="far fa-heart fa-fw me-1"></i>Lưu tin
+                                    </button>
+                                }
+                                <a href="#ungtuyen-section" class="btn btn-sm btn-primary"><i class="fas fa-paper-plane fa-fw me-1"></i>Ứng tuyển ngay</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@returnUrl" class="btn btn-sm btn-outline-secondary me-2" title="Đăng nhập để lưu tin">
+                                    <i class="far fa-heart fa-fw me-1"></i>Lưu tin
+                                </a>
+                                <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@returnUrl" class="btn btn-sm btn-primary"><i class="fas fa-paper-plane fa-fw me-1"></i>Đăng nhập để ứng tuyển</a>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Thông tin chung -->
+                    <div class="bg-light p-3 rounded mb-4">
+                        <h5 class="fw-semibold mb-3">Thông tin chung</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <i class="fas fa-map-marker-alt fa-fw text-danger mt-1 me-2"></i>
+                                    <div>
+                                        <strong>Địa điểm:</strong><br>
+                                        @Model.DiaChiLamViecDayDu
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <i class="fas fa-briefcase fa-fw text-primary mt-1 me-2"></i>
+                                    <div>
+                                        <strong>Loại hình:</strong><br>
+                                        @Model.LoaiHinhCongViecDisplay
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <i class="fas fa-users fa-fw text-info mt-1 me-2"></i>
+                                    <div>
+                                        <strong>Số lượng tuyển:</strong><br>
+                                        @Model.SoLuongTuyen @(Model.SoLuongTuyen > 1 ? "người" : "người")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <i class="fas fa-medal fa-fw text-warning mt-1 me-2"></i>
+                                    <div>
+                                        <strong>Kinh nghiệm:</strong><br>
+                                        @Model.YeuCauKinhNghiemText
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <i class="fas fa-graduation-cap fa-fw text-success mt-1 me-2"></i>
+                                    <div>
+                                        <strong>Bằng cấp:</strong><br>
+                                        @Model.YeuCauHocVanText
+                                    </div>
+                                </div>
+                            </div>
+                            @if (Model.NganhNghes.Any())
+                            {
+                                <div class="col-md-6">
+                                    <div class="d-flex">
+                                        <i class="fas fa-tags fa-fw text-secondary mt-1 me-2"></i>
+                                        <div>
+                                            <strong>Ngành nghề:</strong><br>
+                                            @string.Join(", ", Model.NganhNghes)
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Mô tả công việc -->
+                    <div class="mb-4">
+                        <h5 class="fw-semibold border-bottom pb-2 mb-3">Mô tả công việc</h5>
+                        <div class="job-description">
+                            @Html.Raw(Model.MoTa)
+                        </div>
+                    </div>
+
+                    <!-- Yêu cầu công việc -->
+                    @if (!string.IsNullOrWhiteSpace(Model.YeuCau))
+                    {
+                        <div class="mb-4">
+                            <h5 class="fw-semibold border-bottom pb-2 mb-3">Yêu cầu ứng viên</h5>
+                            <div class="job-requirements">
+                                @Html.Raw(Model.YeuCau)
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Quyền lợi -->
+                    @if (!string.IsNullOrWhiteSpace(Model.QuyenLoi))
+                    {
+                        <div class="mb-4">
+                            <h5 class="fw-semibold border-bottom pb-2 mb-3">Quyền lợi được hưởng</h5>
+                            <div class="job-benefits">
+                                @Html.Raw(Model.QuyenLoi)
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Lịch làm việc -->
+                    @if (Model.LichLamViecs.Any())
+                    {
+                        <div class="mb-4">
+                            <h5 class="fw-semibold border-bottom pb-2 mb-3">Lịch làm việc</h5>
+                            <div class="row">
+                                @foreach (var lich in Model.LichLamViecs)
+                                {
+                                    <div class="col-md-6 mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <i class="far fa-calendar-alt fa-fw me-2 text-info"></i>
+                                            <span>@lich.NgayTrongTuanDisplay: <span class="fw-semibold">@lich.ThoiGianDisplay</span></span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Ngày đăng/hết hạn -->
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <div class="badge bg-light text-dark py-2 px-3 mb-2">
+                            <i class="far fa-calendar-check me-1 text-primary"></i>Ngày đăng: @Model.NgayDang.ToString("dd/MM/yyyy")
+                        </div>
+                        @if (Model.NgayHetHan.HasValue)
+                        {
+                            <div class="badge bg-light text-dark py-2 px-3 mb-2">
+                                <i class="far fa-calendar-times me-1 text-danger"></i>Hạn nộp: @Model.NgayHetHan.Value.ToString("dd/MM/yyyy")
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Phần Ứng tuyển -->
+                    <div class="mt-5 border p-4 rounded bg-light" id="ungtuyen-section">
+                        <h4 class="mb-3 text-center">Ứng tuyển vị trí này</h4>
+                        @if (userIsAuthenticated)
+                        {
+                            <div class="text-center">
+                                <p class="text-muted mb-4">Bạn có thể nộp CV hoặc sử dụng hồ sơ trực tuyến.</p>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button type="button" class="btn btn-primary"><i class="fas fa-paper-plane me-2"></i>Nộp hồ sơ ngay</button>
+                                    <button type="button" class="btn btn-outline-secondary"><i class="fas fa-upload me-2"></i>Tải lên CV</button>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center">
+                                <p class="text-danger mb-3">Vui lòng đăng nhập để ứng tuyển.</p>
+                                <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@returnUrl" class="btn btn-warning">Đăng nhập ngay</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cột thông tin nhà tuyển dụng -->
+        <div class="col-lg-4">
+            <div class="sticky-top" style="top: 20px; z-index: 100;">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fas fa-building me-2"></i>
+                            Thông tin @(Model.LoaiTaiKhoanNguoiDang == LoaiTaiKhoan.doanhnghiep ? "Nhà tuyển dụng" : "Người đăng")
+                        </h5>
+                    </div>
+                    <div class="card-body text-center p-4">
+                        <img src="@Model.LogoHoacAvatarUrl"
+                             alt="Logo/Avatar @Model.TenNguoiDangHoacCongTy"
+                             class="img-thumbnail rounded-circle mb-3"
+                             style="width: 100px; height: 100px; object-fit: cover;"
+                             onerror="this.onerror=null; this.src='/images/default-placeholder.png';">
+
+                        <h5 class="card-title mb-2">@Model.TenNguoiDangHoacCongTy</h5>
+
+                        @if (Model.LoaiTaiKhoanNguoiDang == LoaiTaiKhoan.doanhnghiep)
+                        {
+                            @if (Model.CongTyDaXacMinh)
+                            {
+                                <div class="mb-3">
+                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Đã xác minh</span>
+                                </div>
+                            }
+                            
+                            @if (!string.IsNullOrEmpty(Model.UrlWebsiteCongTy))
+                            {
+                                <div class="mt-3">
+                                    <a href="@Model.UrlWebsiteCongTy" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-info">
+                                        <i class="fas fa-globe me-1"></i>Xem Website
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                    @if (Model.LoaiTaiKhoanNguoiDang == LoaiTaiKhoan.doanhnghiep && !string.IsNullOrEmpty(Model.MoTaCongTy))
+                    {
+                        <div class="card-footer bg-white">
+                            <div class="text-muted small">
+                                <strong>Giới thiệu:</strong> @Model.MoTaCongTy
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <!-- Widget chia sẻ -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="fas fa-share-alt me-2"></i>Chia sẻ tin tuyển dụng</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-outline-primary">
+                                <i class="fab fa-facebook-f me-1"></i>Facebook
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-info">
+                                <i class="fas fa-envelope me-1"></i>Email
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-link me-1"></i>Sao chép
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            const saveButtonDetail = $('#btnSaveToggleDetail');
+            const csrfTokenDetail = '@requestToken'; // Lấy token
+
+            // Sử dụng if để kiểm tra nút có tồn tại không (tránh lỗi nếu người dùng chưa đăng nhập)
+            if (saveButtonDetail.length) {
+                 saveButtonDetail.on('click', function (e) {
+                    e.preventDefault();
+                    const button = $(this);
+                    const tinId = button.data('id');
+                    const isSaving = button.hasClass('btn-save-job');
+                    const url = isSaving ? '@Url.Action("LuuTin", "TimViec")' : '@Url.Action("BoLuuTin", "TimViec")';
+                    const icon = button.find('i');
+                    const originalIconClass = icon.attr('class');
+                    const originalText = button.contents().filter(function() { return this.nodeType === 3; }).text().trim(); // Lấy text node
+
+                    button.prop('disabled', true);
+                    icon.removeClass().addClass('fas fa-spinner fa-spin me-1');
+                    button.contents().filter(function() { return this.nodeType === 3; }).replaceWith(" Đang xử lý...");
+
+                    $.ajax({
+                         url: url,
+                         type: 'POST',
+                         contentType: 'application/json',
+                         data: JSON.stringify(tinId),
+                         headers: {
+                             'RequestVerificationToken': csrfTokenDetail
+                         },
+                        success: function (response) {
+                            if (response.success) {
+                                if (isSaving) {
+                                    button.removeClass('btn-save-job btn-outline-success').addClass('btn-unsave-job btn-success');
+                                    icon.removeClass().addClass('fas fa-heart fa-fw me-1');
+                                    button.contents().filter(function() { return this.nodeType === 3; }).replaceWith(" Đã lưu");
+                                    button.attr('title', 'Bỏ lưu tin này');
+                                } else {
+                                    button.removeClass('btn-unsave-job btn-success').addClass('btn-save-job btn-outline-success');
+                                    icon.removeClass().addClass('far fa-heart fa-fw me-1');
+                                    button.contents().filter(function() { return this.nodeType === 3; }).replaceWith(" Lưu tin");
+                                     button.attr('title', 'Lưu tin này');
+                                }
+                                // toastr.success(response.message);
+                            } else {
+                                console.error("Lỗi từ server:", response.message);
+                                alert(response.message || "Đã xảy ra lỗi. Vui lòng thử lại.");
+                                icon.removeClass().addClass(originalIconClass);
+                                button.contents().filter(function() { return this.nodeType === 3; }).replaceWith(" " + originalText);
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error("Lỗi AJAX:", textStatus, errorThrown, jqXHR.responseText);
+                             let errorMsg = "Đã xảy ra lỗi kết nối hoặc lỗi server. Vui lòng thử lại.";
+                             // ... (Xử lý lỗi tương tự như trang Index) ...
+                             if (jqXHR.status === 401) errorMsg = "Vui lòng đăng nhập để thực hiện hành động này.";
+                             else if (jqXHR.responseJSON && jqXHR.responseJSON.message) errorMsg = jqXHR.responseJSON.message;
+                             alert(errorMsg);
+                             icon.removeClass().addClass(originalIconClass);
+                             button.contents().filter(function() { return this.nodeType === 3; }).replaceWith(" " + originalText);
+                        },
+                        complete: function () {
+                            button.prop('disabled', false);
+                        }
+                    });
+                });
+            }
+
+            // --- Smooth scroll cho nút ứng tuyển ---
+             $('a[href="#ungtuyen-section"]').on('click', function(event) {
+                if (this.pathname === window.location.pathname) { // Chỉ scroll nếu đang ở trang chi tiết
+                  event.preventDefault();
+                  var hash = this.hash;
+                  $('html, body').animate({
+                    scrollTop: $(hash).offset().top - 70 // Điều chỉnh offset nếu có header cố định
+                  }, 800, function(){
+                    //window.location.hash = hash; // Thêm hash vào URL sau khi scroll (tùy chọn)
+                  });
+                }
+              });
+        });
+    </script>
+}

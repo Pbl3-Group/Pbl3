@@ -1,0 +1,78 @@
+@model HeThongTimViec.ViewModels.ViecLam.SuaUngTuyenViewModel
+@{
+    ViewData["Title"] = "Chỉnh Sửa Đơn Ứng Tuyển";
+}
+
+<div class="container mt-4 mb-5">
+     <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb small bg-light p-2 rounded shadow-sm">
+            <li class="breadcrumb-item"><a asp-action="DaUngTuyen" asp-controller="ViecLam" class="text-decoration-none">Việc đã ứng tuyển</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Chỉnh sửa: @Model.TieuDeCongViec</li>
+        </ol>
+    </nav>
+
+    <h2 class="mb-4 display-6 fw-bold text-warning"><i class="fas fa-edit me-2"></i>@ViewData["Title"]</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-9 col-lg-8">
+            <div class="card shadow border-0">
+                 <div class="card-header bg-light p-3 border-bottom">
+                    <h5 class="mb-1">Vị trí: <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@Model.TinTuyenDungId" class="text-primary fw-bold text-decoration-none">@Model.TieuDeCongViec</a></h5>
+                    <p class="small text-muted mb-1"><i class="fas fa-building fa-fw me-1"></i>@Model.TenNhaTuyenDung</p>
+                     <p class="small text-muted mb-0"><i class="far fa-calendar-alt fa-fw me-1"></i>Ngày nộp: @Model.NgayNop.ToString("dd/MM/yyyy HH:mm")</p>
+                 </div>
+                <div class="card-body p-4">
+                     <form asp-action="SuaUngTuyen" asp-route-id="@Model.UngTuyenId" method="post" enctype="multipart/form-data" id="editUngTuyenForm">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="UngTuyenId" />
+                        <input type="hidden" asp-for="TinTuyenDungId" />
+                         <input type="hidden" asp-for="TieuDeCongViec" />
+                         <input type="hidden" asp-for="TenNhaTuyenDung" />
+                         <input type="hidden" asp-for="NgayNop" />
+                         <input type="hidden" asp-for="UrlCvHienTai"/>
+
+                         @if (!ViewData.ModelState.IsValid)
+                         { <div asp-validation-summary="ModelOnly" class="alert alert-danger alert-sm p-2" role="alert"><small>Vui lòng kiểm tra lại các lỗi bên dưới.</small></div> }
+
+                        <div class="mb-4">
+                            <label asp-for="ThuGioiThieu" class="form-label fw-semibold"></label> <small class="text-muted">(Bạn có thể cập nhật lại thư giới thiệu)</small>
+                            <textarea asp-for="ThuGioiThieu" class="form-control form-control-sm" rows="8" placeholder="Cập nhật lại thư giới thiệu của bạn..."></textarea>
+                            <span asp-validation-for="ThuGioiThieu" class="text-danger small d-block mt-1"></span>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <label asp-for="UrlCvHienTai" class="form-label fw-semibold"></label>
+                            @if (!string.IsNullOrEmpty(Model.UrlCvHienTai))
+                            {
+                                <div class="input-group input-group-sm mb-2">
+                                    <span class="input-group-text bg-light"><i class="fas fa-file-alt"></i></span>
+                                    <input type="text" class="form-control bg-light" value="@System.IO.Path.GetFileName(Model.UrlCvHienTai)" readonly title="@Model.UrlCvHienTai">
+                                    <a href="@Model.UrlCvHienTai" target="_blank" class="btn btn-outline-secondary" title="Xem/Tải CV hiện tại"><i class="fas fa-download"></i></a>
+                                </div>
+                                <small class="form-text text-info">Đây là CV bạn đã nộp trước đó.</small>
+                            }
+                            else { <p class="text-muted small fst-italic mt-1">(Chưa có CV nào được nộp cho đơn này)</p> }
+                        </div>
+                         <div class="mb-4">
+                            <label asp-for="CvMoi" class="form-label fw-semibold"></label> <small class="text-muted">(Chỉ chọn file nếu bạn muốn thay thế CV hiện tại)</small>
+                            <input asp-for="CvMoi" type="file" class="form-control form-control-sm" accept=".pdf,.doc,.docx" id="CvMoiInput">
+                            <span asp-validation-for="CvMoi" class="text-danger small d-block mt-1"></span>
+                            <small id="CvMoiFileName" class="form-text text-muted mt-1 d-block"></small>
+                            <small class="form-text text-muted mt-1 d-block">Định dạng: PDF, DOC, DOCX. Tối đa: 5MB.</small>
+                         </div>
+                         <hr class="my-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a asp-action="DaUngTuyen" class="btn btn-outline-secondary btn-sm"> <i class="fas fa-arrow-left me-1"></i> Quay lại </a>
+                            <button type="submit" class="btn btn-warning btn-sm" id="btnSaveChanges"> <i class="fas fa-save me-1"></i> Lưu Thay Đổi </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+     <script> $(function() { $('#CvMoiInput').on('change', function(e) { var fileName = ""; if (e.target.files.length > 0) { fileName = e.target.files[0].name; } $('#CvMoiFileName').text(fileName ? "File mới đã chọn: " + fileName : ""); }); $('#editUngTuyenForm').on('submit', function() { var $btn = $('#btnSaveChanges'); if ($(this).valid()) { $btn.prop('disabled', true); $btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang lưu...'); } }); }); </script>
+}

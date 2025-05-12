@@ -1,0 +1,26 @@
+/* wwwroot/css/viecdaluu.css */
+.search-saved-jobs .input-group .form-control { border-right: 0; }
+.search-saved-jobs .input-group .btn { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+.search-saved-jobs .input-group a.btn { border-left: 0; } /* Nút xóa tìm kiếm */
+
+.saved-job-item { transition: box-shadow 0.2s ease-in-out; }
+.saved-job-item:hover { box-shadow: 0 0.4rem .8rem rgba(0, 0, 0, .075) !important; }
+.saved-job-item .job-title a { color: #343a40; font-weight: 600; }
+.saved-job-item .job-title a:hover { color: #0d6efd; }
+.saved-job-item .company-name { color: #6c757d; }
+.saved-job-item .badge { font-weight: 500; }
+.saved-job-item .job-tags .badge { background-color: #f1f3f5 !important; color: #495057 !important; border: 1px solid #dee2e6 !important;}
+.saved-job-item .img-thumbnail { padding: 0.1rem; }
+.saved-job-item .job-info-line-1 { color: #6c757d; }
+.saved-job-item .job-info-line-1 span { white-space: nowrap; }
+.saved-job-actions .btn { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .saved-job-actions { flex-direction: row !important; justify-content: flex-start !important; width: 100%; margin-top: 0.75rem !important; }
+    .saved-job-actions form, .saved-job-actions a { flex-grow: 1; text-align: center; }
+    .saved-job-actions .btn { width: 100%; }
+}
+
+.pagination .page-link { font-size: 0.8rem; padding: 0.35rem 0.65rem; }
+.pagination .page-item.active .page-link { z-index: 1;}

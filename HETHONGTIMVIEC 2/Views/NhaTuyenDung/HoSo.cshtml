@@ -1,0 +1,285 @@
+@* File: Views/NhaTuyenDung/HoSo.cshtml (Hoặc Areas/NhaTuyenDung/Views/NhaTuyenDung/HoSo.cshtml) *@
+@model HeThongTimViec.ViewModels.HoSoDoanhNghiepViewModel
+@{
+    ViewData["Title"] = $"Hồ sơ Công ty - {Model.TenCongTy}";
+    // Layout = "_LayoutNhaTuyenDung"; // Đảm bảo bạn đang dùng Layout phù hợp
+}
+
+<style>
+    /* ... (Sao chép toàn bộ khối style từ phiên bản trước vào đây) ... */
+    .profile-card .card-header {
+        background-color: #f8f9fa; /* Màu nền sáng cho header */
+        font-weight: 600;
+        border-bottom: 1px solid #dee2e6; /* Thêm đường kẻ dưới header */
+        padding: 0.75rem 1.25rem; /* Tăng padding */
+    }
+    .profile-icon {
+        width: 1.5em; /* Đảm bảo icon thẳng hàng */
+        text-align: center;
+        margin-right: 10px; /* Tăng khoảng cách phải */
+        color: #0d6efd; /* Màu xanh dương chủ đạo */
+        vertical-align: middle; /* Căn giữa theo chiều dọc */
+    }
+    .profile-label {
+        font-weight: 500;
+        color: #6c757d; /* Màu xám cho label */
+        display: flex; /* Dùng flex để icon và text thẳng hàng */
+        align-items: center; /* Căn giữa theo chiều dọc */
+    }
+    .profile-value {
+        color: #212529; /* Màu đen cho giá trị */
+    }
+    .profile-value a {
+        color: #0d6efd;
+        text-decoration: none; /* Bỏ gạch chân */
+    }
+    .profile-value a:hover {
+        text-decoration: underline; /* Thêm gạch chân khi hover */
+    }
+    .company-logo {
+        max-width: 180px;
+        max-height: 180px;
+        border: 1px solid #dee2e6;
+        padding: 0.25rem;
+        background-color: #fff;
+        border-radius: 0.375rem; /* Bo góc nhẹ */
+        object-fit: contain; /* Đảm bảo logo không bị méo */
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Thêm bóng đổ nhẹ cho logo */
+    }
+    .placeholder-logo {
+        width: 180px;
+        height: 180px;
+        background-color: #e9ecef;
+        border: 1px dashed #ced4da;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        font-size: 0.9rem;
+        border-radius: 0.375rem;
+        flex-direction: column; /* Để icon và text xếp chồng */
+        text-align: center;
+    }
+     .verification-badge {
+        font-size: 0.9em;
+        vertical-align: middle;
+        margin-left: 10px;
+        padding: 0.4em 0.7em; /* Tăng padding cho badge */
+    }
+    /* Sử dụng dl, dt, dd để trình bày thông tin */
+    dl.row dt {
+        padding-top: 0.5rem; /* Thêm khoảng cách trên cho dt */
+        padding-bottom: 0.5rem; /* Thêm khoảng cách dưới cho dt */
+        border-bottom: 1px dashed #eee; /* Đường kẻ mờ phân cách */
+    }
+     dl.row dd {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px dashed #eee;
+        margin-left: 0; /* Reset margin left mặc định của dd */
+    }
+     dl.row dt:last-of-type,
+     dl.row dd:last-of-type {
+        border-bottom: none; /* Bỏ đường kẻ cho dòng cuối cùng */
+     }
+
+    .card {
+        border: none; /* Bỏ viền mặc định của card */
+        box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05); /* Tăng nhẹ bóng đổ */
+        border-radius: 0.5rem; /* Bo góc nhiều hơn */
+        overflow: hidden; /* Đảm bảo bo góc áp dụng cho cả header/body */
+    }
+     .card-header h5 {
+        font-size: 1.1rem; /* Điều chỉnh cỡ chữ header */
+        color: #343a40; /* Màu chữ đậm hơn */
+        margin-bottom: 0; /* Bỏ margin bottom mặc định */
+        display: flex; /* Dùng flex để icon và text thẳng hàng */
+        align-items: center; /* Căn giữa theo chiều dọc */
+     }
+    /* Style cho mô tả công ty */
+    .company-description {
+        white-space: pre-wrap; /* Giữ nguyên định dạng xuống dòng */
+        line-height: 1.6; /* Tăng khoảng cách dòng cho dễ đọc */
+        color: #495057;
+    }
+    .text-muted.fst-italic { /* Style cho text "Chưa cập nhật" */
+        color: #adb5bd !important;
+    }
+</style>
+
+<div class="container mt-4 mb-5">
+
+    @* Hiển thị thông báo thành công (nếu có từ action POST ChinhSuaHoSo) *@
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @* Thông báo lỗi nếu có từ Controller *@
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+
+    <div class="row g-4">
+        @* Cột bên trái: Logo và nút hành động *@
+        <div class="col-lg-3">
+            <div class="text-center mb-4">
+                @if (!string.IsNullOrEmpty(Model.UrlLogo))
+                {
+                    @* <img src="@Model.UrlLogo" alt="Logo công ty @Model.TenCongTy" class="company-logo" /> *@
+                    <img src="@Url.Content("~/file/img/Avatar/avantd.jpg")" alt="Logo công ty @Model.TenCongTy" class="company-logo" />
+                }
+                else
+                {
+                    <div class="placeholder-logo">
+                        <i class="fas fa-building fa-2x mb-2"></i>
+                        <span>Chưa có logo</span>
+                    </div>
+                }
+            </div>
+
+            <div class="d-grid gap-2">
+                 @* <<< THÊM NÚT CHỈNH SỬA Ở ĐÂY >>> *@
+                 <a asp-action="ChinhSuaHoSo" class="btn btn-primary">
+                     <i class="fas fa-edit me-1"></i> Chỉnh sửa hồ sơ
+                 </a>
+                 @* <<< KẾT THÚC THÊM NÚT CHỈNH SỬA >>> *@
+
+                <a asp-action="Index" asp-controller="Dashboard" class="btn btn-outline-secondary">
+                     <i class="fas fa-arrow-left me-1"></i> Quay lại Dashboard
+                </a>
+                 @* <a asp-action="Index" asp-controller="CompanyPosting" class="btn btn-outline-info"><i class="fas fa-list-alt me-1"></i> Xem Tin Tuyển Dụng</a> *@
+            </div>
+        </div>
+
+        @* Cột bên phải: Thông tin chi tiết *@
+        <div class="col-lg-9">
+            @* Phần Header Công ty *@
+            <div class="d-flex align-items-center mb-4 pb-2 border-bottom">
+                <h1 class="display-6 me-auto mb-0" style="font-weight: 500;">
+                    @Model.TenCongTy
+                </h1>
+                @if(Model.DaXacMinh)
+                {
+                    <span class="badge bg-success verification-badge"><i class="fas fa-check-circle me-1"></i>Đã xác minh</span>
+                }
+                else
+                {
+                    <span class="badge bg-warning text-dark verification-badge"><i class="fas fa-clock me-1"></i>Chưa xác minh</span>
+                }
+            </div>
+
+            @* Card Thông tin chung *@
+            <div class="card profile-card mb-4">
+                <div class="card-header">
+                    <h5><i class="fas fa-info-circle profile-icon"></i>Thông tin chung</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-md-4 profile-label"><i class="fas fa-barcode profile-icon"></i>Mã số thuế</dt>
+                        <dd class="col-md-8 profile-value">@(!string.IsNullOrWhiteSpace(Model.MaSoThue) ? Model.MaSoThue : Html.Raw("<span class='text-muted fst-italic'>Chưa cập nhật</span>"))</dd>
+
+                        <dt class="col-md-4 profile-label"><i class="fas fa-link profile-icon"></i>Website</dt>
+                        <dd class="col-md-8 profile-value">
+                            @if (!string.IsNullOrWhiteSpace(Model.UrlWebsite))
+                            {
+                                <a href="@Model.UrlWebsite" target="_blank" rel="noopener noreferrer">@Model.UrlWebsite</a>
+                            }
+                            else
+                            {
+                                @Html.Raw("<span class='text-muted fst-italic'>Chưa cập nhật</span>")
+                            }
+                        </dd>
+
+                        <dt class="col-md-4 profile-label"><i class="fas fa-users profile-icon"></i>Quy mô công ty</dt>
+                        <dd class="col-md-8 profile-value">@(!string.IsNullOrWhiteSpace(Model.QuyMoCongTy) ? Model.QuyMoCongTy : Html.Raw("<span class='text-muted fst-italic'>Chưa cập nhật</span>"))</dd>
+
+                        <dt class="col-12 profile-label"><i class="fas fa-align-left profile-icon"></i>Mô tả công ty</dt>
+                        <dd class="col-12 profile-value">
+                            @if (!string.IsNullOrWhiteSpace(Model.MoTa))
+                            {
+                                <div class="company-description">@Model.MoTa</div>
+                            }
+                            else
+                            {
+                                @Html.Raw("<span class='text-muted fst-italic'>Chưa cập nhật mô tả.</span>")
+                            }
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+             @* Card Thông tin liên hệ & Địa chỉ *@
+            <div class="card profile-card mb-4">
+                <div class="card-header">
+                     <h5><i class="fas fa-address-book profile-icon"></i>Thông tin liên hệ & Địa chỉ</h5>
+                </div>
+                <div class="card-body">
+                     <dl class="row mb-0">
+                         <dt class="col-md-4 profile-label"><i class="fas fa-envelope profile-icon"></i>Email liên hệ</dt>
+                         <dd class="col-md-8 profile-value">@Html.DisplayFor(model => model.EmailLienHe)</dd>
+
+                         <dt class="col-md-4 profile-label"><i class="fas fa-phone profile-icon"></i>Số điện thoại</dt>
+                         <dd class="col-md-8 profile-value">@(!string.IsNullOrWhiteSpace(Model.SoDienThoaiLienHe) ? Model.SoDienThoaiLienHe : Html.Raw("<span class='text-muted fst-italic'>Chưa cập nhật</span>"))</dd>
+
+                         <dt class="col-md-4 profile-label"><i class="fas fa-building profile-icon"></i>Địa chỉ ĐKKD</dt>
+                         <dd class="col-md-8 profile-value">@(!string.IsNullOrWhiteSpace(Model.DiaChiDangKy) ? Model.DiaChiDangKy : Html.Raw("<span class='text-muted fst-italic'>Chưa cập nhật</span>"))</dd>
+
+                        <dt class="col-md-4 profile-label"><i class="fas fa-map-marker-alt profile-icon"></i>Địa chỉ liên hệ</dt>
+                        <dd class="col-md-8 profile-value">
+                             @if (!string.IsNullOrWhiteSpace(Model.DiaChiChiTietNguoiDung) || !string.IsNullOrWhiteSpace(Model.TenQuanHuyen) || !string.IsNullOrWhiteSpace(Model.TenThanhPho))
+                            {
+                                @(Model.DiaChiChiTietNguoiDung)@if (!string.IsNullOrWhiteSpace(Model.DiaChiChiTietNguoiDung) && (!string.IsNullOrWhiteSpace(Model.TenQuanHuyen) || !string.IsNullOrWhiteSpace(Model.TenThanhPho))) {<text>, </text>} @Model.TenQuanHuyen@if (!string.IsNullOrWhiteSpace(Model.TenQuanHuyen) && !string.IsNullOrWhiteSpace(Model.TenThanhPho)) {<text>, </text>} @Model.TenThanhPho
+                            }
+                            else
+                            {
+                               @Html.Raw("<span class='text-muted fst-italic'>Chưa cập nhật địa chỉ liên hệ.</span>")
+                            }
+                        </dd>
+                     </dl>
+                </div>
+            </div>
+
+            @* Card Trạng thái xác minh *@
+            @if (Model.DaXacMinh)
+            {
+                <div class="card profile-card">
+                    <div class="card-header bg-success-subtle">
+                         <h5 class="text-success-emphasis"><i class="fas fa-user-check profile-icon text-success"></i>Thông tin xác minh</h5>
+                    </div>
+                    <div class="card-body">
+                         <dl class="row mb-0">
+                            <dt class="col-md-4 profile-label"><i class="fas fa-calendar-check profile-icon"></i>Ngày xác minh</dt>
+                            <dd class="col-md-8 profile-value">@Html.DisplayFor(model => model.NgayXacMinh)</dd>
+
+                            <dt class="col-md-4 profile-label"><i class="fas fa-user-shield profile-icon"></i>Người xác minh</dt>
+                            <dd class="col-md-8 profile-value">@(!string.IsNullOrWhiteSpace(Model.TenAdminXacMinh) ? Model.TenAdminXacMinh : Html.Raw("<span class='text-muted fst-italic'>Không có thông tin</span>"))</dd>
+                         </dl>
+                    </div>
+                </div>
+            }
+             else // Hiển thị thông báo nếu chưa xác minh
+             {
+                 <div class="alert alert-warning d-flex align-items-center" role="alert">
+                   <i class="fas fa-exclamation-triangle fa-lg me-2"></i>
+                   <div>
+                     Tài khoản của bạn hiện <strong>chưa được xác minh</strong>. Việc chỉnh sửa hồ sơ có thể không ảnh hưởng đến trạng thái hiển thị công khai cho đến khi được duyệt.
+                   </div>
+                 </div>
+             }
+
+        </div> @* End col-lg-9 *@
+    </div> @* End row *@
+</div> @* End container *@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @* Thêm script nếu cần *@
+}

@@ -1,0 +1,144 @@
+@* File: Views/Shared/_DaUngTuyenItem.cshtml *@
+@model HeThongTimViec.ViewModels.ViecLam.DaUngTuyenItemViewModel
+@using HeThongTimViec.Models
+@using HeThongTimViec.Utils
+@{
+    var defaultLogo = "/images/default-avatar.png"; // Chung cho cả company và user nếu ko có logo/avatar
+
+    // --- Xử lý DateTime Kind ---
+    // Giả định rằng Model.NgayNop và Model.NgayCapNhatTrangThai từ DB là giờ UTC
+    // nhưng có thể có Kind là Unspecified. Chúng ta cần đảm bảo chúng là UTC trước khi dùng TimeAgo.
+    DateTime ngayNopUtc = Model.NgayNop;
+    if (Model.NgayNop.Kind == DateTimeKind.Unspecified)
+    {
+        ngayNopUtc = DateTime.SpecifyKind(Model.NgayNop, DateTimeKind.Utc);
+    }
+    else if (Model.NgayNop.Kind == DateTimeKind.Local) // Nếu lỡ là Local, chuyển sang UTC
+    {
+        ngayNopUtc = Model.NgayNop.ToUniversalTime();
+    }
+
+    DateTime? ngayCapNhatTrangThaiUtc = null;
+    if (Model.NgayCapNhatTrangThai.HasValue)
+    {
+        ngayCapNhatTrangThaiUtc = Model.NgayCapNhatTrangThai.Value;
+        if (Model.NgayCapNhatTrangThai.Value.Kind == DateTimeKind.Unspecified)
+        {
+            ngayCapNhatTrangThaiUtc = DateTime.SpecifyKind(Model.NgayCapNhatTrangThai.Value, DateTimeKind.Utc);
+        }
+        else if (Model.NgayCapNhatTrangThai.Value.Kind == DateTimeKind.Local)
+        {
+            ngayCapNhatTrangThaiUtc = Model.NgayCapNhatTrangThai.Value.ToUniversalTime();
+        }
+    }
+    // --- Kết thúc xử lý DateTime Kind ---
+}
+
+<div class="job-application-item"> @* Giữ class này nếu bạn có CSS riêng cho nó *@
+    <div class="row g-3 align-items-center">
+
+        @* --- Cột Logo (optional) --- *@
+        <div class="col-auto d-none d-sm-block" style="width: 65px;">
+            <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@Model.TinTuyenDungId" title="Xem chi tiết: @Model.TieuDeCongViec">
+                <img src="@(string.IsNullOrEmpty(Model.LogoUrl) ? defaultLogo : Model.LogoUrl)" 
+                     alt="Logo @Model.TenNhaTuyenDung" 
+                     class="img-fluid rounded-circle border bg-light" 
+                     style="width: 50px; height: 50px; object-fit: contain;" 
+                     onerror="this.onerror=null; this.src='@defaultLogo';" 
+                     loading="lazy">
+            </a>
+        </div>
+
+        @* --- Cột Nội dung chính --- *@
+        <div class="col">
+            <div class="d-flex justify-content-between align-items-start mb-1 flex-wrap gap-1">
+                <h6 class="mb-0 me-2 text-truncate fw-semibold">
+                    <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@Model.TinTuyenDungId" class="text-decoration-none text-primary stretched-link" title="@Model.TieuDeCongViec">
+                        @Model.TieuDeCongViec
+                    </a>
+                </h6>
+                <span class="badge rounded-pill @Model.TrangThaiBadgeClass flex-shrink-0" title="Trạng thái: @Model.TrangThaiDisplay">
+                    @Model.TrangThaiDisplay
+                </span>
+            </div>
+            <p class="text-muted small mb-1 text-truncate" title="@Model.TenNhaTuyenDung">
+                <i class="fas fa-building fa-fw me-1 text-secondary opacity-75"></i> @Model.TenNhaTuyenDung
+            </p>
+            <div class="row gx-md-3 gy-1 small text-muted mb-2 flex-wrap">
+                <div class="col-12 col-sm-auto me-sm-3 text-truncate" title="Địa điểm: @Model.DiaDiem">
+                    <i class="fas fa-map-marker-alt fa-fw text-danger opacity-75 me-1"></i> @Model.DiaDiem
+                </div>
+                <div class="col-12 col-sm-auto text-truncate" title="Mức lương: @Model.MucLuongDisplay">
+                    <i class="fas fa-dollar-sign fa-fw text-success opacity-75 me-1"></i> @Model.MucLuongDisplay
+                </div>
+            </div>
+            
+            <div class="job-dates text-muted small">
+                <span class="date-item" title="Ngày nộp đơn: @Model.NgayNop.ToLocalTime().ToString("dd/MM/yyyy HH:mm")"> @* Hiển thị title giờ local *@
+                    <i class="far fa-calendar-plus fa-fw me-1 opacity-75"></i> Nộp: @TimeHelper.TimeAgo(ngayNopUtc) @* Sử dụng biến đã chuẩn hóa UTC *@
+                </span>
+                @if (ngayCapNhatTrangThaiUtc.HasValue)
+                {
+                    // Chỉ hiển thị ngày cập nhật nếu nó khác ngày nộp (tránh lặp lại thông tin)
+                    // So sánh Date để bỏ qua phần giờ phút giây nếu chỉ muốn check khác ngày
+                    bool showUpdateDate = true;
+                    if (ngayCapNhatTrangThaiUtc.Value.ToLocalTime().Date == Model.NgayNop.ToLocalTime().Date &&
+                        (ngayCapNhatTrangThaiUtc.Value - ngayNopUtc).TotalMinutes < 5) // Và chênh lệch không quá 5 phút
+                    {
+                        showUpdateDate = false; // Nếu cùng ngày và chênh lệch ít, có thể coi là cùng thời điểm nộp/cập nhật ban đầu
+                    }
+
+                    if (showUpdateDate)
+                    {
+                        <span class="date-item" title="Cập nhật trạng thái: @(Model.NgayCapNhatTrangThai.HasValue ? Model.NgayCapNhatTrangThai.Value.ToLocalTime().ToString("dd/MM/yyyy HH:mm") : "N/A")"> @* Hiển thị title giờ local *@
+                            <i class="far fa-calendar-check fa-fw me-1 opacity-75"></i> C.nhật: @TimeHelper.TimeAgo(ngayCapNhatTrangThaiUtc.Value) @* Sử dụng biến đã chuẩn hóa UTC *@
+                        </span>
+                    }
+                }
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.ThuGioiThieuSnippet))
+            {
+                <div class="mt-2">
+                    <p class="text-muted small mb-0" title="Thư ứng tuyển (đoạn trích): @Model.ThuGioiThieuSnippet">
+                        <i class="far fa-envelope fa-fw me-1 text-secondary opacity-75"></i> <strong>Thư UT:</strong> @Model.ThuGioiThieuSnippet
+                    </p>
+                </div>
+            }
+        </div>
+
+        @* --- Cột Nút Hành động --- *@
+        <div class="col-12 col-md-auto mt-2 mt-md-0">
+            <div class="d-flex flex-row flex-md-column justify-content-start justify-content-md-end align-items-stretch h-100 gap-2 action-buttons">
+                <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@Model.TinTuyenDungId" class="btn btn-sm btn-outline-secondary" title="Xem chi tiết công việc">
+                    <i class="fas fa-eye fa-fw"></i> <span class="d-none d-lg-inline">Xem tin</span>
+                </a>
+                @if(Model.CanEdit) {
+                    <a asp-action="SuaUngTuyen" asp-controller="ViecLam" asp-route-id="@Model.UngTuyenId" class="btn btn-sm btn-outline-warning" title="Chỉnh sửa thư giới thiệu hoặc thay đổi CV">
+                        <i class="fas fa-edit fa-fw"></i> <span class="d-none d-lg-inline">Sửa đơn</span>
+                    </a>
+                }
+                @if(Model.CanWithdraw) { 
+                    <button type="button" class="btn btn-sm btn-outline-info btn-withdraw-ungtuyen" data-id="@Model.UngTuyenId" data-job-title="@Model.TieuDeCongViec" title="Rút đơn ứng tuyển này (chỉ thay đổi trạng thái)">
+                        <i class="fas fa-undo-alt fa-fw"></i> <span class="d-none d-lg-inline">Rút đơn</span>
+                    </button>
+                }
+                                @if(Model.CanUndoWithdrawal) { // <<--- THÊM NÚT HOÀN TÁC RÚT ĐƠN
+                    <button type="button" class="btn btn-sm btn-outline-primary btn-undo-withdraw-ungtuyen" data-id="@Model.UngTuyenId" data-job-title="@Model.TieuDeCongViec" title="Hoàn tác rút đơn (nộp lại)">
+                        <i class="fas fa-redo-alt fa-fw"></i> <span class="d-none d-lg-inline">Nộp lại</span>
+                    </button>
+                }
+                @if(Model.CanDeletePermanently) { 
+                    <button type="button" class="btn btn-sm btn-outline-danger btn-delete-ungtuyen" data-id="@Model.UngTuyenId" data-job-title="@Model.TieuDeCongViec" title="Xóa vĩnh viễn đơn ứng tuyển này">
+                        <i class="fas fa-trash-alt fa-fw"></i> <span class="d-none d-lg-inline">Xóa hẳn</span>
+                    </button>
+                }
+                @if(Model.CanContact) { // Giả sử bạn sẽ thêm logic cho nút này sau
+                    <a href="#" class="btn btn-sm btn-info text-white" title="Liên hệ với nhà tuyển dụng (chức năng sắp có)">
+                        <i class="fas fa-comments fa-fw"></i> <span class="d-none d-lg-inline">Liên hệ</span>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

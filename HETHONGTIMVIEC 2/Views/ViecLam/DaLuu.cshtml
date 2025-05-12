@@ -1,0 +1,87 @@
+@model HeThongTimViec.ViewModels.ViecDaLuu.DaLuuViewModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
+@{
+    ViewData["Title"] = "Công Việc Đã Lưu";
+    var requestToken = antiforgery.GetAndStoreTokens(Context).RequestToken; // Cần cho form Xóa tất cả
+}
+
+<link rel="stylesheet" href="~/css/viecdaluu.css" asp-append-version="true" /> @* Tạo file CSS riêng *@
+
+<div class="container mt-4 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <h1 class="display-6 fw-bold text-primary mb-0">@ViewData["Title"]</h1>
+        @if (Model.SavedJobs != null && Model.SavedJobs.Any())
+        {
+            <form asp-controller="ViecLam" asp-action="XoaTatCaTinDaLuu" method="post" onsubmit="return confirm('Bạn chắc chắn muốn xóa TẤT CẢ công việc đã lưu? Hành động này không thể hoàn tác.');">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-sm btn-outline-danger">
+                    <i class="fas fa-trash-alt me-1"></i> Xóa tất cả
+                </button>
+            </form>
+        }
+    </div>
+
+     @* Hiển thị TempData Messages *@
+    @if (TempData["SuccessMessage"] != null) { <div class="alert alert-success alert-dismissible fade show" role="alert"> @TempData["SuccessMessage"] <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div> }
+    @if (TempData["ErrorMessage"] != null) { <div class="alert alert-danger alert-dismissible fade show" role="alert"> @TempData["ErrorMessage"] <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div> }
+    @if (TempData["InfoMessage"] != null) { <div class="alert alert-info alert-dismissible fade show" role="alert"> @TempData["InfoMessage"] <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div> }
+
+
+    <div class="search-saved-jobs mb-4 p-3 bg-white border rounded shadow-sm">
+        <form asp-action="DaLuu" method="get">
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                <input type="text" name="tuKhoa" value="@Model.TuKhoa" class="form-control" placeholder="Tìm kiếm công việc đã lưu theo tiêu đề, công ty, ngành nghề...">
+                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                @if (!string.IsNullOrEmpty(Model.TuKhoa))
+                {
+                     <a asp-action="DaLuu" class="btn btn-outline-secondary">Xóa tìm kiếm</a>
+                }
+            </div>
+        </form>
+    </div>
+
+    <div class="saved-job-list">
+        @if (Model.SavedJobs != null && Model.SavedJobs.Any())
+        {
+            @foreach (var item in Model.SavedJobs)
+            {
+                @* Truyền returnUrl là trang DaLuu hiện tại vào partial *@
+                @await Html.PartialAsync("_SavedJobItem", item, new ViewDataDictionary(ViewData) { { "CurrentUrl", Context.Request.Path + Context.Request.QueryString } })
+            }
+
+            @* Pagination Controls *@
+            @if (Model.SavedJobs.TotalPages > 1)
+            {
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination pagination-sm justify-content-center flex-wrap">
+                         <li class="page-item @(!Model.SavedJobs.HasPreviousPage ? "disabled" : "")">
+                             <a class="page-link" href="@Url.Action("DaLuu", "ViecLam", new { page = Model.SavedJobs.PageIndex - 1, tuKhoa = Model.TuKhoa })" aria-label="Previous"> <i class="fas fa-chevron-left"></i> </a>
+                         </li>
+                          @{
+                                int startPage = Math.Max(1, Model.SavedJobs.PageIndex - 2); int endPage = Math.Min(Model.SavedJobs.TotalPages, Model.SavedJobs.PageIndex + 2);
+                                if (Model.SavedJobs.TotalPages <= 5) { startPage = 1; endPage = Model.SavedJobs.TotalPages; } else if (Model.SavedJobs.PageIndex <=3) { startPage = 1; endPage = 5;} else if (Model.SavedJobs.PageIndex + 2 >= Model.SavedJobs.TotalPages) {startPage = Model.SavedJobs.TotalPages - 4; endPage = Model.SavedJobs.TotalPages;}
+                                if (startPage > 1) { <li class="page-item"><a class="page-link" href="@Url.Action("DaLuu", "ViecLam", new { page = 1, tuKhoa = Model.TuKhoa })">1</a></li> if (startPage > 2) { <li class="page-item disabled"><span class="page-link">...</span></li> } }
+                                for (int i = startPage; i <= endPage; i++) { <li class="page-item @(i == Model.SavedJobs.PageIndex ? "active" : "")"><a class="page-link" href="@Url.Action("DaLuu", "ViecLam", new { page = i, tuKhoa = Model.TuKhoa })">@i</a></li> }
+                                if (endPage < Model.SavedJobs.TotalPages) { if (endPage < Model.SavedJobs.TotalPages - 1) { <li class="page-item disabled"><span class="page-link">...</span></li> } <li class="page-item"><a class="page-link" href="@Url.Action("DaLuu", "ViecLam", new { page = Model.SavedJobs.TotalPages, tuKhoa = Model.TuKhoa })">@Model.SavedJobs.TotalPages</a></li> }
+                           }
+                        <li class="page-item @(!Model.SavedJobs.HasNextPage ? "disabled" : "")">
+                             <a class="page-link" href="@Url.Action("DaLuu", "ViecLam", new { page = Model.SavedJobs.PageIndex + 1, tuKhoa = Model.TuKhoa })" aria-label="Next"> <i class="fas fa-chevron-right"></i> </a>
+                         </li>
+                    </ul>
+                </nav>
+            }
+        }
+        else
+        {
+            <div class="alert alert-info text-center mt-4">
+                <i class="fas fa-info-circle me-2"></i> Bạn chưa lưu công việc nào. Hãy bắt đầu <a asp-action="Index" asp-controller="TimViec">tìm kiếm</a> và lưu lại những việc bạn quan tâm!
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @* Không cần script AJAX cho xóa nếu dùng onsubmit confirm *@
+}

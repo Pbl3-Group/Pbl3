@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+k16XNF4IQUT4fiT+sxAoP2rZ4gB0MAidF5Tlnhd0AQ=",
+  "Hash": "TLDaUyKgCqauo8xJaPIGjRIjgiGNCPzklLQLbCXy3s4=",
   "Source": "HETHONGTIMVIEC",
   "BasePath": "_content/HETHONGTIMVIEC",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "HETHONGTIMVIEC/wwwroot",
       "Source": "HETHONGTIMVIEC",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/obj/Debug/net8.0/scopedcss/bundle/HETHONGTIMVIEC.styles.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/obj/Debug/net8.0/scopedcss/bundle/HETHONGTIMVIEC.styles.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Computed",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/obj/Debug/net8.0/scopedcss/bundle/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/obj/Debug/net8.0/scopedcss/bundle/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "HETHONGTIMVIEC#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
@@ -35,13 +35,13 @@
       "Integrity": "NIHE3yQwp3hPCcPEzdwsowrg2pW7whVsvQITj+VsKQw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/obj/Debug/net8.0/scopedcss/bundle/HETHONGTIMVIEC.styles.css"
+      "OriginalItemSpec": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/obj/Debug/net8.0/scopedcss/bundle/HETHONGTIMVIEC.styles.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/obj/Debug/net8.0/scopedcss/projectbundle/HETHONGTIMVIEC.bundle.scp.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/obj/Debug/net8.0/scopedcss/projectbundle/HETHONGTIMVIEC.bundle.scp.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Computed",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/obj/Debug/net8.0/scopedcss/projectbundle/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/obj/Debug/net8.0/scopedcss/projectbundle/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "HETHONGTIMVIEC#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
@@ -56,15 +56,15 @@
       "Integrity": "NIHE3yQwp3hPCcPEzdwsowrg2pW7whVsvQITj+VsKQw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/obj/Debug/net8.0/scopedcss/projectbundle/HETHONGTIMVIEC.bundle.scp.css"
+      "OriginalItemSpec": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/obj/Debug/net8.0/scopedcss/projectbundle/HETHONGTIMVIEC.bundle.scp.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/css/site.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/css/Login.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
-      "RelativePath": "css/site#[.{fingerprint}]?.css",
+      "RelativePath": "css/Login#[.{fingerprint}]?.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -73,17 +73,38 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "c2tiyv64ts",
-      "Integrity": "pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=",
+      "Fingerprint": "5ipweew5fc",
+      "Integrity": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/css/site.css"
+      "OriginalItemSpec": "wwwroot/css/Login.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/favicon.ico",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/css/style.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
+      "BasePath": "_content/HETHONGTIMVIEC",
+      "RelativePath": "css/style#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "xrwq3bqi3k",
+      "Integrity": "k8gvEie4xtLLifRt9fXOkPrTnJ8BPi/yCiB+T/zn1tU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/style.css"
+    },
+    {
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/favicon.ico",
+      "SourceId": "HETHONGTIMVIEC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "favicon#[.{fingerprint}]?.ico",
       "AssetKind": "All",
@@ -101,10 +122,73 @@
       "OriginalItemSpec": "wwwroot/favicon.ico"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/js/site.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/file/CV/1_1746014973.pdf",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
+      "BasePath": "_content/HETHONGTIMVIEC",
+      "RelativePath": "file/CV/1_1746014973#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hjgbw7a0yy",
+      "Integrity": "fWSX6w+CA/RzTKnECjvyGc1uJoDaa24iFovrWyMo6aY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/file/CV/1_1746014973.pdf"
+    },
+    {
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/file/img/Avatar/1_1745996950.jpg",
+      "SourceId": "HETHONGTIMVIEC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
+      "BasePath": "_content/HETHONGTIMVIEC",
+      "RelativePath": "file/img/Avatar/1_1745996950#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "nq7hrqcdpn",
+      "Integrity": "b+Qn3IHCyqVnqrQ0p0RgKA5vJZ+HJRI8gECTu9dkNzw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/file/img/Avatar/1_1745996950.jpg"
+    },
+    {
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/js/jobPostingForm.js",
+      "SourceId": "HETHONGTIMVIEC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
+      "BasePath": "_content/HETHONGTIMVIEC",
+      "RelativePath": "js/jobPostingForm#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "mdfbhnigq6",
+      "Integrity": "ZlDKTU8jX3L194rFGENQZQiHTpTljC+J75Dp0dbTB4E=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/jobPostingForm.js"
+    },
+    {
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/js/site.js",
+      "SourceId": "HETHONGTIMVIEC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "js/site#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -122,10 +206,10 @@
       "OriginalItemSpec": "wwwroot/js/site.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -143,10 +227,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -164,10 +248,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -185,10 +269,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -206,10 +290,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -227,10 +311,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -248,10 +332,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -269,10 +353,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -290,10 +374,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -311,10 +395,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -332,10 +416,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -353,10 +437,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -374,10 +458,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -395,10 +479,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -416,10 +500,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -437,10 +521,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -458,10 +542,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -479,10 +563,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -500,10 +584,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -521,10 +605,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -542,10 +626,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -563,10 +647,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -584,10 +668,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -605,10 +689,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -626,10 +710,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -647,10 +731,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -668,10 +752,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -689,10 +773,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -710,10 +794,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -731,10 +815,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -752,10 +836,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -773,10 +857,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -794,10 +878,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -815,10 +899,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -836,10 +920,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -857,10 +941,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -878,10 +962,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -899,10 +983,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -920,10 +1004,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -941,10 +1025,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -962,10 +1046,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -983,10 +1067,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1004,10 +1088,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.js.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1025,10 +1109,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1046,10 +1130,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/LICENSE",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/LICENSE",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/bootstrap/LICENSE#[.{fingerprint}]?",
       "AssetKind": "All",
@@ -1067,10 +1151,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/LICENSE"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1088,10 +1172,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1109,10 +1193,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE#[.{fingerprint}]?.txt",
       "AssetKind": "All",
@@ -1130,10 +1214,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/additional-methods.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery-validation/dist/additional-methods#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1151,10 +1235,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery-validation/dist/additional-methods.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1172,10 +1256,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery-validation/dist/additional-methods.min.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1193,10 +1277,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery-validation/dist/jquery.validate.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1214,10 +1298,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery-validation/dist/jquery.validate.min.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/LICENSE.md",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/LICENSE.md",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery-validation/LICENSE#[.{fingerprint}]?.md",
       "AssetKind": "All",
@@ -1235,10 +1319,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery-validation/LICENSE.md"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/dist/jquery.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/dist/jquery.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery/dist/jquery#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1256,10 +1340,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery/dist/jquery.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/dist/jquery.min.js",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/dist/jquery.min.js",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1277,10 +1361,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery/dist/jquery.min.js"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/dist/jquery.min.map",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/dist/jquery.min.map",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1298,10 +1382,10 @@
       "OriginalItemSpec": "wwwroot/lib/jquery/dist/jquery.min.map"
     },
     {
-      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/LICENSE.txt",
+      "Identity": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/LICENSE.txt",
       "SourceId": "HETHONGTIMVIEC",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/",
+      "ContentRoot": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/",
       "BasePath": "_content/HETHONGTIMVIEC",
       "RelativePath": "lib/jquery/LICENSE#[.{fingerprint}]?.txt",
       "AssetKind": "All",
@@ -1321,8 +1405,8 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.c2tiyv64ts.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/css/site.css",
+      "Route": "css/Login.5ipweew5fc.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/css/Login.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1331,7 +1415,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "362"
+          "Value": "0"
         },
         {
           "Name": "Content-Type",
@@ -1339,11 +1423,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=\""
+          "Value": "\"47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 27 Apr 2025 06:02:02 GMT"
+          "Value": "Tue, 29 Apr 2025 18:19:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1353,21 +1437,21 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "c2tiyv64ts"
+          "Value": "5ipweew5fc"
         },
         {
           "Name": "label",
-          "Value": "css/site.css"
+          "Value": "css/Login.css"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0="
+          "Value": "sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
         }
       ]
     },
     {
-      "Route": "css/site.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/css/site.css",
+      "Route": "css/Login.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/css/Login.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1376,7 +1460,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "362"
+          "Value": "0"
         },
         {
           "Name": "Content-Type",
@@ -1384,11 +1468,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=\""
+          "Value": "\"47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 27 Apr 2025 06:02:02 GMT"
+          "Value": "Tue, 29 Apr 2025 18:19:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1398,13 +1482,95 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0="
+          "Value": "sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/css/style.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "42608"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"k8gvEie4xtLLifRt9fXOkPrTnJ8BPi/yCiB+T/zn1tU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Apr 2025 05:02:00 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-k8gvEie4xtLLifRt9fXOkPrTnJ8BPi/yCiB+T/zn1tU="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.xrwq3bqi3k.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/css/style.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "42608"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"k8gvEie4xtLLifRt9fXOkPrTnJ8BPi/yCiB+T/zn1tU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Apr 2025 05:02:00 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xrwq3bqi3k"
+        },
+        {
+          "Name": "label",
+          "Value": "css/style.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-k8gvEie4xtLLifRt9fXOkPrTnJ8BPi/yCiB+T/zn1tU="
         }
       ]
     },
     {
       "Route": "favicon.61n19gt1b8.ico",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/favicon.ico",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1449,7 +1615,7 @@
     },
     {
       "Route": "favicon.ico",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/favicon.ico",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1485,8 +1651,172 @@
       ]
     },
     {
+      "Route": "file/CV/1_1746014973.hjgbw7a0yy.pdf",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/file/CV/1_1746014973.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "426380"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fWSX6w+CA/RzTKnECjvyGc1uJoDaa24iFovrWyMo6aY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Apr 2025 12:09:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hjgbw7a0yy"
+        },
+        {
+          "Name": "label",
+          "Value": "file/CV/1_1746014973.pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fWSX6w+CA/RzTKnECjvyGc1uJoDaa24iFovrWyMo6aY="
+        }
+      ]
+    },
+    {
+      "Route": "file/CV/1_1746014973.pdf",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/file/CV/1_1746014973.pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "426380"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fWSX6w+CA/RzTKnECjvyGc1uJoDaa24iFovrWyMo6aY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Apr 2025 12:09:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fWSX6w+CA/RzTKnECjvyGc1uJoDaa24iFovrWyMo6aY="
+        }
+      ]
+    },
+    {
+      "Route": "file/img/Avatar/1_1745996950.jpg",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/file/img/Avatar/1_1745996950.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "159416"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"b+Qn3IHCyqVnqrQ0p0RgKA5vJZ+HJRI8gECTu9dkNzw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Apr 2025 07:09:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-b+Qn3IHCyqVnqrQ0p0RgKA5vJZ+HJRI8gECTu9dkNzw="
+        }
+      ]
+    },
+    {
+      "Route": "file/img/Avatar/1_1745996950.nq7hrqcdpn.jpg",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/file/img/Avatar/1_1745996950.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "159416"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"b+Qn3IHCyqVnqrQ0p0RgKA5vJZ+HJRI8gECTu9dkNzw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Apr 2025 07:09:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "nq7hrqcdpn"
+        },
+        {
+          "Name": "label",
+          "Value": "file/img/Avatar/1_1745996950.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-b+Qn3IHCyqVnqrQ0p0RgKA5vJZ+HJRI8gECTu9dkNzw="
+        }
+      ]
+    },
+    {
       "Route": "HETHONGTIMVIEC.0taakm8oko.bundle.scp.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/obj/Debug/net8.0/scopedcss/projectbundle/HETHONGTIMVIEC.bundle.scp.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/obj/Debug/net8.0/scopedcss/projectbundle/HETHONGTIMVIEC.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1507,7 +1837,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 27 Apr 2025 06:03:54 GMT"
+          "Value": "Wed, 30 Apr 2025 11:32:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1531,7 +1861,7 @@
     },
     {
       "Route": "HETHONGTIMVIEC.0taakm8oko.styles.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/obj/Debug/net8.0/scopedcss/bundle/HETHONGTIMVIEC.styles.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/obj/Debug/net8.0/scopedcss/bundle/HETHONGTIMVIEC.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1552,7 +1882,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 27 Apr 2025 06:03:54 GMT"
+          "Value": "Wed, 30 Apr 2025 11:32:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1576,7 +1906,7 @@
     },
     {
       "Route": "HETHONGTIMVIEC.bundle.scp.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/obj/Debug/net8.0/scopedcss/projectbundle/HETHONGTIMVIEC.bundle.scp.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/obj/Debug/net8.0/scopedcss/projectbundle/HETHONGTIMVIEC.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1597,7 +1927,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 27 Apr 2025 06:03:54 GMT"
+          "Value": "Wed, 30 Apr 2025 11:32:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1613,7 +1943,7 @@
     },
     {
       "Route": "HETHONGTIMVIEC.styles.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/obj/Debug/net8.0/scopedcss/bundle/HETHONGTIMVIEC.styles.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/obj/Debug/net8.0/scopedcss/bundle/HETHONGTIMVIEC.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1634,7 +1964,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 27 Apr 2025 06:03:54 GMT"
+          "Value": "Wed, 30 Apr 2025 11:32:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1649,8 +1979,90 @@
       ]
     },
     {
+      "Route": "js/jobPostingForm.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/js/jobPostingForm.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18382"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ZlDKTU8jX3L194rFGENQZQiHTpTljC+J75Dp0dbTB4E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Apr 2025 18:48:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ZlDKTU8jX3L194rFGENQZQiHTpTljC+J75Dp0dbTB4E="
+        }
+      ]
+    },
+    {
+      "Route": "js/jobPostingForm.mdfbhnigq6.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/js/jobPostingForm.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18382"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ZlDKTU8jX3L194rFGENQZQiHTpTljC+J75Dp0dbTB4E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Apr 2025 18:48:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mdfbhnigq6"
+        },
+        {
+          "Name": "label",
+          "Value": "js/jobPostingForm.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ZlDKTU8jX3L194rFGENQZQiHTpTljC+J75Dp0dbTB4E="
+        }
+      ]
+    },
+    {
       "Route": "js/site.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/js/site.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/js/site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1687,7 +2099,7 @@
     },
     {
       "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/js/site.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/js/site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1732,7 +2144,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.agp80tu62r.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1777,7 +2189,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1814,7 +2226,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1851,7 +2263,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css.st1cbwfwo5.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1896,7 +2308,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1933,7 +2345,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css.5vj65cig9w.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1978,7 +2390,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2015,7 +2427,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.unj9p35syc.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2060,7 +2472,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2097,7 +2509,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.2q4vfeazbq.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2142,7 +2554,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2179,7 +2591,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2216,7 +2628,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2253,7 +2665,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.o371a8zbv2.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2298,7 +2710,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.n1oizzvkh6.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2343,7 +2755,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.q2ku51ktnl.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2388,7 +2800,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.7na4sro3qu.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2433,7 +2845,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2470,7 +2882,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css.jeal3x0ldm.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2515,7 +2927,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2552,7 +2964,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2589,7 +3001,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2626,7 +3038,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.okkk44j0xs.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2671,7 +3083,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.f8imaxxbri.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2716,7 +3128,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.0wve5yxp74.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2761,7 +3173,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2798,7 +3210,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.cwzlr5n8x4.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2843,7 +3255,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2880,7 +3292,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2917,7 +3329,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2954,7 +3366,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.wmug9u23qg.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2999,7 +3411,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.npxfuf8dg6.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3044,7 +3456,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3081,7 +3493,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css.j75batdsum.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3126,7 +3538,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3163,7 +3575,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.16095smhkz.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3208,7 +3620,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3245,7 +3657,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3282,7 +3694,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.vy0bq9ydhf.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3327,7 +3739,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.b4skse8du6.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3372,7 +3784,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3409,7 +3821,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.ab1c3rmv7g.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3454,7 +3866,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3491,7 +3903,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3528,7 +3940,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.56d2bn4wt9.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3573,7 +3985,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3610,7 +4022,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.u3xrusw2ol.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3655,7 +4067,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.tey0rigmnh.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3700,7 +4112,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3737,7 +4149,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css.73kdqttayv.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3782,7 +4194,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3819,7 +4231,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.bpk8xqwxhs.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3864,7 +4276,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3901,7 +4313,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css.8inm30yfxf.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3946,7 +4358,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3983,7 +4395,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.mpyigms19s.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4028,7 +4440,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4065,7 +4477,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css.4gxs3k148c.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4110,7 +4522,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4147,7 +4559,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.9b9oa1qrmt.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4192,7 +4604,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4229,7 +4641,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.fctod5rc9n.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4274,7 +4686,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4311,7 +4723,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.ve6x09088i.css",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4356,7 +4768,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4393,7 +4805,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.kbynt5jhd9.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4438,7 +4850,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4475,7 +4887,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.l2av4jpuoj.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4520,7 +4932,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.25iw1kog22.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4565,7 +4977,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4602,7 +5014,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.c2nslu3uf3.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4647,7 +5059,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4684,7 +5096,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4721,7 +5133,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js.2lgwfvgpvi.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4766,7 +5178,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4803,7 +5215,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.m39kt2b5c9.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4848,7 +5260,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4885,7 +5297,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4922,7 +5334,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js.wsezl0heh6.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4967,7 +5379,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.um2aeqy4ik.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5012,7 +5424,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5049,7 +5461,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js.6ukhryfubh.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5094,7 +5506,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5131,7 +5543,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5168,7 +5580,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5205,7 +5617,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js.u33ctipx7g.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5250,7 +5662,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.zwph15dxgs.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5295,7 +5707,7 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.o4kw7cc6tf.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5340,7 +5752,7 @@
     },
     {
       "Route": "lib/bootstrap/LICENSE",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/LICENSE",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/LICENSE",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5377,7 +5789,7 @@
     },
     {
       "Route": "lib/bootstrap/LICENSE.81b7ukuj9c",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/bootstrap/LICENSE",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/bootstrap/LICENSE",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5422,7 +5834,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.47otxtyo56.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5467,7 +5879,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5504,7 +5916,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.4v8eqarkd7.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5549,7 +5961,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5586,7 +5998,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/LICENSE.356vix0kms.txt",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5631,7 +6043,7 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/LICENSE.txt",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5668,7 +6080,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.ay5nd8zt9x.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/additional-methods.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5713,7 +6125,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/additional-methods.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5750,7 +6162,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.min.9oaff4kq20.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5795,7 +6207,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.min.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5832,7 +6244,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5869,7 +6281,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.min.b7iojwaux1.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5914,7 +6326,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.min.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5951,7 +6363,7 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.pzqfkb6aqo.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5996,7 +6408,7 @@
     },
     {
       "Route": "lib/jquery-validation/LICENSE.md",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/LICENSE.md",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/LICENSE.md",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6033,7 +6445,7 @@
     },
     {
       "Route": "lib/jquery-validation/LICENSE.x0q3zqp4vz.md",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery-validation/LICENSE.md",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery-validation/LICENSE.md",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6078,7 +6490,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.fwhahm2icz.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/dist/jquery.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/dist/jquery.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6123,7 +6535,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/dist/jquery.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/dist/jquery.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6160,7 +6572,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.5pze98is44.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/dist/jquery.min.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/dist/jquery.min.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6205,7 +6617,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.dd6z7egasc.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/dist/jquery.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/dist/jquery.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6250,7 +6662,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.js",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/dist/jquery.min.js",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/dist/jquery.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6287,7 +6699,7 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.map",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/dist/jquery.min.map",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/dist/jquery.min.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6324,7 +6736,7 @@
     },
     {
       "Route": "lib/jquery/LICENSE.mlv21k5csn.txt",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/LICENSE.txt",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6369,7 +6781,7 @@
     },
     {
       "Route": "lib/jquery/LICENSE.txt",
-      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/wwwroot/lib/jquery/LICENSE.txt",
+      "AssetFile": "/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/wwwroot/lib/jquery/LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {

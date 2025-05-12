@@ -1,0 +1,386 @@
+@* File: Views/UngTuyen/NopHoSo.cshtml *@
+@model HeThongTimViec.ViewModels.UngTuyen.NopHoSoViewModel
+@using HeThongTimViec.Models
+@{
+    ViewData["Title"] = "Nộp Hồ Sơ Ứng Tuyển";
+}
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>                     @* LUÔN ĐẦU TIÊN *@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<div class="container mt-4 mb-5">
+    <!-- Breadcrumb hiện đại hơn -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb small bg-white p-3 rounded shadow-sm border-start border-5 border-primary">
+            <li class="breadcrumb-item"><a asp-controller="TimViec" asp-action="Index" class="text-decoration-none">
+                <i class="fas fa-home text-primary me-1"></i>Tìm việc</a>
+            </li>
+            @if (Model.TinTuyenDungId > 0)
+            {
+                <li class="breadcrumb-item"><a asp-controller="TimViec" asp-action="ChiTiet" 
+                    asp-route-id="@Model.TinTuyenDungId" class="text-decoration-none">
+                    <i class="fas fa-briefcase text-muted me-1"></i>@Model.TieuDeTinTuyenDung</a>
+                </li>
+            }
+            <li class="breadcrumb-item active fw-bold" aria-current="page">
+                <i class="fas fa-file-upload text-primary me-1"></i>Nộp hồ sơ
+            </li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-9 col-xl-8">
+            <!-- Thông tin công việc ngắn gọn -->
+            <div class="card mb-4 border-0 shadow-sm bg-light">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            @if (Model.LoaiTaiKhoanNguoiDang == LoaiTaiKhoan.doanhnghiep)
+                            {
+                                <div class="bg-primary bg-opacity-10 p-3 rounded-circle">
+                                    <i class="fas fa-building text-primary fa-2x"></i>
+                                </div>
+                            }
+                            else if (Model.LoaiTaiKhoanNguoiDang == LoaiTaiKhoan.canhan)
+                            {
+                                <div class="bg-info bg-opacity-10 p-3 rounded-circle">
+                                    <i class="fas fa-user text-info fa-2x"></i>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="bg-secondary bg-opacity-10 p-3 rounded-circle">
+                                    <i class="fas fa-info-circle text-secondary fa-2x"></i>
+                                </div>
+                            }
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="mb-1 text-primary fw-bold">@Model.TieuDeTinTuyenDung</h5>
+                            @if (!string.IsNullOrEmpty(Model.TenNhaTuyenDungHoacCaNhan))
+                            {
+                                <p class="text-muted mb-0">
+                                    <span class="fw-medium">@Model.TenNhaTuyenDungHoacCaNhan</span>
+                                </p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow border-0 rounded-3 overflow-hidden">
+                <div class="card-header bg-gradient p-4 position-relative">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-75"></div>
+                    <div class="position-relative text-center">
+                        <h3 class="text-white mb-0 fw-bold">@ViewData["Title"]</h3>
+                        <p class="text-white-50 mb-0 mt-2">
+                            Hoàn thành thông tin dưới đây để nộp hồ sơ của bạn
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card-body p-4 p-lg-5">
+                    <form asp-action="NopHoSo" asp-route-id="@Model.TinTuyenDungId" method="post" enctype="multipart/form-data" 
+                          id="nopHoSoForm" class="needs-validation" novalidate>
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="TinTuyenDungId" />
+                        @* Truyền các giá trị này để khi validation fail, view vẫn có để hiển thị *@
+                        <input type="hidden" asp-for="TieuDeTinTuyenDung" />
+                        <input type="hidden" asp-for="TenNhaTuyenDungHoacCaNhan" />
+                        <input type="hidden" asp-for="LoaiTaiKhoanNguoiDang" />
+                        <input type="hidden" asp-for="HoTenUngVien" />
+                        <input type="hidden" asp-for="EmailUngVien" />
+                        <input type="hidden" asp-for="SdtUngVien" />
+
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger small p-3 mb-4 rounded-3 border-start border-danger border-4" role="alert">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-exclamation-triangle text-danger me-2"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="alert-heading fw-bold mb-1">Đã xảy ra lỗi:</h6>
+                                        <div class="validation-summary-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <!-- Thẻ tiến trình -->
+                        <div class="progress mb-4 rounded-pill" style="height: 10px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+                                 role="progressbar" style="width: 0%" id="formProgress" aria-valuenow="0" 
+                                 aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <!-- Thông tin ứng viên -->
+                        <div class="card mb-4 border-0 shadow-sm">
+                            <div class="card-header bg-light p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center 
+                                                justify-content-center me-3" style="width: 32px; height: 32px;">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <h5 class="mb-0 fw-bold text-primary">Thông tin ứng viên</h5>
+                                </div>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label small text-muted"><i class="fas fa-id-card me-1"></i>Họ và tên:</label>
+                                        <p class="form-control-plaintext fw-medium border-bottom pb-2">@Model.HoTenUngVien</p>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label small text-muted"><i class="fas fa-envelope me-1"></i>Email liên hệ:</label>
+                                        <p class="form-control-plaintext fw-medium border-bottom pb-2">@Model.EmailUngVien</p>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(Model.SdtUngVien))
+                                    {
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label small text-muted"><i class="fas fa-phone me-1"></i>Số điện thoại:</label>
+                                            <p class="form-control-plaintext fw-medium border-bottom pb-2">@Model.SdtUngVien</p>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CV File -->
+                        <div class="card mb-4 border-0 shadow-sm">
+                            <div class="card-header bg-light p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center 
+                                                justify-content-center me-3" style="width: 32px; height: 32px;">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <h5 class="mb-0 fw-bold text-primary">CV của bạn</h5>
+                                </div>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="mb-3">
+                                    <label asp-for="CvFile" class="form-label fw-semibold"></label>
+                                    <div class="input-group">
+                                        <input asp-for="CvFile" type="file" class="form-control" 
+                                               accept=".pdf,.doc,.docx" id="cvFileInput" style="display: none;">
+                                        <label for="cvFileInput" class="form-control text-muted d-flex align-items-center" id="cvFileLabel">
+                                            <i class="fas fa-upload me-2"></i>Chọn file CV
+                                        </label>
+                                        <button class="btn btn-outline-primary" type="button" id="btnSelectCv">
+                                            <i class="fas fa-folder-open"></i>
+                                        </button>
+                                    </div>
+                                    <div id="cvFilePreview" class="mt-2 d-none">
+                                        <div class="d-flex align-items-center p-2 border rounded bg-light">
+                                            <i class="fas fa-file-pdf text-danger me-3 fa-2x" id="cvFileIcon"></i>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-0 text-truncate" id="cvFileName">document.pdf</h6>
+                                                <small class="text-muted" id="cvFileSize">0 KB</small>
+                                            </div>
+                                            <button type="button" class="btn btn-sm btn-outline-danger" id="removeCvFile">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="CvFile" class="text-danger small d-block mt-2"></span>
+                                    <small class="form-text text-muted mt-2 d-block">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Định dạng: PDF, DOC, DOCX. Kích thước tối đa: 5MB.
+                                        <br>Nếu không tải lên file mới, hệ thống sẽ sử dụng CV mặc định từ hồ sơ của bạn (nếu có).
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Thư giới thiệu -->
+                        <div class="card mb-4 border-0 shadow-sm">
+                            <div class="card-header bg-light p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center 
+                                                justify-content-center me-3" style="width: 32px; height: 32px;">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </div>
+                                    <h5 class="mb-0 fw-bold text-primary">Thư giới thiệu</h5>
+                                </div>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="mb-3">
+                                    <label asp-for="ThuGioiThieu" class="form-label fw-semibold mb-3">
+                                        <i class="fas fa-quote-left text-muted me-2"></i>Viết đôi lời giới thiệu về bản thân
+                                    </label>
+                                    <div class="position-relative">
+                                        <textarea asp-for="ThuGioiThieu" id="thuGioiThieu" class="form-control" rows="6" 
+                                                  placeholder="Viết một vài dòng về bản thân, kinh nghiệm liên quan và tại sao bạn nghĩ mình phù hợp với vị trí này... Điều này sẽ giúp Nhà tuyển dụng hiểu rõ hơn về bạn."
+                                                  style="min-height: 150px;"></textarea>
+                                        <div class="position-absolute bottom-0 end-0 p-2">
+                                            <small class="text-muted" id="charCount">0/2000</small>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="ThuGioiThieu" class="text-danger small d-block mt-2"></span>
+                                    <div class="text-end mt-2">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" id="generateCoverLetter">
+                                            <i class="fas fa-magic me-1"></i>Gợi ý thư giới thiệu
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gửi hồ sơ -->
+                        <div class="text-center mt-4">
+                            <div class="d-flex justify-content-between align-items-center flex-column flex-md-row">
+                                <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@Model.TinTuyenDungId" 
+                                   class="btn btn-outline-secondary btn-lg mb-3 mb-md-0">
+                                    <i class="fas fa-arrow-left me-2"></i>Quay lại tin
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-lg position-relative" id="btnSubmitNopHoSo">
+                                    <span class="d-flex align-items-center">
+                                        <i class="fas fa-paper-plane me-2"></i>
+                                        <span>Gửi Hồ Sơ</span>
+                                    </span>
+                                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-success rounded-circle">
+                                        <span class="visually-hidden">Sẵn sàng gửi</span>
+                                    </span>
+                                </button>
+                            </div>
+                            <p class="mt-4 small text-center text-muted fst-italic">
+                                <i class="fas fa-shield-alt text-primary me-1"></i>
+                                Bằng việc nhấn "Gửi Hồ Sơ", bạn đồng ý cho phép Nhà tuyển dụng xem xét thông tin và CV 
+                                bạn đã cung cấp cho vị trí này.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(function () {
+            // Cập nhật tiến trình form
+            function updateProgress() {
+                let totalFields = 2; // CV File và Thư giới thiệu
+                let filledFields = 0;
+                
+                // Kiểm tra CV file
+                if ($('#cvFileInput').get(0).files.length > 0) {
+                    filledFields++;
+                }
+                
+                // Kiểm tra thư giới thiệu
+                if ($('#thuGioiThieu').val().trim().length > 0) {
+                    filledFields++;
+                }
+                
+                let progressPercent = Math.round((filledFields / totalFields) * 100);
+                $('#formProgress').css('width', progressPercent + '%').attr('aria-valuenow', progressPercent);
+            }
+            
+            // Xử lý chọn file CV
+            $('#btnSelectCv').on('click', function() {
+                $('#cvFileInput').click();
+            });
+            
+            // Hiển thị file đã chọn
+            $('#cvFileInput').on('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Cập nhật label
+                    $('#cvFileLabel').text(file.name).addClass('text-primary');
+                    
+                    // Hiển thị icon tương ứng với loại file
+                    let iconClass = 'fas fa-file text-secondary';
+                    if (file.name.endsWith('.pdf')) {
+                        iconClass = 'fas fa-file-pdf text-danger';
+                    } else if (file.name.endsWith('.doc') || file.name.endsWith('.docx')) {
+                        iconClass = 'fas fa-file-word text-primary';
+                    }
+                    
+                    $('#cvFileIcon').attr('class', iconClass + ' me-3 fa-2x');
+                    $('#cvFileName').text(file.name);
+                    
+                    // Hiển thị kích thước file
+                    const size = file.size / 1024; // KB
+                    const formattedSize = size < 1024 ? 
+                        size.toFixed(1) + ' KB' : 
+                        (size / 1024).toFixed(1) + ' MB';
+                    $('#cvFileSize').text(formattedSize);
+                    
+                    // Hiển thị preview
+                    $('#cvFilePreview').removeClass('d-none');
+                    
+                    // Cập nhật tiến trình
+                    updateProgress();
+                }
+            });
+            
+            // Xóa file đã chọn
+            $('#removeCvFile').on('click', function() {
+                $('#cvFileInput').val('');
+                $('#cvFileLabel').text('Chọn file CV').removeClass('text-primary');
+                $('#cvFilePreview').addClass('d-none');
+                updateProgress();
+            });
+            
+            // Đếm ký tự cho thư giới thiệu
+            $('#thuGioiThieu').on('input', function() {
+                const maxLength = 2000;
+                const currentLength = $(this).val().length;
+                $('#charCount').text(currentLength + '/' + maxLength);
+                
+                // Đổi màu khi gần đạt giới hạn
+                if (currentLength > maxLength * 0.9) {
+                    $('#charCount').removeClass('text-muted').addClass('text-danger');
+                } else {
+                    $('#charCount').removeClass('text-danger').addClass('text-muted');
+                }
+                
+                // Cập nhật tiến trình
+                updateProgress();
+            });
+            
+            // Gợi ý thư giới thiệu
+            $('#generateCoverLetter').on('click', function() {
+                const jobTitle = "@Model.TieuDeTinTuyenDung";
+                const company = "@Model.TenNhaTuyenDungHoacCaNhan";
+                
+                const sampleLetter = `Kính gửi Nhà tuyển dụng,
+
+Tôi viết thư này để bày tỏ sự quan tâm đến vị trí ${jobTitle} tại ${company}. Với kinh nghiệm và kỹ năng phù hợp với yêu cầu công việc, tôi tin rằng mình có thể đóng góp tích cực cho đội ngũ của quý công ty.
+
+Qua quá trình làm việc và học tập, tôi đã phát triển các kỹ năng chuyên môn cần thiết và luôn mong muốn được áp dụng những kiến thức này vào môi trường làm việc năng động như tại ${company}.
+
+Tôi rất mong có cơ hội được thảo luận thêm về vị trí này và cách tôi có thể đóng góp vào sự thành công của công ty.
+
+Trân trọng,
+${Model.HoTenUngVien}`;
+
+                $('#thuGioiThieu').val(sampleLetter);
+                $('#charCount').text(sampleLetter.length + '/2000');
+                updateProgress();
+            });
+            
+            // Hiệu ứng loading cho nút submit
+            $('#nopHoSoForm').on('submit', function() {
+                var $btn = $('#btnSubmitNopHoSo');
+                if ($(this)[0].checkValidity()) {
+                    $btn.prop('disabled', true);
+                    $btn.html(`
+                        <span class="d-flex align-items-center">
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            <span>Đang gửi...</span>
+                        </span>
+                    `);
+                }
+            });
+            
+            // Animation khi load trang
+            $('.card').hide().fadeIn(500);
+            setTimeout(function() {
+                updateProgress();
+            }, 500);
+        });
+    </script>
+}

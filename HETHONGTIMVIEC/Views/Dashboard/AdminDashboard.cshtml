@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Bảng điều khiển Quản trị";
+    // Layout = "_AdminLayout"; // Bạn có thể tạo Layout riêng cho Admin nếu cần
+}
+
+<div class="container mt-4">
+    <h1><i class="fas fa-tachometer-alt me-2"></i>@ViewData["Title"]</h1>
+    <hr />
+    <p>Chào mừng bạn đến với khu vực quản trị hệ thống.</p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Tài khoản chờ duyệt</div>
+                <div class="card-body">
+                    <h5 class="card-title">@* ViewBag.TaiKhoanChoDuyet ?? 0 *@ Số lượng</h5> @* Bỏ comment khi có ViewBag *@
+                    <p class="card-text">Số lượng tài khoản doanh nghiệp đang chờ phê duyệt.</p>
+                    @* <a asp-action="PheDuyetDoanhNghiep" asp-controller="Admin" class="btn btn-light btn-sm">Xem chi tiết</a> *@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Người dùng hoạt động</div>
+                <div class="card-body">
+                    <h5 class="card-title">[Số lượng]</h5> @* TODO: Thêm logic lấy số lượng *@
+                    <p class="card-text">Tổng số người dùng đang hoạt động trên hệ thống.</p>
+                     @* <a asp-action="QuanLyNguoiDung" asp-controller="Admin" class="btn btn-light btn-sm">Quản lý</a> *@
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

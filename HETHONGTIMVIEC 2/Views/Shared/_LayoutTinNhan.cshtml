@@ -1,0 +1,69 @@
+@using System.Security.Claims
+@using HeThongTimViec.Models 
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hệ Thống Tìm Việc</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/tinnhan.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+@{
+    // Lấy avatar người dùng hiện tại từ Claim "UserAvatar" nếu có, nếu không thì dựa vào vai trò
+    var currentUserRole = User.FindFirstValue(ClaimTypes.Role);
+    var defaultAvatar = currentUserRole == nameof(LoaiTaiKhoan.doanhnghiep) ? "/images/avatars/default_employer.png" : "/images/avatars/default_user.png";
+    var currentUserAvatar = User.FindFirstValue("UserAvatar") ?? defaultAvatar;
+}
+<body data-current-user-avatar="@currentUserAvatar"> @* Truyền avatar này cho JavaScript nếu cần *@
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom box-shadow mb-0">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Hệ Thống Tìm Việc</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                    </ul>
+                    <ul class="navbar-nav">
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <span class="navbar-text me-3">
+                                    Chào, @User.Identity.Name!
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                <form class="form-inline" asp-controller="TaiKhoan" asp-action="DangXuat" method="post">
+                                     <button type="submit" class="nav-link btn btn-link text-dark">Đăng xuất</button>
+                                </form>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="chat-container-wrapper">
+        <main role="main" class="pb-0">
+            @RenderBody()
+        </main>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+@* <script src="~/js/signalr/dist/browser/signalr.min.js"></script> *@
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+<script src="~/js/tinnhan.js" asp-append-version="true"></script> @* Đảm bảo file này tồn tại và được load sau jQuery *@
+</body>
+</html>

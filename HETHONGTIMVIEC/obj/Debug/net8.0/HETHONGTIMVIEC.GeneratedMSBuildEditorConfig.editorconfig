@@ -9,105 +9,177 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HETHONGTIMVIEC
 build_property.RootNamespace = HETHONGTIMVIEC
-build_property.ProjectDir = /Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/
+build_property.ProjectDir = /Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC
+build_property.MSBuildProjectDirectory = /Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/Admin/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW4vSW5kZXguY3NodG1s
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/CaNhan/EditAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FOaGFuL0VkaXRBY2NvdW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/Home/Index.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/CaNhan/EditLocations.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FOaGFuL0VkaXRMb2NhdGlvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/CaNhan/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FOaGFuL0VkaXRQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/CaNhan/EditSchedule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FOaGFuL0VkaXRTY2hlZHVsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/CaNhan/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2FOaGFuL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/CompanyPosting/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGFueVBvc3RpbmcvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/CompanyPosting/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGFueVBvc3RpbmcvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/CompanyPosting/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGFueVBvc3RpbmcvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/CompanyPosting/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGFueVBvc3RpbmcvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Dashboard/AdminDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFzaGJvYXJkL0FkbWluRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Dashboard/CandidateDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFzaGJvYXJkL0NhbmRpZGF0ZURhc2hib2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Dashboard/EmployerDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFzaGJvYXJkL0VtcGxveWVyRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Dashboard/EmployerForCandidateDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFzaGJvYXJkL0VtcGxveWVyRm9yQ2FuZGlkYXRlRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/Home/Privacy.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/NhaTuyenDung/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTmhhVHV5ZW5EdW5nL0luZGV4LmNzaHRtbA==
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/IndividualPosting/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5kaXZpZHVhbFBvc3RpbmcvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/Shared/Error.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/IndividualPosting/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5kaXZpZHVhbFBvc3RpbmcvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/IndividualPosting/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5kaXZpZHVhbFBvc3RpbmcvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/IndividualPosting/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSW5kaXZpZHVhbFBvc3RpbmcvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/Shared/_LayoutAdmin.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Shared/Partials/_JobPostingFormPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL19Kb2JQb3N0aW5nRm9ybVBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Shared/_LayoutAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/Shared/_LayoutCompany.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Shared/_LayoutCompany.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXRDb21wYW55LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/Shared/_LayoutUser.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Shared/_LayoutUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXRVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Shared/_TinTuyenDungItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19UaW5UdXllbkR1bmdJdGVtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/TaiKhoan/AccessDenied.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TaiKhoan/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFpS2hvYW4vQWNjZXNzRGVuaWVkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/TaiKhoan/CaiDat.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TaiKhoan/CaiDat.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFpS2hvYW4vQ2FpRGF0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/TaiKhoan/DangKy.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TaiKhoan/DangKy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFpS2hvYW4vRGFuZ0t5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/TaiKhoan/DangKyThanhCongChoDuyet.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TaiKhoan/DangKyThanhCongChoDuyet.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFpS2hvYW4vRGFuZ0t5VGhhbmhDb25nQ2hvRHV5ZXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/TaiKhoan/DangNhap.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TaiKhoan/DangNhap.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFpS2hvYW4vRGFuZ05oYXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/TaiKhoan/ForgotPassword.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TaiKhoan/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFpS2hvYW4vRm9yZ290UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/TaiKhoan/Lockout.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TaiKhoan/Lockout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFpS2hvYW4vTG9ja291dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/TaiKhoan/QuenMatKhau.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TaiKhoan/QuenMatKhau.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFpS2hvYW4vUXVlbk1hdEtoYXUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/TaiKhoan/QuenMatKhauXacNhan.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TaiKhoan/QuenMatKhauXacNhan.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGFpS2hvYW4vUXVlbk1hdEtoYXVYYWNOaGFuLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/TuyenDungCaNhan/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHV5ZW5EdW5nQ2FOaGFuL0luZGV4LmNzaHRtbA==
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TimViec/ChiTiet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGltVmllYy9DaGlUaWV0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/UngVien/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5nVmllbi9JbmRleC5jc2h0bWw=
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TimViec/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGltVmllYy9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/_ViewImports.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/TimViec/TinNotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGltVmllYy9UaW5Ob3RGb3VuZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/_ViewStart.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC/Views/Shared/_Layout.cshtml]
+[/Users/nguyenthanhhuyen/Pictures/tai_lieu/Toán ứng dụng/Toán ứng dụng code/HETHONGTIMVIEC 2/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ryhsnjtu7e
