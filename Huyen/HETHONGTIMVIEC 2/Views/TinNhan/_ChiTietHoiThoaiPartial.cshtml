@@ -1,0 +1,135 @@
+@using System.Security.Claims
+@using HeThongTimViec.Models @* Required for LoaiTaiKhoan enum *@
+@model HeThongTimViec.ViewModels.TinNhanTrangChinhViewModel
+@{
+    var currentUserId = int.Parse(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier)!);
+    var currentUserAvatar = User.FindFirstValue("UserAvatar") ?? (User.IsInRole(nameof(LoaiTaiKhoan.doanhnghiep)) ? "/images/avatars/default_employer.png" : "/images/avatars/default_user.png");
+}
+
+@if (Model.NguoiLienHeDangChonId.HasValue && Model.ThongTinNguoiLienHeDangChon != null)
+{
+    <div class="chat-header">
+        <div class="user-info">
+            <a asp-controller="NguoiDung" asp-action="ChiTiet" asp-route-id="@Model.ThongTinNguoiLienHeDangChon.Id" target="_blank" class="user-avatar-link">
+                <div class="user-avatar">
+                    <img src="@(Model.ThongTinNguoiLienHeDangChon.UrlAvatar ?? (Model.ThongTinNguoiLienHeDangChon.LoaiTk == LoaiTaiKhoan.doanhnghiep ? "/images/avatars/default_employer.png" : "/images/avatars/default_user.png"))" alt="Avatar @Model.ThongTinNguoiLienHeDangChon.HoTen">
+                </div>
+            </a>
+            <div class="user-details">
+                <a asp-controller="NguoiDung" asp-action="ChiTiet" asp-route-id="@Model.ThongTinNguoiLienHeDangChon.Id" target="_blank" class="user-name-link">
+                    <div class="user-name">@Model.ThongTinNguoiLienHeDangChon.HoTen</div>
+                </a>
+                <div class="user-activity">Online</div> @* Placeholder, actual status would need more logic *@
+            </div>
+        </div>
+        <div class="chat-actions">
+            <button class="btn btn-icon" title="Gọi thoại (chức năng sắp có)" onclick="alert('Chức năng gọi thoại sắp ra mắt!');"><i class="fas fa-phone-alt"></i></button>
+            <button class="btn btn-icon" title="Gọi video (chức năng sắp có)" onclick="alert('Chức năng gọi video sắp ra mắt!');"><i class="fas fa-video"></i></button>
+            <a asp-controller="NguoiDung" asp-action="ChiTiet" asp-route-id="@Model.ThongTinNguoiLienHeDangChon.Id" target="_blank" class="btn btn-icon" title="Thông tin người dùng"><i class="fas fa-info-circle"></i></a>
+            <div class="dropdown">
+                <button class="btn btn-icon" type="button" id="chatOptionsDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="Tùy chọn khác">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatOptionsDropdown">
+                    <li><a class="dropdown-item" href="#" id="changeChatColorOption"><i class="fas fa-palette me-2"></i>Đổi màu cuộc trò chuyện</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="alert('Chức năng chặn người dùng sắp ra mắt!');"><i class="fas fa-user-slash me-2"></i>Chặn người này</a></li>
+                    <li><a class="dropdown-item text-danger" href="#" onclick="alert('Chức năng xóa cuộc trò chuyện sắp ra mắt!');"><i class="fas fa-trash-alt me-2"></i>Xóa cuộc trò chuyện</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessagesArea">
+        @if (Model.TinNhanTrongCuocHoiThoai.Any())
+        {
+            @foreach (var msg in Model.TinNhanTrongCuocHoiThoai)
+            {
+                var messageClass = msg.LaCuaToi ? "sent" : "received";
+                <div class="message-item @messageClass" data-message-id="@msg.Id">
+                    @if (!msg.LaCuaToi) {
+                        <div class="message-avatar">
+                             <a asp-controller="NguoiDung" asp-action="ChiTiet" asp-route-id="@msg.NguoiGuiId" target="_blank">
+                                <img src="@(msg.AvatarNguoiGui ?? (msg.LoaiTaiKhoanNguoiGui == LoaiTaiKhoan.doanhnghiep ? "/images/avatars/default_employer.png" : "/images/avatars/default_user.png"))" alt="Avatar @msg.TenNguoiGui" title="@msg.TenNguoiGui">
+                             </a>
+                        </div>
+                    }
+                    <div class="message-content-wrapper">
+                        <div class="message-bubble">
+                            <div class="message-content">
+                                @Html.Raw(msg.NoiDung.Replace("\n", "<br />"))
+                            </div>
+                             @if (msg.LaCuaToi) {
+                                <div class="message-actions-hover">
+                                    <button class="btn btn-sm btn-icon-light" title="Xóa tin nhắn (chức năng sắp có)"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            }
+                        </div>
+                        <div class="message-meta">
+                            @if(msg.LaCuaToi) {
+                                <span title="@msg.NgayGuiFormatted">Bạn • @msg.ThoiGianGuiNhan</span>
+                                <i class="fas @(msg.DaXem ? "fa-check-double" : "fa-check") message-status @(msg.DaXem ? "read" : "sent-unread")" title="@(msg.DaXem ? "Đã xem" : "Đã gửi")"></i>
+                            } else {
+                                <span title="@msg.NgayGuiFormatted">@msg.TenNguoiGui • @msg.ThoiGianGuiNhan</span>
+                            }
+                        </div>
+                    </div>
+                     @if (msg.LaCuaToi) {
+                        <div class="message-avatar self">
+                             <img src="@(currentUserAvatar)" alt="Avatar của bạn" title="Bạn">
+                        </div>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-center text-muted mt-3" id="noMessagesPlaceholder">Chưa có tin nhắn nào trong cuộc trò chuyện này. <br>Hãy bắt đầu cuộc trò chuyện!</p>
+        }
+    </div>
+
+    <div class="chat-input-area">
+        <form id="formGuiTinNhan" asp-action="GuiTinNhan" asp-controller="TinNhan" method="post" data-ajax="true" data-ajax-begin="onBeginSendMessage" data-ajax-success="onMessageSentSuccess" data-ajax-failure="onMessageSentFailure" data-ajax-complete="onCompleteSendMessage">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="NguoiNhanId" value="@Model.NguoiLienHeDangChonId" id="hiddenNguoiNhanId" />
+            <input type="hidden" name="TinLienQuanId" value="@Model.FormGuiTinNhanMoi.TinLienQuanId" />
+            <input type="hidden" name="UngTuyenLienQuanId" value="@Model.FormGuiTinNhanMoi.UngTuyenLienQuanId" />
+            
+            <button type="button" class="btn btn-icon me-2" title="Đính kèm tệp (sắp có)" onclick="alert('Chức năng đính kèm tệp sắp ra mắt!');"><i class="fas fa-paperclip"></i></button>
+            <button type="button" class="btn btn-icon me-2" title="Biểu tượng cảm xúc (sắp có)" onclick="alert('Chức năng biểu tượng cảm xúc sắp ra mắt!');"><i class="far fa-smile"></i></button>
+
+            <textarea name="NoiDung" id="inputNoiDungTinNhan" class="form-control" placeholder="Nhập tin nhắn..." autocomplete="off" required rows="1"></textarea>
+            <button type="submit" class="btn btn-primary ms-2 btn-send" title="Gửi tin nhắn" id="btnGuiTinNhan">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+        <div id="validationSummaryGuiTinNhan" class="text-danger mt-1 small"></div>
+    </div>
+
+    <div class="modal fade" id="chatColorModal" tabindex="-1" aria-labelledby="chatColorModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="chatColorModalLabel">Chọn màu cuộc trò chuyện</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex justify-content-around">
+            <span class="chat-color-option" data-color="#0d6efd" style="background-color: #0d6efd;" title="Xanh dương (Mặc định)"></span>
+            <span class="chat-color-option" data-color="#198754" style="background-color: #198754;" title="Xanh lá"></span>
+            <span class="chat-color-option" data-color="#dc3545" style="background-color: #dc3545;" title="Đỏ"></span>
+            <span class="chat-color-option" data-color="#6f42c1" style="background-color: #6f42c1;" title="Tím"></span>
+            <span class="chat-color-option" data-color="#fd7e14" style="background-color: #fd7e14;" title="Cam"></span>
+            <span class="chat-color-option" data-color="#ffc107" style="background-color: #ffc107;" title="Vàng"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+}
+else
+{
+     <div class="no-conversation-selected">
+        <div>
+            <i class="fas fa-comments fa-3x mb-3"></i>
+            <p>Chọn một cuộc trò chuyện để xem tin nhắn.</p>
+        </div>
+    </div>
+}

@@ -1,0 +1,33 @@
+@* File: Views/BaoCao/_BaoCaoFilterPartial.cshtml *@
+@model HeThongTimViec.ViewModels.BaoCao.DanhSachBaoCaoViewModel
+
+<div class="filter-section mb-4 p-3 bg-white border rounded shadow-sm animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+    <form asp-controller="BaoCao" asp-action="Index" method="get">
+        <div class="row g-3 align-items-end">
+            <div class="col-lg-4 col-md-6">
+                <label asp-for="tuKhoa" class="form-label small fw-semibold">@Html.DisplayNameFor(m => m.tuKhoa)</label>
+                <input asp-for="tuKhoa" type="text" class="form-control form-control-sm" placeholder="Tiêu đề tin, công ty, chi tiết..." />
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label asp-for="trangThai" class="form-label small fw-semibold">@Html.DisplayNameFor(m => m.trangThai)</label>
+                <select asp-for="trangThai" asp-items="ViewBag.TrangThaiXuLyOptions" class="form-select form-select-sm"></select>
+            </div>
+            <div class="col-lg-auto col-md-12 mt-md-0 mt-2"> @* Nút lọc sẽ chiếm full width trên mobile nếu cần *@
+                <button type="submit" class="btn btn-primary btn-sm w-100">
+                    <i class="fas fa-filter me-1"></i> Lọc
+                </button>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Model.tuKhoa) || Model.trangThai.HasValue)
+            {
+                <div class="col-lg-auto col-md-12 mt-md-0 mt-2">
+                    @{
+                        var resetFilterRouteValues = new Dictionary<string, string?>();
+                    }
+                    <a asp-controller="BaoCao" asp-action="Index" asp-all-route-data="resetFilterRouteValues" class="btn btn-outline-secondary btn-sm w-100">
+                        <i class="fas fa-times me-1"></i> Xóa lọc
+                    </a>
+                </div>
+            }
+        </div>
+    </form>
+</div>

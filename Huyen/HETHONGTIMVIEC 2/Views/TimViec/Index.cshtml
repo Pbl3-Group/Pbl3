@@ -1,0 +1,569 @@
+@* File: Views/TimViec/Index.cshtml *@
+@model HeThongTimViec.ViewModels.TimViec.TimViecViewModel
+@using HeThongTimViec.Extensions
+@using HeThongTimViec.Models
+@using System.Linq
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
+@{
+    ViewData["Title"] = "Tìm Việc Làm Bán Thời Gian & Thời Vụ | JobFlex";
+    var requestToken = antiforgery.GetAndStoreTokens(Context).RequestToken;
+    var userIsAuthenticated = User.Identity?.IsAuthenticated ?? false;
+    var currentUserAccountType = ViewBag.CurrentUserAccountType as LoaiTaiKhoan?; // Lấy từ ViewBag
+
+    var baseRouteValues = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+    if (!string.IsNullOrWhiteSpace(Model.TuKhoa)) baseRouteValues["TuKhoa"] = Model.TuKhoa;
+    if (Model.ThanhPhoId.HasValue && Model.ThanhPhoId > 0) baseRouteValues["ThanhPhoId"] = Model.ThanhPhoId;
+    if (Model.QuanHuyenId.HasValue && Model.QuanHuyenId > 0) baseRouteValues["QuanHuyenId"] = Model.QuanHuyenId;
+    if (Model.NganhNgheIds != null && Model.NganhNgheIds.Any(id => id > 0)) baseRouteValues["NganhNgheIds"] = Model.NganhNgheIds;
+    if (Model.LoaiHinhCongViec.HasValue) baseRouteValues["LoaiHinhCongViec"] = Model.LoaiHinhCongViec;
+    if (Model.LoaiLuong.HasValue) baseRouteValues["LoaiLuong"] = Model.LoaiLuong;
+    if (Model.LuongMinFilter.HasValue && Model.LuongMinFilter > 0) baseRouteValues["LuongMinFilter"] = Model.LuongMinFilter;
+    if (Model.LuongMaxFilter.HasValue && Model.LuongMaxFilter > 0) baseRouteValues["LuongMaxFilter"] = Model.LuongMaxFilter;
+    if (Model.TinGap == true) baseRouteValues["TinGap"] = "true";
+    if (!string.IsNullOrWhiteSpace(Model.SapXep) && Model.SapXep != "ngaymoi") baseRouteValues["SapXep"] = Model.SapXep;
+    if (!string.IsNullOrWhiteSpace(Model.KinhNghiemFilter)) baseRouteValues["KinhNghiemFilter"] = Model.KinhNghiemFilter;
+    if (!string.IsNullOrWhiteSpace(Model.HocVanFilter)) baseRouteValues["HocVanFilter"] = Model.HocVanFilter;
+    if (Model.CaLamViecFilter != null && Model.CaLamViecFilter.Any()) baseRouteValues["CaLamViecFilter"] = Model.CaLamViecFilter;
+    if (Model.ChiHienThiViecLamThoiVu) baseRouteValues["ChiHienThiViecLamThoiVu"] = "true"; // Giữ lại nếu vẫn muốn param này (dù đã ẩn UI)
+    if (Model.ChiHienThiViecLamPhuHopLichRanh) baseRouteValues["ChiHienThiViecLamPhuHopLichRanh"] = "true";
+    if (Model.ChiHienThiViecLamDaLuu) baseRouteValues["ChiHienThiViecLamDaLuu"] = "true";
+    if (Model.ChiHienThiViecLamDaUngTuyen) baseRouteValues["ChiHienThiViecLamDaUngTuyen"] = "true";
+}
+<link rel="stylesheet" href="~/css/timviec.css" asp-append-version="true" />
+
+<div class="container mt-4 mb-5 animate__animated animate__fadeIn">
+    <div class="job-search-header text-center mb-4">
+        <h1 class="fw-bold text-primary page-main-title" style="font-size: 2.5rem;">Tìm Việc Làm Bán Thời Gian & Thời Vụ</h1>
+        <p class="lead text-secondary page-sub-title">Khám phá hàng ngàn cơ hội việc làm linh hoạt phù hợp với mọi lứa tuổi.</p>
+    </div>
+
+    <form asp-action="Index" method="get" id="searchForm">
+        <div class="row g-lg-4">
+            @* --- Cột Bộ lọc --- *@
+            <div class="col-lg-3">
+                <div class="filter-sidebar shadow-sm rounded" id="filterSidebar">
+                    <div class="filter-header p-3 border-bottom d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-semibold"><i class="fas fa-filter me-2 text-primary"></i>Bộ lọc tìm kiếm</h5>
+                        <a asp-action="Index" asp-controller="TimViec" class="btn btn-sm btn-outline-secondary reset-filter-btn" title="Đặt lại bộ lọc">
+                            <i class="fas fa-undo-alt me-1"></i> Đặt lại
+                        </a>
+                    </div>
+                    <div class="filter-body p-3">
+                        @* Từ khóa *@
+                        <div class="mb-3 filter-item">
+                            <label asp-for="TuKhoa" class="form-label fw-semibold small visually-hidden">Từ khóa</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="fas fa-search text-muted"></i></span>
+                                <input asp-for="TuKhoa" class="form-control form-control-sm border-start-0" placeholder="Chức danh, công ty, kỹ năng..." />
+                            </div>
+                        </div>
+
+                        @* Loại công việc - Collapse *@
+                        <div class="mb-2 filter-item filter-item-collapsible">
+                            <a class="filter-toggle-btn d-flex justify-content-between align-items-center w-100 text-decoration-none text-dark fw-semibold small py-2" data-bs-toggle="collapse" href="#collapseLoaiCongViec" role="button" aria-expanded="true" aria-controls="collapseLoaiCongViec">
+                                Loại công việc <i class="fas fa-chevron-down fa-xs"></i>
+                            </a>
+                            <div class="collapse show" id="collapseLoaiCongViec">
+                                <div class="pt-2 filter-options-group">
+                                    @if (Model.LoaiHinhCongViecOptions != null)
+                                    {
+                                        @foreach (var option in Model.LoaiHinhCongViecOptions.Where(o => !string.IsNullOrEmpty(o.Value)))
+                                        {
+                                            <div class="form-check form-check-sm">
+                                                <input class="form-check-input" type="radio" name="@nameof(Model.LoaiHinhCongViec)" value="@option.Value" id="lhcv_@option.Value" @(Model.LoaiHinhCongViec.ToString() == option.Value ? "checked" : "")>
+                                                <label class="form-check-label small" for="lhcv_@option.Value">@option.Text</label>
+                                            </div>
+                                        }
+                                         <div class="form-check form-check-sm">
+                                            <input class="form-check-input" type="radio" name="@nameof(Model.LoaiHinhCongViec)" value="" id="lhcv_all" @(!Model.LoaiHinhCongViec.HasValue ? "checked" : "")>
+                                            <label class="form-check-label small" for="lhcv_all">Tất cả loại hình</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-2 filter-divider">
+
+                        @* Địa điểm - Collapse *@
+                        <div class="mb-2 filter-item filter-item-collapsible">
+                            <a class="filter-toggle-btn d-flex justify-content-between align-items-center w-100 text-decoration-none text-dark fw-semibold small py-2" data-bs-toggle="collapse" href="#collapseDiaDiem" role="button" aria-expanded="true" aria-controls="collapseDiaDiem">
+                                Địa điểm <i class="fas fa-chevron-down fa-xs"></i>
+                            </a>
+                            <div class="collapse show" id="collapseDiaDiem">
+                                <div class="pt-2">
+                                    <div class="mb-2">
+                                        <select asp-for="ThanhPhoId" asp-items="Model.ThanhPhoOptions" class="form-select form-select-sm" id="ThanhPhoSelect">
+                                            <option value="">-- Chọn thành phố --</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select asp-for="QuanHuyenId" asp-items="Model.QuanHuyenOptions" class="form-select form-select-sm" id="QuanHuyenSelect"
+                                                data-initial-value="@Model.QuanHuyenId" disabled="@(!Model.ThanhPhoId.HasValue || Model.ThanhPhoId <= 0)">
+                                            <option value="">-- Chọn quận/huyện --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-2 filter-divider">
+
+                        @* Ngành nghề - Collapse *@
+                        <div class="mb-2 filter-item filter-item-collapsible">
+                            <a class="filter-toggle-btn d-flex justify-content-between align-items-center w-100 text-decoration-none text-dark fw-semibold small py-2" data-bs-toggle="collapse" href="#collapseNganhNghe" role="button" aria-expanded="@(Model.NganhNgheIds != null && Model.NganhNgheIds.Any(id => id > 0) ? "true" : "false")" aria-controls="collapseNganhNghe">
+                                Ngành nghề <i class="fas fa-chevron-down fa-xs"></i>
+                            </a>
+                            <div class="collapse @(Model.NganhNgheIds != null && Model.NganhNgheIds.Any(id => id > 0) ? "show" : "")" id="collapseNganhNghe">
+                                <div class="pt-2 filter-options-group filter-checkbox-scroll">
+                                     @if (Model.NganhNgheOptions != null && Model.NganhNgheOptions.Any()) {
+                                        @foreach (var nganhNghe in Model.NganhNgheOptions) {
+                                            <div class="form-check form-check-sm"><input class="form-check-input" type="checkbox" name="NganhNgheIds" value="@nganhNghe.Value" id="nn_@nganhNghe.Value" @(nganhNghe.Selected ? "checked" : "")><label class="form-check-label small" for="nn_@nganhNghe.Value">@nganhNghe.Text</label></div>
+                                        }
+                                    } else { <small class="text-muted">Không có dữ liệu.</small> }
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-2 filter-divider">
+                        
+                        @* Ca làm việc - Collapse *@
+                        <div class="mb-2 filter-item filter-item-collapsible">
+                            <a class="filter-toggle-btn d-flex justify-content-between align-items-center w-100 text-decoration-none text-dark fw-semibold small py-2" data-bs-toggle="collapse" href="#collapseCaLamViec" role="button" aria-expanded="@(Model.CaLamViecFilter != null && Model.CaLamViecFilter.Any() ? "true" : "false")" aria-controls="collapseCaLamViec">
+                                Ca làm việc <i class="fas fa-chevron-down fa-xs"></i>
+                            </a>
+                            <div class="collapse @(Model.CaLamViecFilter != null && Model.CaLamViecFilter.Any() ? "show" : "")" id="collapseCaLamViec">
+                                 <div class="pt-2 filter-options-group filter-checkbox-scroll">
+                                    @if (Model.CaLamViecOptions != null && Model.CaLamViecOptions.Any()) {
+                                        @foreach (var caOption in Model.CaLamViecOptions) {
+                                            <div class="form-check form-check-sm"><input class="form-check-input" type="checkbox" name="CaLamViecFilter" value="@caOption.Value" id="ca_@caOption.Value" @(caOption.Selected ? "checked" : "")><label class="form-check-label small" for="ca_@caOption.Value">@caOption.Text</label></div>
+                                        }
+                                    } else { <small class="text-muted">Không có dữ liệu.</small> }
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-2 filter-divider">
+
+                        @* Xóa bỏ mục "Phù hợp với" ở đây *@
+                        @* <hr class="my-2 filter-divider"> *@ @* Xóa luôn hr nếu không còn mục nào phía trên nó nữa trong khối này *@
+
+                        @* Kinh nghiệm - Collapse *@
+                        <div class="mb-2 filter-item filter-item-collapsible">
+                            <a class="filter-toggle-btn d-flex justify-content-between align-items-center w-100 text-decoration-none text-dark fw-semibold small py-2" data-bs-toggle="collapse" href="#collapseKinhNghiem" role="button" aria-expanded="@(!string.IsNullOrWhiteSpace(Model.KinhNghiemFilter) ? "true" : "false")" aria-controls="collapseKinhNghiem">
+                                Kinh nghiệm <i class="fas fa-chevron-down fa-xs"></i>
+                            </a>
+                            <div class="collapse @(!string.IsNullOrWhiteSpace(Model.KinhNghiemFilter) ? "show" : "")" id="collapseKinhNghiem">
+                                 <div class="pt-2"><input asp-for="KinhNghiemFilter" class="form-control form-control-sm" placeholder="VD: Dưới 1 năm..." /></div>
+                            </div>
+                        </div>
+                        <hr class="my-2 filter-divider">
+
+                        @* Mức lương - Collapse *@
+                        <div class="mb-2 filter-item filter-item-collapsible">
+                             <a class="filter-toggle-btn d-flex justify-content-between align-items-center w-100 text-decoration-none text-dark fw-semibold small py-2" data-bs-toggle="collapse" href="#collapseMucLuong" role="button" aria-expanded="@(Model.LoaiLuong.HasValue ? "true" : "false")" aria-controls="collapseMucLuong">
+                                Mức lương <i class="fas fa-chevron-down fa-xs"></i>
+                            </a>
+                            <div class="collapse @(Model.LoaiLuong.HasValue ? "show" : "")" id="collapseMucLuong">
+                                <div class="pt-2">
+                                    <div class="mb-2">
+                                        <select asp-for="LoaiLuong" asp-items="Model.LoaiLuongOptions" class="form-select form-select-sm" id="LoaiLuongSelect">
+                                             <option value="">-- Chọn loại lương --</option>
+                                        </select>
+                                    </div>
+                                    <div id="salaryMinMaxFilter" style="@(Model.LoaiLuong == LoaiLuong.thoathuan || !Model.LoaiLuong.HasValue ? "display:none;" : "")">
+                                        <div class="mb-2"><input asp-for="LuongMinFilter" type="number" min="0" step="1000" class="form-control form-control-sm" placeholder="Lương từ (VNĐ)" /></div>
+                                        <div><input asp-for="LuongMaxFilter" type="number" min="0" step="1000" class="form-control form-control-sm" placeholder="Lương đến (VNĐ)" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-2 filter-divider">
+
+                        @* Tùy chọn khác (Switches) *@
+                        <div class="mt-3 filter-item">
+                            <h6 class="fw-semibold small mb-2">Tùy chọn khác</h6>
+                            <div class="form-check form-switch form-check-sm">
+                                <input class="form-check-input" type="checkbox" name="TinGap" value="true" id="tingapCheck" @(Model.TinGap == true ? "checked" : "")>
+                                <label class="form-check-label small" for="tingapCheck">Chỉ tin tuyển GẤP</label>
+                            </div>
+                            @* Đã xóa "Chỉ việc thời vụ" ở đây *@
+                            @if (userIsAuthenticated && currentUserAccountType == LoaiTaiKhoan.canhan) {
+                                <div class="form-check form-switch form-check-sm">
+                                    <input class="form-check-input" type="checkbox" asp-for="ChiHienThiViecLamPhuHopLichRanh" id="chiphuhoplich">
+                                    <label class="form-check-label small" for="chiphuhoplich">Phù hợp lịch rảnh của tôi</label>
+                                </div>
+                                <div class="form-check form-switch form-check-sm">
+                                    <input class="form-check-input" type="checkbox" asp-for="ChiHienThiViecLamDaLuu" id="chidalau">
+                                    <label class="form-check-label small" for="chidalau">Việc tôi đã lưu</label>
+                                </div>
+                                <div class="form-check form-switch form-check-sm">
+                                    <input class="form-check-input" type="checkbox" asp-for="ChiHienThiViecLamDaUngTuyen" id="chidaungtuyen">
+                                    <label class="form-check-label small" for="chidaungtuyen">Việc tôi đã ứng tuyển</label>
+                                </div>
+                            }
+                        </div>
+                        
+                        <input type="hidden" name="SapXep" asp-for="SapXep" />
+                        @* Input ẩn cho ChiHienThiViecLamThoiVu nếu bạn vẫn muốn submit giá trị này dù không có UI trực tiếp *@
+                        @* <input type="hidden" asp-for="ChiHienThiViecLamThoiVu" /> *@
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search me-1"></i> Lọc kết quả</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* --- Cột Kết quả --- *@
+            <div class="col-lg-9">
+                <div class="results-header bg-white border rounded p-3 shadow-sm mb-4">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <div>@if (Model.KetQua != null && Model.KetQua.TotalCount > 0){ <span class="fw-bold text-primary results-count"><i class="fas fa-briefcase me-1"></i> Tìm thấy @Model.KetQua.TotalCount việc làm</span><span class="text-muted small page-info"> (Trang @Model.KetQua.PageIndex / @Model.KetQua.TotalPages)</span> } else { <span class="fw-bold text-warning results-count"><i class="fas fa-exclamation-circle me-1"></i> Không tìm thấy việc làm phù hợp.</span> }</div>
+                        <div class="d-flex align-items-center gap-2">
+                            <div id="displaySortForm" class="d-inline-block">
+                                <label for="SapXepSelectDisplay" class="visually-hidden">Sắp xếp theo</label>
+                                <div class="input-group input-group-sm">
+                                    <select id="SapXepSelectDisplay" class="form-select form-select-sm border-start-0" style="min-width: 180px;">
+                                        <option value="ngaymoi" selected="@(Model.SapXep == "ngaymoi" || string.IsNullOrEmpty(Model.SapXep))">Mới nhất</option>
+                                        <option value="luongcao" selected="@(Model.SapXep == "luongcao")">Lương cao nhất</option>
+                                        <option value="luongthap" selected="@(Model.SapXep == "luongthap")">Lương thấp nhất</option>
+                                        @if (userIsAuthenticated && currentUserAccountType == LoaiTaiKhoan.canhan) {
+                                            <option value="phuhopnhat" selected="@(Model.SapXep == "phuhopnhat")">Phù hợp nhất</option>
+                                        }
+                                        <option value="hannopgan" selected="@(Model.SapXep == "hannopgan")">Hạn nộp gần nhất</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="job-list-container">
+                    <div class="job-list">
+                         @if (Model.KetQua != null && Model.KetQua.Any()) {
+                            @for (int i = 0; i < Model.KetQua.Count; i++) {
+                                var item = Model.KetQua[i];
+                                <div class="animate__animated animate__fadeInUp" style="animation-delay: @(0.05 * i)s;">
+                                    @await Html.PartialAsync("_TinTuyenDungItem", item)
+                                </div>
+                            }
+                            @if (Model.KetQua.TotalPages > 1) {
+                                 <nav aria-label="Page navigation" class="mt-4 animate__animated animate__fadeInUp" style="animation-delay: @(0.05 * Model.KetQua.Count)s;">
+                                    <ul class="pagination pagination-sm justify-content-center flex-wrap">
+                                        <li class="page-item @(!Model.KetQua.HasPreviousPage ? "disabled" : "")"> <a class="page-link" href="@Url.Action("Index", "TimViec", new Dictionary<string, object?>(baseRouteValues) { ["page"] = Model.KetQua.PageIndex - 1 })" aria-label="Previous"><i class="fas fa-angle-left"></i></a></li>
+                                        @{
+                                            int startPage = Math.Max(1, Model.KetQua.PageIndex - 2); int endPage = Math.Min(Model.KetQua.TotalPages, Model.KetQua.PageIndex + 2);
+                                            if (Model.KetQua.TotalPages <= 5) { startPage = 1; endPage = Model.KetQua.TotalPages; } else if (Model.KetQua.PageIndex <= 3) { startPage = 1; endPage = 5; } else if (Model.KetQua.PageIndex + 2 >= Model.KetQua.TotalPages) { startPage = Model.KetQua.TotalPages - 4; endPage = Model.KetQua.TotalPages; }
+                                            if (startPage > 1) { <li class="page-item"><a class="page-link" href="@Url.Action("Index", "TimViec", new Dictionary<string, object?>(baseRouteValues) { ["page"] = 1 })">1</a></li>; if (startPage > 2) { <li class="page-item disabled"><span class="page-link">…</span></li> } }
+                                            for (int pageNum = startPage; pageNum <= endPage; pageNum++) { <li class="page-item @(pageNum == Model.KetQua.PageIndex ? "active" : "")"><a class="page-link" href="@Url.Action("Index", "TimViec", new Dictionary<string, object?>(baseRouteValues) { ["page"] = pageNum })">@pageNum</a></li> }
+                                            if (endPage < Model.KetQua.TotalPages) { if (endPage < Model.KetQua.TotalPages - 1) { <li class="page-item disabled"><span class="page-link">…</span></li> } <li class="page-item"><a class="page-link" href="@Url.Action("Index", "TimViec", new Dictionary<string, object?>(baseRouteValues) { ["page"] = Model.KetQua.TotalPages })">@Model.KetQua.TotalPages</a></li> }
+                                        }
+                                        <li class="page-item @(!Model.KetQua.HasNextPage ? "disabled" : "")"> <a class="page-link" href="@Url.Action("Index", "TimViec", new Dictionary<string, object?>(baseRouteValues) { ["page"] = Model.KetQua.PageIndex + 1 })" aria-label="Next"><i class="fas fa-angle-right"></i></a></li>
+                                    </ul>
+                                </nav>
+                            }
+                        } else {
+                            <div class="alert alert-light text-center mt-4 shadow-sm" role="alert">
+                                <img src="/images/no-results.svg" alt="Không tìm thấy" style="max-width: 150px;" class="my-3" />
+                                <h5 class="alert-heading">Không có việc làm phù hợp!</h5>
+                                <p>Rất tiếc, chúng tôi không tìm thấy công việc nào khớp với tiêu chí của bạn. <br/>Hãy thử điều chỉnh bộ lọc hoặc mở rộng phạm vi tìm kiếm.</p>
+                                <a asp-action="Index" asp-controller="TimViec" class="btn btn-sm btn-outline-primary"><i class="fas fa-sync-alt me-1"></i> Xóa bộ lọc & Tìm lại</a>
+                            </div>
+                        }
+                    </div>
+                    <div class="job-list-loader" style="display: none; text-align: center; padding: 40px 0;">
+                        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"><span class="visually-hidden">Đang tải...</span></div>
+                        <p class="mt-2 text-muted">Đang tìm kiếm việc làm...</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 mb-4">
+                    @await Html.PartialAsync("_MeoTimViecPartial")
+                </div>
+            </div>
+        </form> @* Đóng thẻ form ở đây *@
+    </div> @* Đóng thẻ div.row g-lg-4 *@
+</div> @* Đóng thẻ div.container *@
+
+
+<button type="button" class="btn btn-primary btn-floating rounded-circle shadow-lg" id="backToTopBtn" title="Lên đầu trang">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script>
+        $(function () {
+            // === KHỐI JS CHO DROPDOWN ĐỊA CHỈ ===
+            const thanhPhoSelect = $('#ThanhPhoSelect');
+            const quanHuyenSelect = $('#QuanHuyenSelect');
+            const quanHuyenLoading = $('<div id="QuanHuyenLoading" class="text-center small text-muted py-1" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Đang tải...</div>'); // Tạo element loading
+            quanHuyenSelect.parent().append(quanHuyenLoading); // Thêm vào sau select quận/huyện
+
+            function loadQuanHuyen(thanhPhoId, selectedQuanHuyenId, isInitialCall = false) {
+                quanHuyenLoading.show();
+                if (!isInitialCall || quanHuyenSelect.data('current-city-id') != thanhPhoId) {
+                    quanHuyenSelect.html('<option value="">-- Đang tải... --</option>');
+                }
+                quanHuyenSelect.data('current-city-id', thanhPhoId);
+                // Bỏ dòng này: if (!isInitialCall) { quanHuyenSelect.prop('disabled', !(thanhPhoId && thanhPhoId !== "")); }
+                // Việc disable sẽ được xử lý trong success/error/complete
+
+                if (thanhPhoId && thanhPhoId !== "") {
+                    quanHuyenSelect.prop('disabled', true); // Disable trong khi tải
+                    $.ajax({
+                        url: '@Url.Action("GetQuanHuyenByThanhPho", "DiaChi", new { area = "" })', 
+                        type: 'GET', 
+                        data: { thanhPhoId: thanhPhoId },
+                        success: function (data) {
+                            if (quanHuyenSelect.data('current-city-id') != thanhPhoId) return; // Nếu TP đã thay đổi trong lúc tải thì bỏ qua
+                            quanHuyenSelect.html('<option value="">-- Chọn Quận/Huyện --</option>');
+                            if (data && data.length > 0) {
+                                $.each(data, function (_, item) {
+                                    const option = $('<option></option>').val(item.id).text(item.ten);
+                                    if (selectedQuanHuyenId && item.id == selectedQuanHuyenId) { 
+                                        option.prop('selected', true); 
+                                    }
+                                    quanHuyenSelect.append(option);
+                                });
+                                quanHuyenSelect.prop('disabled', false); // Enable lại
+                            } else {
+                                quanHuyenSelect.html('<option value="">-- Không có Quận/Huyện --</option>');
+                                quanHuyenSelect.prop('disabled', true); // Giữ disable
+                            }
+                        },
+                        error: function () {
+                            if (quanHuyenSelect.data('current-city-id') != thanhPhoId) return;
+                            quanHuyenSelect.html('<option value="">-- Lỗi tải dữ liệu --</option>');
+                            quanHuyenSelect.prop('disabled', true); 
+                            
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Lỗi',
+                                    text: 'Không thể tải danh sách Quận/Huyện.',
+                                    confirmButtonText: 'Đóng'
+                                });
+                            } else {
+                                alert('Không thể tải danh sách Quận/Huyện.');
+                            }
+                        },
+                        complete: function () { 
+                            if (quanHuyenSelect.data('current-city-id') == thanhPhoId) { // Chỉ hide loading nếu vẫn là TP đó
+                                quanHuyenLoading.hide(); 
+                            }
+                        }
+                    });
+                } else {
+                    quanHuyenLoading.hide(); 
+                    quanHuyenSelect.prop('disabled', true);
+                    quanHuyenSelect.html('<option value="">-- Chọn Quận/Huyện --</option>');
+                }
+            }
+            
+            thanhPhoSelect.on('change', function () {
+                const selectedCityId = $(this).val(); 
+                quanHuyenSelect.data('initial-value', ''); // Xóa giá trị cũ khi TP thay đổi
+                loadQuanHuyen(selectedCityId, null, false);
+            });
+            
+            const initialThanhPhoId = thanhPhoSelect.val(); 
+            const initialQuanHuyenId = quanHuyenSelect.data('initial-value');
+            if (initialThanhPhoId && initialThanhPhoId !== "") {
+                // Không disable ở đây, để loadQuanHuyen xử lý
+                if (quanHuyenSelect.find('option[value="' + initialQuanHuyenId + '"]').length > 0 && initialQuanHuyenId !== "" && quanHuyenSelect.find('option[value="' + initialQuanHuyenId + '"]').text() !== '-- Chọn Quận/Huyện --' && quanHuyenSelect.find('option[value="' + initialQuanHuyenId + '"]').text() !== '-- Đang tải... --') {
+                    quanHuyenSelect.val(initialQuanHuyenId); 
+                    quanHuyenSelect.data('current-city-id', initialThanhPhoId); 
+                    quanHuyenLoading.hide();
+                    quanHuyenSelect.prop('disabled', false);
+                } else { 
+                    loadQuanHuyen(initialThanhPhoId, initialQuanHuyenId, true); 
+                }
+            } else { 
+                quanHuyenSelect.prop('disabled', true); 
+                quanHuyenLoading.hide();
+            }
+
+            // === KHỐI JS LƯU/BỎ LƯU TIN ===
+            const csrfToken = '@requestToken';
+            $('.job-list').on('click', '.btn-save-job, .btn-unsave-job', function (e) {
+                e.preventDefault();
+                const button = $(this); const tinId = button.data('id');
+                
+                if (!tinId || isNaN(parseInt(tinId)) || parseInt(tinId) <= 0 || !csrfToken) { 
+                    if (typeof Swal !== 'undefined') {
+                         Swal.fire({ icon: 'error', title: 'Lỗi', text: 'Không thể thực hiện thao tác.', confirmButtonText: 'Đóng' });
+                    } else { alert('Lỗi: Không thể thực hiện thao tác.'); }
+                    return; 
+                }
+                
+                const isSaving = button.hasClass('btn-save-job');
+                const url = isSaving ? '@Url.Action("LuuTin", "TimViec")' : '@Url.Action("BoLuuTin", "TimViec")';
+                const icon = button.find('i'); const textSpan = button.find('.button-text-js');
+                const originalIconClass = icon.attr('class'); const originalText = textSpan ? textSpan.text() : ""; // Kiểm tra textSpan
+                
+                button.prop('disabled', true); 
+                icon.removeClass().addClass('fas fa-spinner fa-spin me-1'); 
+                if(textSpan) textSpan.text('Đang xử lý...');
+                
+                $.ajax({
+                    url: url, 
+                    type: 'POST', 
+                    contentType: 'application/json', 
+                    data: JSON.stringify(parseInt(tinId)), 
+                    headers: { 'RequestVerificationToken': csrfToken },
+                    success: function (response) {
+                        if (response && response.success) {
+                            button.addClass('animate__animated animate__pulse');
+                            setTimeout(() => button.removeClass('animate__animated animate__pulse'), 1000);
+                            
+                            if (isSaving) { 
+                                button.removeClass('btn-save-job btn-outline-success').addClass('btn-unsave-job btn-success'); 
+                                icon.removeClass().addClass('fas fa-heart fa-fw me-1'); 
+                                if(textSpan) textSpan.text('Đã lưu'); 
+                                button.attr('title', 'Bỏ lưu tin'); 
+                                if (typeof toastr !== 'undefined') toastr.success('Đã lưu tin tuyển dụng.');
+                            }
+                            else { 
+                                button.removeClass('btn-unsave-job btn-success').addClass('btn-save-job btn-outline-success'); 
+                                icon.removeClass().addClass('far fa-heart fa-fw me-1'); 
+                                if(textSpan) textSpan.text('Lưu tin'); 
+                                button.attr('title', 'Lưu tin'); 
+                                if (typeof toastr !== 'undefined') toastr.info('Đã bỏ lưu tin tuyển dụng.');
+                            }
+                        } else { 
+                            if (typeof Swal !== 'undefined') Swal.fire({ icon: 'error', title: 'Lỗi', text: response ? response.message : "Lỗi xử lý.", confirmButtonText: 'Đóng' }); else alert(response ? response.message : "Lỗi xử lý.");
+                            icon.removeClass().addClass(originalIconClass); 
+                            if(textSpan) textSpan.text(originalText); 
+                        }
+                    },
+                    error: function (jqXHR) { 
+                        let m = "Lỗi server."; 
+                        if (jqXHR.status === 401) m = "Vui lòng đăng nhập."; 
+                        else if (jqXHR.status === 403) m="Lỗi bảo mật."; 
+                        else if(jqXHR.responseJSON && jqXHR.responseJSON.message) m=jqXHR.responseJSON.message; 
+                        else if(jqXHR.responseText) { try { const d=JSON.parse(jqXHR.responseText); if(d.title) m=d.title; } catch{}} 
+                        if (typeof Swal !== 'undefined') Swal.fire({ icon: 'error', title: 'Lỗi', text: m, confirmButtonText: 'Đóng' }); else alert(m);
+                        icon.removeClass().addClass(originalIconClass); 
+                        if(textSpan) textSpan.text(originalText); 
+                    },
+                    complete: function () { button.prop('disabled', false); }
+                });
+            });
+
+            // === KHỐI JS XỬ LÝ SẮP XẾP ===
+            $('#SapXepSelectDisplay').on('change', function() {
+                $('form#searchForm input[name="SapXep"]').val($(this).val());
+                const submitBtn = $('form#searchForm button[type="submit"]');
+                submitBtn.html('<i class="fas fa-spinner fa-spin me-1"></i> Đang tải...');
+                submitBtn.prop('disabled', true);
+                $('.job-list').fadeOut(200, function() { // Giảm thời gian fadeOut
+                    $('form#searchForm').submit();
+                });
+            });
+            
+            const initialSortValue = $('#SapXepSelectDisplay').val();
+            if(initialSortValue){ $('form#searchForm input[name="SapXep"]').val(initialSortValue); }
+            
+            // === BACK TO TOP BUTTON ===
+            const backToTopBtn = $('#backToTopBtn');
+            if (backToTopBtn.length) { // Kiểm tra nút có tồn tại không
+                $(window).scroll(function() {
+                    if ($(this).scrollTop() > 200) { // Giảm khoảng cách scroll để nút hiện sớm hơn
+                        backToTopBtn.fadeIn(200);
+                    } else {
+                        backToTopBtn.fadeOut(200);
+                    }
+                });
+                backToTopBtn.on('click', function() {
+                    $('html, body').animate({scrollTop: 0}, 300, 'swing'); // Giảm thời gian cuộn
+                    return false;
+                });
+            }
+            
+            // === HIỆU ỨNG HOVER CHO CÁC CARD CÔNG VIỆC (Tùy chọn, có thể bỏ nếu gây lag) ===
+            // $('.job-item').hover(
+            //     function() { $(this).addClass('shadow-lg').css('transform', 'translateY(-3px)'); }, // Giảm độ nâng
+            //     function() { $(this).removeClass('shadow-lg').css('transform', 'translateY(0)'); }
+            // );
+            
+            // === KHỞI TẠO TOOLTIP ===
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+            
+            // === HIỆU ỨNG LOADING KHI SUBMIT FORM TÌM KIẾM ===
+            $('#searchForm').on('submit', function() {
+                const submitBtn = $(this).find('button[type="submit"]');
+                submitBtn.html('<i class="fas fa-spinner fa-spin me-1"></i> Đang tìm...');
+                submitBtn.prop('disabled', true);
+                $('body').addClass('searching'); // Có thể dùng để làm mờ toàn trang
+                return true; 
+            });
+
+            // === XỬ LÝ MỨC LƯƠNG MIN/MAX KHI CHỌN LOẠI LƯƠNG ===
+            $('#LoaiLuongSelect').on('change', function() {
+                if ($(this).val() === '@LoaiLuong.thoathuan.ToString()' || $(this).val() === '') {
+                    $('#salaryMinMaxFilter').slideUp(200);
+                } else {
+                    $('#salaryMinMaxFilter').slideDown(200);
+                }
+            }).trigger('change'); // Kích hoạt change để ẩn/hiện đúng khi tải trang
+
+            // === COLLAPSE FILTER ITEMS ===
+            $('.filter-toggle-btn').on('click', function(e){
+                e.preventDefault();
+                const icon = $(this).find('i.fas');
+                if (icon.hasClass('fa-chevron-down')) {
+                    icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+                } else {
+                    icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+                }
+            });
+        });
+        
+        // Thêm thư viện SweetAlert2 và Toastr nếu chưa có
+        function loadScript(src, callback) {
+            let script = document.createElement('script');
+            script.src = src;
+            script.onload = () => callback && callback();
+            script.onerror = () => console.error(`Lỗi tải script: ${src}`);
+            document.head.appendChild(script);
+        }
+
+        function loadStylesheet(href) {
+            let link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            document.head.appendChild(link);
+        }
+
+        if (typeof Swal === 'undefined') {
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.all.min.js'); // Cập nhật version
+             loadStylesheet('https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.css');
+        }
+        
+        if (typeof toastr === 'undefined') {
+            loadStylesheet('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css'); // Cập nhật version
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js', function() {
+                if (typeof toastr !== 'undefined') {
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": true,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "4000", // Tăng thời gian hiển thị
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
+                }
+            });
+        }
+    </script>
+}

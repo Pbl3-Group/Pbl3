@@ -1,0 +1,125 @@
+@model HeThongTimViec.ViewModels.TinNhanTrangChinhViewModel
+@using System.Security.Claims
+@using HeThongTimViec.Models @* Required for LoaiTaiKhoan enum if used directly in view logic *@
+
+@{
+    ViewData["Title"] = "Hộp thư";
+    Layout = "~/Views/Shared/_LayoutTinNhan.cshtml";
+    var currentUserId = int.Parse(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier)!);
+}
+
+<div class="chat-layout-container">
+    <div class="chat-layout">
+        <!-- Sidebar: Danh sách cuộc trò chuyện -->
+        <div class="chat-sidebar">
+            <div class="chat-sidebar-header">
+                <div class="sidebar-title">Danh sách trò chuyện</div>
+                <div class="sidebar-actions">
+                </div>
+            </div>
+            <div class="chat-sidebar-search">
+                 <input type="text" class="form-control" placeholder="Tìm kiếm hoặc bắt đầu..." id="searchInputConversation">
+            </div>
+            <div class="chat-conversations-list" id="conversationList">
+                @if (Model.DanhSachCuocHoiThoai.Any())
+                {
+                    @foreach (var conv in Model.DanhSachCuocHoiThoai.OrderByDescending(c => c.ThoiGianTinNhanCuoi))
+                    {
+                        <a asp-action="Index" asp-route-nguoiLienHeId="@conv.NguoiLienHeId"
+                           class="conversation-item @(conv.NguoiLienHeId == Model.NguoiLienHeDangChonId ? "active" : "")"
+                           data-userid="@conv.NguoiLienHeId"
+                           data-username="@conv.TenNguoiLienHe.ToLower()">
+                            <div class="conversation-avatar">
+                                <img src="@(conv.UrlAvatarNguoiLienHe ?? (conv.LoaiTaiKhoanNguoiLienHe == LoaiTaiKhoan.doanhnghiep ? "/images/avatars/default_employer.png" : "/images/avatars/default_user.png"))" alt="Avatar">
+                            </div>
+                            <div class="conversation-details">
+                                <div class="conversation-name-time">
+                                    <div class="conversation-name">@conv.TenNguoiLienHe</div>
+                                    <div class="conversation-time" id="last-message-time-@conv.NguoiLienHeId">@conv.ThoiGianTinNhanCuoi.ToString("HH:mm")</div>
+                                </div>
+                                <div class="conversation-last-message-unread">
+                                    <div class="conversation-last-message" id="last-message-@conv.NguoiLienHeId">
+                                        @if (conv.LaTinNhanCuoiCuaToi) {<span>Bạn: </span>} @Html.Raw(System.Net.WebUtility.HtmlDecode(conv.TinNhanCuoiCung))
+                                    </div>
+                                    @if (conv.CoTinNhanMoi)
+                                    {
+                                        <span class="badge bg-primary rounded-pill unread-badge" id="unread-badge-@conv.NguoiLienHeId">@conv.SoTinNhanMoi</span>
+                                    }
+                                </div>
+                            </div>
+                        </a>
+                    }
+                }
+                else
+                {
+                    <p class="p-3 text-muted text-center">Không có cuộc trò chuyện nào.</p>
+                }
+                 <div id="noResultsMessage" class="p-3 text-muted text-center" style="display: none;">Không tìm thấy cuộc trò chuyện nào.</div>
+            </div>
+        </div>
+
+        <!-- Main Chat Window -->
+        <div class="chat-main" id="chatMainWindow">
+            @if (Model.NguoiLienHeDangChonId.HasValue && Model.ThongTinNguoiLienHeDangChon != null)
+            {
+                await Html.RenderPartialAsync("_ChiTietHoiThoaiPartial", Model);
+            }
+            else
+            {
+                <div class="no-conversation-selected">
+                    <div>
+                        <i class="fas fa-comments fa-3x mb-3"></i>
+                        <p>Chọn một cuộc trò chuyện để bắt đầu nhắn tin <br> hoặc tìm kiếm để bắt đầu cuộc trò chuyện mới.</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @* <script src="~/js/signalr/dist/browser/signalr.min.js"></script> *@
+    @* <script src="~/js/tinnhan.js" asp-append-version="true"></script> -- This is already in _LayoutTinNhan.cshtml *@
+    <script>
+        const currentLoggedInUserId = @currentUserId;
+        let currentChatPartnerId = @(Model.NguoiLienHeDangChonId.HasValue ? Model.NguoiLienHeDangChonId.Value.ToString() : "null");
+
+        function scrollToBottomMessages() {
+            var chatMessagesDiv = document.getElementById('chatMessagesArea');
+            if (chatMessagesDiv) {
+                chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+            }
+        }
+
+        $(document).ready(function() {
+            scrollToBottomMessages();
+
+            $('#searchInputConversation').on('keyup', function() {
+                var searchText = $(this).val().toLowerCase();
+                var found = false;
+                $('#conversationList .conversation-item').each(function() {
+                    var userName = $(this).data('username');
+                    if (userName.includes(searchText)) {
+                        $(this).show();
+                        found = true;
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                if (!found && searchText !== "" && $('#conversationList .conversation-item:visible').length === 0) {
+                     $('#noResultsMessage').show();
+                     if ($('#conversationList .conversation-item').length > 0 && $('#conversationList .p-3.text-muted').is(':hidden')) {
+                        $('#conversationList .p-3.text-muted').hide();
+                     }
+                } else {
+                    $('#noResultsMessage').hide();
+                     if (searchText === "" && $('#conversationList .conversation-item').length === 0) {
+                        $('#conversationList .p-3.text-muted').show();
+                     } else if (searchText === "" && $('#conversationList .conversation-item').length > 0) {
+                         $('#conversationList .p-3.text-muted').hide();
+                     }
+                }
+            });
+        });
+    </script>
+}

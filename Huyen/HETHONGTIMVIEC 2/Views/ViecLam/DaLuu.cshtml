@@ -1,0 +1,150 @@
+@* File: Views/ViecLam/DaLuu.cshtml *@
+@model HeThongTimViec.ViewModels.ViecDaLuu.DaLuuViewModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
+@{
+    ViewData["Title"] = "Công Việc Đã Lưu";
+    var requestToken = antiforgery.GetAndStoreTokens(Context).RequestToken;
+    var currentTuKhoa = Model.TuKhoa;
+    var currentSapXep = Model.SapXepThoiGian;
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+@* 
+    QUAN TRỌNG: Nếu bạn có file CSS tùy chỉnh (ví dụ: viecdaluu.css hoặc style.css), 
+    hãy đảm bảo nó được link SAU file CSS của Bootstrap trong _Layout.cshtml 
+    hoặc bạn có thể tạo section Styles để chèn CSS cụ thể cho trang này.
+*@
+@* @section Styles { *@
+   <link rel="stylesheet" href="~/css/viecdaluu.css" asp-append-version="true" /> 
+@* } *@
+
+
+<div class="container page-container-saved-jobs">
+    <div class="page-header-saved d-flex align-items-center mb-4 animate__animated animate__fadeInDown">
+        <div class="header-icon-saved">
+            <i class="fas fa-bookmark fa-2x"></i>
+        </div>
+        <div>
+            <h1 class="h3 mb-0">@ViewData["Title"]</h1>
+            <p class="mb-0 text-muted">Những công việc bạn đã lưu lại để xem xét hoặc ứng tuyển sau.</p>
+        </div>
+    </div>
+    
+    @if (TempData["SuccessMessage"] != null) { <div class="alert alert-success alert-dismissible fade show animate__animated animate__fadeIn" role="alert"> @TempData["SuccessMessage"] <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div> }
+    @if (TempData["ErrorMessage"] != null) { <div class="alert alert-danger alert-dismissible fade show animate__animated animate__fadeIn" role="alert"> @TempData["ErrorMessage"] <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div> }
+    @if (TempData["InfoMessage"] != null) { <div class="alert alert-info alert-dismissible fade show animate__animated animate__fadeIn" role="alert"> @TempData["InfoMessage"] <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div> }
+
+    <div class="filter-section-saved mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+        <form asp-action="DaLuu" method="get" id="filterSavedJobsForm"> @* THÊM ID VÀO FORM *@
+            <div class="row g-3 align-items-center"> @* Đổi thành align-items-center để label và input thẳng hàng hơn *@
+                <div class="col-md">
+                    <label asp-for="TuKhoa" class="form-label">Tìm kiếm</label> @* <<< ĐÃ THAY ĐỔI LABEL *@
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text"><i class="fas fa-search text-muted"></i></span>
+                        <input asp-for="TuKhoa" class="form-control form-control-sm" placeholder="Tên công việc, công ty..."> @* <<< ĐÃ THAY ĐỔI PLACEHOLDER *@
+                    </div>
+                </div>
+                <div class="col-md-auto" style="min-width: 200px;">
+                    <label asp-for="SapXepThoiGian" class="form-label">Sắp xếp theo</label>
+                    <select asp-for="SapXepThoiGian" asp-items="Model.SapXepThoiGianOptions" class="form-select form-select-sm">
+                    </select>
+                </div>
+                <div class="col-md-auto d-grid mt-auto"> @* Thêm mt-auto để nút Lọc căn xuống dưới nếu label cao hơn *@
+                    <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-filter me-1"></i> Lọc</button>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.TuKhoa) || (Model.SapXepThoiGian != null && Model.SapXepThoiGian != "moinhat"))
+                {
+                    <div class="col-md-auto d-grid mt-auto">
+                        <a asp-action="DaLuu" class="btn btn-outline-secondary-custom btn-sm"><i class="fas fa-times me-1"></i> Xóa lọc</a>
+                    </div>
+                }
+            </div>
+        </form>
+    </div>
+    
+    @if (Model.SavedJobs != null && Model.SavedJobs.Any())
+    {
+        <div class="d-flex justify-content-between align-items-center saved-job-list-header animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+            <p class="mb-0 text-muted">Bạn có <strong>@Model.SavedJobs.TotalCount</strong> công việc đã lưu.</p>
+             <form asp-controller="ViecLam" asp-action="XoaTatCaTinDaLuu" method="post" onsubmit="return confirm('Bạn chắc chắn muốn xóa TẤT CẢ công việc đã lưu? Hành động này không thể hoàn tác.');">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-sm btn-outline-danger-custom">
+                    <i class="fas fa-trash-alt me-1"></i> Xóa tất cả
+                </button>
+            </form>
+        </div>
+    }
+
+    <div class="saved-job-list animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+        @if (Model.SavedJobs != null && Model.SavedJobs.Any())
+        {
+            <div class="row row-cols-1 g-3">
+                @foreach (var (item, index) in Model.SavedJobs.Select((value, i) => (value,i)))
+                {
+                    <div class="col animate__animated animate__fadeInUp" style="animation-delay: @(0.1 + index * 0.07)s; animation-duration: 0.5s;">
+                         @await Html.PartialAsync("_SavedJobItem", item, new ViewDataDictionary(ViewData) { { "CurrentUrl", Context.Request.Path + Context.Request.QueryString } })
+                    </div>
+                }
+            </div>
+
+            @if (Model.SavedJobs.TotalPages > 1)
+            {
+                <nav aria-label="Page navigation" class="mt-4 d-flex justify-content-center animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <ul class="pagination pagination-sm flex-wrap">
+                         <li class="page-item @(!Model.SavedJobs.HasPreviousPage ? "disabled" : "")">
+                             <a class="page-link" href="@Url.Action("DaLuu", "ViecLam", new { page = Model.SavedJobs.PageIndex - 1, tuKhoa = currentTuKhoa, sapXepThoiGian = currentSapXep })" aria-label="Previous"> <span aria-hidden="true">«</span> </a>
+                         </li>
+                          @{
+                                int startPage = Math.Max(1, Model.SavedJobs.PageIndex - 1); 
+                                int endPage = Math.Min(Model.SavedJobs.TotalPages, Model.SavedJobs.PageIndex + 1);
+                                if(Model.SavedJobs.TotalPages <=3 ) {startPage = 1; endPage = Model.SavedJobs.TotalPages;}
+                                else {
+                                    if(Model.SavedJobs.PageIndex <=2) {startPage=1; endPage=3;}
+                                    else if (Model.SavedJobs.PageIndex >= Model.SavedJobs.TotalPages -1) {startPage = Model.SavedJobs.TotalPages -2; endPage = Model.SavedJobs.TotalPages;}
+                                }
+
+                                if (startPage > 1) { <li class="page-item"><a class="page-link" href="@Url.Action("DaLuu", "ViecLam", new { page = 1, tuKhoa = currentTuKhoa, sapXepThoiGian = currentSapXep })">1</a></li> if (startPage > 2) { <li class="page-item disabled"><span class="page-link">...</span></li> } }
+                                for (int i = startPage; i <= endPage; i++) { <li class="page-item @(i == Model.SavedJobs.PageIndex ? "active" : "")"><a class="page-link" href="@Url.Action("DaLuu", "ViecLam", new { page = i, tuKhoa = currentTuKhoa, sapXepThoiGian = currentSapXep })">@i</a></li> }
+                                if (endPage < Model.SavedJobs.TotalPages) { if (endPage < Model.SavedJobs.TotalPages - 1) { <li class="page-item disabled"><span class="page-link">...</span></li> } <li class="page-item"><a class="page-link" href="@Url.Action("DaLuu", "ViecLam", new { page = Model.SavedJobs.TotalPages, tuKhoa = currentTuKhoa, sapXepThoiGian = currentSapXep })">@Model.SavedJobs.TotalPages</a></li> }
+                           }
+                        <li class="page-item @(!Model.SavedJobs.HasNextPage ? "disabled" : "")">
+                             <a class="page-link" href="@Url.Action("DaLuu", "ViecLam", new { page = Model.SavedJobs.PageIndex + 1, tuKhoa = currentTuKhoa, sapXepThoiGian = currentSapXep })" aria-label="Next"> <span aria-hidden="true">»</span> </a>
+                         </li>
+                    </ul>
+                </nav>
+            }
+        }
+        else
+        {
+            <div class="empty-state-saved animate__animated animate__fadeIn">
+                <div class="icon"> <i class="far fa-bookmark"></i> </div>
+                @if(!string.IsNullOrEmpty(Model.TuKhoa))
+                {
+                    <p class="mb-2">Không tìm thấy công việc nào đã lưu khớp với từ khóa "<strong>@Model.TuKhoa</strong>".</p>
+                    <a asp-action="DaLuu" class="btn btn-sm btn-outline-primary"><i class="fas fa-times me-1"></i> Xóa tìm kiếm</a>
+                }
+                else
+                {
+                    <p class="mb-2">Bạn chưa lưu công việc nào. Hãy khám phá và lưu lại những cơ hội phù hợp!</p>
+                    <a asp-action="Index" asp-controller="TimViec" class="btn btn-sm btn-primary"><i class="fas fa-search me-1"></i> Tìm việc ngay</a>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(function(){
+            // Tự động submit form lọc khi select sắp xếp thay đổi
+            $('#SapXepThoiGian').on('change', function(){
+                 $(this).closest('form.filter-form').submit(); // Sử dụng class của form thay vì ID
+            });
+            // Nếu bạn có select cho TrangThaiFilter và muốn auto-submit:
+            // $('#TrangThaiFilter').on('change', function(){
+            //     $(this).closest('form.filter-form').submit();
+            // });
+        });
+    </script>
+}
