@@ -14,9 +14,9 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 
 Dự án được phát triển bởi nhóm "Pbl3-Group", bao gồm các thành viên:
 
-*   [@Nguyễn Thanh Huyền](https://github.com/Chizk23)- Nguyễn Thanh Huyền
-*   [@Bích Uyên](https://github.com/BichUyen2609)- Nguyễn Thị Bích Uyên
-*   [@Phượng Trần](https://github.com/PhuongTran2212)- Trần Thị Phượng
+*   [@Chizk23](https://github.com/Chizk23)- Nguyễn Thanh Huyền
+*   [@BichUyen2609](https://github.com/BichUyen2609)- Nguyễn Thị Bích Uyên
+*   [@PhuongTran2212](https://github.com/PhuongTran2212)- Trần Thị Phượng
 
 ---
 
@@ -245,8 +245,8 @@ Dự án này được cấp phép theo Giấy phép MIT - xem file [LICENSE](ht
 
 📞 **Liên hệ**
 
-*   [@Nguyễn Thanh Huyền](https://github.com/Chizk23)
-*   [@Bích Uyên](https://github.com/BichUyen2609)
-*   [@Phượng Trần](https://github.com/PhuongTran2212)
+*   [@Chizk23](https://github.com/Chizk23)- Nguyễn Thanh Huyền
+*   [@BichUyen2609](https://github.com/BichUyen2609)- Nguyễn Thị Bích Uyên
+*   [@PhuongTran2212](https://github.com/PhuongTran2212)- Trần Thị Phượng
 
 ⭐ **Nếu bạn thấy dự án này hữu ích, hãy cân nhắc tặng nó một ngôi sao!**
