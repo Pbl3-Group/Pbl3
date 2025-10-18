@@ -1,0 +1,274 @@
+@model HeThongTimViec.ViewModels.BaoCaoThongKeViewModel
+
+<style>
+    /* CSS được đóng gói trong partial view này để dễ quản lý */
+    /* Bạn có thể di chuyển ra file CSS chung nếu muốn */
+
+    .stat-card-candidate {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        min-height: 140px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+    
+    .stat-card-candidate::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+        transition: left 0.5s;
+    }
+    
+    .stat-card-candidate:hover::before {
+        left: 100%;
+    }
+    
+    .stat-card-candidate:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stat-card-candidate.success {
+        background: linear-gradient(145deg, #1dd1a1, #10ac84);
+        color: white;
+    }
+    
+    .stat-card-candidate.warning {
+        background: linear-gradient(145deg, #feca57, #ff9f43);
+        color: #3d3d3d; /* Màu chữ tối hơn cho nền vàng */
+    }
+
+    .stat-card-candidate .stat-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.9;
+        animation: float 3s ease-in-out infinite;
+        text-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+    
+    .stat-card-candidate .stat-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-card-candidate.success .stat-title,
+    .stat-card-candidate.success .stat-value {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .stat-card-candidate .stat-value {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        font-weight: 700;
+    }
+
+    .chart-card-candidate {
+        background: white;
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        /* Thêm display flex để card con chiếm hết chiều cao */
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .chart-card-candidate:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .chart-card-candidate .card-header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 1.5rem;
+        border-radius: 20px 20px 0 0 !important;
+    }
+    
+    .chart-card-candidate .card-header h6 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .chart-card-candidate .card-body {
+        padding: 2rem;
+        flex-grow: 1; /* Cho phép card-body co giãn */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chart-card-candidate .table-responsive {
+        flex-grow: 1; /* Cho phép table-responsive co giãn */
+        max-height: 320px;
+    }
+
+    .chart-card-candidate .table thead th {
+        background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+        color: #374151;
+        border: none;
+        padding: 1rem;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+    }
+    
+    .chart-card-candidate .table tbody tr:hover {
+        background: rgba(102, 126, 234, 0.05);
+        transform: scale(1.01);
+    }
+    
+    .chart-card-candidate .table tbody td {
+        padding: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        vertical-align: middle;
+    }
+    
+    .chart-card-candidate .chart-container {
+        position: relative;
+        min-height: 300px; /* Chiều cao tối thiểu cho biểu đồ */
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease-out;
+    }
+    
+    .animate-on-scroll.animated {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="alert alert-info animate-on-scroll">
+        <i class="fas fa-info-circle me-2"></i>
+        <strong>Lưu ý:</strong> Các thống kê trong tab này dựa trên toàn bộ người dùng có loại tài khoản là <strong>"Cá nhân"</strong>, không chỉ những người đã từng ứng tuyển.
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="stat-card-candidate success animate-on-scroll">
+                <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                <div class="stat-title">Tỉ lệ hoàn thành hồ sơ</div>
+                <div class="stat-value">@Model.TiLeHoanThanhHoSo.ToString("F1")%</div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="stat-card-candidate warning animate-on-scroll">
+                <div class="stat-icon"><i class="fas fa-file-signature"></i></div>
+                <div class="stat-title">Số ứng tuyển / ứng viên</div>
+                <div class="stat-value">@Model.SoUngTuyenTrungBinhMoiUngVien.ToString("F1")</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sắp xếp lại bố cục thành 1 hàng 3 cột -->
+    <div class="row">
+        <!-- Cột 1: Phân bố độ tuổi -->
+        <div class="col-lg-4 mb-4">
+            <div class="chart-card-candidate h-100 animate-on-scroll">
+                <div class="card-header">
+                    <h6><i class="fas fa-birthday-cake"></i> Phân bố độ tuổi</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="candidateAgeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cột 2: Top 5 Ứng viên -->
+        <div class="col-lg-4 mb-4">
+            <div class="chart-card-candidate h-100 animate-on-scroll">
+                <div class="card-header">
+                    <h6><i class="fas fa-trophy"></i> Top 5 Ứng viên tích cực nhất</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-user me-2"></i>Họ Tên</th>
+                                    <th class="text-end"><i class="fas fa-paper-plane me-2"></i>Số lần ứng tuyển</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Top5UngVienTichCucNhat)
+                                {
+                                    <tr>
+                                        <td>@item.HoTen</td>
+                                        <td class="text-end">
+                                            <span class="badge bg-primary rounded-pill fs-6">
+                                                @item.SoLuongUngTuyen.ToString("N0")
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cột 3: Thống kê kinh nghiệm -->
+        <div class="col-lg-4 mb-4">
+            <div class="chart-card-candidate h-100 animate-on-scroll">
+                <div class="card-header">
+                    <h6><i class="fas fa-briefcase"></i> Thống kê kinh nghiệm (từ hồ sơ)</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="candidateExperienceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Kích hoạt lại animation cho các phần tử mới được tải vào DOM
+        const elements = document.querySelectorAll('.animate-on-scroll:not(.animated)');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        elements.forEach(element => {
+            observer.observe(element);
+        });
+    });
+</script>

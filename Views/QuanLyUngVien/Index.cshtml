@@ -1,0 +1,399 @@
+@model HeThongTimViec.ViewModels.QuanLyUngVien.QuanLyUngVienViewModel
+@using HeThongTimViec.Models 
+@using HeThongTimViec.Extensions
+@using HeThongTimViec.Helpers 
+@{
+    ViewData["Title"] = "Quản lý Ứng viên";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Filter Panel (Left Sidebar) -->
+        <div class="col-lg-3">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h4><i class="fas fa-filter me-2"></i>Bộ lọc</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Index" method="get" id="filterForm">
+                        <div class="mb-3">
+                            <label asp-for="FilterByTrangThai" class="form-label fw-semibold">Trạng thái ứng tuyển</label>
+                            @foreach (var item in Model.TrangThaiOptions ?? Enumerable.Empty<SelectListItem>())
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="FilterByTrangThai" id="trangthai_@(item.Value)" value="@item.Value"
+                                           @(Model.FilterByTrangThai.ToString() == item.Value ? "checked" : "") @(string.IsNullOrEmpty(item.Value) && !Model.FilterByTrangThai.HasValue ? "checked" : "")>
+                                    <label class="form-check-label" for="trangthai_@(item.Value)">
+                                        @item.Text
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                        <hr/>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Khu vực mong muốn (Ứng viên)</label>
+                            <div class="province-filter-list" style="max-height: 250px; overflow-y: auto; border: 1px solid #dee2e6; padding: 10px; border-radius: .375rem;">
+                                @if (Model.KhuVucMongMuonOptions != null && Model.KhuVucMongMuonOptions.Any())
+                                {
+                                    foreach (var thanhPho in Model.KhuVucMongMuonOptions)
+                                    {
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="FilterByKhuVucMongMuonIds" value="@thanhPho.Value" id="khuvuc_@thanhPho.Value"
+                                                   @(Model.FilterByKhuVucMongMuonIds != null && Model.FilterByKhuVucMongMuonIds.Contains(int.Parse(thanhPho.Value ?? "0")) ? "checked" : "") />
+                                            <label class="form-check-label" for="khuvuc_@thanhPho.Value">@thanhPho.Text</label>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p class="text-muted small">Không có tùy chọn khu vực.</p>
+                                }
+                            </div>
+                        </div>
+                        <hr/>
+                        <button type="submit" class="btn btn-primary w-100 mb-2"><i class="fas fa-search me-1"></i> Áp dụng bộ lọc</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary w-100">Xóa bộ lọc</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content (Candidate List) -->
+        <div class="col-lg-9">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3>@ViewData["Title"]</h3>
+                <!-- Any additional controls like "Export" can go here -->
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-light py-3">
+                    <form asp-action="Index" method="get" class="row gx-2 gy-2 align-items-center">
+                        @* Hidden fields to retain filter values when submitting this top form *@
+                        <input type="hidden" name="FilterByTrangThai" value="@Model.FilterByTrangThai" />
+                        @if (Model.FilterByKhuVucMongMuonIds != null)
+                        {
+                            foreach (var id in Model.FilterByKhuVucMongMuonIds)
+                            {
+                                <input type="hidden" name="FilterByKhuVucMongMuonIds" value="@id" />
+                            }
+                        }
+
+                        <div class="col-md-4">
+                            <select asp-for="SelectedTinTuyenDungId" asp-items="Model.TinTuyenDungOptions" class="form-select form-select-sm">
+                                <option value="">-- Lọc theo tin tuyển dụng --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input asp-for="SearchTerm" class="form-control form-control-sm" placeholder="Tìm theo tên, email, vị trí..." />
+                        </div>
+                        <div class="col-md-3">
+                             <select asp-for="SortBy" asp-items="Model.SortOptions" class="form-select form-select-sm"></select>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="submit" class="btn btn-primary btn-sm w-100"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body p-0">
+                    @if (Model.UngViens != null && Model.UngViens.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="min-width: 220px;">Ứng viên</th>
+                                        <th style="min-width: 200px;">Thông tin liên hệ & CV</th>
+                                        <th>Ngày nộp</th>
+                                        <th>Trạng thái</th>
+                                        <th class="text-center" style="width: 120px;">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ungVien in Model.UngViens)
+                                    {
+                                        <tr id="ungtuyen-row-@ungVien.UngTuyenId">
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="@ungVien.AvatarUrl" alt="avatar" class="rounded-circle me-3 shadow-sm" style="width: 50px; height: 50px; object-fit: cover;" />
+                                                    <div>
+                                                        <a asp-action="ChiTietHoSo" asp-route-ungVienId="@ungVien.UngVienId" asp-route-ungTuyenId="@ungVien.UngTuyenId" class="fw-bold text-dark text-decoration-none hover-primary">@ungVien.HoTenUngVien</a>
+                                                        <p class="text-muted mb-0 small">@ungVien.ViTriHoSo</p>
+                                                         @if (!string.IsNullOrEmpty(ungVien.KinhNghiemDisplay) && ungVien.KinhNghiemDisplay != "Chưa cập nhật") {
+                                                            <p class="mb-0 small text-muted"><i class="fas fa-briefcase me-1"></i> @ungVien.KinhNghiemDisplay</p>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="mb-1 small"><i class="fas fa-map-marker-alt me-1 text-primary"></i> @ungVien.ThanhPhoUngVien</p>
+                                                @if(!string.IsNullOrEmpty(ungVien.UrlCvDaNop))
+                                                {
+                                                    <p class="mb-1 small">
+                                                        <a href="@ungVien.UrlCvDaNop" target="_blank" class="text-decoration-none">
+                                                            <i class="fas fa-file-pdf me-1 text-danger"></i>Xem CV đã nộp
+                                                        </a>
+                                                    </p>
+                                                }
+                                                @if(ungVien.SkillTags.Any()) {
+                                                    <div class="mt-1">
+                                                        @foreach(var skill in ungVien.SkillTags.Take(3)) { // Show limited tags
+                                                            <span class="badge bg-info-soft text-info me-1">@skill</span>
+                                                        }
+                                                        @if(ungVien.SkillTags.Count > 3) {
+                                                            <span class="badge bg-light text-dark">...</span>
+                                                        }
+                                                    </div>
+                                                }
+                                            </td>
+                                            <td class="small">@ungVien.NgayNopHoSo.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>
+                                                <span class="badge @ungVien.TrangThaiBadgeClass" id="status-badge-@ungVien.UngTuyenId">@ungVien.TrangThaiHienTaiDisplay</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="actions_@ungVien.UngTuyenId" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-h"></i> <span class="visually-hidden">Tùy chọn</span>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end custom-dropdown" aria-labelledby="actions_@ungVien.UngTuyenId">
+                                                        <li>
+                                                            <a class="dropdown-item" asp-action="ChiTietHoSo" asp-route-ungVienId="@ungVien.UngVienId" asp-route-ungTuyenId="@ungVien.UngTuyenId">
+                                                                <i class="fas fa-user-tie fa-fw me-2"></i>Xem hồ sơ
+                                                            </a>
+                                                        </li>
+                                                        @if (!string.IsNullOrEmpty(ungVien.UrlCvDaNop))
+                                                        {
+                                                            <li><a class="dropdown-item" href="@ungVien.UrlCvDaNop" target="_blank"><i class="fas fa-file-alt fa-fw me-2"></i>Xem CV đã nộp</a></li>
+                                                        }
+                                                        <li><hr class="dropdown-divider"></li>
+                                                        @if(ungVien.TrangThaiHienTai != TrangThaiUngTuyen.darut) {
+                                                            <li><button class="dropdown-item change-status-btn" data-ungtuyenid="@ungVien.UngTuyenId" data-newstatus="@TrangThaiUngTuyen.daduyet"><i class="fas fa-check-circle fa-fw me-2 text-success"></i>Đánh dấu Phù hợp</button></li>
+                                                            <li><button class="dropdown-item change-status-btn" data-ungtuyenid="@ungVien.UngTuyenId" data-newstatus="@TrangThaiUngTuyen.ntddaxem"><i class="fas fa-eye fa-fw me-2 text-info"></i>Đánh dấu Đã xem</button></li>
+                                                            <li><button class="dropdown-item change-status-btn" data-ungtuyenid="@ungVien.UngTuyenId" data-newstatus="@TrangThaiUngTuyen.bituchoi"><i class="fas fa-times-circle fa-fw me-2 text-danger"></i>Từ chối hồ sơ</button></li>
+                                                        } else {
+                                                             <li><span class="dropdown-item text-muted disabled"><i class="fas fa-ban fa-fw me-2"></i>Ứng viên đã rút</span></li>
+                                                        }
+                                                        <li><hr class="dropdown-divider"></li>
+                                                        <li>
+                                                            <a class="dropdown-item" 
+                                                           asp-controller="TinNhan" 
+                                                           asp-action="Index" 
+                                                           asp-route-nguoiLienHeId="@ungVien.UngVienId" 
+                                                           asp-route-ungTuyenId="@ungVien.UngTuyenId">
+                                                            <i class="fas fa-comments fa-fw me-2"></i>Gửi tin nhắn
+                                                        </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center p-5">
+                            <i class="fas fa-folder-open fa-4x text-muted mb-3"></i>
+                            <h4>Không tìm thấy ứng viên</h4>
+                            <p class="text-muted">Không có ứng viên nào phù hợp với tiêu chí tìm kiếm của bạn.</p>
+                             <a asp-action="Index" class="btn btn-outline-primary mt-2"><i class="fas fa-sync me-1"></i> Tải lại / Xóa bộ lọc</a>
+                        </div>
+                    }
+                </div>
+                @if (Model.UngViens != null && Model.UngViens.Any() && Model.UngViens.TotalPages > 1)
+                {
+                    <div class="card-footer bg-light">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center mb-0">
+                                <li class="page-item @(Model.UngViens.HasPreviousPage ? "" : "disabled")">
+                                    <a class="page-link" asp-action="Index"
+                                       asp-all-route-data="@Context.Request.Query.ToDictionary(q => q.Key, q => q.Value.ToString())"
+                                       asp-route-page="@(Model.UngViens.PageIndex - 1)">Trước</a>
+                                </li>
+                                @for (int i = 1; i <= Model.UngViens.TotalPages; i++)
+                                {
+                                    // Logic to show limited page numbers (e.g., first, last, current, and a few around current)
+                                    int pageToShow = i;
+                                    bool isActive = (pageToShow == Model.UngViens.PageIndex);
+                                    bool showPageLink = (
+                                        pageToShow <= 2 || // First two pages
+                                        pageToShow > Model.UngViens.TotalPages - 2 || // Last two pages
+                                        (pageToShow >= Model.UngViens.PageIndex - 1 && pageToShow <= Model.UngViens.PageIndex + 1) // Around current
+                                    );
+                                    bool showEllipsis = (
+                                        (pageToShow == 3 && Model.UngViens.PageIndex > 4) ||
+                                        (pageToShow == Model.UngViens.TotalPages - 2 && Model.UngViens.PageIndex < Model.UngViens.TotalPages - 3)
+                                    );
+
+                                    if (showPageLink) {
+                                        <li class="page-item @(isActive ? "active" : "")">
+                                            <a class="page-link" asp-action="Index"
+                                               asp-all-route-data="@Context.Request.Query.ToDictionary(q => q.Key, q => q.Value.ToString())"
+                                               asp-route-page="@pageToShow">@pageToShow</a>
+                                        </li>
+                                    } else if (showEllipsis) {
+                                         <li class="page-item disabled"><span class="page-link">...</span></li>
+                                    }
+                                }
+                                <li class="page-item @(Model.UngViens.HasNextPage ? "" : "disabled")">
+                                    <a class="page-link" asp-action="Index"
+                                       asp-all-route-data="@Context.Request.Query.ToDictionary(q => q.Key, q => q.Value.ToString())"
+                                       asp-route-page="@(Model.UngViens.PageIndex + 1)">Sau</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        // Auto-submit filter form on main filter changes (optional, if you prefer explicit button click, remove this)
+        // $('#filterForm input[type="radio"], #filterForm input[type="checkbox"]').change(function () {
+        //     $('#filterForm').submit();
+        // });
+
+        // AJAX for changing status
+        $('.change-status-btn').click(function (e) {
+            e.preventDefault();
+            var button = $(this);
+            var ungTuyenId = button.data('ungtuyenid');
+            var newStatus = button.data('newstatus'); // This is an integer
+
+            if (!confirm('Bạn có chắc chắn muốn thay đổi trạng thái của ứng tuyển này?')) {
+                return;
+            }
+            
+            var token = $('input[name="__RequestVerificationToken"]').length > 0 ? $('input[name="__RequestVerificationToken"]').val() : null;
+            // Find token if inside a form in the main section (e.g. if any form is present for other reasons)
+            if (!token && $('form input[name="__RequestVerificationToken"]').length > 0) {
+                 token = $('form input[name="__RequestVerificationToken"]').first().val();
+            }
+
+
+            $.ajax({
+                url: '@Url.Action("ThayDoiTrangThai", "QuanLyUngVien")',
+                type: 'POST',
+                data: {
+                    ungTuyenId: ungTuyenId,
+                    newStatus: newStatus,
+                    __RequestVerificationToken: token 
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $('#status-badge-' + ungTuyenId)
+                            .removeClass()
+                            .addClass('badge ' + response.newBadgeClass) // response.newBadgeClass should include 'badge'
+                            .text(response.newStatusDisplay);
+                        
+                        // Show success toast/alert (using Bootstrap Toasts or simple alert)
+                        // Example: toastr.success(response.message, 'Thành công');
+                        alert(response.message);
+
+
+                        // If status filter is active, and this item no longer matches,
+                        // you might want to hide it or indicate it will be gone on refresh.
+                        var currentStatusFilter = $('input[name="FilterByTrangThai"]:checked').val();
+                        if (currentStatusFilter && currentStatusFilter !== "" && newStatus.toString() !== currentStatusFilter) {
+                             $('#ungtuyen-row-' + ungTuyenId).addClass('opacity-50');
+                             // Or fade out:
+                             // $('#ungtuyen-row-' + ungTuyenId).fadeOut(1500, function() { $(this).remove(); });
+                        }
+                        // Update dropdown options if needed (e.g., disable actions)
+                         if(newStatus == @((int)TrangThaiUngTuyen.darut)) {
+                             button.closest('.dropdown-menu').find('.change-status-btn').remove(); // Remove all change status buttons
+                             button.closest('.dropdown-menu').find('li:has(.change-status-btn)').first() // Find the first li that had a button
+                                .before('<li><span class="dropdown-item text-muted disabled"><i class="fas fa-ban fa-fw me-2"></i>Ứng viên đã rút</span></li>');
+                         }
+
+                    } else {
+                        // Example: toastr.error(response.message, 'Lỗi');
+                        alert('Lỗi: ' + response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Example: toastr.error('Đã xảy ra lỗi khi cố gắng thay đổi trạng thái.', 'Lỗi máy chủ');
+                    alert('Đã xảy ra lỗi: ' + xhr.responseText);
+                }
+            });
+        });
+    });
+    </script>
+}
+
+<style>
+    .hover-primary:hover {
+        color: var(--bs-primary) !important;
+    }
+    .bg-info-soft {
+        background-color: rgba(13, 202, 240, 0.15) !important; /* Softer version of Bootstrap info */
+    }
+    .text-info {
+         color: #0dcaf0 !important; /* Bootstrap info color */
+    }
+    .table th {
+        font-weight: 600;
+    }
+    .province-filter-list .form-check {
+        margin-bottom: 0.3rem;
+    }
+    .opacity-50 {
+        opacity: 0.5 !important;
+        transition: opacity 0.5s ease-in-out;
+    }
+    
+    /* Custom dropdown styles */
+    .custom-dropdown {
+        min-width: 220px !important;
+        max-width: 280px !important;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        padding: 8px 0;
+        margin-top: 4px !important;
+    }
+    
+    .custom-dropdown .dropdown-item {
+        padding: 8px 16px;
+        font-size: 14px;
+        line-height: 1.4;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: none;
+        transition: all 0.2s ease;
+    }
+    
+    .custom-dropdown .dropdown-item:hover {
+        background-color: #f8f9fa;
+        padding-left: 20px;
+    }
+    
+    .custom-dropdown .dropdown-item:active {
+        background-color: #e9ecef;
+    }
+    
+    .custom-dropdown .dropdown-divider {
+        margin: 6px 0;
+        border-top: 1px solid #e9ecef;
+    }
+    
+    .custom-dropdown .dropdown-item.disabled {
+        color: #6c757d;
+        pointer-events: none;
+        background-color: transparent;
+    }
+    
+    .custom-dropdown .dropdown-item i {
+        min-width: 16px;
+        text-align: center;
+    }
+    
+    /* Responsive adjustments */
+
+</style>

@@ -1,0 +1,257 @@
+@model HeThongTimViec.ViewModels.ThongBaoIndexViewModel
+
+@{
+    ViewData["Title"] = "Thông Báo Của Tôi";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@* Hiển thị thông báo thành công/lỗi/thông tin từ TempData *@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        @TempData["InfoMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+@if (!Model.Notifications.Any())
+{
+    <div class="text-center p-5">
+        <i class="fas fa-bell-slash fa-3x text-muted"></i>
+        <p class="mt-3">Bạn không có thông báo nào.</p>
+    </div>
+}
+else
+{
+    <form id="main-form" asp-action="DeleteSelected" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <div>
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa các thông báo đã chọn?');">
+                    <i class="fas fa-trash-alt"></i> Xóa mục đã chọn
+                </button>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#markAllAsReadModal">
+                    <i class="fas fa-check-double"></i> Đánh dấu đã đọc
+                </button>
+                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteAllModal">
+                    <i class="fas fa-times-circle"></i> Xóa tất cả
+                </button>
+            </div>
+        </div>
+
+        <ul class="list-group notification-list">
+            <li class="list-group-item bg-light d-none d-md-block">
+                <div class="row align-items-center fw-bold">
+                    <div class="col-auto">
+                        <input type="checkbox" class="form-check-input" id="select-all-checkbox" title="Chọn tất cả" />
+                    </div>
+                    <div class="col">Nội dung</div>
+                    <div class="col-md-3 text-end">Hành động & Thời gian</div>
+                </div>
+            </li>
+            @foreach (var notification in Model.Notifications)
+            {
+                <li class="list-group-item @(notification.IsUnread ? "list-group-item-light" : "")">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <input type="checkbox" class="form-check-input notification-checkbox" name="selectedIds" value="@notification.Id" />
+                        </div>
+                        <div class="col-auto notification-icon">
+                            <i class="@notification.IconClass fa-lg"></i>
+                        </div>
+                        <div class="col">
+                            @* =============================================================== *@
+                            @*                 LOGIC HIỂN THỊ TIÊU ĐỀ VÀ LINK                   *@
+                            @* =============================================================== *@
+                            @if (notification.IsAdminNotification)
+                            {
+                                // Thông báo của Admin: Tiêu đề CHỈ LÀ VĂN BẢN, không có link
+                                <span class="notification-title @(notification.IsUnread ? "text-primary fw-bold" : "text-dark")">@notification.Title</span>
+                            }
+                            else
+                            {
+                                // Thông báo Hệ thống: Kiểm tra xem có TargetUrl không
+                                @if (!string.IsNullOrEmpty(notification.TargetUrl))
+                                {
+                                    // Nếu CÓ, tạo link trực tiếp với href trỏ đến TargetUrl
+                                    // Thêm target="_blank" để mở trong tab mới, giúp người dùng không mất trang hiện tại
+                                    <a href="@notification.TargetUrl" target="_blank" class="text-decoration-none stretched-link" title="Xem chi tiết (mở trong tab mới)">
+                                        <span class="notification-title @(notification.IsUnread ? "text-primary fw-bold" : "text-dark")">@notification.Title</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    // Nếu KHÔNG, chỉ hiển thị tiêu đề, không thể nhấp
+                                    <span class="notification-title @(notification.IsUnread ? "text-primary fw-bold" : "text-dark")">@notification.Title</span>
+                                }
+                            }
+
+                            @if (!string.IsNullOrEmpty(notification.Subtitle))
+                            {
+                                <small class="d-block text-muted">@notification.Subtitle</small>
+                            }
+                            <div class="notification-meta-tags mt-2">
+                                @if (!string.IsNullOrEmpty(notification.TypeDisplayName))
+                                {
+                                    <span class="badge bg-info text-dark"><i class="fas fa-tag fa-fw"></i> @notification.TypeDisplayName</span>
+                                }
+                                @if (!string.IsNullOrEmpty(notification.RelatedEntityDisplayName))
+                                {
+                                    <span class="badge bg-secondary"><i class="fas fa-link fa-fw"></i> @notification.RelatedEntityDisplayName</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 text-md-end mt-2 mt-md-0">
+                            <small class="text-muted d-block mb-1">@notification.Timestamp</small>
+                            <div class="btn-group" role="group" aria-label="Notification actions">
+                                @if (notification.IsAdminNotification)
+                                {
+                                    // Nút xem chi tiết chỉ hiển thị cho thông báo của Admin
+                                    <a asp-action="Details" asp-route-id="@notification.Id" class="btn btn-outline-secondary btn-sm" title="Xem chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                }
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="event.stopPropagation(); if(confirm('Bạn có chắc chắn muốn xóa thông báo này?')) { document.getElementById('delete-form-@notification.Id').submit(); }" title="Xóa">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                @* Form ẩn để xóa từng thông báo một *@
+                <form id="delete-form-@notification.Id" asp-action="Delete" asp-route-id="@notification.Id" method="post" class="d-none">@Html.AntiForgeryToken()</form>
+            }
+        </ul>
+    </form>
+
+    <!-- Phân trang -->
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            @if (Model.PagingInfo.HasPreviousPage)
+            {
+                <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@(Model.PagingInfo.CurrentPage - 1)">Trước</a></li>
+            }
+            else
+            {
+                <li class="page-item disabled"><span class="page-link">Trước</span></li>
+            }
+
+            @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PagingInfo.CurrentPage ? "active" : "")"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li>
+            }
+
+            @if (Model.PagingInfo.HasNextPage)
+            {
+                <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@(Model.PagingInfo.CurrentPage + 1)">Sau</a></li>
+            }
+            else
+            {
+                <li class="page-item disabled"><span class="page-link">Sau</span></li>
+            }
+        </ul>
+    </nav>
+
+    <!-- Modal xác nhận Xóa tất cả -->
+    <div class="modal fade" id="deleteAllModal" tabindex="-1" aria-labelledby="deleteAllModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAllModalLabel">Xác nhận Xóa tất cả Thông báo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Hành động này không thể hoàn tác. Bạn có chắc chắn muốn xóa TOÀN BỘ thông báo của mình không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <form asp-action="DeleteAll" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger">Vâng, Xóa tất cả</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal xác nhận Đánh dấu đã đọc -->
+    <div class="modal fade" id="markAllAsReadModal" tabindex="-1" aria-labelledby="markAllAsReadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="markAllAsReadModalLabel">Xác nhận Đánh dấu tất cả là đã đọc</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn đánh dấu tất cả thông báo trên mọi trang là đã đọc không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <form asp-action="MarkAllAsRead" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-primary">Vâng, Đánh dấu đã đọc</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectAllCheckbox = document.getElementById('select-all-checkbox');
+            if (selectAllCheckbox) {
+                selectAllCheckbox.addEventListener('click', function (event) {
+                    const checkboxes = document.querySelectorAll('.notification-checkbox');
+                    for (const checkbox of checkboxes) {
+                        checkbox.checked = event.target.checked;
+                    }
+                });
+            }
+        });
+    </script>
+    <style>
+        .notification-list .list-group-item {
+            /* Thêm position relative để stretched-link hoạt động đúng */
+            position: relative;
+            padding: 1rem;
+        }
+        .notification-icon {
+            width: 30px;
+            text-align: center;
+        }
+        .notification-title {
+            font-size: 1.05rem;
+        }
+        /* Ngăn link stretched làm các nút khác không bấm được bằng cách tăng z-index */
+        .notification-list .btn-group,
+        .notification-list .btn {
+            position: relative;
+            z-index: 2;
+        }
+        .notification-meta-tags .badge {
+            margin-right: 5px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    </style>
+}

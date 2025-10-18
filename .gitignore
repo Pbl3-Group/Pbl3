@@ -1,0 +1,7 @@
+bin/
+obj/
+App_Keys/
+appsettings.Development.json
+*.log
+.vscode/
+.idea/

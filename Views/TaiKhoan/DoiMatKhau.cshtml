@@ -1,0 +1,70 @@
+@model HeThongTimViec.ViewModels.ChangePasswordViewModel
+
+@{
+    ViewData["Title"] = "Đổi Mật Khẩu";
+    // Giả sử bạn có layout cho trang cài đặt, nếu không thì dùng layout chung
+}
+
+<div class="row justify-content-center mt-5 mb-5">
+    <div class="col-md-8 col-lg-7 col-xl-6">
+        <div class="card shadow-sm">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+                <!-- Vùng hiển thị thông tin người dùng -->
+                <div class="text-center mb-4">
+                    <img src="@(Model.AvatarUrl ?? "/images/default-avatar.png")" 
+                         alt="Ảnh đại diện" 
+                         class="rounded-circle mb-2" 
+                         style="width: 100px; height: 100px; object-fit: cover;"/>
+                    <h5 class="card-title">@Model.HoTen</h5>
+                     @if (!string.IsNullOrEmpty(Model.LoaiTaiKhoan))
+                    {
+                        <p class="card-text">
+                            <span class="badge bg-info text-dark">@Model.LoaiTaiKhoan</span>
+                        </p>
+                    }
+                    <p class="card-text text-muted">@Model.Sdt</p>
+                </div>
+                
+                <hr />
+
+                <form asp-action="DoiMatKhau" method="post">
+                    @Html.AntiForgeryToken()
+                    
+                    @* Hiển thị thông báo lỗi chung hoặc thành công *@
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+
+                    @* Trường Mật khẩu hiện tại *@
+
+                    @* Trường Mật khẩu mới *@
+                    <div class="form-floating mb-3">
+                        <input asp-for="MatKhauMoi" class="form-control" placeholder="Mật khẩu mới" />
+                        <label asp-for="MatKhauMoi"></label>
+                        <span asp-validation-for="MatKhauMoi" class="text-danger"></span>
+                    </div>
+
+                    @* Trường Xác nhận mật khẩu mới *@
+                    <div class="form-floating mb-4">
+                        <input asp-for="XacNhanMatKhauMoi" class="form-control" placeholder="Xác nhận mật khẩu mới" />
+                        <label asp-for="XacNhanMatKhauMoi"></label>
+                        <span asp-validation-for="XacNhanMatKhauMoi" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 btn-lg">Lưu Thay Đổi</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

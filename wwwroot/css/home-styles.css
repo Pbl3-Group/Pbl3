@@ -1,0 +1,1064 @@
+/* Enhanced Home Styles CSS */
+
+:root {
+    --primary-color: #003366;
+    --secondary-color: #FFC107;
+    --accent-color: #00D4AA;
+    --light-bg: #f8f9fa;
+    --dark-bg: #002244;
+    --text-light: #ffffff;
+    --text-dark: #333333;
+    --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    --card-shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.15);
+    --gradient-primary: linear-gradient(135deg, #003366 0%, #004488 100%);
+    --gradient-secondary: linear-gradient(135deg, #FFC107 0%, #FFD700 100%);
+    --gradient-accent: linear-gradient(135deg, #00D4AA 0%, #00E5BB 100%);
+    --gradient-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 1.6;
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+/* Section titles with modern styling */
+.section-title-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.section-title-header h2 {
+    margin-bottom: 0;
+    position: relative;
+    font-weight: 700;
+}
+
+.section-title-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--gradient-secondary);
+    border-radius: 2px;
+}
+
+.section-title {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.section-title .tagline {
+    display: inline-block;
+    background: var(--gradient-secondary);
+    color: var(--primary-color);
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.section-title h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.section-title p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.bg-light {
+    background: var(--gradient-bg) !important;
+}
+
+.dark-bg {
+    background: var(--gradient-primary);
+    position: relative;
+}
+
+.dark-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+}
+
+/* Enhanced Hero Section */
+.hero-section {
+    background: var(--gradient-primary);
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0d2036;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(180deg, transparent 0%, rgba(248, 249, 250, 0.1) 100%);
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    color: var(--text-light);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+}
+
+.hero-section .lead {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+}
+
+.hero-search-form {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-search-form .input-group {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    overflow: hidden;
+    background: white;
+}
+
+.hero-search-form .form-control {
+    border: none;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    background: transparent;
+}
+
+.hero-search-form .form-control:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.hero-search-form .input-group-text {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    padding: 15px;
+}
+
+.hero-search-form .btn-warning {
+    background: var(--gradient-secondary);
+    border: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 15px 30px;
+    transition: all 0.3s ease;
+}
+
+.hero-search-form .btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+
+/* Modern Statistics Section */
+.statistics-section {
+    background: white;
+    padding: 60px 0;
+    position: relative;
+}
+
+.statistics-section .stat-item {
+    text-align: center;
+    padding: 30px 20px;
+    transition: transform 0.3s ease;
+}
+
+.statistics-section .stat-item:hover {
+    transform: translateY(-10px);
+}
+
+.statistics-section .stat-value {
+    font-size: 3rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.statistics-section .stat-label {
+    color: #666;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+/* Enhanced Benefits Section */
+.benefit-item.card {
+    border: none;
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s ease;
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    position: relative;
+}
+
+.benefit-item.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-secondary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.benefit-item.card:hover::before {
+    transform: scaleX(1);
+}
+
+.benefit-item.card:hover {
+    transform: translateY(-15px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.benefit-item.card:hover .benefit-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.benefit-item .card-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.benefit-item .card-body {
+    padding: 40px 30px;
+}
+
+/* Enhanced Featured Fields */
+.field-item.card {
+    text-decoration: none;
+    color: var(--text-dark);
+    border: none;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.field-item.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.field-image {
+    height: 100px;
+    object-fit: contain;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    transition: all 0.3s ease;
+}
+
+.field-item.card:hover .field-image {
+    background: var(--gradient-secondary);
+}
+
+.field-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.field-count {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Enhanced Job Types Section */
+.job-type-item.card {
+    text-decoration: none;
+    color: var(--text-dark);
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s ease;
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    position: relative;
+}
+
+.job-type-item.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var( --gradient-primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.job-type-item.card:hover::before {
+    opacity: 0.05;
+}
+
+.job-type-item.card:hover {
+    transform: translateY(-15px) scale(1.02);
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.job-type-icon {
+    font-size: 2.5rem;
+    background: var(--gradient-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.job-type-item.card:hover .job-type-icon {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+.job-type-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.job-type-item .card-body {
+    padding: 40px 30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Enhanced Job Cards */
+.job-card {
+    box-shadow: var(--card-shadow);
+    position: relative;
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: white;
+}
+
+.job-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.job-badge-urgent {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 0.8em;
+    z-index: 2;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.job-card .card-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-bottom: 1px solid #eee;
+    padding: 25px;
+}
+
+.company-logo-small {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-right: 15px;
+    border-radius: 12px;
+    border: 2px solid #f0f0f0;
+    transition: transform 0.3s ease;
+}
+
+.job-card:hover .company-logo-small {
+    transform: scale(1.1);
+}
+
+.job-card .job-title a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.job-card .job-title a:hover {
+    color: var(--accent-color);
+}
+
+.job-card .card-body {
+    padding: 25px;
+}
+
+.job-card .card-body p {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.job-card .card-body p i {
+    color: var(--secondary-color);
+    margin-right: 10px;
+    width: 18px;
+    text-align: center;
+}
+
+.job-tags .badge {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    padding: 6px 12px;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+.job-card .card-footer {
+    background: white;
+    border-top: 1px solid #f0f0f0;
+    padding: 20px 25px;
+}
+
+/* Enhanced Company Logos */
+.company-logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 25px;
+}
+
+.company-logo-item {
+    padding: 25px;
+    border: 2px solid #f0f0f0;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background: white;
+    min-height: 120px;
+}
+
+.company-logo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow);
+    border-color: var(--accent-color);
+}
+
+.company-logo-item img {
+    max-width: 100%;
+    max-height: 70px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.company-logo-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Enhanced Testimonials */
+.testimonial-item.card {
+    box-shadow: var(--card-shadow);
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: white;
+}
+
+.testimonial-item.card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.testimonial-item .card-body {
+    padding: 30px;
+}
+
+.testimonial-rating {
+    margin-bottom: 20px;
+}
+
+.testimonial-quote {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    background: var(--gradient-bg);
+    padding: 20px;
+    margin: 0;
+}
+
+.author-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 3px solid var(--secondary-color);
+}
+
+.author-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.author-title {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Enhanced How It Works */
+.how-it-works-item {
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.how-it-works-item:hover {
+    transform: translateY(-10px);
+}
+
+.step-number {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8rem;
+    font-weight: 900;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.step-icon {
+    font-size: 3rem;
+    background: var(--gradient-secondary);
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3);
+    transition: all 0.3s ease;
+}
+
+.how-it-works-item:hover .step-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 40px rgba(255, 193, 7, 0.4);
+}
+
+.step-title {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    font-size: 1.3rem;
+}
+
+.step-description {
+    position: relative;
+    z-index: 1;
+    color: #666;
+    font-size: 1.05rem;
+}
+
+/* Enhanced Founders Section */
+.founder-item.card {
+    border: none;
+    box-shadow: var(--card-shadow);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: white;
+}
+
+.founder-item.card:hover {
+    transform: translateY(-15px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.founder-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 30px auto 20px auto;
+    border: 4px solid var(--secondary-color);
+    transition: transform 0.3s ease;
+}
+
+.founder-item.card:hover .founder-avatar {
+    transform: scale(1.05);
+}
+
+.founder-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.founder-title {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.founder-quote {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #555;
+    margin: 15px 0;
+    line-height: 1.5;
+}
+
+.founder-social a {
+    color: var(--primary-color);
+    margin: 0 8px;
+    font-size: 1.3em;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.founder-social a:hover {
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+.founder-item .card-body {
+    padding: 30px;
+}
+
+/* Enhanced Newsletter Section */
+.newsletter-section {
+    background:#1A345A;
+    position: relative;
+}
+
+.newsletter-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(0, 212, 170, 0.1) 0%, transparent 50%);
+}
+
+.newsletter-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.newsletter-form .input-group {
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    overflow: hidden;
+    background: white;
+}
+
+.newsletter-form .form-control {
+    border: none;
+    padding: 18px 25px;
+    font-size: 1.1rem;
+    background: transparent;
+}
+
+.newsletter-form .form-control:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.newsletter-form .btn-warning {
+    background: var(--gradient-secondary);
+    border: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 18px 35px;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form .btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4);
+}
+
+/* About section enhancements */
+.about-us-condensed-section .about-features li {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.about-us-condensed-section .about-features li:hover {
+    transform: translateX(10px);
+}
+
+.about-us-condensed-section .about-features i {
+    margin-right: 12px;
+    font-size: 1.2em;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 80px 0;
+        min-height: 80vh;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    
+    .section-title h2 {
+        font-size: 2rem;
+    }
+    
+    .section-title-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .section-title-header h2 {
+        margin-bottom: 15px;
+    }
+    
+    .company-logo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 15px;
+    }
+    
+    .step-number {
+        font-size: 6rem;
+    }
+    
+    .statistics-section .stat-value {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-search-form .input-group {
+        flex-direction: column;
+        border-radius: 15px;
+    }
+    
+    .hero-search-form .form-control,
+    .hero-search-form .btn-warning {
+        border-radius: 15px !important;
+        margin-bottom: 10px;
+    }
+    
+    .hero-search-form .btn-warning {
+        margin-bottom: 0;
+    }
+}
+
+/* Animation classes */
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scale-in {
+    animation: scaleIn 0.6s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Dark theme specific text colors */
+.dark-bg h2,
+.dark-bg h3,
+.dark-bg p {
+    color: var(--text-light);
+}
+
+.dark-bg .section-title h2 {
+    color: var(--text-light);
+}
+
+.dark-bg .section-title p {
+    color: rgba(255, 255, 255, 0.85);
+}
+.privacy-hero-section {
+    position: relative;
+    background-image: url('/file/img/backgrounds/privacy-bg.jpg'); /* THAY THẾ BẰNG ẢNH NỀN CỦA BẠN */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 6rem 0; /* Tăng padding */
+    color: #fff; /* Đảm bảo chữ màu trắng nổi bật */
+}
+
+.privacy-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#0d2036; /* Màu xanh đậm với độ mờ (0.75) - Giống màu footer #0d2036 */
+    z-index: 1;
+}
+
+.privacy-hero-icon {
+    color: #ffc107; /* Màu vàng cho icon */
+    /* Hoặc một màu khác phù hợp với theme của bạn */
+}
+
+.privacy-hero-section .tagline {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.privacy-hero-section h1 {
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Đổ bóng nhẹ cho chữ */
+}
+
+.privacy-hero-section .lead {
+    max-width: 650px; /* Giới hạn chiều rộng của đoạn text lead */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.privacy-hero-section .btn-light {
+    background-color: #fff;
+    color: #0d2036; /* Màu chữ tối trên nền sáng */
+    border: 2px solid #fff;
+    font-weight: 500;
+}
+.privacy-hero-section .btn-light:hover {
+    background-color: transparent;
+    color: #fff;
+}
+
+.privacy-hero-section .btn-outline-light {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+.privacy-hero-section .btn-outline-light:hover {
+    background-color: #fff;
+    color: #0d2036;
+    border-color: #fff;
+}
+
+/* Đảm bảo min-vh-50 hoạt động (Bootstrap đã có sẵn, nhưng đây là fallback) */
+.min-vh-50 {
+    min-height: 50vh !important;
+}
+
+/* Điều chỉnh Statistics Section nếu cần để nó tách biệt hơn với hero mới */
+.statistics-section {
+    padding: 3rem 0; /* Tăng padding nếu muốn */
+    background-color: #fff; /* Nền trắng để tách biệt */
+    border-bottom: 1px solid #e9ecef; /* Đường kẻ mỏng */
+}
+/* ======================================================= */
+/* === CSS LĨNH VỰC - PHIÊN BẢN CẦU VỒNG + HIỆU ỨNG SÁNG BỪNG === */
+/* ======================================================= */
+
+/* 1. CSS TỔNG QUÁT CHO THẺ */
+a.field-item {
+    display: block;
+    border-radius: var(--bs-card-border-radius);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative; /* Cần để định vị lớp phủ */
+    overflow: hidden; /* Giấu các phần tử tràn ra ngoài khi scale */
+}
+a.field-item .card {
+    border: none;
+    box-shadow: none;
+}
+
+/* 2. HIỆU ỨNG KHI DI CHUỘT VÀO THẺ */
+a.field-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1), 0 8px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* 3. CSS CHO KHỐI MÀU GRADIENT VÀ CHỮ */
+.field-item .card-img-top-color {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Cần để chứa lớp phủ bên trong */
+    z-index: 1; /* Nằm dưới lớp phủ */
+    height: 100px;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+    background-size: 250% 250%;
+    animation: gradient-animation 10s ease infinite;
+    transition: transform 0.4s ease;
+}
+
+/* 4. TẠO LỚP PHỦ LÀM MỜ MÀU */
+.field-item .card-img-top-color::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.25); /* Lớp phủ trắng mờ nhẹ */
+    z-index: 2; /* Nằm trên gradient */
+    transition: opacity 0.4s ease-in-out; /* Hiệu ứng chuyển động cho lớp phủ */
+}
+
+
+/* 5. HIỆU ỨNG HOVER LÊN KHỐI MÀU */
+.field-item:hover .card-img-top-color {
+    transform: scale(1.1); /* Phóng to khối màu để tạo hiệu ứng tràn viền */
+}
+.field-item:hover .card-img-top-color::before {
+    opacity: 0; /* Khi hover, làm lớp phủ biến mất -> màu nền sáng bừng lên */
+}
+
+
+/* Animation tự động di chuyển gradient */
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* 6. ĐỊNH NGHĨA 6 BỘ MÀU GRADIENT THEO THỨ TỰ CỜ CẦU VỒNG */
+/* Giữ nguyên như cũ */
+.bg-field-1 { background-image: linear-gradient(135deg, #FF758C 0%, #FFC3A0 100%); }
+.bg-field-2 { background-image: linear-gradient(135deg, #FFB347 0%, #FFD180 100%); }
+.bg-field-3 { background-image: linear-gradient(135deg, #F9D423 0%, #FFEFBA 100%); }
+.bg-field-4 { background-image: linear-gradient(135deg, #76D7C4 0%, #85FFBD 100%); }
+.bg-field-5 { background-image: linear-gradient(135deg, #89CFF0 0%, #4A90E2 100%); }
+.bg-field-6 { background-image: linear-gradient(135deg, #C3A7E6 0%, #E6B5C6 100%); }

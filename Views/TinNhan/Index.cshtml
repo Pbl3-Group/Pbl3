@@ -1,0 +1,367 @@
+@using System.Security.Claims
+@model HeThongTimViec.ViewModels.TinNhan.QuanLyTinNhanViewModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@{
+    ViewData["Title"] = "Hộp thư tin nhắn";
+    string sidebarColClass = Model.IsChatAreaActive ? "col-md-4 col-lg-3 chat-sidebar-collapsed" : "col-12 chat-sidebar-expanded";
+   string rightColumnClass = Model.IsChatAreaActive ? "col-md-8 col-lg-9 h-100" : "d-none"; 
+}
+
+<link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" />
+
+<div class="container-fluid mt-4 chat-container">
+    <div class="row h-100">
+        <!-- Cột trái: Danh sách hội thoại & Filters -->
+        <div class="@sidebarColClass chat-sidebar" id="chatSidebar">
+            <div class="chat-sidebar-header">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4>Hộp thư</h4>
+                    <a asp-controller="TinNhan" asp-action="Index" class="btn btn-sm btn-outline-secondary" title="Quay lại danh sách / Xóa bộ lọc">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                <form asp-action="Index" method="get" id="searchConversationForm">
+                    @* Hàng 1: Chỉ còn Tìm kiếm hội thoại (LUÔN HIỂN THỊ) *@
+                    <div class="input-group input-group-sm mb-2">
+                        <input type="text" name="searchTerm" class="form-control" placeholder="Tìm theo tên, nội dung..." value="@Model.SearchTerm">
+                        <button class="btn btn-outline-secondary" type="submit" title="Tìm kiếm"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    <!-- Expanded Filters: Chỉ hiển thị khi sidebar MỞ RỘNG (không có chat active) -->
+                    <div id="expandedFiltersSection" class="pt-1 @(Model.IsChatAreaActive ? "d-none" : "")">
+                        @* Hàng 1 (của expanded): Từ ngày và Đến ngày *@
+                        <div class="row gx-2 mb-2">
+                            <div class="col">
+                                <input type="date" name="filterDateFrom" class="form-control form-control-sm" title="Lọc từ ngày" value="@Model.FilterDateFrom?.ToString("yyyy-MM-dd")" />
+                            </div>
+                            <div class="col">
+                                <input type="date" name="filterDateTo" class="form-control form-control-sm" title="Lọc đến ngày" value="@Model.FilterDateTo?.ToString("yyyy-MM-dd")" />
+                            </div>
+                        </div>
+
+                        @* Hàng 2 (của expanded): Lọc theo công việc/ứng tuyển VÀ Trạng thái tin *@
+                        <div class="row gx-2 mb-2">
+                            <div class="col-md-7"> @* Hoặc col-sm-7, col-lg-7 tùy bạn muốn ưu tiên độ rộng *@
+                                <select name="selectedJobContextId" asp-for="SelectedJobContextId" asp-items="Model.JobContextOptions" class="form-select form-select-sm" title="Lọc theo công việc/ứng tuyển">
+                                    @* Option mặc định được thêm trong Controller *@
+                                </select>
+                            </div>
+                            <div class="col-md-5"> @* Hoặc col-sm-5, col-lg-5 *@
+                                <select name="filterReadStatus" asp-for="FilterReadStatus" class="form-select form-select-sm" title="Lọc theo trạng thái tin nhắn">
+                                    <option value="">-- Trạng thái --</option> @* Rút gọn text *@
+                                    <option value="all">Tất cả</option>
+                                    <option value="unread">Chưa đọc</option>
+                                    <option value="read">Đã đọc</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-sm btn-primary w-100 mb-1">Áp dụng tất cả bộ lọc</button>
+                        @if ((!string.IsNullOrEmpty(Model.SearchTerm) || Model.FilterDateFrom.HasValue || Model.FilterDateTo.HasValue || !string.IsNullOrEmpty(Model.FilterReadStatus) || Model.SelectedJobContextId.HasValue) && !Model.IsChatAreaActive)
+                        {
+                            <a asp-controller="TinNhan" asp-action="Index" class="btn btn-sm btn-outline-danger w-100 d-block">Xóa tất cả bộ lọc</a>
+                        }
+                    </div>
+                     @* Nút "Áp dụng tìm kiếm" chỉ cho SearchTerm khi expandedFiltersSection bị ẩn *@
+                    @if(Model.IsChatAreaActive)
+                    {
+                        <button type="submit" class="btn btn-sm btn-primary w-100 mt-1">Áp dụng tìm kiếm</button>
+                    }
+                </form>
+            </div>
+            <div class="list-group list-group-flush chat-list scrollable-div" id="conversationList">
+                @if (Model.DanhSachHoiThoai.Any())
+                {
+                    @foreach (var hoithoai in Model.DanhSachHoiThoai)
+                    {
+                        <partial name="_HoiThoaiItem" model="hoithoai" />
+                    }
+                }
+                else
+                {
+                    <p class="text-center text-muted p-3">
+                        @if (!string.IsNullOrEmpty(Model.SearchTerm) || Model.FilterDateFrom.HasValue || Model.FilterDateTo.HasValue || !string.IsNullOrEmpty(Model.FilterReadStatus) || Model.SelectedJobContextId.HasValue)
+                        {
+                            @:Không tìm thấy hội thoại nào khớp với bộ lọc của bạn.
+                        }
+                        else
+                        {
+                            @:Bạn chưa có hội thoại nào.
+                        }
+                    </p>
+                }
+            </div>
+        </div>
+
+        <!-- Cột phải: Khu vực chat & Details Pane -->
+        <div class="@rightColumnClass d-flex flex-row" id="chatRightColumn">
+            <div class="chat-main flex-grow-1" id="chatMainAreaWrapper">
+                @if (Model.IsChatAreaActive)
+                {
+                    <partial name="_ChatMessagesArea" model="Model" />
+                }
+                else
+                {
+                     <div class="no-chat-selected">
+                        <i class="far fa-comments fa-5x text-muted"></i>
+                        @if (!Model.DanhSachHoiThoai.Any() && string.IsNullOrEmpty(Model.SearchTerm) && !Model.FilterDateFrom.HasValue && !Model.FilterDateTo.HasValue && string.IsNullOrEmpty(Model.FilterReadStatus) && !Model.SelectedJobContextId.HasValue)
+                        { // Chỉ hiển thị "Bạn chưa có hội thoại nào" nếu thực sự không có gì và không có filter nào được áp dụng
+                            <p class="mt-3">Bạn chưa có hội thoại nào.</p>
+                            <p class="text-muted small">Hãy thử tìm kiếm hoặc liên hệ với nhà tuyển dụng/ứng viên.</p>
+                        }
+                        else if (!Model.DanhSachHoiThoai.Any())
+                        { // Trường hợp có filter nhưng không có kết quả
+                             <p class="mt-3">Không tìm thấy hội thoại nào khớp.</p>
+                             <p class="text-muted small">Vui lòng thử lại với bộ lọc khác hoặc <a asp-action="Index" asp-controller="TinNhan">xóa bộ lọc</a>.</p>
+                        }
+                        else
+                        { // Có hội thoại nhưng chưa chọn
+                            <p class="mt-3">Chọn một hội thoại để bắt đầu nhắn tin.</p>
+                            <p class="text-muted small">Hoặc sử dụng các bộ lọc ở cột bên trái để tìm kiếm.</p>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="chat-details-pane border-start" id="chatDetailsPane" style="display: none;">
+                <div class="p-3 scrollable-div h-100" id="chatDetailsContent">
+                    <div class="text-center p-5"><i class="fas fa-spinner fa-spin fa-2x"></i><p class="mt-2">Đang tải thông tin...</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function getAntiForgeryToken() { return '@Xsrf.GetAndStoreTokens(Context).RequestToken'; }
+
+        function showToast(type, message) {
+            if (typeof toastr !== 'undefined') {
+                toastr.options = { "closeButton": true, "progressBar": true, "positionClass": "toast-top-right", "timeOut": "3000" };
+                toastr[type](message);
+            } else { alert(message); }
+        }
+
+        function scrollToBottom() {
+            var chatMessages = $('.chat-messages');
+            if (chatMessages.length) { chatMessages.scrollTop(chatMessages[0].scrollHeight); }
+        }
+
+        function createMessageHtml(msgData, isMyMessage) {
+            var alignmentClass = isMyMessage ? 'message-sent' : 'message-received';
+            var avatar = msgData.avatarUrlNguoiGui ? msgData.avatarUrlNguoiGui : '/images/default-avatar.png';
+            var safeNoiDung = $('<div/>').text(msgData.noiDung).html().replace(/\n/g, '<br>');
+            var tenHienThi = msgData.tenNguoiGui || (isMyMessage ? "Bạn" : "Người lạ");
+            return `<div class="message-item ${alignmentClass}">
+                        ${!isMyMessage ? `<img src="${avatar}" alt="${tenHienThi}" class="avatar" title="${tenHienThi}">` : ''}
+                        <div class="message-content">
+                            <div class="message-bubble">${safeNoiDung}</div>
+                            <div class="message-time" title="${new Date(msgData.ngayGui).toLocaleString()}">${msgData.thoiGianGuiDisplay}</div>
+                        </div>
+                        ${isMyMessage ? `<img src="${avatar}" alt="${tenHienThi}" class="avatar" title="${tenHienThi}">` : ''}
+                    </div>`;
+        }
+
+        function updateConversationListItem(nguoiLienHeId, ungTuyenId, tinTuyenDungId, lastMessageContent, timeDisplay, isMyMessage) {
+            var convItem = $('#conversationList .conversation-item').filter(function() {
+                return $(this).data('nguoilienheid') == nguoiLienHeId &&
+                       ($(this).data('ungtuyenid') || null) == (ungTuyenId || null) &&
+                       ($(this).data('tintuyendungid') || null) == (tinTuyenDungId || null);
+            });
+            if (convItem.length) {
+                var lastMsgSpan = convItem.find('.last-message');
+                lastMsgSpan.text(lastMessageContent.substring(0, 35) + (lastMessageContent.length > 35 ? '...' : ''));
+                if (isMyMessage && lastMsgSpan.find('.fa-reply').length === 0) {
+                    lastMsgSpan.prepend('<i class="fas fa-reply fa-fw"></i> ');
+                } else if (!isMyMessage) { lastMsgSpan.find('.fa-reply').remove(); }
+                convItem.find('.message-time-ago').text(timeDisplay == "HH:mm" || timeDisplay.toLowerCase().includes("vừa") ? "Vừa xong" : timeDisplay);
+                $('#conversationList').prepend(convItem);
+            } else {
+                 // Nếu không tìm thấy item hội thoại (có thể là hội thoại mới hoàn toàn), reload trang
+                 // để đảm bảo danh sách hội thoại được cập nhật chính xác từ server.
+                 showToast('info', 'Có tin nhắn mới. Đang làm mới danh sách...');
+                 setTimeout(function() { window.location.reload(); }, 1500);
+            }
+        }
+
+        function showDetailsPane(contactId, ungTuyenId, tinTuyenDungId) {
+            var detailsPane = $('#chatDetailsPane');
+            var chatMainWrapper = $('#chatMainAreaWrapper');
+            var detailsContent = $('#chatDetailsContent');
+            detailsContent.html('<div class="text-center p-5"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Đang tải...</p></div>');
+            if ($(window).width() < 768) { detailsPane.addClass('active').show(); }
+            else { detailsPane.show(); chatMainWrapper.removeClass('flex-grow-1').addClass('chat-main-shrunk'); }
+            $.ajax({
+                url: '@Url.Action("GetContactDetails", "TinNhan")', type: 'GET',
+                data: { contactId: contactId, ungTuyenId: ungTuyenId || null, tinTuyenDungId: tinTuyenDungId || null },
+                success: function(response) { detailsContent.html(response); },
+                error: function() { detailsContent.html('<p class="text-danger p-3">Lỗi khi tải thông tin chi tiết.</p>'); }
+            });
+        }
+
+        function hideDetailsPane() {
+            var detailsPane = $('#chatDetailsPane');
+            var chatMainWrapper = $('#chatMainAreaWrapper');
+            if ($(window).width() < 768) { detailsPane.removeClass('active'); }
+            else { detailsPane.hide(); chatMainWrapper.removeClass('chat-main-shrunk').addClass('flex-grow-1'); }
+            $('#chatDetailsContent').html('');
+        }
+
+        $(document).ready(function () {
+            scrollToBottom();
+            if (!('@Model.IsChatAreaActive'.toLowerCase() === 'true')) {
+                $('#expandedFiltersSection').removeClass('d-none');
+            } else {
+                $('#expandedFiltersSection').addClass('d-none');
+            }
+
+            $(document).on('click', '.conversation-item', function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var nguoiLienHeId = $this.data('nguoilienheid');
+                var ungTuyenId = $this.data('ungtuyenid');
+                var tinTuyenDungId = $this.data('tintuyendungid');
+                var newUrl = '@Url.Action("Index", "TinNhan")' + '?nguoiLienHeId=' + nguoiLienHeId;
+                if (ungTuyenId) newUrl += '&ungTuyenId=' + ungTuyenId;
+                if (tinTuyenDungId) newUrl += '&tinTuyenDungId=' + tinTuyenDungId;
+                var currentSearchTerm = $('input[name="searchTerm"]').val();
+                var currentDateFrom = $('input[name="filterDateFrom"]').val();
+                var currentDateTo = $('input[name="filterDateTo"]').val();
+                var currentReadStatus = $('select[name="filterReadStatus"]').val();
+                var currentJobContextId = $('select[name="selectedJobContextId"]').val();
+                if (currentSearchTerm) newUrl += '&searchTerm=' + encodeURIComponent(currentSearchTerm);
+                if (currentDateFrom) newUrl += '&filterDateFrom=' + currentDateFrom;
+                if (currentDateTo) newUrl += '&filterDateTo=' + currentDateTo;
+                if (currentReadStatus) newUrl += '&filterReadStatus=' + currentReadStatus;
+                if (currentJobContextId) newUrl += '&selectedJobContextId=' + currentJobContextId;
+                window.location.href = newUrl;
+            });
+
+           $(document).on('submit', '#sendMessageForm', function (e) {
+                e.preventDefault(); // Ngăn form submit theo cách truyền thống (gây reload trang)
+                var form = $(this);
+                var noiDung = form.find('textarea[name="NoiDungTinNhanMoi"]').val();
+                var nguoiNhanId = form.find('input[name="NguoiLienHeIdHienTai"]').val();
+                var ungTuyenId = form.find('input[name="UngTuyenIdChoTinNhanMoi"]').val();
+                var tinTuyenDungId = form.find('input[name="TinTuyenDungIdChoTinNhanMoi"]').val();
+
+                // Kiểm tra dữ liệu đầu vào
+                if (!noiDung.trim() || !nguoiNhanId) {
+                    showToast('warning', 'Nội dung tin nhắn không được để trống.');
+                    return;
+                }
+
+                var sendButton = form.find('button[type="submit"]');
+                var originalButtonHtml = sendButton.html();
+                sendButton.html('<i class="fas fa-spinner fa-spin"></i>').prop('disabled', true); // Hiệu ứng loading
+
+                // --- AJAX CALL ---
+                $.ajax({
+                    url: '/api/tinnhan/guitinnhan', // URL của API endpoint để gửi tin nhắn
+                    type: 'POST',
+                    contentType: 'application/json', // Gửi dữ liệu dưới dạng JSON
+                    headers: {
+                        "RequestVerificationToken": getAntiForgeryToken() // Chống CSRF
+                    },
+                    data: JSON.stringify({ // Dữ liệu gửi đi
+                        NguoiNhanId: parseInt(nguoiNhanId),
+                        NoiDung: noiDung,
+                        UngTuyenLienQuanId: ungTuyenId ? parseInt(ungTuyenId) : null,
+                        TinLienQuanId: tinTuyenDungId ? parseInt(tinTuyenDungId) : null
+                    }),
+                    success: function (response) { // Xử lý khi gửi thành công
+                        if (response.success && response.data) {
+                            // 1. Tạo HTML cho tin nhắn mới
+                            var messageHtml = createMessageHtml(response.data, true);
+                            // 2. Thêm tin nhắn vào vùng hiển thị
+                            $('.chat-messages').append(messageHtml);
+                            // 3. Xóa nội dung textarea và focus lại
+                            form.find('textarea[name="NoiDungTinNhanMoi"]').val('').focus();
+                            // 4. Cuộn xuống tin nhắn mới nhất
+                            scrollToBottom();
+                            // 5. Cập nhật item hội thoại trong danh sách bên trái
+                            updateConversationListItem(nguoiNhanId, ungTuyenId, tinTuyenDungId, noiDung, response.data.thoiGianGuiDisplay, true);
+                        } else {
+                            showToast('error', 'Lỗi: ' + (response.message || 'Không thể gửi tin nhắn.'));
+                        }
+                    },
+                    error: function (xhr) { // Xử lý khi có lỗi
+                        var errorMsg = 'Lỗi khi gửi tin nhắn.';
+                        if (xhr.responseJSON?.message) { errorMsg = xhr.responseJSON.message; }
+                        else if (xhr.responseText) { try { var err = JSON.parse(xhr.responseText); if(err.message) errorMsg = err.message; else errorMsg = xhr.responseText;} catch {errorMsg = xhr.responseText;} }
+                        showToast('error', errorMsg);
+                    },
+                    complete: function () { // Luôn chạy sau success hoặc error
+                        sendButton.html(originalButtonHtml).prop('disabled', false); // Khôi phục nút gửi
+                    }
+                });
+            });
+
+            $(document).on('click', '.delete-conversation-btn', function(e){
+                e.preventDefault(); e.stopPropagation(); var button = $(this);
+                var nguoiLienHeId = button.data('nguoilienheid'); var tenNguoiLienHe = button.data('tennguoilienhe');
+                var convItem = button.closest('.conversation-item'); var ungTuyenId = convItem.data('ungtuyenid');
+                var tinTuyenDungId = convItem.data('tintuyendungid');
+                if (confirm('Bạn có chắc muốn xóa toàn bộ hội thoại với ' + tenNguoiLienHe + ( ungTuyenId || tinTuyenDungId ? ' về công việc này' : '') + '? Hành động này không thể hoàn tác.')) {
+                    var originalDeleteIcon = button.html(); button.html('<i class="fas fa-spinner fa-spin fa-xs"></i>').prop('disabled', true);
+                    $.ajax({
+                        url: '/api/tinnhan/xoahoithoai', type: 'POST', contentType: 'application/json',
+                        headers: { "RequestVerificationToken": getAntiForgeryToken() },
+                        data: JSON.stringify({ NguoiLienHeId: parseInt(nguoiLienHeId), UngTuyenLienQuanId: ungTuyenId ? parseInt(ungTuyenId) : null, TinTuyenDungLienQuanId: tinTuyenDungId ? parseInt(tinTuyenDungId) : null }),
+                        success: function(response) {
+                            if (response.success) {
+                                convItem.fadeOut(function() { $(this).remove(); }); showToast('success', response.message);
+                                var currentChatNguoiLienHeId = $('#chatMainAreaWrapper input[name="NguoiLienHeIdHienTai"]').val();
+                                var currentChatUngTuyenId = ($('#chatMainAreaWrapper input[name="UngTuyenIdChoTinNhanMoi"]').val() || null);
+                                var currentChatTinTuyenDungId = ($('#chatMainAreaWrapper input[name="TinTuyenDungIdChoTinNhanMoi"]').val() || null);
+                                if (currentChatNguoiLienHeId == nguoiLienHeId && currentChatUngTuyenId == (ungTuyenId || null) && currentChatTinTuyenDungId == (tinTuyenDungId || null)) {
+                                     window.location.href = '@Url.Action("Index", "TinNhan")'; // Reload để reset view
+                                } else {
+                                    setTimeout(function() { // Đợi animation rồi kiểm tra lại
+                                        if ($('#conversationList .conversation-item').length === 0) {
+                                             $('#conversationList').html('<p class="text-center text-muted p-3">Bạn chưa có hội thoại nào.</p>');
+                                             if (!currentChatNguoiLienHeId && !('@Model.IsChatAreaActive'.toLowerCase() === 'true')) { // Nếu không có chat nào active và model cũng vậy
+                                                // Không cần reload nếu đã ở trang index không active chat
+                                             } else if(!currentChatNguoiLienHeId) { // Nếu không có chat nào đang active
+                                                window.location.href = '@Url.Action("Index", "TinNhan")'; // Quay về trạng thái index mặc định
+                                             }
+                                        }
+                                    }, 500);
+                                }
+                            } else { showToast('error', 'Lỗi: ' + response.message); button.html(originalDeleteIcon).prop('disabled', false); }
+                        },
+                        error: function(xhr) {
+                            var errorMsg = 'Lỗi khi xóa hội thoại.'; if (xhr.responseJSON?.message) { errorMsg = xhr.responseJSON.message; }
+                            showToast('error', errorMsg); button.html(originalDeleteIcon).prop('disabled', false);
+                        }
+                    });
+                }
+            });
+
+            $(document).on('keypress', '#chatMainAreaWrapper textarea[name="NoiDungTinNhanMoi"]', function (e) {
+                if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $(this).closest('form').submit(); }
+            });
+
+            $(document).on('click', '#chatHeaderInfoTrigger', function() {
+                var detailsPane = $('#chatDetailsPane');
+                if (detailsPane.is(':visible') && (!detailsPane.hasClass('active') || $(window).width() >= 768) ) {
+                    hideDetailsPane();
+                } else {
+                    var contactId = $('#chatMainAreaWrapper input[name="NguoiLienHeIdHienTai"]').val();
+                    var ungTuyenId = $('#chatMainAreaWrapper input[name="UngTuyenIdChoTinNhanMoi"]').val();
+                    var tinTuyenDungId = $('#chatMainAreaWrapper input[name="TinTuyenDungIdChoTinNhanMoi"]').val();
+                    if (contactId) { showDetailsPane(contactId, ungTuyenId, tinTuyenDungId); }
+                }
+            });
+
+            $(document).on('click', function(event) {
+                var detailsPane = $('#chatDetailsPane'); var infoTrigger = $('#chatHeaderInfoTrigger');
+                if (detailsPane.hasClass('active') && !detailsPane.is(event.target) && detailsPane.has(event.target).length === 0 &&
+                    !infoTrigger.is(event.target) && infoTrigger.has(event.target).length === 0) {
+                    hideDetailsPane();
+                }
+            });
+        });
+    </script>
+}

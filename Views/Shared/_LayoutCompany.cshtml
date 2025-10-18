@@ -1,0 +1,257 @@
+@using HeThongTimViec.Models
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@using Microsoft.EntityFrameworkCore
+@inject IHttpContextAccessor HttpContextAccessor
+@inject HeThongTimViec.Data.ApplicationDbContext _dbContext
+@* >>> THÊM INJECT IThongBaoService <<< *@
+@inject HeThongTimViec.Services.IThongBaoService _thongBaoService
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NTD Panel - Hệ Thống Tìm Việc</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="~/css/company-layout-centered.css" asp-append-version="true" />
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light-subtle">
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-primary-emphasis" asp-area="NhaTuyenDung" asp-controller="Dashboard" asp-action="Index">NTD Panel</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCompanyContent" aria-controls="navbarCompanyContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCompanyContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link @IsActive("Dashboard", "Index")" asp-area="NhaTuyenDung" asp-controller="Dashboard" asp-action="Index">Bảng điều khiển</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @IsActive("CompanyPosting", "Index")" asp-area="NhaTuyenDung" asp-controller="CompanyPosting" asp-action="Index">Quản Lý Tin Đăng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @IsActive("QuanLyUngVien", "Index")" asp-area="NhaTuyenDung" asp-controller="QuanLyUngVien" asp-action="Index">
+                                Quản Lý Ứng Viên
+                            </a>
+                        </li>
+                    </ul>
+                    @{
+                        int unreadMessageCountCompany = 0;
+                        // >>> Biến đếm thông báo chưa đọc <<<
+                        int unreadNotificationCountCompany = 0;
+                        var userIdStringCompany = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                        if (User.Identity?.IsAuthenticated == true && int.TryParse(userIdStringCompany, out int currentUserIdCompany))
+                        {
+                            // Lấy số tin nhắn chưa đọc
+                            unreadMessageCountCompany = await _dbContext.TinNhans
+                                .AsNoTracking()
+                                .CountAsync(tn => tn.NguoiNhanId == currentUserIdCompany && tn.NgayDoc == null);
+
+                            // >>> Lấy số thông báo chưa đọc sử dụng IThongBaoService <<<
+                            unreadNotificationCountCompany = await _thongBaoService.GetUnreadThongBaoCountAsync(currentUserIdCompany);
+                        }
+                    }
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item me-2">
+                            <a class="btn btn-primary" asp-area="NhaTuyenDung" asp-controller="CompanyPosting" asp-action="Create">
+                                Đăng Tin Mới
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary position-relative" asp-area="NhaTuyenDung" asp-controller="TinNhan" asp-action="Index" title="Tin nhắn">
+                                <i class="fa-regular fa-envelope fs-5"></i>
+                                @if (unreadMessageCountCompany > 0)
+                                {
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        @unreadMessageCountCompany
+                                        <span class="visually-hidden">tin nhắn chưa đọc</span>
+                                    </span>
+                                }
+                            </a>
+                        </li>
+                        @* >>> CẬP NHẬT LINK VÀ BADGE CHO THÔNG BÁO <<< *@
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary position-relative" asp-area="NhaTuyenDung" asp-controller="ThongBaoPage" asp-action="Index" title="Thông báo">
+                                <i class="fa-regular fa-bell fs-5"></i>
+                                @if (unreadNotificationCountCompany > 0)
+                                {
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                                        @unreadNotificationCountCompany
+                                        <span class="visually-hidden">thông báo chưa đọc</span>
+                                    </span>
+                                }
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown ms-2">
+                            <a class="nav-link dropdown-toggle text-dark-emphasis d-flex align-items-center" href="#" id="navbarDropdownCompany" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-regular fa-building me-2 fs-5 text-secondary"></i>
+                                <span class="company-name-nav">@(ViewBag.TenCongTy ?? "Công Ty")</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-light mt-1" aria-labelledby="navbarDropdownCompany">
+                                <li><a class="dropdown-item" asp-area="NhaTuyenDung" asp-controller="NhaTuyenDung" asp-action="HoSo"><i class="fa-solid fa-id-card-clip fa-fw me-2 text-muted"></i>Hồ sơ Công ty</a></li>
+                                <li><a class="dropdown-item" asp-area="TaiKhoan" asp-controller="TaiKhoan" asp-action="DoiMatKhau"><i class="fa-solid fa-gear fa-fw me-2 text-muted"></i>Đổi mật khẩu</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form asp-area="" asp-controller="TaiKhoan" asp-action="DangXuat" method="post" class="px-2">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger w-100"><i class="fa-solid fa-arrow-right-from-bracket fa-fw me-1"></i>Đăng Xuất</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content-container flex-grow-1 py-3 py-md-4">
+        <div class="container">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="footer-custom pt-5 pb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <h5 class="footer-brand mb-3">JOXFLEX</h5>
+                    <p class="footer-tagline">Nền tảng kết nối việc làm bán thời gian và thời vụ hàng đầu Việt Nam. Chúng tôi giúp người tìm việc dễ dàng tiếp cận với hàng ngàn cơ hội việc làm linh hoạt.</p>
+                    <ul class="list-unstyled contact-info mt-3">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> Email: <a href="mailto:contact@joxflex.com">contact@joxflex.com</a></li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> Điện thoại: <a href="tel:19001234">1900 1234</a></li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Địa chỉ: 123 Đường ABC, Quận 1, TP.HCM</li>
+                    </ul>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="social-icon-circle me-2" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon-circle me-2" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon-circle me-2" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon-circle me-2" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon-circle" title="Github"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4 mb-lg-0">
+                    <h6 class="footer-heading">Về JOXFLEX</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a asp-controller="Home" asp-action="Index"><span class="link-icon"><i class="fas"></i></span>Trang chủ</a></li>
+                        <li><a asp-controller="Home" asp-action="About"><span class="link-icon"><i class="fas"></i></span>Về chúng tôi</a></li>
+                        <li><a asp-controller="Home" asp-action="Privacy"><span class="link-icon"><i class="fas"></i></span>Chính sách & bảo mật</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact"><span class="link-icon"><i class="fas"></i></span>Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                    <h6 class="footer-heading">Dành cho ứng viên</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a asp-controller="TimViec" asp-action="Index"><span class="link-icon"><i class="fas"></i></span>Tìm việc làm</a></li>
+                        <li><a asp-controller="CaNhan" asp-action="Index"><span class="link-icon"><i class="fas"></i></span>Tạo hồ sơ</a></li>
+                        <li><a asp-controller="ViecLam" asp-action="DaLuu"><span class="link-icon"><i class="fas"></i></span>Việc đã lưu</a></li>
+                        <li><a asp-controller="ViecLam" asp-action="DaUngTuyen"><span class="link-icon"><i class="fas"></i></span>Việc đã ứng tuyển</a></li>
+                        <li><a asp-controller="BaoCao" asp-action="Index"><span class="link-icon"><i class="fas"></i></span>Việc đã báo cáo</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 col-12 mb-4 mb-lg-0">
+                    <h6 class="footer-heading">Dành cho nhà tuyển dụng</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a asp-controller="CompanyPosting" asp-action="Create"><span class="link-icon"><i class="fas"></i></span>Đăng tin tuyển dụng</a></li>
+                        <li><a asp-controller="NhaTuyenDung" asp-action="HoSo"><span class="link-icon"><i class="fas"></i></span>Tạo hồ sơ</a></li>
+                        <li><a asp-controller="QuanLyUngVien" asp-action="Index"><span class="link-icon"><i class="fas"></i></span>Quản lý ứng viên</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center pt-4 mt-4 border-top border-secondary-subtle">
+                <p class="mb-0 copyright-text">© @DateTime.Now.Year JOXFLEX. All rights reserved. <a asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách bảo mật</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* >>> PHẦN SCRIPT AJAX ĐỂ CẬP NHẬT ĐỘNG SỐ THÔNG BÁO (TÙY CHỌN) <<< *@
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <script>
+            // Bạn có thể giữ lại phần script AJAX từ _Layout.cshtml của ví dụ trước
+            // để cập nhật động số lượng thông báo chưa đọc trên icon chuông này nếu muốn,
+            // thay vì chỉ tải lại khi load trang.
+            // Nếu bạn quyết định dùng AJAX, bạn sẽ gọi đến API /api/ThongBao/UnreadCount
+            // và cập nhật nội dung của badge thông báo ở trên.
+
+            // Ví dụ AJAX (nếu bạn muốn cập nhật động mà không tải lại trang)
+            // $(document).ready(function () {
+            //     const notificationBellBadge = $('#companyNotificationUnreadCount'); // Cần thêm ID cho badge chuông
+            //     const apiBaseUrl = '/api/ThongBao'; 
+
+            //     function fetchCompanyUnreadNotificationCount() {
+            //         $.ajax({
+            //             url: `${apiBaseUrl}/UnreadCount`, // Endpoint API đã tạo
+            //             type: 'GET',
+            //             success: function (response) {
+            //                 if (response.count > 0) {
+            //                     notificationBellBadge.text(response.count).show();
+            //                 } else {
+            //                     notificationBellBadge.hide();
+            //                 }
+            //             },
+            //             error: function (xhr) {
+            //                 console.error('Lỗi lấy số thông báo chưa đọc (NTD):', xhr.responseText);
+            //                 // notificationBellBadge.hide(); // Hoặc xử lý khác
+            //             }
+            //         });
+            //     }
+
+            //     // Gọi lần đầu
+            //     // fetchCompanyUnreadNotificationCount(); 
+            //     // Gọi định kỳ (ví dụ mỗi 30 giây)
+            //     // setInterval(fetchCompanyUnreadNotificationCount, 30000); 
+            // });
+        </script>
+    }
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+@functions {
+    public string IsActive(string controller, string action, string area = "NhaTuyenDung")
+    {
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+        var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+        var currentArea = ViewContext.RouteData.Values["area"]?.ToString();
+
+        bool isControllerMatch = string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase);
+        bool isAreaMatch = string.Equals(currentArea, area, StringComparison.OrdinalIgnoreCase);
+
+        if (isAreaMatch && isControllerMatch)
+        {
+            if (action == "Index" &&
+                (string.Equals(currentAction, "Index", StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(currentAction, "Create", StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(currentAction, "Edit", StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(currentAction, "Details", StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(currentAction, "ChiTietHoSo", StringComparison.OrdinalIgnoreCase)))
+            {
+                return "active text-primary fw-medium";
+            }
+            if (string.Equals(currentAction, action, StringComparison.OrdinalIgnoreCase))
+            {
+                return "active text-primary fw-medium";
+            }
+        }
+        return "text-dark-emphasis";
+    }
+}

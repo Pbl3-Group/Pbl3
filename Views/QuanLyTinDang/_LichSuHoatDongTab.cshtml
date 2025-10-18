@@ -1,0 +1,155 @@
+@model List<HeThongTimViec.ViewModels.QuanLyTinDang.ActivityLogItemViewModel>
+
+<div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+    <div class="card-header bg-primary text-white py-3">
+        <h5 class="mb-0">
+            <i class="bi bi-clock-history me-2" aria-hidden="true"></i>
+            <span>Lịch sử hoạt động</span>
+        </h5>
+    </div>
+    <div class="card-body p-0">
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <div class="text-muted mb-3">
+                    <i class="bi bi-clipboard fa-3x opacity-50" aria-hidden="true"></i>
+                </div>
+                <p class="text-muted">Chưa có lịch sử hoạt động nào.</p>
+            </div>
+        }
+        else
+        {
+            <div class="timeline p-3">
+                @foreach (var log in Model)
+                {
+                    <div class="timeline-item pb-4 position-relative @(Model.Last() != log ? "" : "border-0")">
+                        <div class="d-flex">
+                            <div class="timeline-icon-container me-3 position-relative">
+                                <div class="timeline-icon rounded-circle overflow-hidden border border-2 border-white shadow-sm">
+                                    <img src="@(log.AvatarUrl ?? "/images/default-avatar.png")" 
+                                         alt="Avatar của @log.NguoiThucHien" 
+                                         class="w-100 h-100 object-fit-cover">
+                                </div>
+                                @if (Model.Last() != log)
+                                {
+                                    <div class="timeline-line position-absolute"></div>
+                                }
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <div>
+                                        <span class="fw-bold">@log.NguoiThucHien</span>
+                                        <span class="log-action ms-1">@log.HanhDongChinh</span>
+                                    </div>
+                                    <div class="timeline-time text-muted small ms-2 d-flex align-items-center">
+                                        <i class="bi bi-clock me-1" aria-hidden="true"></i>
+                                        <span>@log.ThoiGianDisplay</span>
+                                    </div>
+                                </div>
+                                
+                                @if (!string.IsNullOrWhiteSpace(log.MoTaChiTietHtml))
+                                {
+                                    <div class="timeline-detail bg-light rounded-3 p-3 mt-2">
+                                        @Html.Raw(log.MoTaChiTietHtml)
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .timeline {
+        position: relative;
+    }
+    
+    .timeline-item {
+        padding-bottom: 1.5rem;
+        border-bottom: 1px dashed #dee2e6;
+        margin-bottom: 1.5rem;
+    }
+    
+    .timeline-item:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    
+    .timeline-icon {
+        width: 60px;
+        height: 60px;
+        background-color: #f8f9fa;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .timeline-line {
+        width: 2px;
+        background-color: rgba(0, 58, 146, 0.2);
+        height: calc(100% + 1.5rem);
+        left: 29px;
+        top: 60px;
+        z-index: 1;
+    }
+    
+    .timeline-time {
+        white-space: nowrap;
+        font-size: 0.85rem;
+        color: #4a4a4a;
+    }
+    
+    .log-action {
+        color: #002a6a;
+    }
+    
+    .timeline-detail {
+        font-size: 0.9rem;
+        border-left: 3px solid #003a92;
+    }
+    
+    .timeline-detail p:last-child {
+        margin-bottom: 0;
+    }
+    
+    .timeline-item:hover .timeline-detail {
+        background-color: rgba(0, 58, 146, 0.05);
+    }
+    
+    .bg-primary {
+        background: #003a92 !important;
+    }
+
+    
+    
+    /* Responsive adjustments */
+    @@media (max-width: 576px) {
+        .timeline-time {
+            display: block;
+            margin-top: 0.25rem;
+            margin-left: 0 !important;
+        }
+        
+        .d-flex.justify-content-between.align-items-start {
+            flex-direction: column;
+        }
+        
+        .timeline-icon {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .timeline-line {
+            left: 24px;
+        }
+        
+        .timeline-icon-container {
+            margin-right: 1rem;
+        }
+    }
+</style>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">

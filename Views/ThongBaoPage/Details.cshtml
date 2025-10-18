@@ -1,0 +1,36 @@
+@model HeThongTimViec.ViewModels.AdminNotificationDetailsViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết Thông báo";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>@ViewData["Title"]</h1>
+    <div>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Quay lại danh sách
+        </a>
+    </div>
+</div>
+
+
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h4 class="card-title mb-0">@Model.TieuDe</h4>
+    </div>
+    <div class="card-body">
+        @* Dùng pre-wrap để giữ lại các khoảng trắng và xuống dòng từ nội dung gốc *@
+        <p style="white-space: pre-wrap;">@Model.NoiDung</p>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="d-flex justify-content-between flex-wrap gap-2">
+            <div>
+                <strong>Gửi bởi:</strong> @Model.TenAdminGui <br/>
+                <strong>Phân loại:</strong> <span class="badge bg-primary">@Model.LoaiThongBaoDisplay</span>
+            </div>
+            <div class="text-md-end">
+                <strong>Ngày gửi:</strong><br/> @Model.NgayGui
+            </div>
+        </div>
+    </div>
+</div>

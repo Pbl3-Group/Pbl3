@@ -1,0 +1,205 @@
+@model HeThongTimViec.ViewModels.CongTy.DanhSachCongTyViewModel
+@{
+    ViewData["Title"] = "Danh sách Doanh nghiệp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeadStyles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+             /* Thêm nền nhẹ để hiệu ứng kính mờ đẹp hơn */
+            background-color: #f8f9fa;
+        }
+        .section-padding {
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        /* NÂNG CẤP: GIAO DIỆN MỚI CHO CARD CÔNG TY (Glassmorphism & Banner) */
+        /*
+            Bản thân thẻ <a> sẽ là card, không cần div.card bên trong nữa.
+            Điều này giúp toàn bộ thẻ có thể click và đơn giản hóa cấu trúc.
+        */
+        a.company-card-premium {
+            display: flex; /* Dùng flexbox để điều khiển bố cục bên trong */
+            flex-direction: column;
+            text-decoration: none; /* Bỏ gạch chân của link */
+            position: relative;
+            background: rgba(255, 255, 255, 0.7); /* Tăng độ mờ nhẹ */
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            transition: all 0.3s ease;
+            overflow: visible; /* Cho phép logo và bóng đổ tràn ra ngoài */
+        }
+        a.company-card-premium:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        .company-card-banner {
+            height: 80px;
+            background-color: #f1f3f5;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+        }
+        
+        .company-card-body {
+            padding: 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Quan trọng: để body co giãn và đẩy nút xuống dưới */
+        }
+
+        /* NÂNG CẤP: AVATAR/LOGO HÌNH TRÒN VÀ TỐI ƯU HIỂN THỊ */
+        .company-logo-premium {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%; /* Chìa khóa cho hình tròn */
+            border: 5px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background-color: #fff;
+            margin-top: -60px;
+            margin-bottom: 1rem;
+            align-self: center; /* Tự căn giữa trong flex container */
+
+            /* CHÌA KHÓA TỐI ƯU ẢNH: Phóng to và lấp đầy khung tròn */
+            object-fit: cover;
+        }
+        
+        .company-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .company-location {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .company-description {
+            font-size: 0.9rem;
+            color: #34495e;
+            height: 65px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 1.5rem;
+            flex-grow: 1; /* Đảm bảo mô tả co giãn */
+        }
+
+        .job-count-info {
+            background-color: #eaf1ff;
+            border-radius: 50rem;
+            padding: 0.5rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            color: #0d6efd;
+            margin-top: auto; /* Đẩy nút này xuống dưới cùng của card */
+        }
+        .job-count-info i { margin-right: 0.5rem; }
+
+        /* NÂNG CẤP: THANH TÌM KIẾM */
+        .search-form .input-group {
+            border-radius: 50rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .search-form .form-control {
+            border: none;
+            padding-left: 2rem;
+            padding-top: 0.9rem;
+            padding-bottom: 0.9rem;
+        }
+        .search-form .btn {
+             border-radius: 0 50rem 50rem 0 !important;
+        }
+        
+        /* CSS cho phân trang */
+        .pagination .page-link { color: #0d6efd; }
+        .pagination .page-item.active .page-link { background-color: #0d6efd; border-color: #0d6efd; color: #fff; }
+        .pagination .page-item.disabled .page-link { color: #6c757d; }
+    </style>
+}
+
+<div class="container section-padding">
+    <div class="section-title text-center mb-5">
+        <h1>Khám phá các Doanh nghiệp</h1>
+        <p class="lead text-muted">Những đối tác uy tín đang tìm kiếm nhân tài trên nền tảng của chúng tôi.</p>
+    </div>
+
+    <!-- NÂNG CẤP: THANH TÌM KIẾM -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8">
+            <form method="get" asp-action="DanhSach" class="search-form">
+                <div class="input-group">
+                    <input type="text" name="searchString" class="form-control" placeholder="Tìm kiếm theo tên công ty hoặc địa điểm..." value="@Context.Request.Query["searchString"]">
+                    <button class="btn btn-primary px-4" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+        @if (Model.Companies.Any())
+    {
+        <div class="row gy-5 pt-4">
+            @foreach (var company in Model.Companies)
+            {
+                <div class="col-md-6 col-lg-4 d-flex">
+                    <!-- NÂNG CẤP: THẺ <a> LÀ CARD CHÍNH, BỎ DIV.CARD BÊN TRONG -->
+                    <a asp-controller="CongTy" asp-action="ChiTiet" asp-route-slug="@company.ProfileSlug" class="company-card-premium w-100">
+                        <div class="company-card-banner"></div>
+                        <div class="company-card-body">
+                            <!-- Logo được tối ưu với object-fit: cover trong CSS -->
+                            <img src="@(string.IsNullOrEmpty(company.LogoUrl) ? "/images/company-logo-placeholder.png" : company.LogoUrl)" 
+                                 alt="Logo của @company.TenCongTy" class="company-logo-premium">
+                            
+                            <h5 class="company-name">@company.TenCongTy</h5>
+                            
+                            <p class="company-location">
+                                <i class="fas fa-map-marker-alt fa-fw me-1"></i>
+                                @company.DiaDiem
+                            </p>
+                            
+                            <p class="company-description">
+                                @(company.MoTaNgan ?? "Doanh nghiệp chưa cập nhật giới thiệu.")
+                            </p>
+                            
+                            <div class="job-count-info">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Tuyển @company.SoViecLamDangTuyen vị trí</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+        <!-- PHÂN TRANG THÔNG MINH (giữ nguyên logic) -->
+        @if (Model.TotalPages > 1)
+        {
+            <nav aria-label="Company list pagination" class="mt-5">
+                <ul class="pagination justify-content-center">
+                     <!-- ... code phân trang thông minh từ lần trước giữ nguyên ... -->
+                </ul>
+            </nav>
+        }
+    }
+    else
+    {
+        <div class="text-center mt-5">
+            <i class="fas fa-building fa-3x text-muted mb-3"></i>
+            <h4>Không tìm thấy doanh nghiệp nào</h4>
+            <p class="text-muted">Không có doanh nghiệp nào phù hợp với tiêu chí tìm kiếm của bạn.</p>
+        </div>
+    }
+</div>

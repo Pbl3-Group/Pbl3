@@ -1,0 +1,406 @@
+@model HeThongTimViec.ViewModels.ViecLam.DaUngTuyenViewModel
+@using HeThongTimViec.Models
+@using HeThongTimViec.Extensions
+@using HeThongTimViec.Utils
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
+@{
+    ViewData["Title"] = "Quản Lý đơn ứng tuyển";
+
+    var requestToken = antiforgery.GetAndStoreTokens(Context).RequestToken;
+    var currentStatusFilter = Model.TrangThaiFilter;
+    var currentTuKhoa = Model.TuKhoa;
+    var currentSapXepThoiGian = Model.SapXepThoiGian;
+}
+
+@* Không cần Animate.css nữa *@
+
+<style>
+    /* CSS đã được đơn giản hóa, loại bỏ các hiệu ứng animation */
+    .page-header {
+        padding: 1.5rem;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 2rem;
+        border-radius: 0.5rem;
+    }
+    .page-header h1 { color: var(--bs-primary); font-weight: 600; font-size: 1.75rem; }
+    .page-header p { color: #6c757d; font-size: 0.95rem; }
+    .header-icon { width: 50px; height: 50px; background-color: rgba(var(--bs-primary-rgb),0.1); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-right: 15px; color: var(--bs-primary); font-size:1.5rem; }
+
+    .stats-card {
+        background-color: #fff;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        padding: 1.25rem;
+        height: 100%;
+        border: 1px solid #e9ecef;
+    }
+    .stats-card-body { display: flex; align-items: center; }
+    .stats-icon {
+        width: 45px; height: 45px; border-radius: 10px;
+        display: flex; justify-content: center; align-items: center;
+        margin-right: 1rem; font-size: 1.3rem;
+    }
+    .stats-info { flex: 1; }
+    .stats-title { font-size: 0.8rem; color: #6c757d; margin-bottom: 0.15rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stats-number { font-size: 1.6rem; font-weight: 700; margin: 0; color: #212529; }
+
+    .bg-primary-soft { background-color: rgba(var(--bs-primary-rgb),0.1); color: var(--bs-primary);}
+    .bg-success-soft { background-color: rgba(var(--bs-success-rgb),0.1); color: var(--bs-success); }
+    .bg-warning-soft { background-color: rgba(var(--bs-warning-rgb),0.1); color: var(--bs-warning); }
+    .bg-info-soft { background-color: rgba(var(--bs-info-rgb),0.1); color: var(--bs-info); }
+    .bg-danger-soft { background-color: rgba(var(--bs-danger-rgb),0.1); color: var(--bs-danger); }
+    .bg-secondary-soft { background-color: rgba(var(--bs-secondary-rgb),0.1); color: var(--bs-secondary); }
+
+    .filter-section {
+        background-color: #fff;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        border: 1px solid #e9ecef;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .status-tabs .nav-pills .nav-link {
+        border-radius: 50px;
+        padding: 0.5rem 1.25rem;
+        font-weight: 500;
+        font-size:0.85rem;
+        color: #495057;
+        background-color: #e9ecef;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .status-tabs .nav-pills .nav-link:hover { background-color: #d8dde2; }
+    .status-tabs .nav-pills .nav-link.active {
+        background-color: var(--bs-primary);
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(var(--bs-primary-rgb),0.3);
+    }
+    .status-tabs .nav-pills .nav-link.disabled {
+        background-color: #f8f9fa;
+        color: #adb5bd;
+        pointer-events: none;
+    }
+    .status-tabs .nav-pills .nav-link .badge {
+        font-size: 0.7em;
+        vertical-align: middle;
+        margin-left: 0.5rem;
+    }
+    .status-tabs .nav-pills .nav-link.active .badge {
+        background-color: rgba(255,255,255,0.2) !important;
+        color: #fff !important;
+    }
+
+    .empty-state { padding: 3rem 1rem; background-color: #fff; border-radius: 0.75rem; text-align: center; border: 1px solid #e9ecef; margin-top:1rem; }
+    .empty-state .icon { font-size: 3.5rem; color: #ced4da; margin-bottom: 1rem; }
+    .empty-state .message p { font-size: 1.05rem; color: #495057; }
+    
+    .pagination .page-link {
+        border-radius: 50px !important;
+        margin: 0 3px;
+        color: var(--bs-primary);
+    }
+    .pagination .page-item.active .page-link {
+        background-color: var(--bs-primary);
+        border-color: var(--bs-primary);
+        color: white;
+    }
+</style>
+
+<div class="container py-4">
+    <div class="app-container">
+        <div class="page-header d-flex align-items-center mb-4">
+            <div class="header-icon">
+                <i class="fas fa-clipboard-list"></i>
+            </div>
+            <div>
+                <h1 class="h3 mb-0">@ViewData["Title"]</h1>
+                <p class="mb-0 text-muted">Theo dõi, quản lý và cập nhật tình trạng các đơn ứng tuyển của bạn.</p>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="stats-summary mb-4">
+                <div class="row g-3">
+                    <div class="col-lg col-md-4 col-6">
+                        <div class="stats-card">
+                            <div class="stats-card-body">
+                                <div class="stats-icon bg-primary-soft"> <i class="fas fa-layer-group"></i> </div>
+                                <div class="stats-info"> <h5 class="stats-title">Tổng đơn</h5> <p class="stats-number">@Model.TotalCount</p> </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model.StatusCounts != null)
+                    {
+                        var displayOrder = new Dictionary<TrangThaiUngTuyen, int> {
+                            { TrangThaiUngTuyen.danop, 1 }, { TrangThaiUngTuyen.ntddaxem, 2 }, { TrangThaiUngTuyen.daduyet, 3 },
+                            { TrangThaiUngTuyen.darut, 4 }, { TrangThaiUngTuyen.bituchoi, 5 }
+                        };
+                        foreach (var statusEnum in displayOrder.OrderBy(kvp => kvp.Value).Select(kvp => kvp.Key))
+                        {
+                            if (Enum.IsDefined(typeof(TrangThaiUngTuyen), statusEnum))
+                            {
+                                var count = Model.StatusCounts.ContainsKey(statusEnum) ? Model.StatusCounts[statusEnum] : 0;
+                                string colorClass = statusEnum switch {
+                                    TrangThaiUngTuyen.danop => "bg-secondary-soft", TrangThaiUngTuyen.ntddaxem => "bg-info-soft",
+                                    TrangThaiUngTuyen.daduyet => "bg-success-soft", TrangThaiUngTuyen.bituchoi => "bg-danger-soft",
+                                    TrangThaiUngTuyen.darut => "bg-warning-soft", _ => "bg-light"
+                                };
+                                string iconClass = statusEnum switch {
+                                    TrangThaiUngTuyen.danop => "fas fa-paper-plane", TrangThaiUngTuyen.ntddaxem => "far fa-eye",
+                                    TrangThaiUngTuyen.daduyet => "fas fa-user-check", TrangThaiUngTuyen.bituchoi => "fas fa-ban",
+                                    TrangThaiUngTuyen.darut => "fas fa-history", _ => "fas fa-question-circle"
+                                };
+                                if (count > 0 || displayOrder.ContainsKey(statusEnum))
+                                {
+                                    <div class="col-lg col-md-4 col-6">
+                                        <div class="stats-card">
+                                            <div class="stats-card-body">
+                                                <div class="stats-icon @colorClass"> <i class="@iconClass"></i> </div>
+                                                <div class="stats-info"> <h5 class="stats-title">@statusEnum.GetDisplayName()</h5> <p class="stats-number">@count</p> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="filter-section mb-4">
+                <form asp-action="DaUngTuyen" method="get" class="filter-form">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-4 col-lg-4">
+                            <label asp-for="TuKhoa" class="form-label small fw-medium">Tìm kiếm</label>
+                            <input asp-for="TuKhoa" class="form-control form-control-sm" placeholder="Tên công việc, công ty...">
+                        </div>
+                        <div class="col-md-3 col-lg-3">
+                            <label asp-for="TrangThaiFilter" class="form-label small fw-medium">Trạng thái</label>
+                            <select asp-for="TrangThaiFilter" asp-items="Model.TrangThaiOptions" class="form-select form-select-sm"></select>
+                        </div>
+                        <div class="col-md-3 col-lg-3">
+                            <label asp-for="SapXepThoiGian" class="form-label small fw-medium">Sắp xếp theo</label>
+                            <select asp-for="SapXepThoiGian" asp-items="Model.SapXepThoiGianOptions" class="form-select form-select-sm"></select>
+                        </div>
+                        <div class="col-md-2 col-lg-2 d-grid">
+                            <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-filter me-1"></i> Lọc</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+             <div class="status-tabs mb-4">
+                <ul class="nav nav-pills flex-column flex-sm-row nav-fill">
+                    <li class="nav-item me-sm-2 mb-1 mb-sm-0">
+                        <a class="nav-link @(currentStatusFilter == null ? "active" : "") d-flex justify-content-center justify-content-sm-between align-items-center" 
+                           asp-action="DaUngTuyen"
+                           asp-route-tuKhoa="@currentTuKhoa"
+                           asp-route-sapXepThoiGian="@currentSapXepThoiGian">
+                            <span><i class="fas fa-layer-group me-2"></i>Tất cả</span>
+                            <span class="badge rounded-pill @(currentStatusFilter == null ? "bg-white text-primary" :"bg-light text-dark")">@Model.TotalCount</span>
+                        </a>
+                    </li>
+                    @if (Model.StatusCounts != null)
+                    {
+                        var orderedStatuses = new Dictionary<TrangThaiUngTuyen, string> {
+                            { TrangThaiUngTuyen.danop, "fas fa-paper-plane" }, { TrangThaiUngTuyen.ntddaxem, "far fa-eye" }, 
+                            { TrangThaiUngTuyen.daduyet, "fas fa-user-check" }, { TrangThaiUngTuyen.darut, "fas fa-history" }, 
+                            { TrangThaiUngTuyen.bituchoi, "fas fa-ban" }
+                        };
+
+                        foreach (var kvp in orderedStatuses)
+                        {
+                            var statusEnum = kvp.Key;
+                            var iconClass = kvp.Value;
+                            var count = Model.StatusCounts.ContainsKey(statusEnum) ? Model.StatusCounts[statusEnum] : 0;
+                            var isDisabled = count == 0 && currentStatusFilter != statusEnum; 
+
+                            <li class="nav-item me-sm-2 mb-1 mb-sm-0">
+                                <a class="nav-link @(currentStatusFilter == statusEnum ? "active" : "") @(isDisabled ? "disabled" : "") d-flex justify-content-center justify-content-sm-between align-items-center"
+                                   asp-action="DaUngTuyen" asp-route-trangThaiFilter="@statusEnum"
+                                   asp-route-tuKhoa="@currentTuKhoa"
+                                   asp-route-sapXepThoiGian="@currentSapXepThoiGian"
+                                   title="@(isDisabled ? "Chưa có đơn ở trạng thái này" : statusEnum.GetDisplayName())">
+                                    <span><i class="@iconClass me-2"></i>@statusEnum.GetDisplayName()</span>
+                                    <span class="badge rounded-pill @(currentStatusFilter == statusEnum ? "bg-white text-primary" :"bg-light text-dark")">@count</span>
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+
+            <div class="application-list">
+                @if (Model.UngTuyenItems != null && Model.UngTuyenItems.Any())
+                {
+                    <div class="list-group">
+                        @foreach (var item in Model.UngTuyenItems)
+                        {
+                            <div class="list-group-item list-group-item-action border-bottom py-3 px-md-3">
+                                <partial name="_DaUngTuyenItem" model="item" />
+                            </div>
+                        }
+                    </div>
+
+                    @if (Model.UngTuyenItems.TotalPages > 1)
+                    {
+                        <div class="pagination-container mt-4">
+                             <nav aria-label="Page navigation" class="d-flex justify-content-center">
+                                <ul class="pagination pagination-sm">
+                                    <li class="page-item @(!Model.UngTuyenItems.HasPreviousPage ? "disabled" : "")">
+                                        <a class="page-link" asp-action="DaUngTuyen" asp-route-page="1" asp-route-tuKhoa="@Model.TuKhoa" asp-route-trangThaiFilter="@Model.TrangThaiFilter" asp-route-sapXepThoiGian="@Model.SapXepThoiGian" aria-label="First"><i class="fas fa-angle-double-left"></i></a>
+                                    </li>
+                                    <li class="page-item @(!Model.UngTuyenItems.HasPreviousPage ? "disabled" : "")">
+                                        <a class="page-link" asp-action="DaUngTuyen" asp-route-page="@(Model.UngTuyenItems.PageIndex - 1)" asp-route-tuKhoa="@Model.TuKhoa" asp-route-trangThaiFilter="@Model.TrangThaiFilter" asp-route-sapXepThoiGian="@Model.SapXepThoiGian" aria-label="Previous"><i class="fas fa-angle-left"></i></a>
+                                    </li>
+                                    @{
+                                        int startPage = Math.Max(1, Model.UngTuyenItems.PageIndex - 1);
+                                        int endPage = Math.Min(Model.UngTuyenItems.TotalPages, Model.UngTuyenItems.PageIndex + 1);
+                                        if (Model.UngTuyenItems.TotalPages <= 3) { startPage = 1; endPage = Model.UngTuyenItems.TotalPages; }
+                                        else {
+                                            if (Model.UngTuyenItems.PageIndex <= 2) { startPage = 1; endPage = 3; }
+                                            else if (Model.UngTuyenItems.PageIndex >= Model.UngTuyenItems.TotalPages - 1) { startPage = Model.UngTuyenItems.TotalPages - 2; endPage = Model.UngTuyenItems.TotalPages; }
+                                        }
+
+                                        if (startPage > 1) { <li class="page-item"><a class="page-link" asp-action="DaUngTuyen" asp-route-page="1" asp-route-tuKhoa="@Model.TuKhoa" asp-route-trangThaiFilter="@Model.TrangThaiFilter" asp-route-sapXepThoiGian="@Model.SapXepThoiGian">1</a></li> if (startPage > 2) { <li class="page-item disabled"><span class="page-link">...</span></li> } }
+                                        for (int i = startPage; i <= endPage; i++) { <li class="page-item @(i == Model.UngTuyenItems.PageIndex ? "active" : "")"><a class="page-link" asp-action="DaUngTuyen" asp-route-page="@i" asp-route-tuKhoa="@Model.TuKhoa" asp-route-trangThaiFilter="@Model.TrangThaiFilter" asp-route-sapXepThoiGian="@Model.SapXepThoiGian">@i</a></li> }
+                                        if (endPage < Model.UngTuyenItems.TotalPages) { if (endPage < Model.UngTuyenItems.TotalPages - 1) { <li class="page-item disabled"><span class="page-link">...</span></li> } <li class="page-item"><a class="page-link" asp-action="DaUngTuyen" asp-route-page="@Model.UngTuyenItems.TotalPages" asp-route-tuKhoa="@Model.TuKhoa" asp-route-trangThaiFilter="@Model.TrangThaiFilter" asp-route-sapXepThoiGian="@Model.SapXepThoiGian">@Model.UngTuyenItems.TotalPages</a></li> }
+                                    }
+                                    <li class="page-item @(!Model.UngTuyenItems.HasNextPage ? "disabled" : "")">
+                                        <a class="page-link" asp-action="DaUngTuyen" asp-route-page="@(Model.UngTuyenItems.PageIndex + 1)" asp-route-tuKhoa="@Model.TuKhoa" asp-route-trangThaiFilter="@Model.TrangThaiFilter" asp-route-sapXepThoiGian="@Model.SapXepThoiGian" aria-label="Next"><i class="fas fa-angle-right"></i></a>
+                                    </li>
+                                    <li class="page-item @(!Model.UngTuyenItems.HasNextPage ? "disabled" : "")">
+                                        <a class="page-link" asp-action="DaUngTuyen" asp-route-page="@Model.UngTuyenItems.TotalPages" asp-route-tuKhoa="@Model.TuKhoa" asp-route-trangThaiFilter="@Model.TrangThaiFilter" asp-route-sapXepThoiGian="@Model.SapXepThoiGian" aria-label="Last"><i class="fas fa-angle-double-right"></i></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <div class="icon"> <i class="fas fa-folder-open"></i> </div>
+                        <div class="message">
+                            @if (Model.TrangThaiFilter.HasValue || !string.IsNullOrEmpty(Model.TuKhoa))
+                            {
+                                <p>Không tìm thấy đơn ứng tuyển nào phù hợp với bộ lọc của bạn.</p>
+                                <a asp-action="DaUngTuyen" class="btn btn-outline-primary mt-3"> <i class="fas fa-sync-alt me-2"></i> Đặt lại bộ lọc </a>
+                            }
+                            else
+                            {
+                                <p>Bạn chưa ứng tuyển vào công việc nào.</p>
+                                <a asp-controller="TimViec" asp-action="Index" class="btn btn-primary mt-3"> <i class="fas fa-search me-2"></i> Tìm việc ngay </a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+    <script>
+        $(function () {
+            function handleApplicationAction(button, actionUrl, confirmConfig, successDefaultMessage) {
+                var ungTuyenId = button.data('id');
+                var jobTitle = button.data('job-title') || "công việc này";
+
+                if (!ungTuyenId || isNaN(parseInt(ungTuyenId)) || parseInt(ungTuyenId) <= 0) {
+                    Swal.fire('Lỗi', 'ID đơn ứng tuyển không hợp lệ.', 'error');
+                    return;
+                }
+                
+                let finalConfirmHtml = confirmConfig.html.replace(/\$\{jobTitle\}/g, $('<div>').text(jobTitle).html());
+
+                const swalConfig = {
+                    title: confirmConfig.title,
+                    html: finalConfirmHtml,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: confirmConfig.confirmButtonColor || '#3085d6',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: confirmConfig.confirmButtonText || 'Vâng, thực hiện!',
+                    cancelButtonText: 'Hủy bỏ'
+                };
+
+                Swal.fire(swalConfig).then((result) => {
+                    if (result.isConfirmed) {
+                        sendActionRequest(button, ungTuyenId, actionUrl, successDefaultMessage);
+                    }
+                });
+            }
+
+            function sendActionRequest(button, ungTuyenId, urlAction, successMessageDefault) {
+                var token = '@requestToken';
+                var originalButtonHtml = button.html();
+                button.prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Đang xử lý...');
+
+                $.ajax({
+                    url: urlAction,
+                    type: 'POST',
+                    contentType: 'application/json', 
+                    data: JSON.stringify(parseInt(ungTuyenId)), 
+                    headers: { 'RequestVerificationToken': token },
+                    success: function (response) {
+                        if (response.success) {
+                            if (typeof toastr !== 'undefined') {
+                                toastr.options = { "positionClass": "toast-bottom-right", "timeOut": "2000" };
+                                toastr.success(response.message || successMessageDefault);
+                            } else {
+                                alert(response.message || successMessageDefault);
+                            }
+                            
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1500); // Chờ 1.5 giây để người dùng đọc thông báo
+                        } else {
+                            Swal.fire('Thất bại!', response.message || 'Không thể thực hiện thao tác.', 'error');
+                            button.prop('disabled', false).html(originalButtonHtml);
+                        }
+                    },
+                    error: function (jqXHR) {
+                        let msg = 'Lỗi không xác định.';
+                        if (jqXHR.responseJSON && jqXHR.responseJSON.message) msg = jqXHR.responseJSON.message; 
+                        else if (jqXHR.status === 400) msg = "Yêu cầu không hợp lệ."; 
+                        else if (jqXHR.status === 500) msg = "Lỗi máy chủ.";
+                        Swal.fire('Lỗi!', msg, 'error');
+                        button.prop('disabled', false).html(originalButtonHtml);
+                    }
+                });
+            }
+
+            $('.application-list').on('click', '.btn-withdraw-ungtuyen', function (e) {
+                e.preventDefault();
+                handleApplicationAction($(this), '@Url.Action("RutDonUngTuyen", "ViecLam")',
+                    { title: 'Xác nhận rút đơn?', html: `Bạn có chắc chắn muốn rút đơn ứng tuyển cho vị trí <br><b>${"$"}{jobTitle}</b> không?`, confirmButtonText: 'Đồng ý rút' },
+                    'Đã rút đơn ứng tuyển thành công.'
+                );
+            });
+
+            $('.application-list').on('click', '.btn-undo-withdraw-ungtuyen', function (e) {
+                e.preventDefault();
+                handleApplicationAction($(this), '@Url.Action("HoanTacRutDon", "ViecLam")',
+                    { title: 'Xác nhận nộp lại?', html: `Bạn có chắc chắn muốn nộp lại đơn ứng tuyển cho vị trí <br><b>${"$"}{jobTitle}</b> không?`, confirmButtonText: 'Đồng ý nộp lại', confirmButtonColor: '#28a745' },
+                    'Đã nộp lại đơn ứng tuyển thành công.'
+                );
+            });
+            
+            $('.application-list').on('click', '.btn-delete-ungtuyen, .btn-delete-permanently', function (e) { 
+                e.preventDefault();
+                 handleApplicationAction($(this), '@Url.Action("XoaUngTuyenVinhVien", "ViecLam")',
+                    { title: 'Xác nhận xóa vĩnh viễn?', html: `Hành động này không thể hoàn tác. Bạn có chắc chắn muốn XÓA VĨNH VIỄN đơn ứng tuyển cho vị trí <br><b>${"$"}{jobTitle}</b> không?`, confirmButtonText: 'Vâng, Xóa hẳn!', confirmButtonColor: '#d33' },
+                    'Đã xóa vĩnh viễn đơn ứng tuyển.'
+                );
+            });
+
+        });
+    </script>
+}

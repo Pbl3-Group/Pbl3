@@ -1,0 +1,713 @@
+@model HeThongTimViec.ViewModels.Dashboard.CandidateDashboardViewModel
+@using HeThongTimViec.Extensions
+@using HeThongTimViec.Models 
+
+@{
+    ViewData["Title"] = "Bảng điều khiển Ứng viên";
+    var defaultAvatar = Url.Content("~/images/default-avatar.png"); // Đảm bảo có ảnh này trong wwwroot/images
+}
+<link rel="stylesheet" href="~/css/CandidateDashboard.css" asp-append-version="true" />
+
+<div class="container mt-4 mb-5">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="header-content d-flex align-items-center">
+            <img src="@(!string.IsNullOrEmpty(Model.UserAvatarUrl) ? Url.Content(Model.UserAvatarUrl) : defaultAvatar)"
+                 alt="Ảnh đại diện" class="profile-avatar me-3"
+                 onerror="this.onerror=null; this.src='@defaultAvatar';" />
+            <div>
+                <h1 class="mb-0">Chào mừng, @Model.CandidateName!</h1>
+                <p class="lead mb-0">Đây là không gian quản lý dành cho bạn. Chúc một ngày tốt lành!</p>
+            </div>
+        </div>
+    </div>
+    
+     @* --- THÔNG BÁO/GỢI Ý MỚI VỀ CHUYỂN ĐỔI VAI TRÒ --- *@
+<div class="alert alert-light border-start border-4 border-primary mt-4 shadow-sm" role="alert" style="font-size: 0.9rem;">
+    <div class="d-flex align-items-center">
+        <i class="fas fa-user-tie fa-2x text-primary me-3"></i>
+        <div>
+            <h6 class="alert-heading mb-1"><strong>Muốn trở thành Nhà tuyển dụng cá nhân?</strong></h6>
+            <p class="mb-0 text-muted">
+                Bạn có thể đăng tin tuyển dụng và tìm kiếm ứng viên một cách dễ dàng.
+                Nhấn nút "Chuyển sang NTD" trong phần
+                <a href="#quick-actions-section" class="fw-medium text-decoration-none link-primary">Hành động nhanh</a>
+                bên dưới để khám phá ngay!
+            </p>
+        </div>
+    </div>
+</div> 
+    @* --- KẾT THÚC THÔNG BÁO --- *@
+
+    
+    <div class="row g-4 mt-3">
+        <!-- Cột trái: Thông tin hồ sơ & Lịch rảnh -->
+        <div class="col-lg-4">
+            <!-- Profile Summary Card -->
+            <div class="card mb-4 profile-summary-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 card-title"><i class="fas fa-user-circle fa-fw"></i>Hồ sơ cá nhân</h5>
+                    <a asp-controller="CaNhan" asp-action="Index" class="btn btn-sm btn-light border py-1 px-2" title="Chỉnh sửa hồ sơ">
+                        <i class="fas fa-edit text-primary"></i> <span class="d-none d-md-inline ms-1">Sửa</span>
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if (Model.HasProfile)
+                    {
+                        @if (!string.IsNullOrEmpty(Model.ProfileTitle))
+                        {
+                            <h6 class="mb-3" style="font-weight:500; color: var(--bs-primary);"><i class="fas fa-address-card fa-fw me-2"></i>@Model.ProfileTitle</h6>
+                        }
+                        else
+                        {
+                            <h6 class="mb-3 fst-italic text-muted"><i class="fas fa-address-card fa-fw me-2 opacity-50"></i>Chưa có tiêu đề hồ sơ</h6>
+                        }
+                        <ul class="mt-3 list-unstyled profile-details-list">
+                            <li>
+                                <i class="fas fa-bullseye fa-fw"></i>Vị trí mong muốn:
+                                @if (!string.IsNullOrEmpty(Model.DesiredPosition))
+                                {
+                                    <strong class="text-dark ms-1">@Model.DesiredPosition</strong>
+                                }
+                                else
+                                {
+                                    <em class="text-muted ms-1">Chưa cập nhật</em>
+                                }
+                            </li>
+                            <li>
+                                <i class="fas fa-briefcase fa-fw"></i>Trạng thái tìm việc:
+                                <span class="fw-semibold ms-1 @(Model.ProfileJobSearchStatus == TrangThaiTimViec.dangtimtichcuc ? "text-success" : (Model.ProfileJobSearchStatus == TrangThaiTimViec.dangtimthudong ? "text-info" : "text-muted"))">
+                                    <i class="fas @(Model.ProfileJobSearchStatus == TrangThaiTimViec.dangtimtichcuc ? "fa-check-circle" : (Model.ProfileJobSearchStatus == TrangThaiTimViec.dangtimthudong ? "fa-search-dollar" : "fa-pause-circle")) me-1"></i>
+                                    @Model.ProfileJobSearchStatusDisplay
+                                </span>
+                            </li>
+                            <li>
+                                <i class="fas fa-user-shield fa-fw"></i>NTD tìm kiếm:
+                                <span class="fw-semibold ms-1 @(Model.ProfileAllowsSearch ? "text-success" : "text-danger")">
+                                    <i class="fas @(Model.ProfileAllowsSearch ? "fa-eye" : "fa-eye-slash") me-1"></i>
+                                    @(Model.ProfileAllowsSearch ? "Cho phép" : "Không cho phép")
+                                </span>
+                            </li>
+                        </ul>
+                        <div class="mt-3 pt-3 border-top">
+                            <label for="profileCompletion" class="form-label small mb-1 text-muted"><i class="fas fa-tasks fa-fw me-1" style="color: var(--bs-secondary);"></i>Độ hoàn thiện hồ sơ:</label>
+                            @{
+                                string progressBgClass = "bg-success";
+                                if (Model.ProfileCompletionPercentage < 30) progressBgClass = "bg-danger";
+                                else if (Model.ProfileCompletionPercentage < 70) progressBgClass = "bg-warning";
+                            }
+                            <div class="progress profile-completion" id="profileCompletion" role="progressbar" aria-valuenow="@Model.ProfileCompletionPercentage" aria-valuemin="0" aria-valuemax="100" title="@Model.ProfileCompletionPercentage% Hoàn thiện">
+                                <div class="progress-bar @progressBgClass" style="width: @Model.ProfileCompletionPercentage%;">@Model.ProfileCompletionPercentage%</div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state-small py-4 text-center">
+                            <i class="fas fa-user-plus fa-2x opacity-75 mb-2" style="color: var(--bs-secondary);"></i>
+                            <p class="mb-2">Hồ sơ của bạn chưa sẵn sàng.</p>
+                            <p class="small text-muted mb-3">Hoàn thiện hồ sơ để nhà tuyển dụng có thể tìm thấy bạn!</p>
+                            <a asp-controller="CaNhan" asp-action="TaoHoSo" class="btn btn-primary btn-sm"><i class="fas fa-plus-circle me-1"></i> Tạo Hồ sơ ngay</a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Availability Card -->
+            <div class="card availability-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 card-title"><i class="far fa-calendar-alt fa-fw"></i>Lịch rảnh của bạn</h5>
+                     <a asp-controller="CaNhan" asp-action="EditSchedule" class="btn btn-sm btn-light border py-1 px-2 @(Model.HasProfile ? "" : "disabled")" title="@(Model.HasProfile ? "Cập nhật lịch rảnh" : "Tạo hồ sơ để cập nhật lịch rảnh")">
+                        <i class="fas fa-calendar-plus text-primary"></i> <span class="d-none d-md-inline ms-1">Cập nhật</span>
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if (Model.HasProfile)
+                    {
+                        @if (Model.FreeSlotsCount > 0)
+                        {
+                            <p class="card-text text-muted small mb-2">
+                                <i class="fas fa-info-circle fa-fw me-1 text-primary opacity-75"></i> Bạn đã đăng ký <strong class="text-primary animate-number" data-count="@Model.FreeSlotsCount">0</strong> buổi rảnh:
+                            </p>
+                            <div class="availability-list-container">
+                                <div class="list-group list-group-flush">
+                                    @foreach (var slot in Model.DetailedFreeSlots.Take(5)) // Hiển thị tối đa 5 lịch
+                                    {
+                                        <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+                                            <div>
+                                                <i class="far fa-calendar-check fa-fw me-2" style="color: var(--bs-secondary); opacity: 0.8;"></i>
+                                                <span class="day-text">@slot.FullDisplay</span>
+                                            </div>
+                                            <span class="badge time-badge @slot.BuoiBadgeClass">
+                                                <i class="fas @slot.BuoiIconClass me-1"></i>
+                                                @slot.BuoiLamViecDisplay
+                                            </span>
+                                        </div>
+                                    }
+                                    @if (Model.FreeSlotsCount > 5)
+                                    {
+                                        <div class="list-group-item px-0 py-2 text-center">
+                                            <a asp-controller="CaNhan" asp-action="EditSchedule" class="text-muted small">Và @(Model.FreeSlotsCount - 5) lịch khác...</a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="empty-state-small py-3 text-center">
+                                <i class="far fa-calendar-times fa-2x mb-3 text-muted"></i>
+                                <p class="mb-2 fw-medium">Bạn chưa cập nhật lịch rảnh.</p>
+                                <p class="small text-muted mb-3 px-2">Hãy cho nhà tuyển dụng biết khi nào bạn sẵn sàng!</p>
+                                <a asp-controller="CaNhan" asp-action="EditSchedule" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-plus-circle me-1"></i> Thêm lịch rảnh
+                                </a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="empty-state-small py-4 text-center">
+                            <i class="fas fa-user-clock fa-2x mb-3 text-muted"></i>
+                            <p class="mb-2 fw-medium">Hoàn thiện hồ sơ của bạn</p>
+                            <p class="small text-muted mb-3 px-2">Tạo hồ sơ để quản lý lịch rảnh.</p>
+                            <a asp-controller="CaNhan" asp-action="TaoHoSo" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus-circle me-1"></i> Tạo Hồ sơ ngay
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+                     <div class="card desired-locations-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 card-title"><i class="fas fa-map-marked-alt fa-fw"></i>Địa điểm mong muốn</h5>
+                    <a asp-controller="CaNhan" asp-action="EditLocations" class="btn btn-sm btn-light border py-1 px-2 @(Model.HasProfile ? "" : "disabled")" title="@(Model.HasProfile ? "Cập nhật địa điểm" : "Tạo hồ sơ để cập nhật địa điểm")">
+                        <i class="fas fa-plus-circle text-primary"></i> <span class="d-none d-md-inline ms-1">Cập nhật</span>
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if (Model.HasProfile)
+                    {
+                        @if (Model.DesiredLocationsCount > 0)
+                        {
+                            <p class="card-text text-muted small mb-2">
+                                <i class="fas fa-info-circle fa-fw me-1 text-primary opacity-75"></i> Bạn đã chọn <strong class="text-primary animate-number" data-count="@Model.DesiredLocationsCount">0</strong> địa điểm:
+                            </p>
+                            <div class="desired-locations-list-container">
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var location in Model.DesiredLocations.Take(5)) // Hiển thị tối đa 5
+                                    {
+                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+                                            <div>
+                                                <i class="fas fa-map-pin fa-fw me-2 text-danger"></i>
+                                                <span>@location.FullDiaDiem</span>
+                                            </div>
+                                            <form asp-controller="Dashboard" asp-action="XoaDiaDiemMongMuonDashboard" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa địa điểm này không?');">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="diaDiemId" value="@location.Id" />
+                                                <button type="submit" class="btn btn-sm btn-link text-danger p-0" title="Xóa địa điểm này">
+                                                    <i class="fas fa-times-circle"></i>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    }
+                                    @if (Model.DesiredLocationsCount > 5)
+                                    {
+                                        <li class="list-group-item px-0 py-2 text-center">
+                                            <a asp-controller="CaNhan" asp-action="EditLocations" class="text-muted small">Và @(Model.DesiredLocationsCount - 5) địa điểm khác...</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="empty-state-small py-3 text-center">
+                                <i class="fas fa-map-marker-slash fa-2x mb-3 text-muted"></i>
+                                <p class="mb-2 fw-medium">Bạn chưa chọn địa điểm mong muốn.</p>
+                                <p class="small text-muted mb-3 px-2">Thêm địa điểm để nhận gợi ý việc làm phù hợp!</p>
+                                <a asp-controller="CaNhan" asp-action="EditLocations" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-plus-circle me-1"></i> Thêm địa điểm
+                                </a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="empty-state-small py-4 text-center">
+                            <i class="fas fa-user-edit fa-2x mb-3 text-muted"></i>
+                            <p class="mb-2 fw-medium">Hoàn thiện hồ sơ của bạn</p>
+                            <p class="small text-muted mb-3 px-2">Tạo hồ sơ để quản lý địa điểm mong muốn.</p>
+                            <a asp-controller="CaNhan" asp-action="TaoHoSo" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus-circle me-1"></i> Tạo Hồ sơ ngay
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div> <!-- End col-lg-4 -->
+
+        <!-- Cột phải: Thống kê, Hành động nhanh và Hoạt động gần đây -->
+        <div class="col-lg-8">
+            <!-- Statistics Cards -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4 col-sm-6">
+                    <div class="card stat-card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-paper-plane stat-icon" style="color: var(--bs-primary);"></i>
+                            <div class="stat-number animate-number" data-count="@Model.ApplicationsCount">0</div>
+                            <div class="stat-text">Lượt ứng tuyển</div>
+                            <a asp-controller="ViecLam" asp-action="DaUngTuyen" class="btn btn-sm btn-link stretched-link mt-2 p-0">Xem chi tiết <i class="fas fa-arrow-right fa-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="card stat-card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-bookmark stat-icon" style="color: var(--bs-info);"></i>
+                            <div class="stat-number animate-number" data-count="@Model.SavedJobsCount">0</div>
+                            <div class="stat-text">Việc làm đã lưu</div>
+                            <a asp-controller="ViecLam" asp-action="DaLuu" class="btn btn-sm btn-link text-info stretched-link mt-2 p-0">Xem chi tiết <i class="fas fa-arrow-right fa-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="card stat-card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-flag stat-icon" style="color: var(--bs-danger);"></i>
+                            <div class="stat-number animate-number" data-count="@Model.ReportsCount">0</div>
+                            <div class="stat-text">Báo cáo đã gửi</div>
+                            <a asp-controller="BaoCao" asp-action="Index" class="btn btn-sm btn-link text-danger stretched-link mt-2 p-0">Xem chi tiết <i class="fas fa-arrow-right fa-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="mb-4">
+                <h5 class="section-title"><i class="fas fa-bolt fa-fw"></i>Hành động nhanh</h5>
+                <div class="row g-3">
+                    <div class="col-lg-4 col-md-6 col-6">
+                        <a asp-controller="TimViec" asp-action="Index" class="text-decoration-none">
+                            <div class="card quick-action-card search-job h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-search"></i>
+                                    <h6 class="card-title mb-0">Tìm việc mới</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6">
+                        <a asp-controller="CaNhan" asp-action="Index" class="text-decoration-none">
+                            <div class="card quick-action-card manage-profile h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-id-card"></i>
+                                    <h6 class="card-title mb-0">Quản lý Hồ sơ</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6">
+                        <a asp-controller="ThongBao" asp-action="Index" class="text-decoration-none">
+                            <div class="card quick-action-card notifications h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-bell"></i>
+                                    <h6 class="card-title mb-0">Thông báo</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6">
+                        <a asp-controller="TinNhan" asp-action="Index" class="text-decoration-none">
+                            <div class="card quick-action-card messages h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-comments"></i>
+                                    <h6 class="card-title mb-0">Tin nhắn</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6">
+                        <a asp-controller="TaiKhoan" asp-action="DoiMatKhau" class="text-decoration-none">
+                            <div class="card quick-action-card account-settings h-100">
+                                <div class="card-body">
+                                    <i class="fas fa-user-cog"></i>
+                                    <h6 class="card-title mb-0">Đổi Mật Khẩu</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6">
+                        <form asp-controller="TaiKhoan" asp-action="ChuyenDoiVaiTro" method="post" class="h-100">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="card quick-action-card switch-role-card h-100 w-100 border-0 text-decoration-none p-0" title="Chuyển sang giao diện Nhà tuyển dụng">
+                                <div class="card-body">
+                                    <i class="fas fa-people-arrows"></i>
+                                    <h6 class="card-title mb-0">Chuyển sang NTD</h6>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabbed Content for Recent Activities -->
+            <div class="mb-4">
+                <ul class="nav nav-tabs" id="activityTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="recent-applications-tab" data-bs-toggle="tab" data-bs-target="#recent-applications-pane" type="button" role="tab" aria-controls="recent-applications-pane" aria-selected="true">
+                            <i class="fas fa-history fa-fw"></i>Ứng tuyển gần đây
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="recent-saved-jobs-tab" data-bs-toggle="tab" data-bs-target="#recent-saved-jobs-pane" type="button" role="tab" aria-controls="recent-saved-jobs-pane" aria-selected="false">
+                            <i class="far fa-save fa-fw"></i>Việc đã lưu
+                        </button>
+                    </li>
+                    @if (Model.RecentReports.Any() || Model.ReportsCount > 0)
+                    {
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-pane" type="button" role="tab" aria-controls="reports-pane" aria-selected="false">
+                                <i class="far fa-flag fa-fw"></i>Báo cáo
+                            </button>
+                        </li>
+                    }
+                </ul>
+                <div class="tab-content" id="activityTabContent">
+                    <!-- Tab Pane: Recent Applications -->
+                    <div class="tab-pane fade show active" id="recent-applications-pane" role="tabpanel" aria-labelledby="recent-applications-tab" tabindex="0">
+                        <div class="card activity-list" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+                            <div class="card-body p-0">
+                                @if (Model.RecentApplications.Any())
+                                {
+                                    <ul class="list-group list-group-flush">
+                                        @foreach (var app in Model.RecentApplications)
+                                        {
+                                            <li class="list-group-item">
+                                                <div class="row g-2 align-items-center">
+                                                    <div class="col">
+                                                        <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@app.TinTuyenDungId" class="text-decoration-none job-title d-block mb-1">@app.TieuDeCongViec</a>
+                                                        <p class="mb-1 company-name"><i class="fas fa-building fa-fw"></i> @app.TenNhaTuyenDung</p>
+                                                        <div class="job-details-summary">
+                                                            <span><i class="fas fa-map-marker-alt fa-fw"></i> @(string.IsNullOrEmpty(app.DiaDiem) ? "N/A" : app.DiaDiem)</span>
+                                                            <span><i class="fas fa-business-time fa-fw"></i> @(string.IsNullOrEmpty(app.LoaiHinhCongViecDisplay) ? "N/A" : app.LoaiHinhCongViecDisplay)</span>
+                                                            <span><i class="fas fa-money-bill-wave fa-fw"></i> @(string.IsNullOrEmpty(app.MucLuongDisplay) ? "Thỏa thuận" : app.MucLuongDisplay)</span>
+                                                        </div>
+                                                        @if (app.Tags != null && app.Tags.Any())
+                                                        {
+                                                            <div class="job-tags mt-1">
+                                                                @foreach (var tag in app.Tags.Take(3))
+                                                                { <span class="badge">@tag</span> }
+                                                                @if (app.Tags.Count > 3)
+                                                                { <span class="badge">...</span>}
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div class="col-auto text-end" style="min-width: 120px;">
+                                                        <small class="activity-date d-block mb-1" title="Ngày nộp hồ sơ"><i class="far fa-calendar-check fa-fw me-1"></i>@app.NgayNop.ToString("dd/MM/yyyy")</small>
+                                                        <span class="badge @app.TrangThaiBadgeClass d-block mb-2 w-100">@app.TrangThaiDisplay</span>
+                                                        <div class="actions d-flex flex-column flex-sm-row justify-content-end gap-1">
+                                                            @if (app.CanWithdraw)
+                                                            {
+                                                                <form asp-controller="Dashboard" asp-action="RutUngTuyenDashboard" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn rút đơn ứng tuyển cho vị trí này không?');">
+                                                                    @Html.AntiForgeryToken()
+                                                                    <input type="hidden" name="ungTuyenId" value="@app.UngTuyenId" />
+                                                                    <button type="submit" class="btn btn-sm btn-outline-warning btn-action w-100 w-sm-auto" title="Rút đơn ứng tuyển"><i class="fas fa-undo-alt"></i> <span class="d-none d-md-inline">Rút</span></button>
+                                                                </form>
+                                                            }
+                                                            <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@app.TinTuyenDungId" class="btn btn-sm btn-outline-info btn-action w-100 w-sm-auto" title="Xem chi tiết tin tuyển dụng"><i class="fas fa-eye"></i> <span class="d-none d-md-inline">Xem</span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                    @if (Model.ApplicationsCount > Model.RecentApplications.Count)
+                                    {
+                                        <div class="card-footer text-center bg-light py-3">
+                                            <a asp-controller="ViecLam" asp-action="DaUngTuyen" class="btn btn-outline-secondary btn-sm">
+                                                Xem tất cả (@Model.ApplicationsCount ứng tuyển) <i class="fas fa-angle-double-right ms-1"></i>
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="empty-state py-4 text-center">
+                                        <i class="far fa-folder-open fa-3x text-muted"></i>
+                                        <p class="mt-2">Bạn chưa ứng tuyển công việc nào gần đây.</p>
+                                        <a asp-controller="TimViec" asp-action="Index" class="btn btn-primary btn-sm mt-2">Bắt đầu tìm việc <i class="fas fa-arrow-right ms-1"></i></a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Pane: Recent Saved Jobs -->
+                    <div class="tab-pane fade" id="recent-saved-jobs-pane" role="tabpanel" aria-labelledby="recent-saved-jobs-tab" tabindex="0">
+                        <div class="card activity-list" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+                            <div class="card-body p-0">
+                                @if (Model.RecentSavedJobs.Any())
+                                {
+                                    <ul class="list-group list-group-flush">
+                                        @foreach (var job in Model.RecentSavedJobs)
+                                        {
+                                            <li class="list-group-item">
+                                                <div class="row g-2 align-items-center">
+                                                    <div class="col">
+                                                        <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@job.TinTuyenDungId" class="text-decoration-none job-title d-block mb-1">@job.TieuDe</a>
+                                                        <p class="mb-1 company-name"><i class="fas fa-building fa-fw"></i> @job.TenCongTyHoacNguoiDang</p>
+                                                        <div class="job-details-summary">
+                                                            <span><i class="fas fa-map-marker-alt fa-fw"></i> @(string.IsNullOrEmpty(job.DiaDiem) ? "N/A" : job.DiaDiem)</span>
+                                                            <span><i class="fas fa-business-time fa-fw"></i> @(string.IsNullOrEmpty(job.LoaiHinhDisplay) ? "N/A" : job.LoaiHinhDisplay)</span>
+                                                            <span><i class="fas fa-money-bill-wave fa-fw"></i> @(string.IsNullOrEmpty(job.MucLuongDisplay) ? "Thỏa thuận" : job.MucLuongDisplay)</span>
+                                                        </div>
+                                                        @if (job.Tags != null && job.Tags.Any())
+                                                        {
+                                                            <div class="job-tags mt-1">
+                                                                @foreach (var tag in job.Tags.Take(3))
+                                                                { <span class="badge">@tag</span> }
+                                                                @if (job.Tags.Count > 3) { <span class="badge">...</span>}
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div class="col-auto text-end" style="min-width: 120px;">
+                                                        <small class="activity-date d-block mb-1" title="Ngày lưu tin"><i class="far fa-calendar-plus fa-fw me-1"></i>@job.NgayLuu.ToString("dd/MM/yyyy")</small>
+                                                        @if (job.DaUngTuyen)
+                                                        {
+                                                            <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle rounded-pill d-block mb-2 w-100">
+                                                                <i class="fas fa-check-circle me-1"></i>Đã ứng tuyển
+                                                            </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a asp-controller="ViecLam" asp-action="UngTuyenNgay" asp-route-tinTuyenDungId="@job.TinTuyenDungId" class="btn btn-sm btn-primary d-block mb-2 w-100">
+                                                                <i class="fas fa-paper-plane me-1"></i>Ứng tuyển ngay
+                                                            </a>
+                                                        }
+
+                                                        <div class="actions d-flex flex-column flex-sm-row justify-content-end gap-1">
+                                                            <form asp-controller="Dashboard" asp-action="BoLuuTinDashboard" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn bỏ lưu tin tuyển dụng này không?');">
+                                                                @Html.AntiForgeryToken()
+                                                                <input type="hidden" name="tinDaLuuId" value="@job.TinDaLuuId" />
+                                                                <button type="submit" class="btn btn-sm btn-outline-danger btn-action w-100 w-sm-auto" title="Bỏ lưu tin"><i class="fas fa-trash-alt"></i> <span class="d-none d-md-inline">Bỏ lưu</span></button>
+                                                            </form>
+                                                            <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@job.TinTuyenDungId" class="btn btn-sm btn-outline-info btn-action w-100 w-sm-auto" title="Xem chi tiết tin tuyển dụng"><i class="fas fa-eye"></i> <span class="d-none d-md-inline">Xem</span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                    @if (Model.SavedJobsCount > Model.RecentSavedJobs.Count)
+                                    {
+                                        <div class="card-footer text-center bg-light py-3">
+                                            <a asp-controller="ViecLam" asp-action="DaLuu" class="btn btn-outline-secondary btn-sm">
+                                                Xem tất cả (@Model.SavedJobsCount việc đã lưu) <i class="fas fa-angle-double-right ms-1"></i>
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="empty-state py-4 text-center">
+                                        <i class="far fa-bookmark fa-3x text-muted"></i>
+                                        <p class="mt-2">Bạn chưa lưu công việc nào.</p>
+                                        <p class="small text-muted">Hãy bắt đầu tìm kiếm và lưu lại những cơ hội tốt nhé!</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Pane: Reports -->
+                    @if (Model.RecentReports.Any() || Model.ReportsCount > 0)
+                    {
+                        <div class="tab-pane fade" id="reports-pane" role="tabpanel" aria-labelledby="reports-tab" tabindex="0">
+                            <div class="card activity-list" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+                                <div class="card-body p-0">
+                                    @if (Model.RecentReports.Any())
+                                    {
+                                        <ul class="list-group list-group-flush">
+                                            @foreach (var report in Model.RecentReports)
+                                            {
+                                                <li class="list-group-item">
+                                                    <div class="row g-2 align-items-center">
+                                                        <div class="col">
+                                                            <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@report.TinTuyenDungId" class="text-decoration-none job-title d-block mb-1">@report.TieuDeTinTuyenDung</a>
+                                                            <p class="mb-1 company-name">
+                                                                <i class="fas fa-exclamation-triangle fa-fw text-warning"></i>
+                                                                <strong>Lý do:</strong> <span class="fw-normal">@report.LyDoBaoCaoDisplay</span>
+                                                            </p>
+                                                            <div class="job-details-summary">
+                                                                <span><i class="far fa-calendar-alt fa-fw"></i> Ngày: @report.NgayBaoCao.ToString("dd/MM/yyyy")</span>
+                                                            </div>
+                                                            @if (!string.IsNullOrEmpty(report.GhiChuAdmin))
+                                                            {
+                                                                <div class="mt-2 p-2 bg-light-subtle rounded border-start border-3 border-info">
+                                                                    <p class="mb-0 fst-italic small">
+                                                                        <i class="fas fa-user-shield fa-fw me-1 text-info"></i>
+                                                                        <strong>Phản hồi Admin:</strong> @report.GhiChuAdmin
+                                                                    </p>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                        <div class="col-auto text-end" style="min-width: 120px;">
+                                                            <span class="badge @report.TrangThaiXuLyBadgeClass d-block mb-2 w-100">@report.TrangThaiXuLyDisplay</span>
+                                                            <div class="actions d-flex flex-column flex-sm-row justify-content-end gap-1">
+                                                                @if (report.CanDelete)
+                                                                {
+                                                                    <form asp-controller="Dashboard" asp-action="XoaBaoCaoDashboard" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa báo cáo này không?');">
+                                                                        @Html.AntiForgeryToken()
+                                                                        <input type="hidden" name="baoCaoId" value="@report.BaoCaoId" />
+                                                                        <button type="submit" class="btn btn-sm btn-outline-danger btn-action w-100 w-sm-auto" title="Xóa báo cáo"><i class="fas fa-trash"></i> <span class="d-none d-md-inline">Xóa</span></button>
+                                                                    </form>
+                                                                }
+                                                                <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@report.TinTuyenDungId" class="btn btn-sm btn-outline-info btn-action w-100 w-sm-auto" title="Xem chi tiết tin tuyển dụng"><i class="fas fa-eye"></i> <span class="d-none d-md-inline">Xem tin</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        </ul>
+                                        @if (Model.ReportsCount > Model.RecentReports.Count)
+                                        {
+                                            <div class="card-footer text-center bg-light py-3">
+                                                <a asp-controller="BaoCao" asp-action="Index" class="btn btn-outline-secondary btn-sm">
+                                                    Xem tất cả (@Model.ReportsCount báo cáo) <i class="fas fa-angle-double-right ms-1"></i>
+                                                </a>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="empty-state-small py-4 text-center">
+                                            <i class="far fa-flag fa-3x text-muted"></i>
+                                            <p class="mt-2">Bạn chưa gửi báo cáo nào.</p>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animate numbers
+            const counters = document.querySelectorAll('.animate-number');
+            const speed = 150; // Lower value = faster animation
+
+            counters.forEach(counter => {
+                const target = +counter.dataset.count || 0;
+                if (isNaN(target)) {
+                    if (counter.dataset.count) counter.innerText = counter.dataset.count;
+                    return;
+                }
+                counter.innerText = '0';
+
+                const updateCount = () => {
+                    const current = +counter.innerText;
+                    const increment = target / speed;
+
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + increment);
+                        setTimeout(updateCount, 15); // Animation interval
+                    } else {
+                        counter.innerText = target.toLocaleString('vi-VN'); // Format number with thousand separator
+                    }
+                };
+                // Add a small delay before starting the animation for better visual effect
+                setTimeout(updateCount, 200);
+            });
+
+            // Bootstrap Tab event (if needed for other initializations)
+            var triggerTabList = [].slice.call(document.querySelectorAll('#activityTab button'));
+            triggerTabList.forEach(function (triggerEl) {
+                var tabTrigger = new bootstrap.Tab(triggerEl);
+                triggerEl.addEventListener('shown.bs.tab', function (event) {
+                    // console.log('Tab shown: ' + event.target.id);
+                });
+            });
+        });
+    </script>
+    <script>
+        // Script animate-number và Bootstrap Tab (giữ nguyên)
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animate numbers
+            const counters = document.querySelectorAll('.animate-number');
+            const speed = 150; 
+
+            counters.forEach(counter => {
+                const target = +counter.dataset.count || 0;
+                if (isNaN(target)) {
+                    if (counter.dataset.count) counter.innerText = counter.dataset.count;
+                    return;
+                }
+                counter.innerText = '0';
+
+                const updateCount = () => {
+                    const current = +counter.innerText;
+                    const increment = target / speed;
+
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + increment);
+                        setTimeout(updateCount, 15); 
+                    } else {
+                        counter.innerText = target.toLocaleString('vi-VN'); 
+                    }
+                };
+                setTimeout(updateCount, 200);
+            });
+
+            var triggerTabList = [].slice.call(document.querySelectorAll('#activityTab button'))
+            triggerTabList.forEach(function (triggerEl) {
+                var tabTrigger = new bootstrap.Tab(triggerEl)
+                triggerEl.addEventListener('shown.bs.tab', function (event) {
+                    // console.log('Tab shown: ' + event.target.id);
+                })
+            })
+        });
+                document.addEventListener('DOMContentLoaded', function () {
+            // Animate numbers
+            const counters = document.querySelectorAll('.animate-number');
+            const speed = 150; 
+
+            counters.forEach(counter => {
+                const target = +counter.dataset.count || 0;
+                if (isNaN(target)) {
+                    if (counter.dataset.count) counter.innerText = counter.dataset.count;
+                    return;
+                }
+                counter.innerText = '0';
+
+                const updateCount = () => {
+                    const current = +counter.innerText;
+                    const increment = target / speed;
+
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + increment);
+                        setTimeout(updateCount, 15); 
+                    } else {
+                        counter.innerText = target.toLocaleString('vi-VN'); 
+                    }
+                };
+                setTimeout(updateCount, 200);
+            });
+
+            var triggerTabList = [].slice.call(document.querySelectorAll('#activityTab button'))
+            triggerTabList.forEach(function (triggerEl) {
+                var tabTrigger = new bootstrap.Tab(triggerEl)
+                triggerEl.addEventListener('shown.bs.tab', function (event) {
+                    // console.log('Tab shown: ' + event.target.id);
+                })
+            })
+        });
+    </script>
+}

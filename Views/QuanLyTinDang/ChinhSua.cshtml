@@ -1,0 +1,748 @@
+@model HeThongTimViec.ViewModels.QuanLyTinDang.AdminEditJobPostingViewModel
+@using HeThongTimViec.Models
+
+@{
+    ViewData["Title"] = "Chỉnh sửa tin đăng - " + Model.TieuDe;
+    // Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml"; // Uncomment if you have an Admin layout
+}
+
+<style>
+    .modern-card {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    }
+    
+    .modern-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+    
+    .card-header-modern {
+        background: linear-gradient(135deg, #2a4265 0%, #084298 100%);
+        border: none;
+        border-radius: 16px 16px 0 0 !important;
+        padding: 20px;
+    }
+    
+    .card-header-modern h6 {
+        color: white;
+        font-weight: 600;
+        margin: 0;
+        font-size: 1.1rem;
+    }
+    
+    .form-control-modern {
+        border: 2px solid #e8ecf4;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        background: #ffffff;
+    }
+    
+    .form-control-modern:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        transform: translateY(-1px);
+    }
+    
+    .form-label-modern {
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .btn-modern {
+        border-radius: 12px;
+        padding: 12px 24px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        border: none;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-primary-modern {
+        background: linear-gradient(135deg, #084298 0%, #416cac 100%);
+        color: white;
+    }
+    
+    .btn-primary-modern:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-secondary-modern {
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        color: #4a5568;
+        border: 2px solid #e2e8f0;
+    }
+    
+    .btn-secondary-modern:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        color: #2d3748;
+    }
+    
+    .btn-danger-modern {
+        background: linear-gradient(135deg, #dc3545 0%, #e4606d 100%);
+        color: white;
+    }
+    
+    .btn-danger-modern:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+    }
+    
+    .page-header {
+        background: linear-gradient(135deg, #112e58 0%, #366bb8 100%);
+        border-radius: 20px;
+        padding: 24px;
+        margin-bottom: 32px;
+        color: white;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .alert-modern {
+        border: none;
+        border-radius: 12px;
+        padding: 16px;
+        background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+        border-left: 4px solid #3182ce;
+    }
+    
+    .alert-danger-modern {
+        background: linear-gradient(135deg, #ffe6e6 0%, #fff0f0 100%);
+        border-left: 4px solid #dc3545;
+    }
+    
+    .floating-label {
+        position: relative;
+        margin-bottom: 24px;
+    }
+    
+    .floating-label input,
+    .floating-label select,
+    .floating-label textarea {
+        padding-top: 20px;
+        padding-bottom: 8px;
+    }
+    
+    .floating-label label {
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        transform: translateY(-50%);
+        transition: all 0.3s ease;
+        pointer-events: none;
+        background: white;
+        padding: 0 4px;
+        color: #718096;
+    }
+    
+    .floating-label input:focus + label,
+    .floating-label input:not(:placeholder-shown) + label,
+    .floating-label select:focus + label,
+    .floating-label select:not([value=""]) + label,
+    .floating-label textarea:focus + label,
+    .floating-label textarea:not(:placeholder-shown) + label {
+        top: 0;
+        font-size: 0.75rem;
+        color: #667eea;
+        font-weight: 600;
+    }
+    
+    .icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        margin-right: 12px;
+    }
+    
+    @@keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .animate-slide-in {
+        animation: slideIn 0.6s ease-out;
+    }
+    
+    .form-section {
+        margin-bottom: 32px;
+    }
+    
+    .nav-tabscustom {
+        border: none;
+        background: linear-gradient(135deg, #f8f9ff 0%, #e8ecf4 100%);
+        border-radius: 16px;
+        padding: 8px;
+        margin-bottom: 0;
+    }
+    
+    .nav-tabscustom .nav-link {
+        border: 2px solid transparent;
+        border-radius: 12px;
+        color: #4a5568;
+        font-weight: 600;
+        padding: 12px 20px;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-tabscustom .nav-link.active {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+        border-color: #2563eb;
+        color: #2563eb;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.1);
+    }
+    
+    .nav-tabscustom .nav-link:hover {
+        background: #f7fafc;
+        color: #2563eb;
+    }
+    
+    .tab-content {
+        border: none;
+        border-radius: 0 0 16px 16px;
+    }
+    
+    .input-group-text-modern {
+        background: #f7fafc;
+        border: 2px solid #e8ecf4;
+        border-right: none;
+        border-radius: 12px 0 0 12px;
+        padding: 12px;
+        color: #718096;
+    }
+    
+    .form-check-input-modern {
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .form-check-input-modern:checked {
+        background-color: #2563eb;
+        border-color: #2563eb;
+    }
+    
+    .form-check-label {
+        font-weight: 600;
+        color: #2d3748;
+    }
+    
+    .info-card {
+        background: linear-gradient(135deg, #f8f9ff 0%, #e8ecf4 100%);
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 20px;
+    }
+    
+    .badge-modern {
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+</style>
+
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">
+                <i class="fas fa-briefcase icon-wrapper"></i>
+                @ViewData["Title"]
+            </h1>
+            <p class="mb-0 opacity-75">ID: @Model.IdTinDangDisplay</p>
+        </div>
+        <div class="d-flex gap-3">
+            <a asp-action="ChiTiet" asp-route-id="@Model.Id" class="btn btn-secondary-modern btn-modern">
+                <i class="fas fa-arrow-left me-2"></i>Quay lại
+            </a>
+            <button type="button" class="btn btn-danger-modern btn-modern" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">
+                <i class="fas fa-trash me-2"></i>Xóa
+            </button>
+            <button type="submit" form="editJobPostingForm" class="btn btn-primary-modern btn-modern">
+                <i class="fas fa-save me-2"></i>Lưu thay đổi
+            </button>
+        </div>
+    </div>
+</div>
+
+<form asp-action="ChinhSua" asp-route-id="@Model.Id" method="post" id="editJobPostingForm">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    @if (Model.LichLamViecItems != null)
+    {
+        for (int i = 0; i < Model.LichLamViecItems.Count; i++)
+        {
+            <input type="hidden" asp-for="LichLamViecItems[i].Id" />
+            <input type="hidden" asp-for="LichLamViecItems[i].NgayTrongTuan" />
+            <input type="hidden" asp-for="LichLamViecItems[i].GioBatDau" />
+            <input type="hidden" asp-for="LichLamViecItems[i].GioKetThuc" />
+            <input type="hidden" asp-for="LichLamViecItems[i].BuoiLamViec" />
+            <input type="hidden" asp-for="LichLamViecItems[i].MarkedForDeletion" />
+        }
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-modern animate-slide-in" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger-modern animate-slide-in" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger-modern animate-slide-in" role="alert" style="@(ViewData.ModelState.IsValid ? "display:none;" : "")"></div>
+
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabscustom" id="editJobTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="thong-tin-co-ban-tab" data-bs-toggle="tab" data-bs-target="#thong-tin-co-ban-pane" type="button" role="tab" aria-controls="thong-tin-co-ban-pane" aria-selected="true">Thông tin cơ bản</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="chi-tiet-cong-viec-tab" data-bs-toggle="tab" data-bs-target="#chi-tiet-cong-viec-pane" type="button" role="tab" aria-controls="chi-tiet-cong-viec-pane" aria-selected="false">Chi tiết công việc</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="cai-dat-tin-dang-tab" data-bs-toggle="tab" data-bs-target="#cai-dat-tin-dang-pane" type="button" role="tab" aria-controls="cai-dat-tin-dang-pane" aria-selected="false">Cài đặt tin đăng</button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content pt-0">
+        <!-- TAB 1: Thông tin cơ bản -->
+        <div class="tab-pane fade show active" id="thong-tin-co-ban-pane" role="tabpanel" aria-labelledby="thong-tin-co-ban-tab">
+            <div class="modern-card animate-slide-in">
+                <div class="card-header-modern">
+                    <h6>
+                        <i class="fas fa-briefcase me-2"></i>
+                        Thông tin cơ bản
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <!-- Left Column: Thông tin công việc -->
+                        <div class="col-lg-7">
+                            <h6 class="mb-3">Thông tin công việc</h6>
+                            <p class="text-sm text-muted">Thông tin cơ bản về công việc</p>
+
+                            <div class="form-section">
+                                <div class="floating-label">
+                                    <input asp-for="TieuDe" class="form-control form-control-modern" placeholder=" " />
+                                    <label asp-for="TieuDe" class="form-label-modern"></label>
+                                </div>
+                                <span asp-validation-for="TieuDe" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-section">
+                                <div class="floating-label">
+                                    <input asp-for="TenCongTy" class="form-control form-control-modern" placeholder=" " />
+                                    <label asp-for="TenCongTy" class="form-label-modern"></label>
+                                </div>
+                                <span asp-validation-for="TenCongTy" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-section">
+                                <label class="form-label-modern">Địa điểm</label>
+                                <div class="input-group">
+                                    <span class="input-group-text input-group-text-modern"><i class="fas fa-map-marker-alt"></i></span>
+                                    <input asp-for="DiaChiLamViec" class="form-control form-control-modern" placeholder=" " />
+                                </div>
+                                <span asp-validation-for="DiaChiLamViec" class="text-danger small d-block mt-1"></span>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <div class="floating-label">
+                                            <select asp-for="ThanhPhoId" asp-items="Model.ThanhPhoOptions" class="form-select form-control-modern" id="ThanhPhoId_Edit">
+                                                <option value="">-- Tỉnh/Thành phố --</option>
+                                            </select>
+                                            <label asp-for="ThanhPhoId" class="form-label-modern"></label>
+                                        </div>
+                                        <span asp-validation-for="ThanhPhoId" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="floating-label">
+                                            <select asp-for="QuanHuyenId" asp-items="Model.QuanHuyenOptions" class="form-select form-control-modern" id="QuanHuyenId_Edit">
+                                                <option value="">-- Quận/Huyện --</option>
+                                            </select>
+                                            <label asp-for="QuanHuyenId" class="form-label-modern"></label>
+                                        </div>
+                                        <span asp-validation-for="QuanHuyenId" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <label class="form-label-modern">Mức lương</label>
+                                <div class="input-group">
+                                    <span class="input-group-text input-group-text-modern"><i class="fas fa-dollar-sign"></i></span>
+                                    <input asp-for="LuongToiThieu" class="form-control form-control-modern" placeholder="Tối thiểu" type="number" min="0" />
+                                    <span class="input-group-text border-start-0 border-end-0">-</span>
+                                    <input asp-for="LuongToiDa" class="form-control form-control-modern" placeholder="Tối đa" type="number" min="0" />
+                                    <select asp-for="LoaiLuong" asp-items="Model.LoaiLuongOptions" class="form-select form-control-modern" id="LoaiLuong_Edit" style="border-top-left-radius: 0; border-bottom-left-radius: 0; flex-grow:0.5; min-width:100px;"></select>
+                                </div>
+                                <span asp-validation-for="LuongToiThieu" class="text-danger small d-block"></span>
+                                <span asp-validation-for="LuongToiDa" class="text-danger small d-block"></span>
+                                <span asp-validation-for="LoaiLuong" class="text-danger small d-block"></span>
+                                <small class="form-text text-muted" id="LuongThoaThuanText_Edit" style="display: @(Model.LoaiLuong == LoaiLuong.thoathuan ? "block" : "none");">Mức lương sẽ hiển thị là "Thỏa thuận".</small>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Loại công việc -->
+                        <div class="col-lg-5">
+                            <h6 class="mb-3">Loại công việc</h6>
+                            <p class="text-sm text-muted">Thông tin về loại hình và lịch làm việc</p>
+
+                            <div class="form-section">
+                                <div class="floating-label">
+                                    <select asp-for="LoaiHinhCongViec" asp-items="Model.LoaiHinhCongViecOptions" class="form-select form-control-modern"></select>
+                                    <label asp-for="LoaiHinhCongViec" class="form-label-modern"></label>
+                                </div>
+                                <span asp-validation-for="LoaiHinhCongViec" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-section">
+                                <div class="input-group">
+                                    <span class="input-group-text input-group-text-modern"><i class="fas fa-clock"></i></span>
+                                    <input asp-for="LichLamViecMoTa" class="form-control form-control-modern" placeholder=" " />
+                                </div>
+                                <span asp-validation-for="LichLamViecMoTa" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-section">
+                                <div class="input-group">
+                                    <span class="input-group-text input-group-text-modern"><i class="fas fa-users"></i></span>
+                                    <input asp-for="SoLuongTuyen" type="number" class="form-control form-control-modern" min="1" />
+                                </div>
+                                <span asp-validation-for="SoLuongTuyen" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-section">
+                                <div class="input-group">
+                                    <span class="input-group-text input-group-text-modern"><i class="fas fa-calendar-alt"></i></span>
+                                    <input asp-for="NgayHetHan" type="date" class="form-control form-control-modern" asp-format="{0:yyyy-MM-dd}" />
+                                </div>
+                                <span asp-validation-for="NgayHetHan" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: Chi tiết công việc -->
+        <div class="tab-pane fade" id="chi-tiet-cong-viec-pane" role="tabpanel" aria-labelledby="chi-tiet-cong-viec-tab">
+            <div class="modern-card animate-slide-in" style="animation-delay: 0.1s;">
+                <div class="card-header-modern">
+                    <h6>
+                        <i class="fas fa-info-circle me-2"></i>
+                        Chi tiết công việc
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <h6 class="mb-3">Mô tả chi tiết về công việc, yêu cầu và quyền lợi</h6>
+                    <p class="text-sm text-muted">Cung cấp thông tin đầy đủ để thu hút ứng viên tiềm năng.</p>
+                    <div class="row">
+                        <div class="col-12 form-section">
+                            <div class="floating-label">
+                                <textarea asp-for="MoTa" class="form-control form-control-modern" rows="8" placeholder=" "></textarea>
+                                <label asp-for="MoTa" class="form-label-modern"></label>
+                            </div>
+                            <span asp-validation-for="MoTa" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12 form-section">
+                            <div class="floating-label">
+                                <textarea asp-for="YeuCau" class="form-control form-control-modern" rows="6" placeholder=" "></textarea>
+                                <label asp-for="YeuCau" class="form-label-modern"></label>
+                            </div>
+                            <span asp-validation-for="YeuCau" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12 form-section">
+                            <div class="floating-label">
+                                <textarea asp-for="QuyenLoi" class="form-control form-control-modern" rows="6" placeholder=" "></textarea>
+                                <label asp-for="QuyenLoi" class="form-label-modern"></label>
+                            </div>
+                            <span asp-validation-for="QuyenLoi" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12 form-section">
+                            <div class="floating-label">
+                                <select asp-for="SelectedNganhNgheIds" asp-items="Model.NganhNgheOptions" class="form-control form-control-modern choices-multiple-edit" multiple></select>
+                                <label asp-for="SelectedNganhNgheIds" class="form-label-modern"></label>
+                            </div>
+                            <span asp-validation-for="SelectedNganhNgheIds" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: Cài đặt tin đăng -->
+        <div class="tab-pane fade" id="cai-dat-tin-dang-pane" role="tabpanel" aria-labelledby="cai-dat-tin-dang-tab">
+            <div class="modern-card animate-slide-in" style="animation-delay: 0.2s;">
+                <div class="card-header-modern">
+                    <h6>
+                        <i class="fas fa-cogs me-2"></i>
+                        Cài đặt tin đăng
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <h6 class="mb-3">Cài đặt trạng thái và hiển thị tin đăng</h6>
+                    <p class="text-sm text-muted">Quản lý các tùy chọn hiển thị của tin tuyển dụng.</p>
+                    <div class="row">
+                        <div class="col-md-6 form-section">
+                            <div class="input-group">
+                                <span class="input-group-text input-group-text-modern">
+                                    <i class="fas fa-circle @(Model.TrangThai == TrangThaiTinTuyenDung.daduyet ? "text-success" : (Model.TrangThai == TrangThaiTinTuyenDung.choduyet ? "text-warning" : "text-secondary"))" id="trangThaiIcon"></i>
+                                </span>
+                                <select asp-for="TrangThai" asp-items="Model.TrangThaiTinDangOptions" class="form-select form-control-modern" id="TrangThaiTinDang_Edit"></select>
+                            </div>
+                            <span asp-validation-for="TrangThai" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-section">
+                            <div class="form-check form-switch">
+                                <input asp-for="IsFeatured" class="form-check-input form-check-input-modern" type="checkbox" id="isFeatureSwitch" />
+                                <label asp-for="IsFeatured" class="form-check-label" for="isFeatureSwitch"></label>
+                                <small class="form-text text-muted d-block">Đưa tin lên vị trí nổi bật (nếu có hỗ trợ).</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-section">
+                            <div class="form-check form-switch">
+                                <input asp-for="TinGap" class="form-check-input form-check-input-modern" type="checkbox" id="tinGapSwitch" />
+                                <label asp-for="TinGap" class="form-check-label" for="tinGapSwitch"></label>
+                                <small class="form-text text-muted d-block">Đánh dấu tin là tuyển dụng gấp.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="horizontal dark my-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-card mb-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-calendar-plus text-primary me-2"></i>
+                                    <strong>Ngày tạo:</strong>
+                                </div>
+                                <p class="mb-0 text-muted">@Model.NgayTaoDisplay</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-card mb-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <strong>Đã cập nhật lần cuối:</strong>
+                                </div>
+                                <p class="mb-0 text-muted">@Model.CapNhatCuoiDisplay</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="info-card">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-user text-primary me-2"></i>
+                                    <strong>Người đăng:</strong>
+                                </div>
+                                <p class="mb-0 text-muted">@Model.NguoiDangDisplay</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modern-card">
+            <div class="card-header-modern">
+                <h6 class="modal-title" id="deleteConfirmModalLabel">
+                    <i class="fas fa-trash-alt me-2"></i>Xác nhận xóa
+                </h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p>Bạn có chắc chắn muốn xóa tin đăng này không? Hành động này không thể hoàn tác.</p>
+                <p><strong>Tiêu đề:</strong> @Model.TieuDe</p>
+            </div>
+            <div class="modal-footer p-3">
+                <button type="button" class="btn btn-secondary-modern btn-modern" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Hủy
+                </button>
+                <form asp-action="XoaTin" method="post" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger-modern btn-modern">
+                        <i class="fas fa-trash me-2"></i>Xóa tin
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            // Choices.js initialization
+            var multiSelectNganhNghe = document.querySelector('.choices-multiple-edit');
+            if (typeof Choices !== 'undefined' && multiSelectNganhNghe) {
+                new Choices(multiSelectNganhNghe, {
+                    removeItemButton: true,
+                    placeholder: true,
+                    placeholderValue: 'Chọn ngành nghề...',
+                    allowHTML: false
+                });
+            } else if (multiSelectNganhNghe) {
+                console.warn('Choices.js library not found or not loaded before this script.');
+            }
+
+            // Load Quan Huyen
+            function loadQuanHuyenEdit() {
+                var thanhPhoId = $('#ThanhPhoId_Edit').val();
+                var quanHuyenSelect = $('#QuanHuyenId_Edit');
+                var currentQuanHuyenId = '@Model.QuanHuyenId';
+
+                quanHuyenSelect.empty().append($('<option></option>').val('').text('-- Chọn Quận/Huyện --')).prop('disabled', true);
+
+                if (thanhPhoId) {
+                    $.ajax({
+                        url: '@Url.Action("GetQuanHuyenByThanhPho", "QuanLyTinDang", new { Area = "Admin" })',
+                        type: 'GET',
+                        data: { thanhPhoId: thanhPhoId },
+                        success: function (data) {
+                            quanHuyenSelect.prop('disabled', false);
+                            $.each(data, function (index, item) {
+                                quanHuyenSelect.append($('<option></option>').val(item.id).text(item.ten));
+                            });
+                            if (currentQuanHuyenId && currentQuanHuyenId != '0') {
+                                quanHuyenSelect.val(currentQuanHuyenId);
+                            }
+                        },
+                        error: function () {
+                            console.error('Lỗi khi tải danh sách quận huyện.');
+                            quanHuyenSelect.prop('disabled', true);
+                        }
+                    });
+                }
+            }
+
+            $('#ThanhPhoId_Edit').change(function () {
+                $('#QuanHuyenId_Edit').val('');
+                loadQuanHuyenEdit();
+            });
+
+            if ($('#ThanhPhoId_Edit').val()) {
+                loadQuanHuyenEdit();
+            }
+
+            // Handle LoaiLuong change
+            function handleLoaiLuongChange() {
+                var loaiLuongValue = parseInt($('#LoaiLuong_Edit').val());
+                var loaiLuongThoaThuanConst = @((int)LoaiLuong.thoathuan);
+
+                if (loaiLuongValue === loaiLuongThoaThuanConst) {
+                    $('input[asp-for="LuongToiThieu"]').prop('disabled', true).val('');
+                    $('input[asp-for="LuongToiDa"]').prop('disabled', true).val('');
+                    $('#LuongThoaThuanText_Edit').show();
+                } else {
+                    $('input[asp-for="LuongToiThieu"]').prop('disabled', false);
+                    $('input[asp-for="LuongToiDa"]').prop('disabled', false);
+                    $('#LuongThoaThuanText_Edit').hide();
+                }
+            }
+
+            $('#LoaiLuong_Edit').change(handleLoaiLuongChange);
+            handleLoaiLuongChange();
+
+            // Update status icon color
+            $('#TrangThaiTinDang_Edit').change(function() {
+                var selectedStatus = parseInt($(this).val());
+                var icon = $('#trangThaiIcon');
+                icon.removeClass('text-success text-warning text-secondary text-danger text-info text-dark');
+
+                if (selectedStatus === @((int)TrangThaiTinTuyenDung.daduyet)) {
+                    icon.addClass('text-success');
+                } else if (selectedStatus === @((int)TrangThaiTinTuyenDung.choduyet)) {
+                    icon.addClass('text-warning');
+                } else if (selectedStatus === @((int)TrangThaiTinTuyenDung.taman)) {
+                    icon.addClass('text-secondary');
+                } else if (selectedStatus === @((int)TrangThaiTinTuyenDung.hethan)) {
+                    icon.addClass('text-danger');
+                } else if (selectedStatus === @((int)TrangThaiTinTuyenDung.datuyen)) {
+                    icon.addClass('text-info');
+                } else if (selectedStatus === @((int)TrangThaiTinTuyenDung.bituchoi)) {
+                    icon.addClass('text-dark');
+                } else {
+                    icon.addClass('text-secondary');
+                }
+            }).trigger('change');
+
+            // Floating label effect
+            $('.floating-label input, .floating-label select, .floating-label textarea').on('focus blur', function() {
+                var parent = $(this).parent();
+                if ($(this).val() !== '' || $(this).is(':focus')) {
+                    parent.addClass('focused');
+                } else {
+                    parent.removeClass('focused');
+                }
+            });
+
+            $('.floating-label input, .floating-label select, .floating-label textarea').each(function() {
+                if ($(this).val() !== '') {
+                    $(this).parent().addClass('focused');
+                }
+            });
+
+            // Card hover effect
+            $('.modern-card').hover(
+                function() {
+                    $(this).addClass('shadow-lg');
+                },
+                function() {
+                    $(this).removeClass('shadow-lg');
+                }
+            );
+
+            // Form submit loading effect
+            $('form').submit(function() {
+                var submitBtn = $(this).find('button[type="submit"]');
+                submitBtn.prop('disabled', true);
+                submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Đang lưu...');
+            });
+        });
+    </script>
+}

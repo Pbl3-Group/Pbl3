@@ -1,0 +1,485 @@
+﻿@model HeThongTimViec.ViewModels.TrangChu.HomePageViewModel
+@using HeThongTimViec.Extensions
+@using HeThongTimViec.Utils 
+
+@{
+    ViewData["Title"] = "Trang Chủ - Tìm việc làm bán thời gian & thời vụ dễ dàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeadStyles {
+    <!-- SwiperJS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- CSS tùy chỉnh của bạn (nếu có) -->
+    <link rel="stylesheet" href="~/css/home-styles.css" asp-append-version="true" />
+
+    <style>
+        /* Ghi đè padding của layout để hero section sát với header */
+        main[role="main"] {
+            padding-top: 0 !important;
+        }
+
+        /* 1. CSS cho avatar/logo công việc hình tròn */
+        .job-card .company-logo-small {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 1px solid #e0e0e0;
+        }
+        
+   .pagination {
+            justify-content: center;
+        }
+        section[id] { scroll-margin-top: 80px; }
+
+    </style>
+}
+
+<!-- ============================
+HERO SECTION (GIAO DIỆN GỐC + FORM MỚI)
+============================= -->
+<!-- Hero Section (Bố cục 2 cột như cũ, chỉ thay form tìm kiếm) -->
+<section class="hero-section text-white" style="background-image: url('@Model.HeroImageUrl');">
+    <div class="container">
+        <div class="row align-items-center gy-4 gy-lg-0">
+            <div class="col-lg-7">
+                <h1 class="display-4 fw-bold mb-3">Tìm việc làm bán thời gian & thời vụ dễ dàng</h1>
+                <p class="lead mb-4">Kết nối với hàng ngàn cơ hội việc làm linh hoạt phù hợp với lịch trình của bạn.</p>
+<!-- FORM TÌM KIẾM ĐÃ NÂNG CẤP -->
+            <form asp-controller="TimViec" asp-action="Index" method="get" class="hero-search-form">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    <input type="text" name="TuKhoa" class="form-control" placeholder="Nhập từ khóa, vị trí, công ty..." value="">
+                    <select name="ThanhPhoId" asp-items="Model.ThanhPhoOptions" class="form-select d-none d-md-block">
+                        <option value="">Tất cả địa điểm</option>
+                    </select>
+                    <button class="btn btn-warning" type="submit">Tìm Kiếm</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center">
+            <img src="~/file/img/Picture/pexels-photo-3184418.webp" alt="Tìm việc làm dễ dàng với JOXFLEX" class="img-fluid rounded shadow-sm" style="max-height: 450px;">
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ============================
+STATISTICS SECTION
+============================= -->
+<section class="statistics-section section-padding">
+    <div class="container">
+        <div class="row text-center">
+            @foreach (var stat in Model.Statistics)
+            {
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <h2 class="stat-value">@stat.Value</h2>
+                        <p class="stat-label">@stat.Label</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+BENEFITS SECTION
+============================= -->
+<section class="benefits-section section-padding bg-light">
+    <div class="container">
+        <div class="section-title text-center">
+            <span class="tagline">Tính năng nổi bật</span>
+            <h2>Lợi ích khi sử dụng JOXFLEX</h2>
+            <p>Khám phá những tính năng độc đáo giúp JOXFLEX trở thành nền tảng tìm việc làm bán thời gian hàng đầu</p>
+        </div>
+        <div class="row">
+            @foreach (var benefit in Model.Benefits)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="benefit-item card h-100">
+                        <div class="card-body text-center">
+                            <div class="benefit-icon"><i class="@benefit.IconClass"></i></div>
+                            <h5 class="card-title">@benefit.Title</h5>
+                            <p class="card-text">@benefit.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+FEATURED FIELDS SECTION
+============================= -->
+<section id="featured-fields-section" class="featured-fields-section section-padding">
+    <div class="container">
+        <div class="section-title-header">
+            <h2>Khám phá theo lĩnh vực</h2>
+           
+        </div>
+        
+        @functions {
+            public static string GenerateInitials(string name)
+            {
+                if (string.IsNullOrWhiteSpace(name)) return "";
+                var words = name.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (words.Length == 1)
+                {
+                    return words[0].Substring(0, Math.Min(2, words[0].Length)).ToUpper();
+                }
+                return string.Concat(words.Take(2).Select(w => w[0])).ToUpper();
+            }
+        }
+        <div class="row">
+            @if (Model.FeaturedFields.Any())
+            {
+                // Khởi tạo bộ đếm để gán class màu
+                var i = 0;
+                @foreach (var field in Model.FeaturedFields)
+                {
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <a asp-controller="TimViec" asp-action="Index" asp-route-NganhNgheIds="@field.Id"
+                           class="field-item card text-center h-100 text-decoration-none">
+                            
+                            <!-- THAY THẾ IMG BẰNG DIV CÓ MÀU NỀN -->
+                            <div class="card-img-top-color bg-field-@((i % 6) + 1)">
+                              
+                            </div>
+                            <!-- KẾT THÚC THAY THẾ -->
+
+                            <div class="card-body p-2">
+                                <h6 class="field-name small">@field.Name</h6>
+                                <p class="field-count text-muted small">@field.JobCount việc làm</p>
+                            </div>
+                        </a>
+                    </div>
+                    i++; // Tăng bộ đếm
+                }
+            }
+            else
+            {
+                <p class="text-center col-12">Chưa có lĩnh vực nào nổi bật.</p>
+            }
+        </div>
+
+        @if (Model.FeaturedFieldsTotalPages > 1)
+        {
+            <nav aria-label="Field pagination" class="mt-4">
+                <ul class="pagination">
+                    @for (int j = 1; j <= Model.FeaturedFieldsTotalPages; j++)
+                    {
+                        <li class="page-item @(j == Model.FeaturedFieldsPageNumber ? "active" : "")">
+                            <a class="page-link" asp-action="Index" 
+                               asp-route-fieldPage="@j" 
+                               asp-route-jobPage="@Model.FeaturedJobsPageNumber"
+                               asp-fragment="featured-fields-section">@j</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    </div>
+</section>
+
+<!-- ============================
+JOB TYPES SECTION (ĐÃ CÓ LIÊN KẾT)
+============================= -->
+<section class="job-types-section section-padding bg-light">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Loại hình công việc</h2>
+            <p>Tìm kiếm công việc phù hợp với thời gian và hình thức làm việc bạn mong muốn</p>
+        </div>
+        @{
+            static Dictionary<string, string> ParseQueryParams(string query)
+            {
+                var dict = new Dictionary<string, string>();
+                if (string.IsNullOrWhiteSpace(query)) return dict;
+                foreach (var pair in query.Split('&', StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var kv = pair.Split('=', 2);
+                    if (kv.Length == 2) dict[kv[0]] = kv[1];
+                }
+                return dict;
+            }
+        }
+        @if (Model.JobTypes != null && Model.JobTypes.Any())
+        {
+            <div class="row justify-content-center">
+                @foreach (var type in Model.JobTypes.Take(3))
+                {
+                    <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
+                        <a asp-controller="TimViec" asp-action="Index" asp-all-route-data="@(ParseQueryParams(type.QueryParam))"
+                           class="job-type-item card text-decoration-none w-100">
+                            <div class="card-body text-center d-flex flex-column justify-content-center">
+                                <div class="job-type-icon mb-3"><i class="@type.IconClass"></i></div>
+                                <h5 class="job-type-name">@type.Name</h5>
+                                <p class="job-type-count text-muted">@type.JobCount việc làm</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-center">Hiện chưa có thông tin loại hình công việc.</p>
+        }
+    </div>
+</section>
+
+<!-- ============================
+ABOUT US SECTION
+============================= -->
+<section class="about-us-condensed-section section-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <img src="~/file/img/Picture/pexels-fauxels-3184291.jpg" alt="Về JOXFLEX" class="img-fluid rounded">
+            </div>
+            <div class="col-lg-6">
+                <span class="tagline">Về chúng tôi</span>
+                <h2>Nền tảng kết nối việc làm hàng đầu Việt Nam</h2>
+                <p>JOXFLEX là nền tảng kết nối việc làm bán thời gian và thời vụ hàng đầu tại Việt Nam. Chúng tôi giúp người tìm việc dễ dàng tiếp cận với hàng ngàn cơ hội việc làm linh hoạt, đồng thời hỗ trợ doanh nghiệp tìm kiếm nhân sự phù hợp một cách nhanh chóng và hiệu quả.</p>
+                <ul class="list-unstyled about-features">
+                    <li><i class="fas fa-check-circle text-success"></i> Đa dạng việc làm</li>
+                    <li><i class="fas fa-check-circle text-success"></i> Kết nối nhanh chóng</li>
+                    <li><i class="fas fa-check-circle text-success"></i> Doanh nghiệp uy tín</li>
+                    <li><i class="fas fa-check-circle text-success"></i> Hỗ trợ 24/7</li>
+                </ul>
+                <a asp-controller="Home" asp-action="About" class="btn btn-primary">Tìm hiểu thêm <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+FEATURED JOBS SECTION
+============================= -->
+<!-- THÊM ID VÀO SECTION -->
+<section id="featured-jobs-section" class="featured-jobs-section section-padding bg-light">
+    <div class="container">
+        <div class="section-title-header">
+            <h2>Việc làm nổi bật</h2>
+            <a asp-controller="TimViec" asp-action="Index" class="btn btn-outline-primary btn-sm">Xem tất cả <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+
+        <div class="row">
+            @if (Model.FeaturedJobs.Any())
+            {
+                @foreach (var job in Model.FeaturedJobs)
+                {
+                    <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
+                        <div class="job-card card h-100 w-100">
+                            @if (job.TinGap)
+                            {
+                                <span class="badge bg-danger job-badge-urgent">Gấp</span>
+                            }
+                            <div class="card-header d-flex align-items-center">
+                                <img src="@(string.IsNullOrEmpty(job.LogoHoacAvatarUrl) ? "/images/company-logo-placeholder.png" : job.LogoHoacAvatarUrl)"
+                                     alt="@job.TenCongTyHoacNguoiDang" class="company-logo-small">
+                                <div>
+                                    <h5 class="job-title mb-0">
+                                        <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@job.Id" asp-route-tieuDeSeo="@SeoUrlHelper.GenerateSlug(job.TieuDe)" class="text-decoration-none">@job.TieuDe</a>
+                                    </h5>
+                                    <small class="company-name text-muted">@job.TenCongTyHoacNguoiDang</small>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="job-location mb-2"><i class="fas fa-map-marker-alt text-muted me-2"></i> @job.DiaDiem</p>
+                                <p class="job-salary mb-2"><i class="fas fa-dollar-sign text-muted me-2"></i> @job.MucLuongDisplay</p>
+                                <p class="job-type mb-2"><i class="fas fa-briefcase text-muted me-2"></i> @job.LoaiHinhCongViecDisplay</p>
+                            </div>
+                            <div class="card-footer text-center bg-transparent border-top-0 py-3">
+                                <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@job.Id" asp-route-tieuDeSeo="@SeoUrlHelper.GenerateSlug(job.TieuDe)" class="btn btn-primary btn-sm w-100">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12">
+                     <p class="text-center">Hiện chưa có việc làm nổi bật nào.</p>
+                </div>
+            }
+        </div>
+
+        <!-- ĐIỀU KHIỂN PHÂN TRANG -->
+        @if (Model.FeaturedJobsTotalPages > 1)
+        {
+            <nav aria-label="Job pagination" class="mt-3">
+                <ul class="pagination">
+                    @for (int i = 1; i <= Model.FeaturedJobsTotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.FeaturedJobsPageNumber ? "active" : "")">
+                             <!-- THÊM ASP-FRAGMENT ĐỂ TẠO LINK NEO -->
+                            <a class="page-link" asp-action="Index" 
+                               asp-route-jobPage="@i" 
+                               asp-route-fieldPage="@Model.FeaturedFieldsPageNumber"
+                               asp-fragment="featured-jobs-section">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    </div>
+</section>
+<!-- ============================
+TOP COMPANIES SECTION
+============================= -->
+<section class="top-companies-section section-padding">
+    <div class="container">
+        <div class="section-title-header">
+            <h2>Các doanh nghiệp đang hợp tác</h2>
+            <a asp-controller="Home" asp-action="DanhSach" class="btn btn-outline-primary btn-sm">Xem tất cả doanh nghiệp <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="company-logo-grid">
+            @if (Model.TopCompanies.Any())
+            {
+                @foreach (var company in Model.TopCompanies)
+                {
+                    <div class="company-logo-item">
+                        <a asp-controller="CongTy" asp-action="ChiTiet" asp-route-slug="@company.ProfileSlug">
+                            <img src="@(string.IsNullOrEmpty(company.LogoUrl) ? "/images/company-logo-placeholder.png" : company.LogoUrl)"
+                                alt="@company.Name" title="@company.Name">
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-center">Chưa có thông tin công ty nổi bật.</p>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+TESTIMONIALS SECTION
+============================= -->
+<section class="testimonials-section section-padding bg-light">
+    <div class="container">
+        <div class="section-title text-center">
+            <span class="tagline">Đánh giá từ người dùng</span>
+            <h2>Người dùng nói gì về chúng tôi</h2>
+        </div>
+        <div class="row">
+            @foreach (var testimonial in Model.Testimonials)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-item card h-100">
+                        <div class="card-body">
+                            <div class="testimonial-rating">
+                                @for (int i = 0; i < testimonial.Rating; i++)
+                                {
+                                    <i class="fas fa-star text-warning"></i>
+                                }
+                                @for (int i = testimonial.Rating; i < 5; i++)
+                                {
+                                    <i class="far fa-star text-warning"></i>
+                                }
+                            </div>
+                            <p class="testimonial-quote">"@testimonial.Quote"</p>
+                        </div>
+                        <div class="card-footer testimonial-author">
+                            <img src="@(string.IsNullOrEmpty(testimonial.AvatarUrl) ? "/images/avatar-placeholder.png" : testimonial.AvatarUrl)"
+                                alt="@testimonial.AuthorName" class="author-avatar">
+                            <div>
+                                <span class="author-name">@testimonial.AuthorName</span>
+                                <span class="author-title">@testimonial.AuthorTitle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+HOW IT WORKS SECTION
+============================= -->
+<section class="how-it-works-section section-padding">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Cách thức hoạt động</h2>
+            <p>Tìm việc làm bán thời gian và thời vụ chưa bao giờ dễ dàng đến thế</p>
+        </div>
+        <div class="row">
+            @foreach (var step in Model.HowItWorksSteps)
+            {
+                <div class="col-md-4">
+                    <div class="how-it-works-item">
+                        <div class="step-number">@step.Number</div>
+                        <div class="step-icon"><i class="@step.IconClass"></i></div>
+                        <h5 class="step-title">@step.Title</h5>
+                        <p class="step-description">@step.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center mt-4">
+            <a asp-controller="TaiKhoan" asp-action="DangKy" class="btn btn-warning btn-lg">Đăng ký ngay</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+FOUNDERS SECTION
+============================= -->
+<section class="founders-section section-padding bg-light">
+    <div class="container">
+        <div class="section-title text-center">
+            <span class="tagline">Đội ngũ sáng lập</span>
+            <h2>Gặp gỡ những người sáng lập</h2>
+            <p>Những người đã xây dựng nên JOXFLEX với tầm nhìn kết nối cộng đồng việc làm bán thời gian</p>
+        </div>
+        <div class="row justify-content-center">
+            @if (Model.Founders != null && Model.Founders.Any())
+            {
+                @foreach (var founder in Model.Founders)
+                {
+                    <div class="col-md-6 col-lg-4 col-xl-3 mb-4 d-flex align-items-stretch">
+                        <div class="founder-item card text-center h-100">
+                            <img src="@(string.IsNullOrEmpty(founder.AvatarUrl) ? Url.Content("~/file/img/founders/founder1.png") : Url.Content("~" + founder.AvatarUrl))"
+                                 alt="Ảnh đại diện của @founder.Name" class="founder-avatar card-img-top"
+                                 onerror="this.onerror=null; this.src='@Url.Content("/file/img/founders/founder1.png")';">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="founder-name">@founder.Name</h5>
+                                <p class="founder-title text-muted">@founder.Title</p>
+                                <p class="founder-quote mt-2 mb-3">"@founder.Quote"</p>
+                                <div class="founder-social mt-auto">
+                                    @if (!string.IsNullOrEmpty(founder.TwitterUrl) && founder.TwitterUrl != "#")
+                                    {
+                                        <a href="@founder.TwitterUrl" target="_blank" class="social-icon" title="Twitter của @founder.Name"><i class="fab fa-twitter"></i></a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(founder.GithubUrl) && founder.GithubUrl != "#")
+                                    {
+                                        <a href="@founder.GithubUrl" target="_blank" class="social-icon" title="GitHub của @founder.Name"><i class="fab fa-github"></i></a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p>Thông tin về đội ngũ sáng lập đang được cập nhật.</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+  
+}

@@ -1,0 +1,379 @@
+/* ==========================================================================
+   Chat Application Styles
+   ========================================================================== */
+
+/* 1. Chat Container & Layout
+-------------------------------------------------------------------------- */
+
+.chat-container {
+    height: calc(100vh - 120px); /* Adjust 120px based on your navbar/footer height if any, or set a fixed height like 75vh or 600px */
+    max-height: 800px; /* Optional: cap the max height */
+    min-height: 500px; /* Optional: ensure a minimum height */
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    border-radius: 0.5rem; /* From styles.css .card */
+    box-shadow: var(--shadow-md, 0 4px 8px rgba(0, 0, 0, 0.1));
+    overflow: hidden; /* Important to contain children */
+    display: flex;
+    flex-direction: column; /* To allow header/footer within container if needed */
+     border-left: none;
+    border-right: none;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.chat-container > .row {
+    flex-grow: 1; /* Make the row fill the container height */
+    min-height: 0; /* Prevent row from growing beyond container due to content */
+}
+
+.chat-sidebar,
+.chat-main {
+    height: 100%; /* Make columns fill row height */
+    display: flex;
+    flex-direction: column; /* Allow internal elements to manage their own height */
+    min-height: 0; /* Prevent columns from growing beyond row due to content */
+}
+
+.chat-sidebar {
+    border-right: 1px solid var(--bs-border-color, #dee2e6);
+    background-color: var(--color-neutral-100, #f8f9fa); /* Light background for sidebar */
+}
+
+/* 2. Scrollable Divs
+-------------------------------------------------------------------------- */
+.scrollable-div {
+    overflow-y: auto;
+    flex-grow: 1; /* Critical for taking available space and enabling scroll */
+    min-height: 0; /* Prevent content from breaking flex layout */
+    padding: 0; /* Reset padding if list-group adds it */
+}
+
+/* Custom Scrollbar (Optional, Webkit/Blink browsers) */
+.scrollable-div::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable-div::-webkit-scrollbar-track {
+    background: var(--color-neutral-200, #e9ecef);
+    border-radius: 10px;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+    background: var(--color-neutral-400, #ced4da);
+    border-radius: 10px;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb:hover {
+    background: var(--color-neutral-500, #adb5bd);
+}
+
+/* 3. Chat Sidebar (Conversation List)
+-------------------------------------------------------------------------- */
+.chat-sidebar-header {
+    padding: 1rem 1rem 0.75rem; /* Adjusted padding */
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+    background-color: #fff; /* White header for sidebar */
+}
+
+.chat-sidebar-header h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem; /* From styles.css H4 */
+    color: var(--bs-primary);
+}
+
+.chat-sidebar-header .input-group-sm .form-control {
+    font-size: 0.875rem;
+}
+.chat-sidebar-header .input-group-sm .btn {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+}
+
+
+/* Conversation List Items (_HoiThoaiItem.cshtml) */
+.chat-list .list-group-item.conversation-item {
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    padding: 0.75rem 1rem;
+    transition: background-color var(--transition-fast, 150ms) ease;
+    cursor: pointer;
+    border-bottom: 1px solid var(--bs-border-color-translucent, rgba(0,0,0,0.1));
+}
+.chat-list .list-group-item.conversation-item:last-child {
+    border-bottom: 0;
+}
+
+.chat-list .list-group-item.conversation-item:hover {
+    background-color: var(--color-neutral-200, #e9ecef);
+}
+
+.chat-list .list-group-item.conversation-item.active {
+    background-color:#00529E; /* Dark background for active conversation */
+    color: #fff;
+    border-color: var(--bs-primary);
+}
+
+.chat-list .conversation-item.active .text-muted,
+.chat-list .conversation-item.active .name,
+.chat-list .conversation-item.active .context-job i,
+.chat-list .conversation-item.active .last-message i {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.conversation-item img.rounded-circle {
+    width: 45px; /* As per CSHTML */
+    height: 45px; /* As per CSHTML */
+    object-fit: cover;
+}
+
+.conversation-item .name {
+    font-weight: 600; /* From styles.css text-semibold */
+    color: var(--bs-body-color, #333);
+    margin-bottom: 0.1rem !important; /* Override h6 mb-0 default */
+}
+
+.conversation-item .context-job,
+.conversation-item .last-message {
+    font-size: 0.8rem; /* Smaller than default small */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px; /* Adjust as needed */
+    display: block; /* Ensure it takes full width for ellipsis */
+}
+.conversation-item .last-message {
+    margin-top: 0.1rem;
+    max-width: 180px; /* Slightly more space for last message */
+}
+.conversation-item .last-message i {
+    font-size: 0.7em;
+    margin-right: 2px;
+}
+
+
+.conversation-item .message-time-ago {
+    font-size: 0.75rem; /* From styles.css fs-8 */
+    white-space: nowrap;
+}
+
+.conversation-item .unread-badge {
+    font-size: 0.7rem;
+    padding: 0.25em 0.5em;
+}
+
+.conversation-item .delete-conversation-btn {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+    line-height: 1;
+    /* Initially hide, show on hover of parent item */
+    opacity: 0.6;
+    transition: opacity var(--transition-fast, 150ms) ease;
+}
+
+.conversation-item:hover .delete-conversation-btn {
+    opacity: 1;
+}
+.conversation-item .delete-conversation-btn:hover {
+    opacity: 1;
+    background-color: var(--bs-danger);
+    color: #fff;
+}
+
+
+/* 4. Chat Main Area (_ChatMessagesArea.cshtml)
+-------------------------------------------------------------------------- */
+.chat-main-area { /* The column itself */
+    background-color: #fff; /* Main chat area background */
+}
+
+.chat-header {
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+    display: flex;
+    align-items: center;
+    background-color: var(--color-neutral-100, #f8f9fa); /* Light header for chat */
+}
+
+.chat-header img.rounded-circle {
+    width: 40px; /* As per CSHTML */
+    height: 40px; /* As per CSHTML */
+    object-fit: cover;
+}
+
+.chat-header h5 {
+    font-size: 1.1rem; /* From styles.css H5 */
+    color: var(--bs-primary);
+}
+.chat-header small a {
+    color: var(--bs-link-color);
+    text-decoration: none;
+}
+.chat-header small a:hover {
+    color: var(--bs-link-hover-color);
+    text-decoration: underline;
+}
+
+/* Messages Area */
+.chat-messages {
+    padding: 1rem;
+}
+
+.message-item {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: flex-end; /* Align avatar and bubble bottom */
+}
+
+.message-item .avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.message-item.message-sent {
+    justify-content: flex-end; /* Aligns content to the right */
+}
+.message-item.message-sent .message-content {
+    align-items: flex-end; /* Aligns bubble and time to the right */
+    margin-left: 0.5rem; /* Space from avatar (if on left) */
+    margin-right: 0;
+}
+.message-item.message-sent .avatar {
+    order: 1; /* Avatar on the right */
+    margin-left: 0.5rem;
+}
+
+
+.message-item.message-received .message-content {
+    align-items: flex-start; /* Aligns bubble and time to the left */
+}
+.message-item.message-received .avatar {
+    margin-right: 0.5rem;
+}
+
+.message-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%; /* Prevent messages from being too wide */
+}
+
+.message-bubble {
+    padding: 0.6rem 0.9rem; /* From styles.css .form-control */
+    border-radius: 1rem; /* More rounded than standard inputs */
+    line-height: 1.4;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.message-item.message-sent .message-bubble {
+    background-color: var(--bs-primary);
+    color: #fff;
+    border-bottom-right-radius: 0.25rem; /* "Tail" effect */
+}
+
+.message-item.message-received .message-bubble {
+    background-color: var(--color-neutral-200, #e9ecef);
+    color: var(--bs-body-color, #333);
+    border-bottom-left-radius: 0.25rem; /* "Tail" effect */
+}
+
+.message-time {
+    font-size: 0.7rem; /* Smaller than fs-8 */
+    color: var(--color-neutral-600, #6c757d);
+    margin-top: 0.25rem;
+    padding: 0 0.25rem; /* Slight padding for alignment */
+}
+.message-item.message-sent .message-time {
+    text-align: right;
+}
+.message-item.message-received .message-time {
+    text-align: left;
+}
+
+
+/* Chat Input Area */
+.chat-input-area {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--bs-border-color, #dee2e6);
+    background-color: var(--color-neutral-100, #f8f9fa); /* Light background for input area */
+}
+
+.chat-input-area form {
+    align-items: center;
+}
+
+.chat-input-area textarea.form-control {
+    resize: none; /* Disable manual resizing */
+    line-height: 1.5;
+    max-height: 120px; /* Limit height, scroll internally if more text */
+    transition: border-color var(--transition-fast, 150ms) ease-in-out,
+                box-shadow var(--transition-fast, 150ms) ease-in-out;
+}
+.chat-input-area textarea.form-control:focus {
+    border-color: var(--bs-secondary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-secondary-rgb), 0.25); /* Adjusted focus shadow */
+}
+
+.chat-input-area .btn {
+    height: fit-content; /* Adjust button height to textarea */
+    padding: 0.6rem 1rem; /* Match form-control padding more closely */
+}
+.chat-input-area .btn i {
+    font-size: 1.1rem;
+}
+
+
+/* 5. No Chat Selected Placeholder
+-------------------------------------------------------------------------- */
+.no-chat-selected {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: var(--color-neutral-500, #adb5bd);
+    padding: 2rem;
+    flex-grow: 1; /* Make it fill the chat-main area */
+}
+
+.no-chat-selected i {
+    font-size: 4rem; /* Larger than fa-5x */
+    margin-bottom: 1rem;
+}
+.no-chat-selected p {
+    font-size: 1.1rem;
+    color: var(--color-neutral-600, #6c757d);
+}
+.no-chat-selected .small {
+     font-size: 0.9rem;
+}
+
+
+/* 6. Responsive Adjustments (Optional, Bootstrap handles most)
+-------------------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+    .chat-container {
+        height: calc(100vh - 70px); /* Adjust for smaller screens if navbar is smaller */
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    /* On smaller screens, you might want to hide the sidebar or make it an overlay */
+    /* For simplicity, we'll let Bootstrap's columns stack. If one is active, it might be full width. */
+    /* This part would require JavaScript to manage visibility if one column should hide. */
+
+    .conversation-item .context-job,
+    .conversation-item .last-message {
+        max-width: 100px; /* Further reduce for smaller screens */
+    }
+    .message-content {
+        max-width: 85%;
+    }
+}
+

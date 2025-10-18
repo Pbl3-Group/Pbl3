@@ -1,0 +1,1098 @@
+@model HeThongTimViec.ViewModels.QuanLyTinDang.QuanLyTinDangIndexViewModel
+@using HeThongTimViec.Models
+@using HeThongTimViec.Extensions
+
+@{
+    ViewData["Title"] = "Quản lý Tin đăng";
+    Layout = "_LayoutAdmin";
+    var currentKeyword = Model.Keyword ?? "";
+    var currentSortBy = Model.SortBy ?? "moinhat";
+    var currentViewMode = Model.ViewMode ?? "list";
+    var currentTab = Model.CurrentTab ?? "tatca";
+}
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #2b5189 100%);
+        --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        --warning-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --primary-color: #00529E;
+        --secondary-color: #6c757d;
+        --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        --card-hover-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background-color: #f5f7fa;
+        color: #333;
+    }
+
+    .modern-container {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+
+    /* Enhanced Header (Matching Báo cáo & Thống kê) */
+    .report-header {
+        background: linear-gradient(135deg, #112e58 0%, #366bb8 100%); 
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+    }
+
+    .report-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @@keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .report-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Blue Frame Under Header Text (Preserved) */
+    .report-title::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100px;
+        height: 4px;
+        border-radius: 2px;
+    }
+
+    /* Enhanced Tab Navigation (Matching Báo cáo & Thống kê) */
+    .nav-tabs-modern {
+        border: none;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--card-shadow);
+    }
+
+    .nav-tabs-modern .nav-item {
+        margin: 0;
+    }
+
+    .nav-tabs-modern .nav-link {
+        border: none;
+        border-radius: 10px;
+        padding: 1rem 2rem;
+        margin: 0 0.25rem;
+        transition: all 0.3s ease;
+        color: #666;
+        font-weight: 600;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-tabs-modern .nav-link:hover {
+        background: rgba(102, 126, 234, 0.1);
+        color: #667eea;
+        transform: translateY(-2px);
+    }
+
+    .nav-tabs-modern .nav-link.active {
+        background: var(--primary-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .nav-tabs-modern .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: var(--primary-gradient);
+        transition: width 0.3s ease;
+    }
+
+    .nav-tabs-modern .nav-link:hover::before {
+        width: 100%;
+    }
+
+    .nav-tabs-modern .nav-link.active::before {
+        width: 100%;
+    }
+
+    /* Rest of the existing styles remain unchanged */
+    .stats-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        height: 100%;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+
+    .stats-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: var(--primary-gradient);
+        border-radius: 0 10px 10px 0;
+    }
+
+    .stats-card.border-left-success::before {
+        background: var(--success-gradient);
+    }
+
+    .stats-card.border-left-warning::before {
+        background: var(--warning-gradient);
+    }
+
+    .stats-card.border-left-danger::before {
+        background: var(--danger-gradient);
+    }
+
+    .stats-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0;
+    }
+
+    .stats-card.border-left-success .stats-number {
+        background: var(--success-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stats-card.border-left-warning .stats-number {
+        background: var(--warning-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stats-card.border-left-danger .stats-number {
+        background: var(--danger-gradient);
+28:1
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0;
+    }
+
+    .stats-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+    }
+
+    .stats-icon:hover {
+        transform: scale(1.15);
+    }
+
+    .filter-card .card-body {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 20px;
+        width: 100%;
+    }
+    .filter-card .card-body form {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    }
+
+    .filter-card .input-group {
+    flex: 3; /* Increased flex-grow to make input field stretch more */
+    min-width: 300px; /* Ensure minimum width for usability */
+    max-width: none; /* Remove max-width to allow stretching */
+    }
+
+    .filter-card .btn:not(.btn-group .btn) {
+    flex: 1; /* Allow buttons to grow and fill space */
+    min-width: 150px; /* Slightly increased for better proportion */
+    white-space: nowrap;
+}
+
+   .filter-card .form-select {
+    flex: 1; /* Allow select to grow and fill space */
+    min-width: 150px;
+    max-width: none; /* Remove max-width to allow stretching */
+}
+
+    .filter-card .btn-group {
+    flex: 0 0 auto;
+    min-width: 100px; /* Adjusted for better fit */
+}
+
+    @@media (max-width: 1199px) {
+        .filter-card .card-body,
+        .filter-card .card-body form {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        
+        .filter-card .input-group {
+            flex: 1 1 300px;
+            max-width: 100%;
+        }
+        
+        .filter-card .form-select {
+            flex: 1 1 150px;
+        }
+        
+        .filter-card .btn:not(.btn-group .btn) {
+            flex: 0 0 auto;
+            min-width: 120px;
+        }
+    }
+
+    @@media (max-width: 1199px) {
+    .filter-card .card-body,
+    .filter-card .card-body form {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 15px;
+    }
+    
+    .filter-card .input-group {
+        flex: 1 1 100%; /* Full width on smaller screens */
+        max-width: 100%;
+    }
+    
+    .filter-card .form-select {
+        flex: 1 1 100%; /* Full width on smaller screens */
+        max-width: 100%;
+    }
+    
+    .filter-card .btn:not(.btn-group .btn) {
+        flex: 0 0 auto;
+        min-width: 150px;
+    }
+}
+
+    @@media (max-width: 767px) {
+        .filter-card .card-body,
+        .filter-card .card-body form {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 15px;
+        }
+        
+        .filter-card .input-group,
+        .filter-card .form-select,
+        .filter-card .btn:not(.btn-group .btn) {
+            flex: none;
+            max-width: 100%;
+            width: 100%;
+        }
+        
+        .filter-card .btn-group {
+             align-self: stretch;
+            width: auto;
+        }
+    }
+
+    .filter-advanced {
+    flex-direction: column;
+    align-items: stretch;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+  .filter-advanced .input-group,
+.filter-advanced .form-select {
+    flex: 1; /* Equal growth for all elements */
+    min-width: 150px;
+    max-width: none; /* Remove max-width to allow stretching */
+}
+
+.filter-advanced .btn {
+    flex: 0 0 auto;
+    min-width: 120px; /* Adjusted for better proportion */
+}
+
+    @@media (max-width: 991px) {
+        .filter-advanced {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+    }
+
+    .form-control, .form-select {
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #00D4FF;
+        box-shadow: 0 0 0 0.2rem rgba(0, 212, 255, 0.25);
+        background: white;
+    }
+
+    .btn-primary {
+        background: var(--dark-gradient);
+        border: none;
+        border-radius: 12px;
+        padding: 12px 24px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+        filter: brightness(1.1);
+    }
+
+    .btn-outline-primary {
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        border-radius: 12px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-list-container {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+
+    .job-list-header-row {
+        background: linear-gradient(135deg, #153566 0%, #e9ecef 100%);
+        padding: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        color: white;
+    }
+
+    .job-list-item-row:hover {
+        background-color: #f8fafc;
+    }
+
+    .job-list-item-row.trangthai-choduyet-bg {
+        background-color: #fff9e6 !important;
+        border-left: 4px solid #ffc107;
+    }
+
+    .job-list-item-row.trangthai-choduyet-bg:hover {
+        background-color: #fff3cd !important;
+    }
+
+    .job-col-tindang h6 a {
+        color: var(--primary-color);
+        transition: color 0.2s ease;
+    }
+
+    .job-col-tindang h6 a:hover {
+        color: #00366b;
+        text-decoration: underline !important;
+    }
+
+    .pagination .page-link {
+        border: none;
+        border-radius: 10px;
+        margin: 0 3px;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #00D4FF;
+        transition: all 0.3s ease;
+    }
+
+    .pagination .page-item.active .page-link {
+        background: var(--primary-gradient);
+        color: white;
+    }
+
+    .pagination .page-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        color: #00D4FF;
+    }
+
+    .pagination .page-item.active .page-link:hover {
+        color: white;
+    }
+
+    .alert {
+        border: none;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(10px);
+        animation: slideInDown 0.5s ease;
+    }
+
+    .alert-info {
+        background: linear-gradient(135deg, rgba(13, 110, 253, 0.15) 0%, rgba(13, 110, 253, 0.1) 100%);
+        border-left: 4px solid #0d6efd;
+        color: #052c65;
+    }
+
+    .badge {
+        border-radius: 6px;
+        padding: 0.3em 0.6em;
+        font-weight: 500;
+    }
+
+    .badge-warning.text-dark {
+        background-color: #fff3cd !important;
+        color: #664d03 !important;
+        border: 1px solid #ffecb5;
+    }
+
+    .badge-success {
+        background-color: #d1e7dd !important;
+        color: #0f5132 !important;
+        border: 1px solid #badbcc;
+    }
+
+    .badge-secondary {
+        background-color: #e9ecef !important;
+        color: #495057 !important;
+        border: 1px solid #ced4da;
+    }
+
+    .badge-danger {
+        background-color: #f8d7da !important;
+        color: #842029 !important;
+        border: 1px solid #f1c2c7;
+    }
+
+    .badge-info {
+        background-color: #d1e5ff !important;
+        color: #00366b !important;
+        border: 1px solid #b6d4fe;
+    }
+
+    .badge-dark {
+        background-color: #d3d3d4 !important;
+        color: #0e1113 !important;
+        border: 1px solid #c0c1c2;
+    }
+
+    .badge-light.text-dark {
+        background-color: #f8f9fa !important;
+        color: #212529 !important;
+        border: 1px solid #dee2e6 !important;
+    }
+
+    .jobtype-badge {
+        background-color: #e9ecef;
+        color: #495057;
+        border: 1px solid #ced4da;
+        font-weight: 500;
+        padding: 0.3em 0.6em !important;
+    }
+
+    .bg-primary {
+        --bs-bg-opacity: 1;
+        background-color: #aeceff !important;
+    }
+
+    .bg-success {
+        --bs-bg-opacity: 1;
+        background-color: rgb(168, 209, 190) !important;
+    }
+
+    .bg-warning {
+        --bs-bg-opacity: 1;
+        background-color: #fff3cd !important;
+    }
+
+    .bg-danger {
+        --bs-bg-opacity: 1;
+        background-color: rgb(255 221 224) !important;
+    }
+
+    @@keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @@media (max-width: 1199px) {
+        .job-col-nguoidang { flex: 0 0 180px; }
+        .job-col-loai { flex: 0 0 120px; }
+        .job-list-header-row .job-col-thoigian,
+        .job-list-item-row .job-col-thoigian { display: none; }
+    }
+
+    @@media (max-width: 991px) {
+        .job-list-header-row .job-col-loai,
+        .job-list-item-row .job-col-loai { display: none; }
+        .job-col-nguoidang { min-width: 150px; flex-grow: FOOTER
+        flex-basis: 150px; }
+    }
+
+    @@media (max-width: 767px) {
+        .report-title {
+            font-size: 2rem;
+        }
+        .stats-number {
+            font-size: 2rem;
+        }
+        .job-list-item-row { flex-wrap: wrap; padding: 1rem; position: relative; }
+        .job-col { flex-basis: 100% !important; text-align: left !important; margin-bottom: 0.5rem; justify-content: flex-start; }
+        .job-col:last-child { margin-bottom: 0; }
+        .job-col-checkbox { position: absolute; left: 1rem; top: 1rem; flex-basis: auto !important; padding-left: 0; height: auto; z-index: 1; }
+        .job-col-tindang { margin-top: 0; padding-left: 2.5rem; }
+        .job-col-nguoidang, .job-col-loai, .job-col-thoigian, .job-col-trangthai { padding-left: 2.5rem; }
+        .job-col-thaotac { position: absolute; right: 0.5rem; top: 0.5rem; flex-basis: auto !important; z-index: 1; }
+        .job-list-item-row .job-col-loai, .job-list-item-row .job-col-thoigian { display: flex !important; }
+        .nav-tabs-modern {
+            flex-direction: column;
+        }
+        .nav-tabs-modern .nav-link {
+            margin: 0.25rem 0;
+        }
+    }
+</style>
+
+<div class="modern-container">
+    <div class="container-fluid">
+        <!-- Enhanced Header (Matching Báo cáo & Thống kê with preserved blue frame) -->
+        <div class="report-header animate-fade-in">
+            <h1 class="report-title">📝@ViewData["Title"]</h1>
+        </div>
+
+        <!-- Statistics Cards (Unchanged) -->
+        <div class="row mb-4 animate-fade-in">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card stats-card border-left-primary shadow h-100 py-2">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-xs font-weight-bold text-muted text-uppercase mb-2">Tổng tin đăng</div>
+                            <div class="stats-number">@Model.TongSoTin.ToString("N0")</div>
+                        </div>
+                        <div class="stats-icon bg-primary bg-opacity-20">
+                            <i class="fas fa-briefcase text-primary h3 mb-0"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card stats-card border-left-success shadow h-100 py-2">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-xs font-weight-bold text-muted text-uppercase mb-2">Đang hoạt động</div>
+                            <div class="stats-number">@Model.SoTinDangHoatDong.ToString("N0")</div>
+                        </div>
+                        <div class="stats-icon bg-success bg-opacity-20">
+                            <i class="fas fa-check-circle text-success h3 mb-0"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card stats-card border-left-warning shadow h-100 py-2">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-xs font-weight-bold text-muted text-uppercase mb-2">Chờ duyệt</div>
+                            <div class="stats-number">@Model.SoTinChoDuyet.ToString("N0")</div>
+                        </div>
+                        <div class="stats-icon bg-warning bg-opacity-20">
+                            <i class="fas fa-hourglass-half text-warning h3 mb-0"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card stats-card border-left-danger shadow h-100 py-2">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-xs font-weight-bold text-muted text-uppercase mb-2">Đã hết hạn</div>
+                            <div class="stats-number">@Model.SoTinDaHetHan.ToString("N0")</div>
+                        </div>
+                        <div class="stats-icon bg-danger bg-opacity-20">
+                            <i class="fas fa-calendar-times text-danger h3 mb-0"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Tab Navigation (Matching Báo cáo & Thống kê) -->
+        <ul class="nav nav-tabs nav-tabs-modern" id="jobTabs">
+            <li class="nav-item">
+                <a class="nav-link @(currentTab == "tatca" ? "active" : "")" asp-action="Index" asp-controller="QuanLyTinDang" asp-area="" asp-route-currentTab="tatca" asp-route-keyword="@currentKeyword" asp-route-viewMode="@currentViewMode" asp-route-sortBy="@currentSortBy" asp-route-page="1">
+                    <i class="fas fa-list-alt me-2"></i>Tất cả
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(currentTab == "choduyet" ? "active" : "")" asp-action="Index" asp-controller="QuanLyTinDang" asp-area="" asp-route-currentTab="choduyet" asp-route-keyword="@currentKeyword" asp-route-viewMode="@currentViewMode" asp-route-sortBy="@currentSortBy" asp-route-page="1">
+                    <i class="fas fa-hourglass-half me-2"></i>Chờ duyệt
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(currentTab == "danghoatdong" ? "active" : "")" asp-action="Index" asp-controller="QuanLyTinDang" asp-area="" asp-route-currentTab="danghoatdong" asp-route-keyword="@currentKeyword" asp-route-viewMode="@currentViewMode" asp-route-sortBy="@currentSortBy" asp-route-page="1">
+                    <i class="fas fa-check-circle me-2"></i>Đang hoạt động
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(currentTab == "daan" ? "active" : "")" asp-action="Index" asp-controller="QuanLyTinDang" asp-area="" asp-route-currentTab="daan" asp-route-keyword="@currentKeyword" asp-route-viewMode="@currentViewMode" asp-route-sortBy="@currentSortBy" asp-route-page="1">
+                    <i class="fas fa-eye-slash me-2"></i>Đã ẩn
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(currentTab == "dahethan" ? "active" : "")" asp-action="Index" asp-controller="QuanLyTinDang" asp-area="" asp-route-currentTab="dahethan" asp-route-keyword="@currentKeyword" asp-route-viewMode="@currentViewMode" asp-route-sortBy="@currentSortBy" asp-route-page="1">
+                    <i class="fas fa-calendar-times me-2"></i>Đã hết hạn
+                </a>
+            </li>
+        </ul>
+
+        @if (currentTab != "phantic")
+        {
+            <!-- Filter and View Options (Unchanged) -->
+            <div class="card filter-card shadow mb-4 animate-fade-in">
+                <div class="card-body">
+                    <form asp-action="Index" asp-controller="QuanLyTinDang" asp-area="" method="get" class="d-flex flex-wrap align-items-end gap-3" id="searchSortForm">
+                        <input type="hidden" name="currentTab" value="@currentTab" />
+                        <input type="hidden" name="viewMode" value="@currentViewMode" />
+                        <input type="hidden" name="sortBy" value="@currentSortBy" />
+                        <input type="hidden" name="page" value="1" />
+
+                        @if (Model.FilterTrangThai.HasValue) { <input type="hidden" name="filterTrangThai" value="@Model.FilterTrangThai.Value" /> }
+                        @if (Model.FilterLoaiCongViec.HasValue) { <input type="hidden" name="filterLoaiCongViec" value="@Model.FilterLoaiCongViec.Value" /> }
+                        @if (Model.FilterLoaiNguoiDang.HasValue) { <input type="hidden" name="filterLoaiNguoiDang" value="@Model.FilterLoaiNguoiDang.Value" /> }
+                        @if (Model.FilterThanhPhoId.HasValue) { <input type="hidden" name="filterThanhPhoId" value="@Model.FilterThanhPhoId.Value" /> }
+                        @if (Model.FilterQuanHuyenId.HasValue) { <input type="hidden" name="filterQuanHuyenId" value="@Model.FilterQuanHuyenId.Value" /> }
+                        @if (Model.FilterNganhNgheIds != null && Model.FilterNganhNgheIds.Any())
+                        {
+                            @foreach (var nnId in Model.FilterNganhNgheIds) { <input type="hidden" name="filterNganhNgheIds" value="@nnId" /> }
+                        }
+                        @if (Model.FilterLuongMin.HasValue) { <input type="hidden" name="filterLuongMin" value="@Model.FilterLuongMin.Value" /> }
+                        @if (Model.FilterLuongMax.HasValue) { <input type="hidden" name="filterLuongMax" value="@Model.FilterLuongMax.Value" /> }
+                        @if (Model.FilterTinGap.HasValue) { <input type="hidden" name="filterTinGap" value="@Model.FilterTinGap.Value.ToString().ToLower()" /> }
+
+                        <div class="input-group" style="max-width: 350px;">
+                            <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                            <input type="text" name="keyword" class="form-control border-start-0" placeholder="Tìm kiếm tin đăng..." value="@Model.Keyword">
+                        </div>
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#advancedFilterModal">
+                            <i class="fas fa-filter me-2"></i>Lọc nâng cao
+                        </button>
+
+                        <select id="sortBySelect" name="sortBy" class="form-select" style="width: auto;" asp-for="SortBy" asp-items="@Model.SortByOptions"></select>
+
+                        <div class="btn-group view-toggle">
+                            <a asp-action="Index" asp-controller="QuanLyTinDang" asp-area="" asp-route-currentTab="@currentTab" asp-route-keyword="@currentKeyword" asp-route-sortBy="@currentSortBy" asp-route-viewMode="list" asp-route-page="1"
+                               asp-route-filterTrangThai="@Model.FilterTrangThai" asp-route-filterLoaiCongViec="@Model.FilterLoaiCongViec" asp-route-filterLoaiNguoiDang="@Model.FilterLoaiNguoiDang" asp-route-filterThanhPhoId="@Model.FilterThanhPhoId" asp-route-filterQuanHuyenId="@Model.FilterQuanHuyenId" asp-route-filterNganhNgheIds="@Model.FilterNganhNgheIds" asp-route-filterLuongMin="@Model.FilterLuongMin" asp-route-filterLuongMax="@Model.FilterLuongMax" asp-route-filterTinGap="@Model.FilterTinGap"
+                               class="btn btn-sm @(currentViewMode == "list" ? "btn-primary" : "btn-outline-primary")" title="Xem dạng danh sách">
+                                <i class="fas fa-list"></i>
+                            </a>
+                            <a asp-action="Index" asp-controller="QuanLyTinDang" asp-area="" asp-route-currentTab="@currentTab" asp-route-keyword="@currentKeyword" asp-route-sortBy="@currentSortBy" asp-route-viewMode="grid" asp-route-page="1"
+                               asp-route-filterTrangThai="@Model.FilterTrangThai" asp-route-filterLoaiCongViec="@Model.FilterLoaiCongViec" asp-route-filterLoaiNguoiDang="@Model.FilterLoaiNguoiDang" asp-route-filterThanhPhoId="@Model.FilterThanhPhoId" asp-route-filterQuanHuyenId="@Model.FilterQuanHuyenId" asp-route-filterNganhNgheIds="@Model.FilterNganhNgheIds" asp-route-filterLuongMin="@Model.FilterLuongMin" asp-route-filterLuongMax="@Model.FilterLuongMax" asp-route-filterTinGap="@Model.FilterTinGap"
+                               class="btn btn-sm @(currentViewMode == "grid" ? "btn-primary" : "btn-outline-primary")" title="Xem dạng lưới">
+                                <i class="fas fa-th-large"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Job Postings List/Grid (Unchanged) -->
+            @if (Model.JobPostings != null && Model.JobPostings.Any())
+            {
+                if (currentViewMode == "grid")
+                {
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4 animate-fade-in">
+                        @foreach (var item in Model.JobPostings)
+                        {
+                            <div class="col d-flex">
+                                <partial name="_JobPostingGridItem" model="item" />
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="job-list-container animate-fade-in">
+
+                        @foreach (var item in Model.JobPostings)
+                        {
+                            <partial name="_JobPostingListItem" model="item" />
+                        }
+                    </div>
+                }
+
+                <!-- Pagination (Unchanged) -->
+                @if (Model.JobPostings.TotalPages > 1)
+                {
+                    <nav aria-label="Page navigation" class="mt-5 animate-fade-in">
+                        <ul class="pagination justify-content-center">
+                            @if (Model.JobPostings.HasPreviousPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-action="Index" asp-controller="QuanLyTinDang" asp-area=""
+                                       asp-route-page="@(Model.JobPostings.PageIndex - 1)"
+                                       asp-route-currentTab="@currentTab" asp-route-keyword="@currentKeyword" asp-route-viewMode="@currentViewMode" asp-route-sortBy="@currentSortBy"
+                                       asp-route-filterTrangThai="@Model.FilterTrangThai" asp-route-filterLoaiCongViec="@Model.FilterLoaiCongViec" asp-route-filterLoaiNguoiDang="@Model.FilterLoaiNguoiDang" asp-route-filterThanhPhoId="@Model.FilterThanhPhoId" asp-route-filterQuanHuyenId="@Model.FilterQuanHuyenId" asp-route-filterNganhNgheIds="@Model.FilterNganhNgheIds" asp-route-filterLuongMin="@Model.FilterLuongMin" asp-route-filterLuongMax="@Model.FilterLuongMax" asp-route-filterTinGap="@Model.FilterTinGap">
+                                        <i class="fas fa-chevron-left me-1"></i> Trước
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled"><span class="page-link"><i class="fas fa-chevron-left me-1"></i> Trước</span></li>
+                            }
+
+                            @{
+                                int totalPages = Model.JobPostings.TotalPages;
+                                int currentPage = Model.JobPostings.PageIndex;
+                                int startPage = Math.Max(1, currentPage - 2);
+                                int endPage = Math.Min(totalPages, currentPage + 2);
+
+                                if (startPage > 1)
+                                {
+                                    <li class="page-item"><a class="page-link" asp-action="Index" asp-controller="QuanLyTinDang" asp-area="" asp-route-page="1" asp-route-currentTab="@currentTab" asp-route-keyword="@currentKeyword" asp-route-viewMode="@currentViewMode" asp-route-sortBy="@currentSortBy" asp-route-filterTrangThai="@Model.FilterTrangThai" asp-route-filterLoaiCongViec="@Model.FilterLoaiCongViec" asp-route-filterLoaiNguoiDang="@Model.FilterLoaiNguoiDang" asp-route-filterThanhPhoId="@Model.FilterThanhPhoId" asp-route-filterQuanHuyenId="@Model.FilterQuanHuyenId" asp-route-filterNganhNgheIds="@Model.FilterNganhNgheIds" asp-route-filterLuongMin="@Model.FilterLuongMin" asp-route-filterLuongMax="@Model.FilterLuongMax" asp-route-filterTinGap="@Model.FilterTinGap">1</a></li>
+                                    if (startPage > 2)
+                                    {
+                                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                                    }
+                                }
+
+                                for (int i = startPage; i <= endPage; i++)
+                                {
+                                    <li class="page-item @(i == currentPage ? "active" : "")">
+                                        <a class="page-link" asp-action="Index" asp-controller="QuanLyTinDang" asp-area=""
+                                           asp-route-page="@i"
+                                           asp-route-currentTab="@currentTab" asp-route-keyword="@currentKeyword" asp-route-viewMode="@currentViewMode" asp-route-sortBy="@currentSortBy"
+                                           asp-route-filterTrangThai="@Model.FilterTrangThai" asp-route-filterLoaiCongViec="@Model.FilterLoaiCongViec" asp-route-filterLoaiNguoiDang="@Model.FilterLoaiNguoiDang" asp-route-filterThanhPhoId="@Model.FilterThanhPhoId" asp-route-filterQuanHuyenId="@Model.FilterQuanHuyenId" asp-route-filterNganhNgheIds="@Model.FilterNganhNgheIds" asp-route-filterLuongMin="@Model.FilterLuongMin" asp-route-filterLuongMax="@Model.FilterLuongMax" asp-route-filterTinGap="@Model.FilterTinGap">
+                                            @i
+                                        </a>
+                                    </li>
+                                }
+
+                                if (endPage < totalPages)
+                                {
+                                    if (endPage < totalPages - 1)
+                                    {
+                                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                                    }
+                                    <li class="page-item"><a class="page-link" asp-action="Index" asp-controller="QuanLyTinDang" asp-area="" asp-route-page="@totalPages" asp-route-currentTab="@currentTab" asp-route-keyword="@currentKeyword" asp-route-viewMode="@currentViewMode" asp-route-sortBy="@currentSortBy" asp-route-filterTrangThai="@Model.FilterTrangThai" asp-route-filterLoaiCongViec="@Model.FilterLoaiCongViec" asp-route-filterLoaiNguoiDang="@Model.FilterLoaiNguoiDang" asp-route-filterThanhPhoId="@Model.FilterThanhPhoId" asp-route-filterQuanHuyenId="@Model.FilterQuanHuyenId" asp-route-filterNganhNgheIds="@Model.FilterNganhNgheIds" asp-route-filterLuongMin="@Model.FilterLuongMin" asp-route-filterLuongMax="@Model.FilterLuongMax" asp-route-filterTinGap="@Model.FilterTinGap">@totalPages</a></li>
+                                }
+                            }
+
+                            @if (Model.JobPostings.HasNextPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-action="Index" asp-controller="QuanLyTinDang" asp-area=""
+                                       asp-route-page="@(Model.JobPostings.PageIndex + 1)"
+                                       asp-route-currentTab="@currentTab" asp-route-keyword="@currentKeyword" asp-route-viewMode="@currentViewMode" asp-route-sortBy="@currentSortBy"
+                                       asp-route-filterTrangThai="@Model.FilterTrangThai" asp-route-filterLoaiCongViec="@Model.FilterLoaiCongViec" asp-route-filterLoaiNguoiDang="@Model.FilterLoaiNguoiDang" asp-route-filterThanhPhoId="@Model.FilterThanhPhoId" asp-route-filterQuanHuyenId="@Model.FilterQuanHuyenId" asp-route-filterNganhNgheIds="@Model.FilterNganhNgheIds" asp-route-filterLuongMin="@Model.FilterLuongMin" asp-route-filterLuongMax="@Model.FilterLuongMax" asp-route-filterTinGap="@Model.FilterTinGap">
+                                        Sau <i class="fas fa-chevron-right ms-1"></i>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item disabled"><span class="page-link">Sau <i class="fas fa-chevron-right ms-1"></i></span></li>
+                            }
+                        </ul>
+                    </nav>
+                }
+            }
+            else
+            {
+                <div class="alert alert-info text-center mt-4 animate-fade-in" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>Không tìm thấy tin đăng nào phù hợp với tiêu chí của bạn.
+                </div>
+            }
+        }
+        else if (currentTab == "phantic")
+        {
+            <partial name="_AnalyticsTab" model="Model" />
+        }
+    </div>
+</div>
+
+<!-- Modals (Unchanged) -->
+<partial name="_AdvancedFilterModal" model="Model" />
+<partial name="_TuChoiTinModal" />
+<partial name="_XoaTinModal" />
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animation cho stats cards
+            const statsCards = document.querySelectorAll('.stats-card');
+            statsCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate-fade-in');
+            });
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Enhanced form interactions
+            document.querySelectorAll('.form-control, .form-select').forEach(input => {
+                input.addEventListener('focus', function () {
+                    this.parentNode.style.transform = 'scale(1.02)';
+                    this.parentNode.style.transition = 'transform 0.2s ease';
+                });
+
+                input.addEventListener('blur', function () {
+                    this.parentNode.style.transform = 'scale(1)';
+                });
+            });
+
+            // Button hover effects
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function () {
+                    if (!this.disabled) {
+                        this.style.transform = 'translateY(-2px)';
+                    }
+                });
+
+                btn.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Sort and search form handling
+            $('#sortBySelect').change(function () {
+                $('#searchSortForm input[name="sortBy"]').val($(this).val());
+                $('#searchSortForm').submit();
+            });
+
+            $('#selectAllJobs').change(function () {
+                $('.job-list-item-row input[name="selectedJobIds"]').prop('checked', $(this).is(':checked'));
+            });
+
+            $(document).on('change', '.job-list-item-row input[name="selectedJobIds"]', function () {
+                if (!$(this).is(':checked')) {
+                    $('#selectAllJobs').prop('checked', false);
+                } else {
+                    if ($('.job-list-item-row input[name="selectedJobIds"]:checked').length === $('.job-list-item-row input[name="selectedJobIds"]').length) {
+                        $('#selectAllJobs').prop('checked', true);
+                    }
+                }
+            });
+
+            $('#FilterThanhPhoId').change(function () {
+                var thanhPhoId = $(this).val();
+                var quanHuyenSelect = $('#FilterQuanHuyenId');
+                quanHuyenSelect.empty().append('<option value="">Tất cả Quận/Huyện</option>');
+
+                if (thanhPhoId) {
+                    quanHuyenSelect.prop('disabled', true);
+                    $.getJSON('@Url.Action("GetQuanHuyenByThanhPho", "QuanLyTinDang", new { area = "" })', { thanhPhoId: thanhPhoId }, function (data) {
+                        if (data) {
+                            $.each(data, function (index, item) {
+                                quanHuyenSelect.append($('<option>', {
+                                    value: item.id,
+                                    text: item.ten
+                                }));
+                            });
+                            var previouslySelectedQuanHuyen = "@Model.FilterQuanHuyenId";
+                            if (previouslySelectedQuanHuyen) {
+                                quanHuyenSelect.val(previouslySelectedQuanHuyen);
+                            }
+                        }
+                    }).always(function () {
+                        quanHuyenSelect.prop('disabled', false);
+                    });
+                }
+            }).trigger('change');
+
+            var tinIdToProcess;
+
+            $(document).on('click', '.btn-duyet-tin', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                tinIdToProcess = $(this).data('id');
+                if (confirm('Bạn có chắc chắn muốn duyệt tin ID: ' + tinIdToProcess + '?')) {
+                    $.post('@Url.Action("DuyetTin", "QuanLyTinDang", new { area = "" })', { id: tinIdToProcess, __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() })
+                        .done(function (response) {
+                            if (response.success) {
+                                alert(response.message);
+                                location.reload();
+                            } else {
+                                alert('Lỗi: ' + (response.message || 'Không thể duyệt tin.'));
+                            }
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                            alert('Có lỗi xảy ra trong quá trình duyệt tin. Vui lòng thử lại. Details: ' + textStatus + ", " + errorThrown);
+                        });
+                }
+            });
+
+            $(document).on('click', '.btn-tu-choi-tin', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                tinIdToProcess = $(this).data('id');
+                $('#tuChoiTinModal').modal('show');
+            });
+
+            $('#confirmTuChoiTin').click(function () {
+                var lyDo = $('#lyDoTuChoiInput').val();
+                if (!lyDo.trim()) {
+                    alert('Vui lòng nhập lý do từ chối.');
+                    $('#lyDoTuChoiInput').focus();
+                    return;
+                }
+                $(this).prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang xử lý...');
+                $.post('@Url.Action("TuChoiTin", "QuanLyTinDang", new { area = "" })', { id: tinIdToProcess, lyDo: lyDo, __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() })
+                    .done(function (response) {
+                        $('#tuChoiTinModal').modal('hide');
+                        if (response.success) {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert('Lỗi: ' + (response.message || 'Không thể từ chối tin.'));
+                        }
+                    })
+                    .fail(function () {
+                        $('#tuChoiTinModal').modal('hide');
+                        alert('Có lỗi xảy ra trong quá trình từ chối tin. Vui lòng thử lại.');
+                    }).always(function () {
+                        $('#confirmTuChoiTin').prop('disabled', false).text('Xác nhận từ chối');
+                    });
+            });
+
+            $(document).on('click', '.btn-xoa-tin', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                tinIdToProcess = $(this).data('id');
+                $('#xoaTinModal .modal-body p').text(`Bạn có chắc chắn muốn xóa tin đăng ID: ${tinIdToProcess}? Hành động này không thể hoàn tác.`);
+                $('#xoaTinModal').modal('show');
+            });
+
+            $('#confirmXoaTin').click(function () {
+                $(this).prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang xóa...');
+                $.post('@Url.Action("XoaTin", "QuanLyTinDang", new { area = "" })', { id: tinIdToProcess, __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() })
+                    .done(function (response) {
+                        $('#xoaTinModal').modal('hide');
+                        if (response.success) {
+                            alert(response.message);
+                            location.reload();
+                        } else {
+                            alert('Lỗi: ' + (response.message || 'Không thể xóa tin.'));
+                        }
+                    })
+                    .fail(function () {
+                        $('#xoaTinModal').modal('hide');
+                        alert('Có lỗi xảy ra trong quá trình xóa tin. Vui lòng thử lại.');
+                    }).always(function () {
+                        $('#confirmXoaTin').prop('disabled', false).text('Xác nhận xóa');
+                    });
+            });
+
+            $('#tuChoiTinModal').on('hidden.bs.modal', function () {
+                $('#lyDoTuChoiInput').val('');
+                $('#confirmTuChoiTin').prop('disabled', false).text('Xác nhận từ chối');
+            });
+
+            $('#xoaTinModal').on('hidden.bs.modal', function () {
+                $('#confirmXoaTin').prop('disabled', false).text('Xác nhận xóa');
+            });
+
+            // Add smooth scrolling for tab navigation (Matching Báo cáo & Thống kê)
+            document.querySelectorAll('.nav-tabs-modern .nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    document.querySelector('.job-list-container').style.opacity = '0.7';
+                    setTimeout(() => {
+                        document.querySelector('.job-list-container').style.opacity = '1';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+}

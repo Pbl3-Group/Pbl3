@@ -1,0 +1,43 @@
+@model HeThongTimViec.ViewModels.TinNhan.HoiThoaiViewModel
+
+<a href="#" class="list-group-item list-group-item-action conversation-item @(Model.IsActive ? "active" : "")"
+    data-nguoilienheid="@Model.NguoiLienHeId" data-ungtuyenid="@Model.UngTuyenLienQuanId"
+    data-tintuyendungid="@Model.TinTuyenDungLienQuanId">
+    <div class="d-flex w-100">
+        <div class="d-flex align-items-center flex-grow-1" style="min-width: 0;">
+            <img src="@(Model.AvatarUrlNguoiLienHe ?? "/images/default-avatar.png")" alt="@Model.TenNguoiLienHe"
+                class="rounded-circle me-2 flex-shrink-0" style="width: 45px; height: 45px; object-fit: cover;">
+            <div class="flex-grow-1" style="min-width: 0;">
+                <h6 class="mb-0 name text-truncate" title="@Model.TenNguoiLienHe">@Model.TenNguoiLienHe</h6>
+                @if (!string.IsNullOrEmpty(Model.TieuDeCongViecLienQuan))
+                {
+                    <small class="text-muted d-block context-job text-truncate" title="@Model.TieuDeCongViecLienQuan">
+                        <i class="fas fa-briefcase fa-fw"></i> @Model.TieuDeCongViecLienQuan
+                    </small>
+                }
+                <small class="text-muted d-block last-message text-truncate" title="@Model.TinNhanCuoiCung">
+                    @if (Model.LaTinNhanCuoiCuaToi)
+                    {
+                        <i class="fas fa-reply fa-fw"></i>
+                    }
+                    @Model.TinNhanCuoiCung
+                </small>
+            </div>
+        </div>
+        <div class="text-end ps-2 flex-shrink-0 d-flex flex-column align-items-end">
+            <small class="text-muted message-time-ago d-block mb-1"
+                title="@Model.NgayGuiTinNhanCuoiCung.ToString("dd/MM/yyyy HH:mm")">@Model.ThoiGianGuiTinNhanCuoiCungDisplay</small>
+            <div class="d-flex align-items-center mt-auto">
+                @if (Model.SoTinNhanChuaDoc > 0)
+                {
+                    <span class="badge bg-danger rounded-pill me-1 unread-badge">@Model.SoTinNhanChuaDoc</span>
+                }
+                <button class="btn btn-sm btn-icon delete-conversation-btn" data-nguoilienheid="@Model.NguoiLienHeId"
+                    data-tennguoilienhe="@Model.TenNguoiLienHe" data-ungtuyenid="@Model.UngTuyenLienQuanId"
+                    data-tintuyendungid="@Model.TinTuyenDungLienQuanId" title="Xóa hội thoại này">
+                    <i class="fas fa-trash-alt fa-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</a>

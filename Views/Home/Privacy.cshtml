@@ -1,0 +1,533 @@
+﻿@{
+    // ViewData["Title"] đã được set trong Controller
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/home-styles.css" asp-append-version="true" />
+
+<!-- Hero Section cho Privacy Policy -->
+<section class="privacy-hero-section">
+    <div class="privacy-hero-overlay"></div> @* Lớp phủ màu cho ảnh nền *@
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center align-items-center min-vh-50"> @* min-vh-50 để có chiều cao tối thiểu *@
+            <div class="col-lg-8 text-center text-white">
+                <div class="privacy-hero-icon mb-4">
+                    <i class="fas fa-user-shield fa-4x"></i> @* Icon lớn về bảo mật *@
+                </div>
+                <span class="tagline bg-warning text-dark px-3 py-1 rounded-pill mb-3 d-inline-block">Bảo mật & Riêng tư</span>
+                <h1 class="display-4 fw-bold mb-3">@ViewData["Title"]</h1>
+                <p class="lead mb-4" style="font-size: 1.1rem; opacity: 0.9;">
+                    Tại JOXFLEX, sự an toàn và riêng tư dữ liệu của bạn là ưu tiên hàng đầu của chúng tôi.
+                    Tìm hiểu cách chúng tôi bảo vệ thông tin cá nhân bạn.
+                </p>
+                <div class="mt-4">
+                    <a href="#introduction" class="btn btn-light btn-lg me-2">
+                        <i class="fas fa-arrow-down me-2"></i>Xem chi tiết Chính sách
+                    </a>
+                    <a asp-action="Contact" asp-controller="Home" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-question-circle me-2"></i>Liên hệ hỗ trợ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Statistics Section - Privacy Stats -->
+<div class="statistics-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-item">
+                    <div class="stat-value">256</div>
+                    <div class="stat-label">Bit Encryption</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-item">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Bảo mật liên tục</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-item">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Tuân thủ GDPR</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-item">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Vi phạm dữ liệu</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container section-padding">
+    <div class="row">
+        <!-- Sidebar Navigation -->
+        <div class="col-lg-3">
+            <div class="privacy-sidebar">
+                <div class="card benefit-item">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-list benefit-icon" style="font-size: 1.5rem; margin-bottom: 10px;"></i>
+                            Mục lục
+                        </h5>
+                        <nav class="privacy-nav">
+                            <ul class="list-unstyled">
+                                <li><a href="#introduction" class="privacy-nav-link">1. Giới thiệu</a></li>
+                                <li><a href="#information-collection" class="privacy-nav-link">2. Thông tin thu thập</a></li>
+                                <li><a href="#how-we-use-information" class="privacy-nav-link">3. Cách sử dụng thông tin</a></li>
+                                <li><a href="#information-sharing" class="privacy-nav-link">4. Chia sẻ thông tin</a></li>
+                                <li><a href="#data-security" class="privacy-nav-link">5. An toàn dữ liệu</a></li>
+                                <li><a href="#cookies" class="privacy-nav-link">6. Cookies</a></li>
+                                <li><a href="#your-rights" class="privacy-nav-link">7. Quyền của bạn</a></li>
+                                <li><a href="#children-privacy" class="privacy-nav-link">8. Quyền riêng tư trẻ em</a></li>
+                                <li><a href="#policy-changes" class="privacy-nav-link">9. Thay đổi chính sách</a></li>
+                                <li><a href="#contact-us-privacy" class="privacy-nav-link">10. Liên hệ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                
+                <!-- Quick Contact Card -->
+                <div class="card benefit-item mt-4">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope benefit-icon"></i>
+                        <h6 class="card-title">Có câu hỏi?</h6>
+                        <p class="card-text">Liên hệ với chúng tôi về quyền riêng tư</p>
+                        <a href="mailto:privacy@joxflex.com" class="btn btn-warning btn-sm">
+                            <i class="fas fa-paper-plane me-2"></i>Gửi email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9">
+            <div class="privacy-content">
+                <!-- Last Updated Badge -->
+                <div class="alert alert-info d-flex align-items-center mb-4" style="background: var(--gradient-bg); border: none; border-radius: 15px;">
+                    <i class="fas fa-clock me-3" style="color: var(--primary-color);"></i>
+                    <div>
+                        <strong>Cập nhật lần cuối:</strong> @DateTime.Now.ToString("dd/MM/yyyy")
+                    </div>
+                </div>
+
+                <!-- Privacy Policy Sections -->
+                <section id="introduction" class="privacy-section mb-5">
+                    <div class="card benefit-item">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-handshake benefit-icon me-3"></i>
+                                <h2 class="section-heading mb-0">1. Giới thiệu</h2>
+                            </div>
+                            <p>Chào mừng bạn đến với Chính sách Bảo mật của JOXFLEX. Chúng tôi cam kết bảo vệ quyền riêng tư và thông tin cá nhân của người dùng. Chính sách này giải thích cách chúng tôi thu thập, sử dụng, tiết lộ và bảo vệ thông tin của bạn khi bạn truy cập và sử dụng nền tảng của chúng tôi.</p>
+                            <div class="alert alert-warning" style="background: var(--gradient-secondary); border: none; color: var(--primary-color); border-radius: 10px;">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Lưu ý quan trọng:</strong> Bằng việc sử dụng dịch vụ của JOXFLEX, bạn đồng ý với các điều khoản được mô tả trong Chính sách Bảo mật này.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="information-collection" class="privacy-section mb-5">
+                    <div class="card benefit-item">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-database benefit-icon me-3"></i>
+                                <h2 class="section-heading mb-0">2. Thông tin chúng tôi thu thập</h2>
+                            </div>
+                            <p>Chúng tôi có thể thu thập các loại thông tin sau:</p>
+                            
+                            <div class="row">
+                                <div class="col-lg-6 mb-3">
+                                    <div class="info-type-card">
+                                        <h6 class="fw-bold text-primary mb-2">
+                                            <i class="fas fa-user me-2"></i>Thông tin cá nhân
+                                        </h6>
+                                        <ul class="list-unstyled small">
+                                            <li><i class="fas fa-check text-success me-2"></i>Tên, địa chỉ email</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Số điện thoại, ngày sinh</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Thông tin hồ sơ (CV, kinh nghiệm)</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Thông tin tài khoản ngân hàng</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="info-type-card">
+                                        <h6 class="fw-bold text-primary mb-2">
+                                            <i class="fas fa-building me-2"></i>Thông tin doanh nghiệp
+                                        </h6>
+                                        <ul class="list-unstyled small">
+                                            <li><i class="fas fa-check text-success me-2"></i>Tên công ty, mã số thuế</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Địa chỉ, thông tin liên hệ</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Thông tin tin tuyển dụng</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-6 mb-3">
+                                    <div class="info-type-card">
+                                        <h6 class="fw-bold text-primary mb-2">
+                                            <i class="fas fa-chart-line me-2"></i>Thông tin sử dụng
+                                        </h6>
+                                        <ul class="list-unstyled small">
+                                            <li><i class="fas fa-check text-success me-2"></i>Lịch sử tìm kiếm việc làm</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Các tin đã ứng tuyển</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Tin nhắn trao đổi</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="info-type-card">
+                                        <h6 class="fw-bold text-primary mb-2">
+                                            <i class="fas fa-cog me-2"></i>Thông tin kỹ thuật
+                                        </h6>
+                                        <ul class="list-unstyled small">
+                                            <li><i class="fas fa-check text-success me-2"></i>Địa chỉ IP, trình duyệt</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Hệ điều hành, thiết bị</li>
+                                            <li><i class="fas fa-check text-success me-2"></i>Cookies và tracking</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="how-we-use-information" class="privacy-section mb-5">
+                    <div class="card benefit-item">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-tools benefit-icon me-3"></i>
+                                <h2 class="section-heading mb-0">3. Cách chúng tôi sử dụng thông tin của bạn</h2>
+                            </div>
+                            <p>JOXFLEX sử dụng thông tin thu thập được cho các mục đích sau:</p>
+                            
+                            <div class="row">
+                                <div class="col-lg-4 mb-3">
+                                    <div class="usage-item text-center">
+                                        <div class="usage-icon">
+                                            <i class="fas fa-server"></i>
+                                        </div>
+                                        <h6>Vận hành nền tảng</h6>
+                                        <p class="small">Cung cấp, vận hành và duy trì dịch vụ</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <div class="usage-item text-center">
+                                        <div class="usage-icon">
+                                            <i class="fas fa-chart-pie"></i>
+                                        </div>
+                                        <h6>Cải thiện dịch vụ</h6>
+                                        <p class="small">Cá nhân hóa và phân tích sử dụng</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <div class="usage-item text-center">
+                                        <div class="usage-icon">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <h6>Giao tiếp</h6>
+                                        <p class="small">Hỗ trợ khách hàng và marketing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="usage-details mt-4">
+                                <div class="accordion" id="usageAccordion">
+                                    <div class="accordion-item" style="border: none; margin-bottom: 10px; border-radius: 10px;">
+                                        <h6 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#usage1">
+                                                <i class="fas fa-list me-2"></i>Xem chi tiết các mục đích sử dụng
+                                            </button>
+                                        </h6>
+                                        <div id="usage1" class="accordion-collapse collapse" data-bs-parent="#usageAccordion">
+                                            <div class="accordion-body">
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fas fa-check-circle text-success me-2"></i>Cung cấp, vận hành và duy trì Nền tảng</li>
+                                                    <li><i class="fas fa-check-circle text-success me-2"></i>Cải thiện, cá nhân hóa và mở rộng Nền tảng</li>
+                                                    <li><i class="fas fa-check-circle text-success me-2"></i>Hiểu và phân tích cách bạn sử dụng Nền tảng</li>
+                                                    <li><i class="fas fa-check-circle text-success me-2"></i>Phát triển sản phẩm, dịch vụ mới</li>
+                                                    <li><i class="fas fa-check-circle text-success me-2"></i>Giao tiếp với bạn về dịch vụ khách hàng</li>
+                                                    <li><i class="fas fa-check-circle text-success me-2"></i>Xử lý các giao dịch của bạn</li>
+                                                    <li><i class="fas fa-check-circle text-success me-2"></i>Gửi email thông báo, bản tin</li>
+                                                    <li><i class="fas fa-check-circle text-success me-2"></i>Phát hiện và ngăn chặn gian lận</li>
+                                                    <li><i class="fas fa-check-circle text-success me-2"></i>Tuân thủ các nghĩa vụ pháp lý</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="information-sharing" class="privacy-section mb-5">
+                    <div class="card benefit-item">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-share-alt benefit-icon me-3"></i>
+                                <h2 class="section-heading mb-0">4. Chia sẻ thông tin</h2>
+                            </div>
+                            
+                            <div class="sharing-scenarios">
+                                <div class="scenario-item mb-4">
+                                    <div class="d-flex align-items-start">
+                                        <div class="scenario-icon me-3">
+                                            <i class="fas fa-user-check"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold">Với sự đồng ý của bạn</h6>
+                                            <p class="mb-0">Chúng tôi sẽ chia sẻ thông tin cá nhân của bạn với các bên thứ ba khi có sự đồng ý rõ ràng từ bạn.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="scenario-item mb-4">
+                                    <div class="d-flex align-items-start">
+                                        <div class="scenario-icon me-3">
+                                            <i class="fas fa-handshake"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold">Để kết nối việc làm</h6>
+                                            <p class="mb-0">Thông tin hồ sơ của ứng viên có thể được chia sẻ với nhà tuyển dụng khi ứng viên ứng tuyển. Thông tin tin tuyển dụng được công khai cho người tìm việc.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="scenario-item mb-4">
+                                    <div class="d-flex align-items-start">
+                                        <div class="scenario-icon me-3">
+                                            <i class="fas fa-cogs"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold">Nhà cung cấp dịch vụ</h6>
+                                            <p class="mb-0">Chia sẻ với các nhà cung cấp dịch vụ bên thứ ba để thực hiện các dịch vụ thay mặt chúng tôi (xử lý thanh toán, phân tích dữ liệu, gửi email, dịch vụ lưu trữ).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="scenario-item mb-4">
+                                    <div class="d-flex align-items-start">
+                                        <div class="scenario-icon me-3">
+                                            <i class="fas fa-balance-scale"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold">Vì lý do pháp lý</h6>
+                                            <p class="mb-0">Tiết lộ thông tin nếu được yêu cầu bởi pháp luật hoặc để đáp ứng các yêu cầu hợp lệ của cơ quan công quyền.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="scenario-item">
+                                    <div class="d-flex align-items-start">
+                                        <div class="scenario-icon me-3">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold">Chuyển giao kinh doanh</h6>
+                                            <p class="mb-0">Nếu JOXFLEX tham gia vào việc sáp nhập, mua lại hoặc bán tài sản, thông tin của bạn có thể được chuyển giao.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="data-security" class="privacy-section mb-5">
+                    <div class="card benefit-item">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-shield-alt benefit-icon me-3"></i>
+                                <h2 class="section-heading mb-0">5. An toàn dữ liệu</h2>
+                            </div>
+                            <p>Chúng tôi sử dụng các biện pháp bảo mật hợp lý về mặt kỹ thuật và tổ chức để bảo vệ thông tin cá nhân của bạn khỏi bị truy cập, sử dụng hoặc tiết lộ trái phép.</p>
+                            
+                            <div class="alert alert-warning" style="background: rgba(255, 193, 7, 0.1); border: 1px solid var(--secondary-color); border-radius: 10px;">
+                                <i class="fas fa-exclamation-triangle me-2" style="color: var(--secondary-color);"></i>
+                                <strong>Lưu ý:</strong> Tuy nhiên, không có phương thức truyền tải qua Internet hoặc phương thức lưu trữ điện tử nào là an toàn 100%.
+                            </div>
+                            
+                            <div class="row mt-4">
+                                <div class="col-lg-4 text-center">
+                                    <div class="security-feature">
+                                        <i class="fas fa-lock security-icon"></i>
+                                        <h6>Mã hóa SSL</h6>
+                                        <p class="small">Bảo vệ dữ liệu truyền tải</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 text-center">
+                                    <div class="security-feature">
+                                        <i class="fas fa-server security-icon"></i>
+                                        <h6>Lưu trữ an toàn</h6>
+                                        <p class="small">Hệ thống bảo mật cao</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 text-center">
+                                    <div class="security-feature">
+                                        <i class="fas fa-eye security-icon"></i>
+                                        <h6>Giám sát 24/7</h6>
+                                        <p class="small">Theo dõi liên tục</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="cookies" class="privacy-section mb-5">
+                    <div class="card benefit-item">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-cookie-bite benefit-icon me-3"></i>
+                                <h2 class="section-heading mb-0">6. Cookies và Công nghệ theo dõi</h2>
+                            </div>
+                            <p>Chúng tôi sử dụng cookies và các công nghệ theo dõi tương tự để thu thập và theo dõi thông tin, cũng như để cải thiện và phân tích Dịch vụ của chúng tôi.</p>
+                            <div class="cookie-info">
+                                <div class="alert alert-info" style="background: var(--gradient-bg); border: none; border-radius: 10px;">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Thông tin:</strong> Bạn có thể hướng dẫn trình duyệt của mình từ chối tất cả cookies hoặc cho biết khi nào một cookie đang được gửi.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="your-rights" class="privacy-section mb-5">
+                    <div class="card benefit-item">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-user-shield benefit-icon me-3"></i>
+                                <h2 class="section-heading mb-0">7. Quyền của bạn</h2>
+                            </div>
+                            <p>Bạn có các quyền sau liên quan đến thông tin cá nhân của mình:</p>
+                            
+                            <div class="row">
+                                <div class="col-lg-6 mb-3">
+                                    <div class="rights-item">
+                                        <i class="fas fa-eye text-primary me-2"></i>
+                                        <strong>Quyền truy cập</strong><br>
+                                        <small>Truy cập, cập nhật hoặc xóa thông tin chúng tôi có về bạn</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="rights-item">
+                                        <i class="fas fa-ban text-primary me-2"></i>
+                                        <strong>Quyền phản đối</strong><br>
+                                        <small>Phản đối việc xử lý dữ liệu của bạn</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="rights-item">
+                                        <i class="fas fa-pause text-primary me-2"></i>
+                                        <strong>Quyền hạn chế</strong><br>
+                                        <small>Yêu cầu hạn chế xử lý dữ liệu</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="rights-item">
+                                        <i class="fas fa-undo text-primary me-2"></i>
+                                        <strong>Quyền rút lại</strong><br>
+                                        <small>Rút lại sự đồng ý (nếu việc xử lý dựa trên sự đồng ý)</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-for-rights mt-4">
+                                <div class="alert alert-success" style="background: rgba(0, 212, 170, 0.1); border: 1px solid var(--accent-color); border-radius: 10px;">
+                                    <i class="fas fa-envelope me-2" style="color: var(--accent-color);"></i>
+                                    Để thực hiện các quyền này, vui lòng liên hệ với chúng tôi qua <a href="mailto:privacy@joxflex.com" style="color: var(--accent-color); font-weight: bold;">privacy@joxflex.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="children-privacy" class="privacy-section mb-5">
+                    <div class="card benefit-item">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-child benefit-icon me-3"></i>
+                                <h2 class="section-heading mb-0">8. Quyền riêng tư của trẻ em</h2>
+                            </div>
+                            <div class="alert alert-warning" style="background: rgba(255, 193, 7, 0.1); border: 1px solid var(--secondary-color); border-radius: 10px;">
+                                <i class="fas fa-exclamation-triangle me-2" style="color: var(--secondary-color);"></i>
+                                <strong>Hạn chế độ tuổi:</strong> Dịch vụ của chúng tôi không dành cho bất kỳ ai dưới 18 tuổi ("Trẻ em").
+                            </div>
+                            <p>Chúng tôi không cố ý thu thập thông tin nhận dạng cá nhân từ Trẻ em. Nếu bạn là cha mẹ hoặc người giám hộ và bạn biết rằng con bạn đã cung cấp cho chúng tôi Thông tin Cá nhân, vui lòng liên hệ với chúng tôi.</p>
+                        </div>
+                    </div>
+                </section>
+                 <section id="policy-changes" class="privacy-section mb-5"></section>
+                    <div class="card benefit-item">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-sync-alt benefit-icon me-3"></i>
+                                <h2 class="section-heading mb-0">9. Thay đổi Chính sách Bảo mật</h2>
+                            </div>
+                            <p>Chúng tôi có thể cập nhật Chính sách Bảo mật này theo thời gian để phản ánh những thay đổi trong thực tiễn hoạt động hoặc vì các lý do pháp lý, quy định khác.</p>
+                            <div class="alert alert-info" style="background: var(--gradient-bg); border: none; border-radius: 10px;">
+                                <i class="fas fa-bell me-2"></i>
+                                <strong>Thông báo cập nhật:</strong> Chúng tôi sẽ thông báo cho bạn về bất kỳ thay đổi quan trọng nào bằng cách đăng Chính sách Bảo mật mới trên trang này và cập nhật ngày "Cập nhật lần cuối". Chúng tôi khuyến khích bạn xem lại Chính sách Bảo mật này định kỳ.
+                            </div>
+                            <p class="mt-3">Những thay đổi đối với Chính sách Bảo mật này có hiệu lực khi chúng được đăng trên trang này.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contact-us-privacy" class="privacy-section mb-5"> @* Sửa lại ID để khớp với sidebar nav *@
+                    <div class="card benefit-item">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-headset benefit-icon me-3"></i>
+                                <h2 class="section-heading mb-0">10. Liên hệ với chúng tôi</h2>
+                            </div>
+                            <p>Nếu bạn có bất kỳ câu hỏi, thắc mắc hoặc yêu cầu nào liên quan đến Chính sách Bảo mật này hoặc cách chúng tôi xử lý dữ liệu cá nhân của bạn, vui lòng liên hệ với chúng tôi qua các kênh sau:</p>
+                            
+                            <div class="contact-options mt-4">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="contact-option-card text-center p-3">
+                                            <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                                            <h6 class="fw-bold">Qua Email</h6>
+                                            <p class="small mb-1">Đối với các vấn đề về quyền riêng tư:</p>
+                                            <a href="mailto:privacy@joxflex.com" class="text-decoration-none">privacy@joxflex.com</a>
+                                            <p class="small mt-2 mb-1">Hỗ trợ chung:</p>
+                                            <a href="mailto:support@joxflex.com" class="text-decoration-none">support@joxflex.com</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="contact-option-card text-center p-3">
+                                            <i class="fas fa-link fa-2x text-primary mb-2"></i>
+                                            <h6 class="fw-bold">Qua Trang Liên Hệ</h6>
+                                            <p class="small mb-1">Gửi yêu cầu trực tiếp qua form:</p>
+                                            <a asp-controller="Home" asp-action="Contact" class="btn btn-outline-primary btn-sm mt-1">
+                                                Đến trang Liên hệ
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-center text-muted small">
+                                    Chúng tôi sẽ cố gắng phản hồi yêu cầu của bạn trong thời gian sớm nhất có thể.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div> <!-- End .privacy-content -->
+        </div> <!-- End .col-lg-9 (Main Content) -->
+    </div> <!-- End .row -->
+</div> <!-- End .container.section-padding -->

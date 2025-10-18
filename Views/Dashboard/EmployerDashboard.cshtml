@@ -1,0 +1,341 @@
+@model HeThongTimViec.ViewModels.EmployerCompanyDashboardViewModel
+@using HeThongTimViec.Models
+@using HeThongTimViec.Extensions
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Bảng điều khiển Nhà tuyển dụng";
+    var defaultCompanyLogo = "/images/default-company-logo.png";
+    var defaultAvatar = "/images/default-avatar.png";
+}
+
+<link rel="stylesheet" href="~/css/CandidateDashboard.css" asp-append-version="true" />
+
+<div class="container mt-4">
+    <!-- Company & Representative Header with improved design -->
+
+    <div class="dashboard-header">
+        <div class="header-content">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center text-md-start mb-3 mb-md-0">
+                    <img src="@(!string.IsNullOrEmpty(Model.CompanyLogoUrl) ? Model.CompanyLogoUrl : defaultCompanyLogo)"
+                         alt="Logo @Model.CompanyName" class="profile-avatar">
+                </div>
+                <div class="col-md-7">
+                    <h1 class="mb-2">@Model.CompanyName</h1>
+                    <p class="lead mb-2">
+                        <i class="fa-regular fa-user me-2"></i>Người đại diện: <strong>@Model.RepresentativeUserName</strong>
+                    </p>
+                    <div class="mb-2">
+                        @if (Model.IsCompanyVerified)
+                        {
+                            <span class="badge bg-success">
+                                <i class="fa-solid fa-check-circle me-1"></i>Đã xác minh
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">
+                                <i class="fa-solid fa-triangle-exclamation me-1"></i>Chưa xác minh
+                            </span>
+                        }
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.CompanyWebsite))
+                    {
+                        <p class="mb-0 small">
+                            <i class="fa-solid fa-globe me-1"></i> 
+                            <a href="@Model.CompanyWebsite" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                @Model.CompanyWebsite
+                            </a>
+                        </p>
+                    }
+                </div>
+                <div class="col-md-3 text-md-end mt-3 mt-md-0">
+                    <a asp-controller="CompanyPosting" asp-action="Create" class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-plus me-2"></i>Đăng Tin Mới
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions with improved card design -->
+    <div class="row mb-4">
+    <div class="col-12">
+        <h2 class="section-title">
+            <i class="fa-solid fa-bolt"></i> Hành động nhanh
+        </h2>
+    </div>
+
+    <!-- Card 1: Quản lý Tin Đăng -->
+    <div class="col-lg-3 col-md-6 mb-3">
+        <a asp-controller="CompanyPosting" asp-action="Index" class="text-decoration-none h-100" aria-label="Quản lý tin đăng của công ty">
+            <div class="card quick-action-card manage-profile h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-list-check"></i>
+                    <h5 class="card-title">Quản lý Tin Đăng</h5>
+                    <p class="card-text text-muted">Quản lý các tin tuyển dụng của công ty</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Card 2: Quản lý Ứng Viên -->
+    <div class="col-lg-3 col-md-6 mb-3">
+        <a asp-controller="QuanLyUngVien" asp-action="Index" class="text-decoration-none h-100" aria-label="Quản lý ứng viên">
+            <!-- Thêm position-relative ở đây để định vị cho badge -->
+            <div class="card quick-action-card search-job h-100 position-relative">
+                <div class="card-body">
+                    <i class="fa-solid fa-users"></i>
+                    <h5 class="card-title">Quản lý Ứng Viên</h5>
+                    <p class="card-text text-muted">Xem và quản lý ứng viên đã nộp</p>
+                    @if (Model.NewApplicationsCount > 0)
+                    {
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            @Model.NewApplicationsCount
+                            <span class="visually-hidden">ứng tuyển mới</span>
+                        </span>
+                    }
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Card 3: Hồ sơ Công ty -->
+    <div class="col-lg-3 col-md-6 mb-3">
+        <a asp-controller="NhaTuyenDung" asp-action="ChinhSuaHoSo" class="text-decoration-none h-100" aria-label="Chỉnh sửa hồ sơ công ty">
+            <div class="card quick-action-card notifications h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-building-user"></i>
+                    <h5 class="card-title">Hồ sơ Công ty</h5>
+                    <p class="card-text text-muted">Cập nhật thông tin công ty</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Card 4: Tài khoản Đại diện -->
+    <div class="col-lg-3 col-md-6 mb-3">
+        <a asp-controller="TaiKhoan" asp-action="CaiDat" class="text-decoration-none h-100" aria-label="Cài đặt tài khoản người đại diện">
+            <div class="card quick-action-card account-settings h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <h5 class="card-title">Tài khoản Đại diện</h5>
+                    <p class="card-text text-muted">Cài đặt tài khoản của bạn</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+    <!-- Statistics Overview with improved stat cards -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="section-title">
+                <i class="fa-solid fa-chart-bar"></i> Tổng quan về Tin đăng & Ứng viên
+            </h2>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card stat-card h-100" style="border-left: 4px solid var(--bs-primary);">
+                <div class="card-body">
+                    <i class="fas fa-briefcase stat-icon" style="color: var(--bs-primary);"></i>
+                    <div class="stat-number">@Model.TotalJobsPosted</div>
+                    <div class="stat-text">Tổng tin đã đăng</div>
+                    <a asp-controller="CompanyPosting" asp-action="Index" class="stretched-link">Xem chi tiết →</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card stat-card h-100" style="border-left: 4px solid var(--bs-success);">
+                <div class="card-body">
+                    <i class="fas fa-check-circle stat-icon" style="color: var(--bs-success);"></i>
+                    <div class="stat-number">@Model.ActiveJobsCount</div>
+                    <div class="stat-text">Tin đang hoạt động</div>
+                    <a asp-controller="CompanyPosting" asp-action="Index" asp-route-statusFilter="daduyet" class="stretched-link">Xem chi tiết →</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card stat-card h-100" style="border-left: 4px solid var(--bs-warning);">
+                <div class="card-body">
+                    <i class="fas fa-hourglass-half stat-icon" style="color: var(--bs-warning);"></i>
+                    <div class="stat-number">@Model.PendingJobsCount</div>
+                    <div class="stat-text">Tin chờ duyệt</div>
+                    <a asp-controller="CompanyPosting" asp-action="Index" asp-route-statusFilter="choduyet" class="stretched-link">Xem chi tiết →</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card stat-card h-100" style="border-left: 4px solid var(--bs-danger);">
+                <div class="card-body">
+                    <i class="fas fa-archive stat-icon" style="color: var(--bs-danger);"></i>
+                    <div class="stat-number">@Model.ExpiredOrFilledJobsCount</div>
+                    <div class="stat-text">Tin hết hạn/đã tuyển</div>
+                    <a asp-controller="CompanyPosting" asp-action="Index" asp-route-statusFilter="hethan_datuyen" class="stretched-link">Xem chi tiết →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <div class="card stat-card h-100" style="border-left: 4px solid var(--bs-info);">
+                <div class="card-body">
+                    <i class="fas fa-file-alt stat-icon" style="color: var(--bs-info);"></i>
+                    <div class="stat-number">@Model.TotalApplicationsReceived</div>
+                    <div class="stat-text">Tổng số lượt ứng tuyển</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card stat-card h-100" style="border-left: 4px solid var(--bs-success);">
+                <div class="card-body">
+                    <i class="fas fa-envelope-open-text stat-icon" style="color: var(--bs-success);"></i>
+                    <div class="stat-number">@Model.NewApplicationsCount</div>
+                    <div class="stat-text">Ứng tuyển mới (chưa xem)</div>
+                    @if (Model.NewApplicationsCount > 0)
+                    {
+                        <a asp-controller="QuanLyUngVien" asp-action="Index" asp-route-filter="moi" class="stretched-link">Xem chi tiết →</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="row mt-4">
+        <!-- Recently Posted Jobs -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold">
+                        <i class="fa-solid fa-newspaper me-2" style="color: var(--bs-primary);"></i>
+                        Tin Đăng Gần Đây
+                    </h6>
+                    <a asp-controller="CompanyPosting" asp-action="Index" class="btn btn-sm btn-outline-primary">
+                        Xem tất cả →
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    @if (Model.RecentlyPostedJobs.Any())
+                    {
+                        <div class="activity-list">
+                            @foreach (var job in Model.RecentlyPostedJobs)
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h6 class="job-title mb-1">
+                                                <a asp-controller="CompanyPosting" asp-action="Details" asp-route-id="@job.Id">
+                                                    @job.Title
+                                                </a>
+                                            </h6>
+                                            <div class="d-flex align-items-center gap-3 mb-2">
+                                                <span class="activity-date">
+                                                    <i class="fa-regular fa-calendar"></i>
+                                                    @job.PostedDate.ToString("dd/MM/yyyy")
+                                                </span>
+                                                <span class="badge @(job.Status.ToString() == "daduyet" ? "bg-success" : job.Status.ToString() == "choduyet" ? "bg-warning text-dark" : "bg-secondary")">
+                                                    @job.Status.GetDisplayName()
+                                                </span>
+                                            </div>
+                                            <div class="job-details-summary">
+                                                <span><i class="fa-solid fa-users"></i>Ứng tuyển: @job.ApplicantCount</span>
+                                            </div>
+                                        </div>
+                                        <div class="actions">
+                                            <a asp-controller="CompanyPosting" asp-action="Edit" asp-route-id="@job.Id" 
+                                               class="btn btn-sm btn-outline-secondary btn-action">
+                                                <i class="fas fa-edit"></i> Sửa
+                                            </a>
+                                            <a asp-controller="QuanLyUngVien" asp-action="Index" asp-route-jobId="@job.Id" 
+                                               class="btn btn-sm btn-outline-info btn-action">
+                                                <i class="fas fa-users"></i> Ứng viên
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state-small">
+                            <i class="fa-solid fa-folder-open"></i>
+                            <p>Công ty chưa đăng tin tuyển dụng nào gần đây.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Applications -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold">
+                        <i class="fa-solid fa-user-plus me-2" style="color: var(--bs-success);"></i>
+                        Ứng Tuyển Mới Nhận
+                    </h6>
+                    <a asp-controller="QuanLyUngVien" asp-action="Index" class="btn btn-sm btn-outline-success">
+                        Xem tất cả →
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    @if (Model.RecentApplications.Any())
+                    {
+                        <div class="activity-list">
+                            @foreach (var app in Model.RecentApplications)
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex align-items-start">
+                                        <img src="@(!string.IsNullOrEmpty(app.ApplicantAvatarUrl) ? app.ApplicantAvatarUrl : defaultAvatar)" 
+                                             alt="Avatar của @app.ApplicantName" 
+                                             class="rounded-circle me-3" 
+                                             style="width: 48px; height: 48px; object-fit: cover;">
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                                <h6 class="job-title mb-0">
+                                                    <a asp-controller="QuanLyUngVien" asp-action="ChiTietUngVien" asp-route-ungTuyenId="@app.ApplicationId">
+                                                        @app.ApplicantName
+                                                    </a>
+                                                </h6>
+                                                <span class="activity-date">
+                                                    <i class="fa-regular fa-clock"></i>
+                                                    @app.AppliedDate.ToString("dd/MM/yy HH:mm")
+                                                </span>
+                                            </div>
+                                            <div class="company-name mb-1">
+                                                <i class="fa-solid fa-briefcase"></i>
+                                                <a asp-controller="CompanyPosting" asp-action="Details" asp-route-id="@app.JobId">
+                                                    @app.JobTitle
+                                                </a>
+                                            </div>
+                                            @if(!string.IsNullOrWhiteSpace(app.ApplicantProfilePosition))
+                                            {
+                                                <div class="job-details-summary mb-1">
+                                                    <span><i class="fa-solid fa-user-tie"></i>Vị trí HS: @app.ApplicantProfilePosition</span>
+                                                </div>
+                                            }
+                                            <span class="badge @(app.Status == TrangThaiUngTuyen.danop ? "bg-primary" : app.Status == TrangThaiUngTuyen.daduyet ? "bg-success" : app.Status == TrangThaiUngTuyen.ntddaxem ? "bg-info" : "bg-secondary")">
+                                                @app.Status.GetDisplayName()
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state-small">
+                            <i class="fa-solid fa-inbox"></i>
+                            <p>Chưa có ứng tuyển mới nào.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

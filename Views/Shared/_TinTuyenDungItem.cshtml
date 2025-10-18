@@ -1,0 +1,206 @@
+@* File: Views/Shared/_TinTuyenDungItem.cshtml *@
+@model HeThongTimViec.ViewModels.TimViec.KetQuaTimViecItemViewModel
+@using HeThongTimViec.Models
+@using HeThongTimViec.Utils
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using System.Security.Claims;
+
+@{
+    var userIsAuthenticated = HttpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated ?? false;
+    var currentUrl = HttpContextAccessor.HttpContext?.Request.PathBase + HttpContextAccessor.HttpContext?.Request.Path + HttpContextAccessor.HttpContext?.Request.QueryString;
+
+    var defaultCompanyLogo = "/images/default-company.png";
+    var defaultAvatar = "/images/default-avatar.png";
+
+    var finalLogoUrl = Model.LoaiTaiKhoanNguoiDang == LoaiTaiKhoan.doanhnghiep
+        ? (!string.IsNullOrEmpty(Model.LogoHoacAvatarUrl) ? Model.LogoHoacAvatarUrl : defaultCompanyLogo)
+        : (!string.IsNullOrEmpty(Model.LogoHoacAvatarUrl) ? Model.LogoHoacAvatarUrl : defaultAvatar);
+
+    var currentUserIdString = HttpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var currentUserAccountTypeStringItem = HttpContextAccessor.HttpContext?.User.FindFirstValue("AccountType") ?? HttpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Role);
+    
+    // --- LOGIC MỚI ĐỂ XÁC ĐỊNH canApplyItem ---
+    bool canApplyItem = false;
+    string cannotApplyTitle = "Bạn không thể ứng tuyển"; // Tiêu đề mặc định cho nút bị vô hiệu hóa
+
+    if (userIsAuthenticated)
+    {
+        // Kiểm tra xem có phải người đăng tin không
+        bool isCurrentUserThePoster = !string.IsNullOrEmpty(currentUserIdString) && Model.NguoiDangId.ToString() == currentUserIdString;
+
+        if (isCurrentUserThePoster)
+        {
+            canApplyItem = false;
+            cannotApplyTitle = "Bạn không thể ứng tuyển vào tin của chính mình";
+        }
+        else if (!string.IsNullOrEmpty(currentUserAccountTypeStringItem))
+        {
+            // Kiểm tra loại tài khoản (chỉ 'canhan' mới được ứng tuyển)
+            if (Enum.TryParse<LoaiTaiKhoan>(currentUserAccountTypeStringItem, true, out var accountTypeItem) && accountTypeItem == LoaiTaiKhoan.canhan)
+            {
+                canApplyItem = true;
+            }
+            else
+            {
+                canApplyItem = false;
+                cannotApplyTitle = "Tài khoản của bạn không thể ứng tuyển";
+            }
+        }
+    }
+}
+
+<div class="card job-card-redesign @(Model.TinGap ? "border-danger" : "") mb-3 shadow-sm">
+    <div class="card-body p-0">
+        @if (Model.TinGap)
+        {
+            <span class="job-card-urgent-badge">Gấp</span>
+        }
+        
+        <div class="row g-0">
+            <!-- Logo Column -->
+            <div class="job-card-logo-col">
+                <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@Model.Id" asp-route-tieuDeSeo="@HeThongTimViec.Utils.SeoUrlHelper.GenerateSlug(Model.TieuDe)" class="text-decoration-none">
+                    <img src="@finalLogoUrl"
+                         alt="Logo @Model.TenCongTyHoacNguoiDang"
+                         class="job-card-logo-img"
+                         onerror="this.onerror=null; this.src='@(Model.LoaiTaiKhoanNguoiDang == LoaiTaiKhoan.doanhnghiep ? defaultCompanyLogo : defaultAvatar)';">
+                </a>
+            </div>
+
+            <!-- Main Content Column -->
+            <div class="col">
+                 <div class="p-3">
+                    <h5 class="job-card-title mb-0">
+                        <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@Model.Id" asp-route-tieuDeSeo="@HeThongTimViec.Utils.SeoUrlHelper.GenerateSlug(Model.TieuDe)" class="stretched-link text-decoration-none text-dark">
+                            @Model.TieuDe
+                        </a>
+                    </h5>
+
+                    <div class="job-card-company-location text-muted small mt-1">
+                        <span class="company-name">
+                            <i class="fas fa-building fa-fw"></i>@Model.TenCongTyHoacNguoiDang
+                        </span>
+                        <span class="location ms-2">
+                            <i class="fas fa-map-marker-alt fa-fw"></i>@Model.DiaDiem
+                        </span>
+                    </div>
+
+                    <div class="job-card-salary text-success fw-semibold my-1">
+    <i class="fas fa-money-bill-wave fa-fw"></i>@Model.MucLuongDisplay
+</div>
+
+                    <div class="job-card-tags mb-2">
+                        @foreach (var nn in Model.NganhNgheNho)
+                        {
+                            <span class="badge job-card-tag bg-light text-dark border me-1">@nn</span>
+                        }
+                        <span class="badge job-card-tag job-card-tag-type bg-info-subtle text-info-emphasis border border-info-subtle">@Model.LoaiHinhCongViecDisplay</span>
+                    </div>
+
+                    <div class="job-card-requirements small text-muted">
+                        <span title="@Model.YeuCauKinhNghiemText" class="me-3">
+                            <i class="fas fa-briefcase fa-fw"></i><strong>K.nghiệm:</strong> @(string.IsNullOrWhiteSpace(Model.YeuCauKinhNghiemText) ? "Không yêu cầu" : Model.YeuCauKinhNghiemText)
+                        </span>
+                        <span title="@Model.YeuCauHocVanText">
+                            <i class="fas fa-graduation-cap fa-fw"></i><strong>H.vấn:</strong> @(string.IsNullOrWhiteSpace(Model.YeuCauHocVanText) ? "Không yêu cầu" : Model.YeuCauHocVanText)
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Date, Actions, and Suitability -->
+            <div class="job-card-actions-col">
+                <div class="job-card-meta text-end">
+                    <small class="post-date d-block text-muted" title="Ngày đăng: @Model.NgayDang.ToString("dd/MM/yyyy HH:mm")">
+                        @TimeHelper.TimeAgo(TimeHelper.ConvertToVietnamTimeFromUtc(Model.NgayDang))
+                    </small>
+                    @if (Model.NgayHetHan.HasValue)
+                    {
+                        var hanNopClass = "";
+                        var timeRemaining = Model.NgayHetHan.Value.Date - DateTime.UtcNow.Date;
+                        if (timeRemaining.TotalDays < 0) {
+                            hanNopClass = "text-danger fw-bold"; 
+                        } else if (timeRemaining.TotalDays < 3 && timeRemaining.TotalDays >= 0) {
+                            hanNopClass = "text-warning"; 
+                        }
+                        <small class="expiry-date d-block text-muted @hanNopClass mt-1" title="Hạn nộp hồ sơ: @Model.NgayHetHan.Value.ToString("dd/MM/yyyy")">
+                            <i class="far fa-calendar-times fa-fw"></i> Hạn: @TimeHelper.FormatDate(Model.NgayHetHan)
+                        </small>
+                    }
+                    
+                    @if (userIsAuthenticated && canApplyItem && Model.PhuHopScore > 0)
+                    {
+                         <div class="phu-hop-indicator mt-2" title="Mức độ phù hợp ước tính: @Model.PhuHopScore%">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <span class="phu-hop-text small me-1 text-@(Model.PhuHopScore >= 70 ? "success" : (Model.PhuHopScore >= 40 ? "warning" : "primary"))">
+                                    @Model.PhuHopScore%
+                                </span>
+                                <div class="progress" style="height: 5px; width: 40px;">
+                                    <div class="progress-bar bg-@(Model.PhuHopScore >= 70 ? "success" : (Model.PhuHopScore >= 40 ? "warning" : "primary"))" 
+                                         role="progressbar" 
+                                         style="width: @Model.PhuHopScore%;" 
+                                         aria-valuenow="@Model.PhuHopScore" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="action-buttons-group mt-auto">
+                    @if (userIsAuthenticated)
+                    {
+                        if (Model.DaLuu)
+                        {
+                            <button class="btn btn-sm btn-success btn-unsave-job w-100 mb-1" data-id="@Model.Id" title="Bỏ lưu tin này">
+                                <i class="fas fa-heart fa-fw"></i><span class="btn-action-text">Đã lưu</span>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-sm btn-outline-success btn-save-job w-100 mb-1" data-id="@Model.Id" title="Lưu tin này">
+                                <i class="far fa-heart fa-fw"></i><span class="btn-action-text">Lưu tin</span>
+                            </button>
+                        }
+
+                        @if (canApplyItem)
+                        {
+                            if (Model.DaUngTuyen)
+                            {
+                                <button type="button" class="btn btn-sm btn-secondary w-100" disabled>
+                                    <i class="fas fa-check-circle fa-fw"></i><span class="btn-action-text">Đã ứng tuyển</span>
+                                </button>
+                            }
+                            else
+                            {
+                                <a asp-controller="UngTuyen" asp-action="NopHoSo" asp-route-id="@Model.Id"
+                                   class="btn btn-sm btn-primary btn-apply-job w-100">
+                                    <i class="fas fa-paper-plane fa-fw"></i><span class="btn-action-text">Ứng tuyển</span>
+                                </a>
+                            }
+                        }
+                        else 
+                        {
+                            // --- THAY ĐỔI Ở ĐÂY: Thêm title động vào nút bị vô hiệu hóa ---
+                            <button type="button" class="btn btn-sm btn-primary w-100" disabled title="@cannotApplyTitle">
+                                <i class="fas fa-paper-plane fa-fw"></i><span class="btn-action-text">Ứng tuyển</span>
+                            </button>
+                        }
+                    }
+                    else 
+                    {
+                        <a asp-controller="TaiKhoan" asp-action="DangNhap" asp-route-returnUrl="@currentUrl"
+                           class="btn btn-sm btn-outline-success w-100 mb-1" title="Đăng nhập để lưu tin">
+                            <i class="far fa-heart fa-fw"></i><span class="btn-action-text">Lưu tin</span>
+                        </a>
+                        <a asp-controller="TaiKhoan" asp-action="DangNhap" asp-route-returnUrl="@Url.Action("NopHoSo", "UngTuyen", new { id = Model.Id })"
+                           class="btn btn-sm btn-primary btn-apply-job w-100">
+                            <i class="fas fa-paper-plane fa-fw"></i><span class="btn-action-text">Ứng tuyển</span>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,745 @@
+@model HeThongTimViec.ViewModels.QuanLyTinDang.JobPostingInfoSection
+
+<div class="job-posting-container">
+    <div class="job-card">
+        <!-- Header with gradient background -->
+        <div class="job-header">
+            <div class="header-content">
+                <h1 class="job-title">@Model.TieuDe</h1>
+                <div class="company-badge">
+                    <i class="bi bi-building-check"></i>
+                    <span>Tin tuyển dụng đã xác thực</span>
+                </div>
+            </div>
+            <div class="header-decoration"></div>
+        </div>
+
+        <div class="job-body">
+            <!-- Quick Info Pills -->
+            <div class="quick-info-section">
+                <div class="info-pills">
+                    <div class="pill pill-primary">
+                        <div class="pill-icon">
+                            <i class="bi bi-briefcase-fill"></i>
+                        </div>
+                        <div class="pill-content">
+                            <span class="pill-label">Loại hình</span>
+                            <span class="pill-value">@Model.LoaiHinhCongViecDisplay</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pill pill-success">
+                        <div class="pill-icon">
+                            <i class="bi bi-cash-stack"></i>
+                        </div>
+                        <div class="pill-content">
+                            <span class="pill-label">Mức lương</span>
+                            <span class="pill-value">@Model.MucLuongDisplay</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pill pill-info">
+                        <div class="pill-icon">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div class="pill-content">
+                            <span class="pill-label">Địa điểm</span>
+                            <span class="pill-value">@Model.DiaDiemLamViec</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pill pill-warning">
+                        <div class="pill-icon">
+                            <i class="bi bi-clock-fill"></i>
+                        </div>
+                        <div class="pill-content">
+                            <span class="pill-label">Thời gian</span>
+                            <span class="pill-value">@Model.ThoiGianLamViec_Formatted</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pill pill-purple">
+                        <div class="pill-icon">
+                            <i class="bi bi-laptop"></i>
+                        </div>
+                        <div class="pill-content">
+                            <span class="pill-label">Remote</span>
+                            <span class="pill-value">@Model.LamViecTuXaDisplay</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Section -->
+            <div class="category-section">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="bi bi-tags-fill"></i>
+                    </div>
+                    <div class="category-content">
+                        <h6 class="category-title">Danh mục - Ngành nghề</h6>
+                        <p class="category-value">@Model.DanhMucNganhNghe</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Details Sections -->
+            <div class="job-details">
+                <!-- Job Description -->
+                <div class="detail-section" data-section="description">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="bi bi-file-text-fill"></i>
+                        </div>
+                        <h2 class="section-title">Mô tả công việc</h2>
+                        <div class="section-toggle">
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div class="content-wrapper">@Html.Raw(Model.MoTaCongViec)</div>
+                    </div>
+                </div>
+
+                <!-- Job Requirements -->
+                <div class="detail-section" data-section="requirements">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="bi bi-person-check-fill"></i>
+                        </div>
+                        <h2 class="section-title">Yêu cầu công việc</h2>
+                        <div class="section-toggle">
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div class="content-wrapper">@Html.Raw(Model.YeuCauCongViec)</div>
+                    </div>
+                </div>
+
+                <!-- Benefits -->
+                <div class="detail-section" data-section="benefits">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="bi bi-award-fill"></i>
+                        </div>
+                        <h2 class="section-title">Quyền lợi</h2>
+                        <div class="section-toggle">
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div class="content-wrapper">@Html.Raw(Model.QuyenLoi)</div>
+                    </div>
+                </div>
+
+                <!-- Additional Benefits -->
+                @if (!string.IsNullOrWhiteSpace(Model.PhuCapKhacHtml))
+                {
+                    <div class="detail-section" data-section="additional">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="bi bi-gift-fill"></i>
+                            </div>
+                            <h2 class="section-title">Phúc lợi khác</h2>
+                            <div class="section-toggle">
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="section-content">
+                            <div class="content-wrapper">@Html.Raw(Model.PhuCapKhacHtml)</div>
+                        </div>
+                    </div>
+                }
+
+                <!-- Skills -->
+                @if (Model.KyNangTags.Any())
+                {
+                    <div class="detail-section" data-section="skills">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="bi bi-tools"></i>
+                            </div>
+                            <h2 class="section-title">Yêu cầu về Kỹ năng</h2>
+                            <div class="section-toggle">
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="section-content">
+                            <div class="skills-grid">
+                                @foreach (var skill in Model.KyNangTags)
+                                {
+                                    <div class="skill-tag">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        <span>@skill</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- Schedule -->
+                @if (Model.LichLamViecs.Any())
+                {
+                    <div class="detail-section" data-section="schedule">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="bi bi-calendar-week-fill"></i>
+                            </div>
+                            <h2 class="section-title">Lịch làm việc</h2>
+                            <div class="section-toggle">
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="section-content">
+                            <div class="schedule-grid">
+                                @foreach (var lich in Model.LichLamViecs)
+                                {
+                                    <div class="schedule-item">
+                                        <div class="schedule-day">@lich.NgayTrongTuanDisplay</div>
+                                        <div class="schedule-time">@lich.ThoiGianDisplay</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* CSS Variables for theming */
+:root {
+    --primary-color: #2563eb;
+    --primary-light: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #64748b;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --info-color: #06b6d4;
+    --purple-color: #8b5cf6;
+    --background: #f8fafc;
+    --surface: #ffffff;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --radius: 12px;
+    --radius-lg: 16px;
+    --spacing: 1.5rem;
+}
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.job-posting-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Job Card */
+.job-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--border-color);
+}
+
+.job-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+/* Header */
+.job-header {
+    background: linear-gradient(135deg, #112e58 0%, #366bb8 100%);
+    position: relative;
+    padding: 2.5rem 2rem;
+    color: white;
+    overflow: hidden;
+}
+
+.header-decoration {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.job-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.company-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Job Body */
+.job-body {
+    padding: 2rem;
+}
+
+/* Quick Info Pills */
+.quick-info-section {
+    margin-bottom: 2rem;
+}
+
+.info-pills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.pill {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.pill:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.pill-primary { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-color: var(--primary-color); }
+.pill-success { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border-color: var(--success-color); }
+.pill-info { background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%); border-color: var(--info-color); }
+.pill-warning { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: var(--warning-color); }
+.pill-purple { background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border-color: var(--purple-color); }
+
+.pill-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 1.25rem;
+}
+
+.pill-primary .pill-icon { background: var(--primary-color); color: white; }
+.pill-success .pill-icon { background: var(--success-color); color: white; }
+.pill-info .pill-icon { background: var(--info-color); color: white; }
+.pill-warning .pill-icon { background: var(--warning-color); color: white; }
+.pill-purple .pill-icon { background: var(--purple-color); color: white; }
+
+.pill-content {
+    flex: 1;
+}
+
+.pill-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.pill-value {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Category Section */
+.category-section {
+    margin-bottom: 2rem;
+}
+
+.category-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+}
+
+.category-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.25rem;
+}
+
+.category-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.category-value {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+/* Job Details */
+.job-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detail-section {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.detail-section:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-header:hover {
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+}
+
+.section-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    font-size: 1.125rem;
+}
+
+.section-title {
+    flex: 1;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.section-toggle {
+    transition: transform 0.3s ease;
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+}
+
+.detail-section.collapsed .section-toggle {
+    transform: rotate(-90deg);
+}
+
+.section-content {
+    padding: 1.5rem;
+    background: var(--surface);
+}
+
+.content-wrapper {
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+.content-wrapper ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.content-wrapper li {
+    margin-bottom: 0.5rem;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+.skill-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid #bae6fd;
+    border-radius: 8px;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+}
+
+.skill-tag i {
+    color: var(--success-color);
+    font-size: 0.875rem;
+}
+
+/* Schedule Grid */
+.schedule-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.schedule-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #fef7ff 0%, #faf5ff 100%);
+    border: 1px solid #e9d5ff;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.schedule-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--purple-color);
+}
+
+.schedule-day {
+    flex: 0 0 150px;
+    font-weight: 600;
+    color: var(--purple-color);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.schedule-time {
+    flex: 1;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@@media (max-width: 768px) {
+    .job-posting-container {
+        padding: 0 0.75rem;
+        margin: 1rem auto;
+    }
+    
+    .job-header {
+        padding: 2rem 1.5rem;
+    }
+    
+    .job-title {
+        font-size: 1.75rem;
+    }
+    
+    .job-body {
+        padding: 1.5rem;
+    }
+    
+    .info-pills {
+        grid-template-columns: 1fr;
+    }
+    
+    .pill {
+        padding: 1rem;
+    }
+    
+    .section-header {
+        padding: 1rem;
+    }
+    
+    .section-content {
+        padding: 1rem;
+    }
+    
+    .schedule-day {
+        flex: 0 0 100px;
+        font-size: 0.75rem;
+    }
+}
+
+@@media (max-width: 480px) {
+    .job-title {
+        font-size: 1.5rem;
+    }
+    
+    .company-badge {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+    }
+    
+    .pill-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .category-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .section-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.125rem;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading animation */
+@@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.job-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.detail-section {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.detail-section:nth-child(1) { animation-delay: 0.1s; }
+.detail-section:nth-child(2) { animation-delay: 0.2s; }
+.detail-section:nth-child(3) { animation-delay: 0.3s; }
+.detail-section:nth-child(4) { animation-delay: 0.4s; }
+.detail-section:nth-child(5) { animation-delay: 0.5s; }
+.detail-section:nth-child(6) { animation-delay: 0.6s; }
+</style>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css">
+
+<!-- Optional: Add collapsible functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click handlers for collapsible sections
+    const sectionHeaders = document.querySelectorAll('.section-header');
+    
+    sectionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const section = this.parentElement;
+            const content = section.querySelector('.section-content');
+            const toggle = this.querySelector('.section-toggle i');
+            
+            if (section.classList.contains('collapsed')) {
+                // Expand
+                content.style.maxHeight = content.scrollHeight + 'px';
+                section.classList.remove('collapsed');
+                toggle.style.transform = 'rotate(0deg)';
+            } else {
+                // Collapse
+                content.style.maxHeight = '0';
+                section.classList.add('collapsed');
+                toggle.style.transform = 'rotate(-90deg)';
+            }
+        });
+    });
+    
+    // Add smooth scroll to section functionality
+    const pills = document.querySelectorAll('.pill');
+    pills.forEach(pill => {
+        pill.addEventListener('click', function() {
+            // Add click effect
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'translateY(-2px)';
+            }, 100);
+        });
+    });
+    
+    // Add intersection observer for animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    document.querySelectorAll('.detail-section').forEach(section => {
+        observer.observe(section);
+    });
+});
+</script>

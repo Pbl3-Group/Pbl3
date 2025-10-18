@@ -1,0 +1,27 @@
+<!-- File: Views/IndividualPosting/_RepostModalPartial.cshtml -->
+<div class="modal fade" id="repostModal" tabindex="-1" aria-labelledby="repostModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="repostModalLabel">Đăng lại tin tuyển dụng</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form asp-action="RepostQuick" method="post" id="repostForm">
+        @Html.AntiForgeryToken()
+        <div class="modal-body">
+          <p>Bạn sắp đăng lại tin: <strong id="postingTitleInModal"></strong></p>
+          <p>Tin mới sẽ được hiển thị ngay lập tức và <strong>tin cũ sẽ bị xóa</strong>. Vui lòng chọn ngày hết hạn mới (để trống nếu không có hạn).</p>
+          <input type="hidden" name="id" id="postingIdInput" />
+          <div class="mb-3">
+            <label for="newExpiryDateInput" class="form-label">Ngày hết hạn mới</label>
+            <input type="date" class="form-control" id="newExpiryDateInput" name="newExpiryDate">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+          <button type="submit" class="btn btn-primary">Xác nhận và Xóa tin cũ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

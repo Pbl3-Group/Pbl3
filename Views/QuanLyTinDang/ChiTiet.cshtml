@@ -1,0 +1,757 @@
+@model HeThongTimViec.ViewModels.QuanLyTinDang.AdminJobPostingDetailViewModel
+@{
+    ViewData["Title"] = "Chi tiết tin: " + Model.JobPostingTitle;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --primary-color: #667eea;
+        --primary-dark: #5a67d8;
+        --secondary-color: #f8faff;
+        --accent-color: #764ba2;
+        --text-primary: #2d3748;
+        --text-secondary: #4a5568;
+        --border-color: #e2e8f0;
+        --success-color: #48bb78;
+        --danger-color: #f56565;
+        --warning-color: #ed8936;
+        --shadow-light: 0 4px 6px rgba(102, 126, 234, 0.1);
+        --shadow-medium: 0 10px 25px rgba(102, 126, 234, 0.15);
+        --shadow-heavy: 0 20px 40px rgba(102, 126, 234, 0.2);
+        --border-radius: 15px;
+        --border-radius-small: 10px;
+    }
+
+    /* Header Modern */
+    .page-header {
+        background: linear-gradient(135deg, #112e58 0%, #366bb8 100%);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        color: white;
+        box-shadow: var(--shadow-medium);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        z-index: 0;
+    }
+
+    .page-header-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .breadcrumb-modern {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 25px;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb-modern .breadcrumb {
+        margin: 0;
+        background: transparent;
+        padding: 0;
+    }
+
+    .breadcrumb-modern .breadcrumb-item a {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .breadcrumb-modern .breadcrumb-item.active {
+        color: white;
+        font-weight: 600;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .status-badge-modern {
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-modern {
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--border-radius-small);
+        font-weight: 600;
+        border: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: var(--shadow-light);
+    }
+
+    .btn-primary-modern {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-primary-modern:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    .btn-danger-modern {
+        background: rgba(245, 101, 101, 0.9);
+        color: white;
+    }
+
+    .btn-danger-modern:hover {
+        background: rgba(229, 62, 62, 1);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(245, 101, 101, 0.3);
+        color: white;
+    }
+
+    /* Cards Modern */
+    .card-modern {
+        border: none;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-light);
+        overflow: hidden;
+        background: white;
+        transition: all 0.3s ease;
+    }
+
+    .card-modern:hover {
+        box-shadow: var(--shadow-medium);
+        transform: translateY(-2px);
+    }
+
+    .card-header-modern {
+        background: var(--primary-gradient);
+        color: white;
+        border: none;
+        padding: 1.25rem 1.5rem;
+        font-weight: 600;
+    }
+
+    .card-header-tabs-modern {
+        background: white;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0;
+    }
+
+    /* Tabs Modern */
+    .nav-tabs-modern {
+        border: none;
+        position: relative;
+        padding: 0 1.5rem;
+        background: linear-gradient(to right, #f8faff, #ffffff);
+    }
+
+    .nav-tabs-modern::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--border-color), transparent);
+    }
+
+    .nav-link-modern {
+        border: none;
+        padding: 1rem 1.5rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+        position: relative;
+        background: transparent;
+        transition: all 0.3s ease;
+        border-radius: 0;
+        margin: 0;
+    }
+
+    .nav-link-modern:hover {
+        color: var(--primary-color);
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    }
+
+    .nav-link-modern.active {
+        color: var(--primary-color);
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        font-weight: 600;
+    }
+
+    .nav-link-modern.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 3px;
+        background: var(--primary-gradient);
+        border-radius: 3px 3px 0 0;
+    }
+
+    .nav-link-modern i {
+        margin-right: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    /* Tab Content */
+    .tab-content-modern {
+            background: #ffffff;
+        padding: 2rem;
+        min-height: 400px;
+    }
+
+    /* Sidebar Card */
+    .sidebar-card {
+        position: sticky;
+        top: 2rem;
+    }
+
+    .sidebar-header {
+        background: linear-gradient(135deg, #112e58 0%, #366bb8 100%);
+        color: white;
+        padding: 1.25rem 1.5rem;
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .sidebar-body {
+        background: #ffffff;
+        padding: 1.5rem;
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+    }
+
+    /* Modal Modern */
+    .modal-content-modern {
+        border: none;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-heavy);
+        overflow: hidden;
+    }
+
+    .modal-header-modern {
+        background: var(--primary-gradient);
+        color: white;
+        border: none;
+        padding: 1.5rem;
+    }
+
+    .modal-body-modern {
+        background: var(--secondary-color);
+        padding: 2rem;
+    }
+
+    .modal-footer-modern {
+        background: white;
+        border: none;
+        padding: 1.5rem;
+        gap: 0.75rem;
+    }
+
+    .form-control-modern {
+        border: 2px solid var(--border-color);
+        border-radius: var(--border-radius-small);
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+        background: white;
+    }
+
+    .form-control-modern:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        outline: none;
+    }
+
+    .form-label-modern {
+        color: var(--text-primary);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-close-modern {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        opacity: 1;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .page-header {
+            padding: 1.5rem;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+        }
+        
+        .action-buttons {
+            margin-top: 1.5rem;
+        }
+        
+        .nav-tabs-modern {
+            padding: 0 1rem;
+        }
+        
+        .nav-link-modern {
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .tab-content-modern {
+            padding: 1.5rem;
+        }
+    }
+
+    /* Animation */
+    .fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Loading States */
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(102, 126, 234, 0.1);
+        backdrop-filter: blur(5px);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(102, 126, 234, 0.3);
+        border-top: 4px solid var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
+<div class="container-fluid py-4">
+    <!-- Header Section -->
+    <div class="page-header fade-in">
+        <div class="page-header-content">
+            <div class="breadcrumb-modern">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-action="Index" class="text-decoration-none">
+                                <i class="fas fa-home me-1"></i>Quản lý tin đăng
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Chi tiết tin
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-start flex-wrap">
+                <div class="flex-grow-1">
+                    <h1 class="page-title">
+                        <i class="fas fa-briefcase me-2"></i>
+                        @Model.JobPostingTitle
+                        <span class="status-badge-modern @Model.PostingStatusSidebar.TrangThaiTagOverallCssClass">
+                            @Model.PostingStatusSidebar.TrangThaiTagOverall
+                        </span>
+                    </h1>
+                    
+                    <div class="action-buttons">
+                        @if (Model.PostingStatusSidebar.CanDuyet)
+                        {
+                            <button type="button" class="btn btn-modern btn-primary-modern" 
+                                    onclick="duyetTin('@Model.JobPostingId', '@Model.JobPostingTitle')">
+                                <i class="fas fa-check"></i>
+                                <span>Duyệt tin</span>
+                            </button>
+                        }
+                        @if (Model.PostingStatusSidebar.CanTuChoi)
+                        {
+                            <button type="button" class="btn btn-modern btn-danger-modern" 
+                                    onclick="openTuChoiModal('@Model.JobPostingId', '@Model.JobPostingTitle')">
+                                <i class="fas fa-times"></i>
+                                <span>Từ chối</span>
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <div class="card-modern mb-4 fade-in">
+                <div class="card-header-tabs-modern">
+                    <ul class="nav nav-tabs nav-tabs-modern" id="jobDetailTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link nav-link-modern @(Model.CurrentTab == "chitiet" ? "active" : "")" 
+                               asp-action="ChiTiet" asp-route-id="@Model.JobPostingId" asp-route-tab="chitiet"
+                               role="tab" aria-controls="chitiet-content" aria-selected="@(Model.CurrentTab == "chitiet")">
+                                <i class="fas fa-file-alt"></i>Chi tiết tin đăng
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link nav-link-modern @(Model.CurrentTab == "nguoidang" ? "active" : "")" 
+                               asp-action="ChiTiet" asp-route-id="@Model.JobPostingId" asp-route-tab="nguoidang"
+                               role="tab" aria-controls="nguoidang-content" aria-selected="@(Model.CurrentTab == "nguoidang")">
+                                <i class="fas fa-user"></i>Thông tin người đăng
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link nav-link-modern @(Model.CurrentTab == "lichsu" ? "active" : "")" 
+                               asp-action="ChiTiet" asp-route-id="@Model.JobPostingId" asp-route-tab="lichsu"
+                               role="tab" aria-controls="lichsu-content" aria-selected="@(Model.CurrentTab == "lichsu")">
+                                <i class="fas fa-history"></i>Lịch sử hoạt động
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content-modern">
+                    <div class="tab-content" id="jobDetailTabContent">
+                        <div class="tab-pane fade @(Model.CurrentTab == "chitiet" ? "show active" : "")" 
+                             id="chitiet-content" role="tabpanel" aria-labelledby="chitiet-tab">
+                            @await Html.PartialAsync("_ChiTietTinDangTab", Model.JobInfo)
+                        </div>
+                        <div class="tab-pane fade @(Model.CurrentTab == "nguoidang" ? "show active" : "")" 
+                             id="nguoidang-content" role="tabpanel" aria-labelledby="nguoidang-tab">
+                            @await Html.PartialAsync("_ThongTinNguoiDangTab", Model.RecruiterInfo)
+                        </div>
+                        <div class="tab-pane fade @(Model.CurrentTab == "lichsu" ? "show active" : "")" 
+                             id="lichsu-content" role="tabpanel" aria-labelledby="lichsu-tab">
+                            @await Html.PartialAsync("_LichSuHoatDongTab", Model.ActivityLog)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="card-modern sidebar-card fade-in">
+                <div class="sidebar-header">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Thông tin đăng tin</span>
+                </div>
+                <div class="sidebar-body">
+                    @await Html.PartialAsync("_ThongTinDangTinSidebar", Model.PostingStatusSidebar)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for TuChoiTin -->
+<div class="modal fade" id="tuChoiModal" tabindex="-1" aria-labelledby="tuChoiModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-content-modern">
+            <div class="modal-header modal-header-modern">
+                <h5 class="modal-title" id="tuChoiModalLabel">
+                    <i class="fas fa-times-circle me-2"></i>Từ chối tin đăng
+                </h5>
+                <button type="button" class="btn-close btn-close-modern" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-body-modern">
+                <div class="alert alert-info border-0" style="background: rgba(102, 126, 234, 0.1); color: var(--primary-color);">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Tin đăng:</strong> <span id="tuChoiModalTenTin"></span>
+                </div>
+                
+                <form id="formTuChoi">
+                    <input type="hidden" id="tuChoiTinIdInput" name="id" />
+                    <div class="mb-3">
+                        <label for="lyDoTuChoiInput" class="form-label form-label-modern">
+                            Lý do từ chối <span class="text-danger">*</span>
+                        </label>
+                        <textarea class="form-control form-control-modern" id="lyDoTuChoiInput" name="lyDo" rows="4" required
+                                  placeholder="Vui lòng nhập lý do cụ thể để từ chối tin đăng này..."></textarea>
+                        <div class="form-text mt-2" style="color: var(--text-secondary);">
+                            <i class="fas fa-lightbulb me-1"></i>
+                            Lý do từ chối sẽ được gửi thông báo đến người đăng tin.
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer modal-footer-modern">
+                <button type="button" class="btn btn-modern btn-secondary" data-bs-dismiss="modal" style="background: #f7fafc; color: var(--text-secondary); border: 2px solid var(--border-color);">
+                    <i class="fas fa-times me-1"></i> Hủy bỏ
+                </button>
+                <button type="button" class="btn btn-modern btn-danger-modern" onclick="submitTuChoiTin()">
+                    <i class="fas fa-ban me-1"></i> Xác nhận từ chối
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var tuChoiModalInstance;
+        document.addEventListener('DOMContentLoaded', function () {
+            var tuChoiModalElement = document.getElementById('tuChoiModal');
+            if (tuChoiModalElement) {
+                tuChoiModalInstance = new bootstrap.Modal(tuChoiModalElement);
+            }
+
+            // Add smooth scroll behavior for tab changes
+            const navLinks = document.querySelectorAll('.nav-link-modern');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Add loading effect
+                    this.style.opacity = '0.7';
+                    setTimeout(() => {
+                        this.style.opacity = '1';
+                    }, 300);
+                });
+            });
+        });
+
+        function showLoadingOverlay() {
+            const overlay = document.createElement('div');
+            overlay.className = 'loading-overlay';
+            overlay.innerHTML = '<div class="loading-spinner"></div>';
+            document.body.appendChild(overlay);
+            return overlay;
+        }
+
+        function hideLoadingOverlay(overlay) {
+            if (overlay && overlay.parentNode) {
+                overlay.parentNode.removeChild(overlay);
+            }
+        }
+
+        function duyetTin(id, tieuDe) {
+            Swal.fire({
+                title: '🎯 Xác nhận duyệt tin',
+                html: `Bạn có chắc chắn muốn duyệt tin "<strong style="color: var(--primary-color);">${tieuDe}</strong>" không?`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#667eea',
+                cancelButtonColor: '#e2e8f0',
+                confirmButtonText: '<i class="fas fa-check me-1"></i> Xác nhận duyệt',
+                cancelButtonText: '<i class="fas fa-times me-1"></i> Hủy bỏ',
+                customClass: {
+                    popup: 'border-0 shadow-lg',
+                    confirmButton: 'btn-modern',
+                    cancelButton: 'btn-modern'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const loadingOverlay = showLoadingOverlay();
+
+                    fetch(`/admin/QuanLyTinDang/DuyetTin`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `id=${id}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        hideLoadingOverlay(loadingOverlay);
+                        if (data.success) {
+                            Swal.fire({
+                                title: '🎉 Thành công!',
+                                text: data.message,
+                                icon: 'success',
+                                confirmButtonColor: '#48bb78',
+                                confirmButtonText: '<i class="fas fa-check me-1"></i> Đồng ý',
+                                customClass: {
+                                    popup: 'border-0 shadow-lg',
+                                    confirmButton: 'btn-modern'
+                                },
+                                buttonsStyling: false
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                title: '❌ Lỗi!',
+                                text: data.message,
+                                icon: 'error',
+                                confirmButtonColor: '#f56565',
+                                confirmButtonText: '<i class="fas fa-times me-1"></i> Đóng',
+                                customClass: {
+                                    popup: 'border-0 shadow-lg',
+                                    confirmButton: 'btn-modern'
+                                },
+                                buttonsStyling: false
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        hideLoadingOverlay(loadingOverlay);
+                        console.error('Error:', error);
+                        Swal.fire({
+                            title: '⚠️ Lỗi!',
+                            text: 'Đã xảy ra lỗi khi duyệt tin.',
+                            icon: 'error',
+                            confirmButtonColor: '#f56565',
+                            confirmButtonText: '<i class="fas fa-times me-1"></i> Đóng',
+                            customClass: {
+                                popup: 'border-0 shadow-lg',
+                                confirmButton: 'btn-modern'
+                            },
+                            buttonsStyling: false
+                        });
+                    });
+                }
+            });
+        }
+
+        function openTuChoiModal(id, tieuDe) {
+            document.getElementById('tuChoiTinIdInput').value = id;
+            document.getElementById('tuChoiModalTenTin').textContent = tieuDe;
+            document.getElementById('lyDoTuChoiInput').value = '';
+            if (tuChoiModalInstance) {
+                tuChoiModalInstance.show();
+                // Focus on textarea after modal is shown
+                setTimeout(() => {
+                    document.getElementById('lyDoTuChoiInput').focus();
+                }, 500);
+            }
+        }
+
+        function submitTuChoiTin() {
+            const id = document.getElementById('tuChoiTinIdInput').value;
+            const lyDo = document.getElementById('lyDoTuChoiInput').value;
+
+            if (!lyDo.trim()) {
+                Swal.fire({
+                    title: '⚠️ Thiếu thông tin!',
+                    text: 'Vui lòng nhập lý do từ chối.',
+                    icon: 'warning',
+                    confirmButtonColor: '#ed8936',
+                    confirmButtonText: '<i class="fas fa-check me-1"></i> Đã hiểu',
+                    customClass: {
+                        popup: 'border-0 shadow-lg',
+                        confirmButton: 'btn-modern'
+                    },
+                    buttonsStyling: false
+                });
+                document.getElementById('lyDoTuChoiInput').focus();
+                return;
+            }
+
+            const loadingOverlay = showLoadingOverlay();
+
+            fetch(`/admin/QuanLyTinDang/TuChoiTin`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id=${id}&lyDo=${encodeURIComponent(lyDo)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoadingOverlay(loadingOverlay);
+                if (data.success) {
+                    if (tuChoiModalInstance) {
+                        tuChoiModalInstance.hide();
+                    }
+                    Swal.fire({
+                        title: '✅ Thành công!',
+                        text: data.message,
+                        icon: 'success',
+                        confirmButtonColor: '#48bb78',
+                        confirmButtonText: '<i class="fas fa-check me-1"></i> Đồng ý',
+                        customClass: {
+                            popup: 'border-0 shadow-lg',
+                            confirmButton: 'btn-modern'
+                        },
+                        buttonsStyling: false
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        title: '❌ Lỗi!',
+                        text: data.message,
+                        icon: 'error',
+                        confirmButtonColor: '#f56565',
+                        confirmButtonText: '<i class="fas fa-times me-1"></i> Đóng',
+                        customClass: {
+                            popup: 'border-0 shadow-lg',
+                            confirmButton: 'btn-modern'
+                        },
+                        buttonsStyling: false
+                    });
+                }
+            })
+            .catch(error => {
+                hideLoadingOverlay(loadingOverlay);
+                console.error('Error:', error);
+                Swal.fire({
+                    title: '⚠️ Lỗi!',
+                    text: 'Đã xảy ra lỗi khi từ chối tin.',
+                    icon: 'error',
+                    confirmButtonColor: '#f56565',
+                    confirmButtonText: '<i class="fas fa-times me-1"></i> Đóng',
+                    customClass: {
+                        popup: 'border-0 shadow-lg',
+                        confirmButton: 'btn-modern'
+                    },
+                    buttonsStyling: false
+                });
+            });
+        }
+    </script>
+}

@@ -1,0 +1,121 @@
+@model HeThongTimViec.ViewModels.BaoCao.BaoCaoItemViewModel
+@using HeThongTimViec.Models
+@{
+    ViewData["Title"] = "Chi tiết Báo cáo";
+   
+}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="BaoCao" asp-action="Index">Báo cáo của tôi</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+  </ol>
+</nav>
+
+<div class="row g-4">
+    <!-- Cột thông tin báo cáo -->
+    <div class="col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-flag text-danger me-2"></i>Thông tin báo cáo</h5>
+            </div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-5">Mã báo cáo:</dt>
+                    <dd class="col-sm-7">#@Model.BaoCaoId</dd>
+
+                    <dt class="col-sm-5">Ngày gửi:</dt>
+                    <dd class="col-sm-7">@Model.NgayBaoCao.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                    <dt class="col-sm-5">Lý do:</dt>
+                    <dd class="col-sm-7 fw-bold">@Model.LyDoBaoCaoDisplay</dd>
+                    
+                    @if (!string.IsNullOrWhiteSpace(Model.ChiTietBaoCao))
+                    {
+                        <dt class="col-12 mt-3">Nội dung chi tiết:</dt>
+                        <dd class="col-12">
+                            <blockquote class="blockquote bg-light p-2 rounded small">
+                                @Model.ChiTietBaoCao
+                            </blockquote>
+                        </dd>
+                    }
+                </dl>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mt-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-gavel text-primary me-2"></i>Trạng thái xử lý</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="badge fs-6 @Model.TrangThaiXuLyBadgeClass">@Model.TrangThaiXuLyDisplay</span>
+                </div>
+                
+                @if (Model.TrangThaiXuLy != TrangThaiXuLyBaoCao.moi)
+                {
+                    <dl class="row mb-0 small">
+                        <dt class="col-sm-5">Người xử lý:</dt>
+                        <dd class="col-sm-7">@(Model.TenAdminXuLy ?? "Hệ thống")</dd>
+                        
+                        <dt class="col-sm-5">Ngày xử lý:</dt>
+                        <dd class="col-sm-7">@Model.NgayXuLyCuaAdmin?.ToString("dd/MM/yyyy HH:mm")</dd>
+                        
+                        @if (!string.IsNullOrWhiteSpace(Model.GhiChuAdmin))
+                        {
+                            <dt class="col-12 mt-3">Ghi chú từ quản trị viên:</dt>
+                            <dd class="col-12">
+                                <p class="fst-italic text-muted mb-0">"@Model.GhiChuAdmin"</p>
+                            </dd>
+                        }
+                    </dl>
+                }
+                else
+                {
+                    <p class="text-muted mb-0">Báo cáo của bạn đang chờ được xem xét. Chúng tôi sẽ phản hồi sớm nhất có thể.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Cột thông tin tin tuyển dụng bị báo cáo -->
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+             <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-file-alt text-secondary me-2"></i>Tin tuyển dụng bị báo cáo</h5>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@Model.TinTuyenDungId" class="text-decoration-none" target="_blank">
+                        @Model.TieuDeTinTuyenDung
+                    </a>
+                </h4>
+                <h6 class="card-subtitle mb-2 text-muted">Đăng bởi: @Model.TenNhaTuyenDungHoacNguoiDang</h6>
+                <hr>
+                <div class="row g-3 small">
+                    <div class="col-md-6">
+                        <i class="fas fa-map-marker-alt fa-fw text-danger me-1"></i>
+                        <strong>Địa điểm:</strong> @Model.DiaDiemTinTuyenDung
+                    </div>
+                     <div class="col-md-6">
+                        <i class="fas fa-dollar-sign fa-fw text-success me-1"></i>
+                        <strong>Mức lương:</strong> @Model.MucLuongDisplayTinTuyenDung
+                    </div>
+                     <div class="col-md-6">
+                        <i class="fas fa-briefcase fa-fw text-primary me-1"></i>
+                        <strong>Loại hình:</strong> @Model.LoaiHinhDisplayTinTuyenDung
+                    </div>
+                     <div class="col-md-6">
+                        <i class="far fa-clock fa-fw text-secondary me-1"></i>
+                        <strong>Hạn nộp:</strong> @(Model.NgayHetHanTinTuyenDung?.ToString("dd/MM/yyyy") ?? "Không giới hạn")
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-end">
+                <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@Model.TinTuyenDungId" class="btn btn-sm btn-outline-primary" target="_blank">
+                    Xem chi tiết tin <i class="fas fa-external-link-alt fa-xs ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

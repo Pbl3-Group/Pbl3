@@ -1,0 +1,586 @@
+@model HeThongTimViec.ViewModels.QuanLyTinDang.QuanLyTinDangItemViewModel
+@using HeThongTimViec.Models
+@using HeThongTimViec.Extensions
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+        --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --danger-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        --info-gradient: linear-gradient(135deg, #3742fa 0%, #2f3542 100%);
+        --glass-bg: rgba(255, 255, 255, 0.95);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --shadow-soft: 0 8px 32px rgba(31, 38, 135, 0.37);
+        --shadow-hover: 0 12px 40px rgba(31, 38, 135, 0.5);
+        --border-radius: 16px;
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .modern-table-container {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        margin: 2rem 0;
+    }
+
+    .modern-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: transparent;
+        margin: 0;
+        table-layout: fixed;
+    }
+
+    .modern-table tbody tr {
+        transition: var(--transition);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .modern-table tbody tr:hover {
+        background: rgba(102, 126, 234, 0.05);
+        transform: scale(1.01);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .modern-table td {
+        padding: 1.25rem 1rem;
+        vertical-align: middle;
+        border: none;
+        overflow: hidden;
+    }
+
+    /* Định nghĩa width cụ thể cho từng cột */
+    .modern-table td:nth-child(1) { /* Checkbox */
+        width: 60px;
+        text-align: center;
+        padding-left: 1.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .modern-table td:nth-child(2) { /* Thông tin tin đăng */
+        width: 40%;
+        text-align: left;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .modern-table td:nth-child(3) { /* Người đăng */
+        width: 180px;
+        text-align: center;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .modern-table td:nth-child(4) { /* Loại hình */
+        width: 120px;
+        text-align: center;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .modern-table td:nth-child(5) { /* Thời gian */
+        width: 110px;
+        text-align: center;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .modern-table td:nth-child(6) { /* Trạng thái */
+        width: 100px;
+        text-align: center;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .modern-table td:nth-child(7) { /* Actions */
+        width: 220px;
+        text-align: center;
+        padding-left: 0.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .job-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: left;
+        width: 100%;
+    }
+
+    .job-title {
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        line-height: 1.4;
+    }
+
+    .job-title a {
+        color: #2d3748;
+        text-decoration: none;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    .job-title a:hover {
+        color: #4299e1;
+        text-decoration: underline;
+    }
+
+    .job-detail {
+        font-size: 0.85rem;
+        color: #718096;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.3;
+    }
+
+    .poster-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        justify-content: center;
+        width: 100%;
+        max-width: 180px;
+        margin: 0 auto;
+    }
+
+    .poster-icon {
+        font-size: 1.25rem;
+        color: #4a5568;
+        flex-shrink: 0;
+        width: 20px;
+        text-align: center;
+    }
+
+    .poster-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .poster-name {
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        max-width: 120px;
+    }
+
+    .poster-type {
+        font-size: 0.8rem;
+        color: #718096;
+        white-space: nowrap;
+    }
+
+    .status-badge {
+        padding: 0.5rem 0.8rem;
+        border-radius: 25px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+        min-width: 70px;
+        max-width: 100%;
+    }
+
+    .status-choduyet {
+        background: var(--warning-gradient);
+        color: white;
+        box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+    }
+
+    .status-active {
+        background: var(--success-gradient);
+        color: white;
+        box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+    }
+
+    .status-inactive {
+        background: var(--danger-gradient);
+        color: white;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    .status-badge::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .status-badge:hover::before {
+        left: 100%;
+    }
+
+    .time-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: #718096;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .time-info i {
+        flex-shrink: 0;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.4rem;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 220px;
+        margin: 0 auto;
+    }
+
+    .action-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        font-size: 0.8rem;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .action-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255,255,255,0.2);
+        transform: scale(0);
+        transition: var(--transition);
+        border-radius: 50%;
+    }
+
+    .action-btn:hover::before {
+        transform: scale(1);
+    }
+
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .btn-view {
+        background: var(--info-gradient);
+        color: white;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        color: #8b4513;
+    }
+
+    .btn-approve {
+        background: var(--success-gradient);
+        color: white;
+    }
+
+    .btn-reject {
+        background: var(--danger-gradient);
+        color: white;
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+        color: white;
+    }
+
+    /* Responsive Design */
+    @@media (max-width: 1200px) {
+        .modern-table td:nth-child(2) {
+            width: 35%;
+        }
+        
+        .modern-table td:nth-child(3) {
+            width: 160px;
+        }
+        
+        .modern-table td:nth-child(7) {
+            width: 200px;
+        }
+        
+        .action-buttons {
+            gap: 0.3rem;
+        }
+        
+        .action-btn {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    @@media (max-width: 992px) {
+        .modern-table {
+            table-layout: auto;
+        }
+        
+        .modern-table td {
+            padding: 1rem 0.75rem;
+        }
+        
+        .modern-table td:nth-child(1) {
+            width: 50px;
+        }
+        
+        .modern-table td:nth-child(3) {
+            width: 140px;
+        }
+        
+        .modern-table td:nth-child(4),
+        .modern-table td:nth-child(5),
+        .modern-table td:nth-child(6) {
+            width: 100px;
+        }
+        
+        .modern-table td:nth-child(7) {
+            width: 180px;
+        }
+        
+        .poster-info {
+            flex-direction: column;
+            gap: 0.5rem;
+            max-width: 140px;
+        }
+        
+        .poster-name {
+            font-size: 0.85rem;
+            max-width: 100px;
+        }
+        
+        .action-buttons {
+            gap: 0.25rem;
+            max-width: 180px;
+        }
+        
+        .action-btn {
+            width: 30px;
+            height: 30px;
+            font-size: 0.75rem;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .table-responsive {
+            font-size: 0.9rem;
+        }
+        
+        .modern-table td {
+            padding: 0.75rem 0.5rem;
+        }
+        
+        .modern-table td:nth-child(1) {
+            width: 40px;
+        }
+        
+        .modern-table td:nth-child(3) {
+            width: 120px;
+        }
+        
+        .modern-table td:nth-child(4),
+        .modern-table td:nth-child(5),
+        .modern-table td:nth-child(6) {
+            width: 80px;
+        }
+        
+        .modern-table td:nth-child(7) {
+            width: 160px;
+        }
+        
+        .job-title {
+            font-size: 0.9rem;
+        }
+        
+        .job-detail {
+            font-size: 0.8rem;
+        }
+        
+        .poster-name {
+            font-size: 0.8rem;
+            max-width: 80px;
+        }
+        
+        .poster-type {
+            font-size: 0.75rem;
+        }
+        
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 0.4rem 0.6rem;
+            min-width: 60px;
+        }
+        
+        .time-info {
+            font-size: 0.75rem;
+        }
+        
+        .action-buttons {
+            gap: 0.2rem;
+            max-width: 160px;
+        }
+        
+        .action-btn {
+            width: 28px;
+            height: 28px;
+            font-size: 0.7rem;
+        }
+    }
+</style>
+
+@{
+    var isChoDuyet = Model.TrangThai == TrangThaiTinTuyenDung.choduyet;
+    var badgeClass = Model.TrangThai == TrangThaiTinTuyenDung.choduyet ? "status-choduyet" :
+                    (Model.TrangThai == TrangThaiTinTuyenDung.daduyet ? "status-active" : "status-inactive");
+    var rowClass = isChoDuyet ? "trangthai-choduyet-bg" : "";
+    string posterIconClass = Model.LoaiTaiKhoanNguoiDang == LoaiTaiKhoan.doanhnghiep ? "fas fa-building poster-icon" : 
+                            (Model.LoaiTaiKhoanNguoiDang == LoaiTaiKhoan.canhan ? "fas fa-user poster-icon" : "fas fa-question-circle poster-icon");
+    string posterTypeDisplay = Model.LoaiTaiKhoanNguoiDang.GetDisplayName();
+}
+
+<div class="modern-table-container">
+    <div class="table-responsive">
+        <table class="modern-table">
+            <tbody>
+                <tr class="@rowClass">
+                    <td>
+                        <input type="checkbox" class="form-check-input" value="@Model.Id" name="selectedJobIds" aria-label="Chọn tin @Model.TieuDe" />
+                    </td>
+                    <td>
+                        <div class="job-info">
+                            <div class="job-title">
+                                <a asp-action="ChiTiet" asp-controller="QuanLyTinDang" asp-area="" asp-route-id="@Model.Id" title="@Model.TieuDe">
+                                    @Model.TieuDe
+                                </a>
+                                @if (Model.TinGap)
+                                {
+                                    <span class="status-badge status-choduyet" style="font-size: 0.7em;">Gấp</span>
+                                }
+                            </div>
+                            @if (!string.IsNullOrWhiteSpace(Model.DiaDiemLamViec))
+                            {
+                                <div class="job-detail" title="@Model.DiaDiemLamViec">
+                                    <i class="fas fa-map-marker-alt fa-fw"></i>@Model.DiaDiemLamViec
+                                </div>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(Model.MucLuongDisplay))
+                            {
+                                <div class="job-detail" title="@Model.MucLuongDisplay">
+                                    <i class="fas fa-dollar-sign fa-fw"></i>@Model.MucLuongDisplay
+                                </div>
+                            }
+                            @if (Model.DanhMucNganhNghe != null && Model.DanhMucNganhNghe.Any())
+                            {
+                                <div class="job-detail" title="@string.Join(", ", Model.DanhMucNganhNghe)">
+                                    <i class="fas fa-tags fa-fw"></i>@string.Join(", ", Model.DanhMucNganhNghe.Take(2))@(Model.DanhMucNganhNghe.Count() > 2 ? "..." : "")
+                                </div>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <div class="poster-info" title="@Model.TenNguoiDang (@posterTypeDisplay)">
+                            <i class="@posterIconClass"></i>
+                            <div class="poster-details">
+                                <div class="poster-name">@Model.TenNguoiDang</div>
+                                <div class="poster-type">@posterTypeDisplay</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="status-badge status-active">@Model.LoaiHinhCongViecDisplay</span>
+                    </td>
+                    <td>
+                        <div class="time-info">
+                            <i class="far fa-clock fa-fw"></i>@Model.ThoiGianDangTuongDoi
+                        </div>
+                    </td>
+                    <td>
+                        <span class="status-badge @badgeClass">@Model.TrangThaiDisplay</span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <a asp-controller="TimViec" asp-action="ChiTiet" asp-area="" asp-route-id="@Model.Id" target="_blank" class="action-btn btn-view" title="Xem tin (Client)">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a asp-controller="QuanLyTinDang" asp-action="ChiTiet" asp-area="" asp-route-id="@Model.Id" class="action-btn btn-view" title="Xem chi tiết (Admin)">
+                                <i class="fas fa-search"></i>
+                            </a>
+                            @if (Model.TrangThai != TrangThaiTinTuyenDung.daxoa && Model.TrangThai != TrangThaiTinTuyenDung.datuyen)
+                            {
+                                <a asp-action="ChinhSua" asp-controller="QuanLyTinDang" asp-area="" asp-route-id="@Model.Id" class="action-btn btn-edit" title="Chỉnh sửa">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            }
+                            @if (Model.TrangThai == TrangThaiTinTuyenDung.choduyet || Model.TrangThai == TrangThaiTinTuyenDung.bituchoi)
+                            {
+                                <button type="button" class="action-btn btn-approve btn-duyet-tin" data-id="@Model.Id" title="Duyệt tin">
+                                    <i class="fas fa-check-circle"></i>
+                                </button>
+                            }
+                            @if (Model.TrangThai == TrangThaiTinTuyenDung.choduyet)
+                            {
+                                <button type="button" class="action-btn btn-reject btn-tu-choi-tin" data-id="@Model.Id" title="Từ chối">
+                                    <i class="fas fa-times-circle"></i>
+                                </button>
+                            }
+                            @if (Model.TrangThai != TrangThaiTinTuyenDung.daxoa)
+                            {
+                                <button type="button" class="action-btn btn-delete btn-xoa-tin" data-id="@Model.Id" title="Xóa tin đăng">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

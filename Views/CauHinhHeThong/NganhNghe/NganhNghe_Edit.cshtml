@@ -1,0 +1,331 @@
+@model HeThongTimViec.Models.NganhNghe
+@{
+    ViewData["Title"] = "Chỉnh Sửa Ngành Nghề";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+        --success-gradient: linear-gradient(135deg, #0f897f 0%, #7dcb9a 100%);
+        --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        --warning-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, #112e58 0%, #366bb8 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+    }
+
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+    }
+
+    .page-header h1 {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        font-weight: 300;
+        font-size: 2.5rem;
+    }
+
+    .form-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+        transition: all 0.4s ease;
+    }
+
+    .form-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-control, .form-select {
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #00D4FF;
+        box-shadow: 0 0 0 0.2rem rgba(0, 212, 255, 0.25);
+        background: white;
+    }
+
+    .form-floating > label {
+        color: #6c757d;
+        transition: all 0.3s ease;
+    }
+
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label {
+        color: #00D4FF;
+    }
+
+    .form-text {
+        color: #6c757d;
+        font-size: 0.85rem;
+    }
+
+    .text-danger {
+        font-size: 0.85rem;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .alert-info {
+        background: linear-gradient(135deg, rgba(40, 167, 255, 0.15) 0%, rgba(40, 167, 255, 0.1) 100%);
+        border-left: 4px solid #0dcaf0;
+        color: #084298;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 20px;
+        animation: slideInDown 0.5s ease;
+    }
+
+    .alert-danger {
+        background: linear-gradient(135deg, rgba(220, 53, 69, 0.15) 0%, rgba(220, 53, 69, 0.1) 100%);
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 20px;
+        display: none;
+        animation: slideInDown 0.5s ease;
+    }
+
+    .alert-danger:empty {
+        display: none;
+    }
+
+    .alert-danger:not(:empty) {
+        display: block;
+    }
+
+    .btn-primary {
+        background: var(--dark-gradient);
+        border: none;
+        border-radius: 12px;
+        padding: 12px 24px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+        filter: brightness(1.1);
+        color: white;
+    }
+
+    .btn-outline-primary {
+        border: 2px solid #00D4FF;
+        border-radius: 12px;
+        padding: 12px 24px;
+        transition: all 0.3s ease;
+        color: #00D4FF;
+    }
+
+    .btn-outline-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(0, 212, 255, 0.3);
+        background: #00D4FF;
+        color: white;
+    }
+
+    .btn-outline-secondary {
+        border: 2px solid #6c757d;
+        border-radius: 12px;
+        padding: 12px 24px;
+        transition: all 0.3s ease;
+        color: #6c757d;
+    }
+
+    .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        background: #6c757d;
+        color: white;
+    }
+
+    @@keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @@media (max-width: 768px) {
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .form-control, .form-select {
+            padding: 10px 12px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary, .btn-outline-primary, .btn-outline-secondary {
+            padding: 10px 16px;
+            font-size: 0.9rem;
+        }
+
+        .alert-info h6 {
+            font-size: 0.95rem;
+        }
+
+        .alert-info p {
+            font-size: 0.85rem;
+        }
+    }
+</style>
+
+<!-- === TIÊU ĐỀ === -->
+<div class="page-header animate-fade-in">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1><i class="fas fa-edit me-3"></i>@ViewData["Title"] <small class="text-muted fs-6">ID: @Model.Id</small></h1>
+    </div>
+</div>
+
+<!-- === FORM CHỈNH SỬA NGÀNH NGHỀ === -->
+<div class="form-card animate-fade-in">
+    <div class="card-body p-4">
+        <div class="alert alert-info mb-4" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-info-circle fa-2x text-info me-3"></i>
+                <div>
+                    <h6 class="alert-heading mb-1">Đang chỉnh sửa: @Model.Ten</h6>
+                    <p class="mb-0 small">Thay đổi thông tin ngành nghề và nhấn "Lưu thay đổi" để cập nhật.</p>
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="NganhNghe_Edit" class="needs-validation" novalidate>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-4">
+                <div class="form-floating">
+                    <input asp-for="Ten" class="form-control" id="tenNganhNghe" placeholder="Tên ngành nghề" required>
+                    <label asp-for="Ten">Tên ngành nghề</label>
+                    <span asp-validation-for="Ten" class="text-danger"></span>
+                    <div class="form-text">Nhập tên ngành nghề cần chỉnh sửa</div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="form-floating">
+                    <textarea asp-for="MoTa" class="form-control" id="moTaNganhNghe" placeholder="Mô tả" style="height: 150px"></textarea>
+                    <label asp-for="MoTa">Mô tả ngành nghề</label>
+                    <span asp-validation-for="MoTa" class="text-danger"></span>
+                    <div class="form-text">Nhập thông tin chi tiết về ngành nghề này</div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-2"></i>Lưu thay đổi
+                </button>
+                <a asp-action="NganhNghe_Details" asp-route-id="@Model.Id" class="btn btn-outline-primary">
+                    <i class="fas fa-eye me-1"></i>Xem chi tiết
+                </a>
+                <a asp-action="NganhNghe_Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-1"></i>Hủy
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation cho form card và alert
+            const formCard = document.querySelector('.form-card');
+            const alertInfo = document.querySelector('.alert-info');
+            formCard.classList.add('animate-fade-in');
+            alertInfo.classList.add('animate-fade-in');
+
+            // Kích hoạt validation Bootstrap 5
+            (function() {
+                'use strict';
+                var forms = document.querySelectorAll('.needs-validation');
+                Array.prototype.slice.call(forms).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            })();
+
+            // Enhanced form interactions
+            document.querySelectorAll('.form-control').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentNode.style.transform = 'scale(1.02)';
+                    this.parentNode.style.transition = 'transform 0.2s ease';
+                });
+                input.addEventListener('blur', function() {
+                    this.parentNode.style.transform = 'scale(1)';
+                });
+            });
+
+            // Button hover effects
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    if (!this.disabled) {
+                        this.style.transform = 'translateY(-2px)';
+                    }
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+}

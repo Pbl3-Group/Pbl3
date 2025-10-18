@@ -1,0 +1,230 @@
+@using HeThongTimViec.Models
+@model HeThongTimViec.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Đăng Ký Tài Khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Hoặc layout phù hợp
+}
+
+<div class="row justify-content-center mt-5 mb-5">
+    <div class="col-md-7 col-lg-6 col-xl-5">
+        <div class="card shadow-sm">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+                @* Form đăng ký truyền thống *@
+                <form asp-action="DangKy" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" id="registerForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+                    @* Thông tin chung *@
+                    <div class="form-floating mb-3">
+                        <input asp-for="HoTen" class="form-control" placeholder="Họ và Tên" />
+                        <label asp-for="HoTen"></label>
+                        <span asp-validation-for="HoTen" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Email" class="form-control" placeholder="name@example.com" autocomplete="email" />
+                        <label asp-for="Email"></label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Sdt" class="form-control" placeholder="Số điện thoại" autocomplete="tel" />
+                        <label asp-for="Sdt"></label>
+                        <span asp-validation-for="Sdt" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Password" class="form-control" placeholder="Mật khẩu" type="password" autocomplete="new-password" />
+                        <label asp-for="Password"></label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu" type="password" autocomplete="new-password" />
+                        <label asp-for="ConfirmPassword"></label>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="LoaiTkDangKy" class="form-label"></label>
+                        <select asp-for="LoaiTkDangKy" class="form-select" asp-items="@ViewBag.LoaiTkList" id="LoaiTkSelect">
+                            <option value="">-- Vui lòng chọn loại tài khoản --</option>
+                        </select>
+                        <span asp-validation-for="LoaiTkDangKy" class="text-danger"></span>
+                    </div>
+
+                    @* Thông tin cá nhân (chung cho cả 2 loại TK) *@
+                    <div class="mb-3">
+                        <label asp-for="GioiTinh" class="form-label"></label>
+                        <select asp-for="GioiTinh" class="form-select" asp-items="@ViewBag.GioiTinhList">
+                            <option value="">-- Chọn giới tính --</option>
+                        </select>
+                        <span asp-validation-for="GioiTinh" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NgaySinh" class="form-label"></label>
+                        <input asp-for="NgaySinh" class="form-control" type="date" />
+                        <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="DiaChiChiTiet" class="form-label">Địa chỉ liên hệ/Trụ sở</label>
+                        <textarea asp-for="DiaChiChiTiet" class="form-control" rows="2" placeholder="Số nhà, tên đường..."></textarea>
+                        <span asp-validation-for="DiaChiChiTiet" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ThanhPhoId" class="form-label">Tỉnh/Thành phố (Liên hệ/Trụ sở)</label>
+                        <select asp-for="ThanhPhoId" class="form-select" asp-items="@ViewBag.ThanhPhoList" id="ThanhPhoSelect">
+                            <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                        </select>
+                        <span asp-validation-for="ThanhPhoId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="QuanHuyenId" class="form-label">Quận/Huyện (Liên hệ/Trụ sở)</label>
+                        <select asp-for="QuanHuyenId" class="form-select" asp-items="@ViewBag.QuanHuyenList" id="QuanHuyenSelect" disabled>
+                            <option value="">-- Chọn Quận/Huyện --</option>
+                        </select>
+                        <span asp-validation-for="QuanHuyenId" class="text-danger"></span>
+                    </div>
+
+
+                    @* --- Các trường chỉ dành cho Doanh nghiệp --- *@
+                    <div id="DoanhNghiepFields" style="display:none;">
+                        <hr />
+                        <h5 class="mb-3 text-muted">Thông tin Doanh nghiệp</h5>
+                        <div class="form-floating mb-3">
+                            <input asp-for="TenCongTy" class="form-control" placeholder="Tên công ty theo giấy phép" />
+                            <label asp-for="TenCongTy"></label>
+                            <span asp-validation-for="TenCongTy" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="MaSoThue" class="form-control" placeholder="Mã số thuế" />
+                            <label asp-for="MaSoThue"></label>
+                            <span asp-validation-for="MaSoThue" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="DiaChiDangKyKinhDoanh" class="form-control" placeholder="Địa chỉ trên giấy phép đăng ký kinh doanh" />
+                            <label asp-for="DiaChiDangKyKinhDoanh"></label>
+                            <span asp-validation-for="DiaChiDangKyKinhDoanh" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="UrlWebsite" class="form-control" placeholder="https://congtycuaban.com" type="url" />
+                            <label asp-for="UrlWebsite"></label>
+                            <span asp-validation-for="UrlWebsite" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="agreeTerms" name="agreeTerms" value="true" required>
+                        <label class="form-check-label small" for="agreeTerms">
+                            Tôi đã đọc và đồng ý với
+                            <a href="@Url.Action("Terms", "Home")" target="_blank" class="link-primary">Điều khoản dịch vụ</a> và
+                            <a href="@Url.Action("Privacy", "Home")" target="_blank" class="link-primary">Chính sách bảo mật</a>.
+                        </label>
+                        <div class="invalid-feedback">Bạn phải đồng ý với điều khoản và chính sách.</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 btn-lg">Đăng Ký</button>
+                </form>
+
+                @* --- THÊM PHẦN ĐĂNG KÝ BẰNG DỊCH VỤ BÊN NGOÀI --- *@
+
+                @*
+                    LƯU Ý: asp-controller="Account" là giả định.
+                    Nếu controller của bạn tên khác (ví dụ: TaiKhoan), hãy thay đổi nó.
+                    Action "ExternalLogin" là action sẽ xử lý việc redirect sang Google.
+                    Input "provider" với value "Google" sẽ cho action biết bạn muốn đăng ký/đăng nhập bằng Google.
+                *@
+                @* --- KẾT THÚC PHẦN ĐĂNG KÝ BẰNG DỊCH VỤ BÊN NGOÀI --- *@
+
+
+                <div class="mt-4 text-center">
+                    <p class="small mb-0">
+                        Đã có tài khoản?
+                        <a asp-action="DangNhap" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="link-primary">Đăng nhập tại đây</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            // --- Hàm ẩn/hiện các trường của Doanh nghiệp ---
+            function toggleDoanhNghiepFields() {
+                const doanhNghiepValue = '@LoaiTaiKhoan.doanhnghiep.ToString()'; // Đảm bảo LoaiTaiKhoan enum có sẵn trong view hoặc truyền giá trị chuỗi
+                if ($('#LoaiTkSelect').val() === doanhNghiepValue) {
+                    $('#DoanhNghiepFields').slideDown();
+                    $('#TenCongTy').prop('required', true);
+                    $('#MaSoThue').prop('required', true);
+                    $('#DiaChiDangKyKinhDoanh').prop('required', true);
+                } else {
+                    $('#DoanhNghiepFields').slideUp();
+                    $('#TenCongTy').prop('required', false).val(''); // Xóa giá trị khi ẩn
+                    $('#MaSoThue').prop('required', false).val('');
+                    $('#DiaChiDangKyKinhDoanh').prop('required', false).val('');
+                    $('#UrlWebsite').val(''); // Cũng xóa giá trị UrlWebsite
+
+                    // Xóa lỗi validation cũ của các trường này nếu có
+                    $('#TenCongTy-error').hide();
+                    $('#MaSoThue-error').hide();
+                    $('#DiaChiDangKyKinhDoanh-error').hide();
+                    $('#UrlWebsite-error').hide();
+                }
+            }
+
+            toggleDoanhNghiepFields();
+            $('#LoaiTkSelect').change(toggleDoanhNghiepFields);
+
+
+            const quanHuyenSelect = $('#QuanHuyenSelect');
+            const thanhPhoSelect = $('#ThanhPhoSelect');
+
+            function loadQuanHuyen(showLoading = true) {
+                var selectedThanhPhoId = thanhPhoSelect.val();
+                quanHuyenSelect.prop('disabled', true);
+
+                if (selectedThanhPhoId) {
+                    if (showLoading) {
+                        quanHuyenSelect.empty().append($('<option/>', { value: '', text: '-- Đang tải... --' }));
+                    }
+                    const url = `/api/diachi/quanhuyen/${selectedThanhPhoId}`; // Cập nhật URL nếu cần
+
+                    $.getJSON(url)
+                        .done(function (data) {
+                            quanHuyenSelect.empty().append($('<option/>', { value: '', text: '-- Chọn Quận/Huyện --' }));
+                            if (data && data.length > 0) {
+                                $.each(data, function (index, item) {
+                                    quanHuyenSelect.append($('<option/>', { value: item.id, text: item.ten }));
+                                });
+                                var currentQuanHuyenId = '@Html.Raw(Model?.QuanHuyenId)';
+                                if (currentQuanHuyenId) {
+                                    quanHuyenSelect.val(currentQuanHuyenId);
+                                }
+                            }
+                            quanHuyenSelect.prop('disabled', false);
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                            console.error("Lỗi tải quận/huyện:", textStatus, errorThrown);
+                            quanHuyenSelect.empty().append($('<option/>', { value: '', text: '-- Lỗi tải dữ liệu --' }));
+                            // Giữ disable nếu lỗi, hoặc có thể cho phép chọn lại TP
+                        });
+                } else {
+                    quanHuyenSelect.empty().append($('<option/>', { value: '', text: '-- Chọn Quận/Huyện --' }));
+                    // quanHuyenSelect.prop('disabled', true); // Đã disable ở đầu hàm
+                }
+            }
+
+            thanhPhoSelect.change(function () {
+                loadQuanHuyen(true);
+            });
+
+            if (thanhPhoSelect.val()) {
+                loadQuanHuyen(false);
+            } else {
+                quanHuyenSelect.prop('disabled', true);
+            }
+
+        });
+    </script>
+}

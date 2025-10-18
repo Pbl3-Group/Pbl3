@@ -1,0 +1,197 @@
+@* File: Views/IndividualPosting/ChiTiet.cshtml *@
+@model HeThongTimViec.ViewModels.JobPosting.ChiTietTuyenDungViewModel
+@using HeThongTimViec.Utils
+@using HeThongTimViec.Models
+@using HeThongTimViec.Extensions
+
+@{
+    ViewData["Title"] = "Xem trước: " + Model.TieuDe;
+    // Vì đây là NTD cá nhân, luôn dùng defaultAvatar nếu không có avatar
+    var finalLogoUrl = !string.IsNullOrEmpty(Model.LogoUrl) ? Model.LogoUrl : "/images/default-avatar.png";
+}
+
+@* Bạn có thể tạo file css riêng nếu muốn, ví dụ: wwwroot/css/job-detail.css *@
+<style>
+    .job-detail-page { background-color: #f8f9fa; padding-top: 2rem; padding-bottom: 2rem; }
+    .job-detail-main-card, .sidebar-card { border: 1px solid #e9ecef; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-radius: .5rem; }
+    .job-title { color: var(--bs-primary); }
+    .company-name { font-weight: 500; }
+    .job-meta-info span { display: inline-flex; align-items: center; }
+    .job-meta-info i { width: 20px; text-align: center; }
+    .section-title { font-size: 1.25rem; font-weight: 600; color: #343a40; border-bottom: 2px solid var(--bs-primary); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+    .section-content { line-height: 1.7; }
+    .section-content ul { padding-left: 20px; }
+    .section-content p:last-child { margin-bottom: 0; }
+    .work-schedule-table th { font-weight: 600; }
+</style>
+
+<div class="job-detail-page container mt-4">
+
+    <div class="alert alert-info d-flex align-items-center" role="alert">
+      <i class="fas fa-info-circle fa-2x me-3"></i>
+      <div>
+        Đây là trang xem trước tin tuyển dụng của bạn. Giao diện này tương tự như những gì người tìm việc sẽ thấy.
+        <br>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="fw-bold">Chỉnh sửa tin</a> | 
+        <a asp-action="Index" class="fw-bold">Quay về danh sách quản lý</a>
+      </div>
+    </div>
+
+
+    <div class="row g-4 mt-2">
+        <!-- CỘT NỘI DUNG CHÍNH -->
+        <div class="col-lg-8">
+            <div class="card job-detail-main-card">
+                <div class="card-body p-4">
+                    <!-- Header -->
+                    <div class="job-header mb-4">
+                        <h1 class="job-title h3 fw-bold">
+                            @Model.TieuDe
+                            @if (Model.TinGap)
+                            {
+                                <span class="badge bg-danger ms-2">GẤP</span>
+                            }
+                        </h1>
+                        <h2 class="company-name h5 text-muted fw-normal">
+                            <i class="fas fa-user me-2"></i> <!-- Icon người dùng cho NTD cá nhân -->
+                            <span>@Model.TenNguoiDang</span>
+                        </h2>
+                        <div class="job-meta-info d-flex flex-wrap gap-3 text-muted mt-3 small">
+                            <span><i class="fas fa-dollar-sign text-success me-1"></i> @Model.MucLuongDisplay</span>
+                            <span><i class="fas fa-map-marker-alt text-danger me-1"></i> @Model.DiaDiemLamViec</span>
+                            <span><i class="far fa-clock text-info me-1"></i> Đăng @TimeHelper.TimeAgo(Model.NgayDang)</span>
+                            @if (Model.NgayHetHan.HasValue)
+                            {
+                                <span class="@(Model.IsExpired ? "text-danger fw-bold" : "")"><i class="far fa-calendar-times me-1"></i> Hạn nộp: @Model.NgayHetHan.Value.ToString("dd/MM/yyyy")</span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Job Details Card -->
+                    <div class="card job-spec-card mb-4">
+                        <div class="card-header bg-light fw-bold">Chi tiết tin tuyển dụng</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3"><strong><i class="fas fa-users me-2 text-muted"></i>Số lượng tuyển:</strong> @Model.SoLuongTuyen người</div>
+                                <div class="col-md-6 mb-3"><strong><i class="fas fa-briefcase me-2 text-muted"></i>Hình thức:</strong> @Model.LoaiHinhDisplay</div>
+                                <div class="col-md-6 mb-3"><strong><i class="fas fa-chart-line me-2 text-muted"></i>Kinh nghiệm:</strong> @Model.YeuCauKinhNghiemText</div>
+                                <div class="col-md-6 mb-3"><strong><i class="fas fa-graduation-cap me-2 text-muted"></i>Học vấn:</strong> @Model.YeuCauHocVanText</div>
+                                <div class="col-12">
+                                    <strong><i class="fas fa-tags me-2 text-muted"></i>Ngành nghề:</strong>
+                                    @if (Model.NganhNghes.Any())
+                                    {
+                                        foreach (var nganh in Model.NganhNghes)
+                                        {
+                                            <span class="badge bg-secondary me-1">@nganh</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span>Chưa xác định</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description Sections -->
+                    <div class="job-description-section">
+                        <h4 class="section-title">Mô tả công việc</h4>
+                        <div class="section-content">@Html.Raw(Model.MoTa)</div>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.YeuCau))
+                        {
+                            <h4 class="section-title mt-4">Yêu cầu ứng viên</h4>
+                            <div class="section-content">@Html.Raw(Model.YeuCau)</div>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(Model.QuyenLoi))
+                        {
+                            <h4 class="section-title mt-4">Quyền lợi được hưởng</h4>
+                            <div class="section-content">@Html.Raw(Model.QuyenLoi)</div>
+                        }
+                    </div>
+
+                    <!-- Work Schedule -->
+                    @if (Model.LichLamViecs.Any())
+                    {
+                        <h4 class="section-title mt-4">Lịch làm việc</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm work-schedule-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Ngày trong tuần</th>
+                                        <th>Buổi</th>
+                                        <th>Thời gian</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var lich in Model.LichLamViecs)
+                                    {
+                                        <tr>
+                                            <td>@lich.NgayTrongTuan.GetDisplayName()</td>
+                                            <td>@(lich.BuoiLamViec?.GetDisplayName() ?? "N/A")</td>
+                                            <td>
+                                                @if (lich.GioBatDau.HasValue && lich.GioKetThuc.HasValue)
+                                                {
+                                                    // Dùng định dạng hh\:mm để hiển thị đúng TimeSpan
+                                                    @($"{lich.GioBatDau:hh\\:mm} - {lich.GioKetThuc:hh\\:mm}")
+                                                }
+                                                else
+                                                {
+                                                    <span>Linh hoạt</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- CỘT PHỤ (SIDEBAR) -->
+        <div class="col-lg-4">
+            <!-- Recruiter Info Card -->
+            <div class="card sidebar-card mb-4">
+                <div class="card-body text-center">
+                    <img src="@finalLogoUrl" class="img-fluid rounded-circle border p-1 mb-3" style="width: 100px; height: 100px; object-fit: cover;" alt="Avatar @Model.TenNguoiDang"
+                         onerror="this.onerror=null; this.src='/images/default-avatar.png';">
+                    <h5 class="card-title">@Model.TenNguoiDang</h5>
+                    <span class="badge bg-light text-dark border">Nhà tuyển dụng doanh nghiệp</span>
+                </div>
+            </div>
+
+            <!-- Job Summary Card -->
+            <div class="card sidebar-card mb-4">
+                <div class="card-header fw-bold">Thông tin chung</div>
+                <ul class="list-group list-group-flush">
+                    @if(Model.LuotXem > 0)
+                    {
+                        <li class="list-group-item"><strong>Lượt xem:</strong> @Model.LuotXem</li>
+                    }
+                    <li class="list-group-item"><strong>Ngày đăng:</strong> @Model.NgayDang.ToString("dd/MM/yyyy")</li>
+                    <li class="list-group-item"><strong>Hạn nộp hồ sơ:</strong> @(Model.NgayHetHan.HasValue ? Model.NgayHetHan.Value.ToString("dd/MM/yyyy") : "Không giới hạn")</li>
+                </ul>
+            </div>
+             
+             <!-- Map Card -->
+             <div class="card sidebar-card">
+                 <div class="card-header fw-bold">Bản đồ</div>
+                 <div class="card-body p-0">
+                     <iframe
+                         width="100%"
+                         height="250"
+                         style="border:0"
+                         loading="lazy"
+                         allowfullscreen
+                         referrerpolicy="no-referrer-when-downgrade"
+                         src="https://www.google.com/maps?q=@(Uri.EscapeDataString(Model.DiaDiemLamViec))&output=embed">
+                     </iframe>
+                 </div>
+             </div>
+        </div>
+    </div>
+</div>

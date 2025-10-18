@@ -1,0 +1,240 @@
+@model HeThongTimViec.ViewModels.HoSoDoanhNghiepEditViewModel
+@{
+    ViewData["Title"] = $"Chỉnh sửa Hồ sơ - {ViewBag.TenCongTy ?? "Công ty"}";
+    // Layout = "_LayoutNhaTuyenDung";
+}
+
+
+    <style>
+        .form-label.required-field::after { content: " *"; color: red; }
+        .current-logo-preview, #newLogoPreview {
+    /* Ép thành hình vuông hoàn hảo */
+    width: 150px;
+    height: 150px;
+    
+    border: 1px solid #dee2e6;
+    padding: 0.25rem;
+    border-radius: 50%; /* Bây giờ sẽ tạo ra hình tròn hoàn hảo */
+    object-fit: cover;  /* Tự động phóng to/cắt ảnh cho vừa khung tròn */
+    display: block;
+    margin: 0 auto 1rem auto;
+    background-color: #fff; /* Thêm nền trắng phòng trường hợp logo có nền trong suốt */
+        #newLogoPreview { display: none; }
+    </style>
+
+
+<div class="container mt-4 mb-5">
+    <h1 class="h3 mb-4">Chỉnh sửa Hồ sơ Công ty</h1>
+
+    <form asp-action="ChinhSuaHoSo" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.NguoiDungId)
+        @Html.HiddenFor(model => model.CurrentUrlLogo)
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <div class="row g-4">
+            <!-- Cột trái: Thông tin -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">Thông tin Doanh nghiệp</div>
+                    <div class="card-body">
+                        <div class="mb-3"><label asp-for="TenCongTy" class="form-label required-field"></label><input asp-for="TenCongTy" class="form-control" /><span asp-validation-for="TenCongTy" class="text-danger"></span></div>
+                        <div class="row"><div class="col-md-6 mb-3"><label asp-for="MaSoThue" class="form-label"></label><input asp-for="MaSoThue" class="form-control" /><span asp-validation-for="MaSoThue" class="text-danger"></span></div><div class="col-md-6 mb-3"><label asp-for="QuyMoCongTy" class="form-label"></label><input asp-for="QuyMoCongTy" class="form-control" /><span asp-validation-for="QuyMoCongTy" class="text-danger"></span></div></div>
+                        <div class="mb-3"><label asp-for="UrlWebsite" class="form-label"></label><input asp-for="UrlWebsite" class="form-control" type="url" /><span asp-validation-for="UrlWebsite" class="text-danger"></span></div>
+                        <div class="mb-3"><label asp-for="DiaChiDangKy" class="form-label"></label><input asp-for="DiaChiDangKy" class="form-control" /><span asp-validation-for="DiaChiDangKy" class="text-danger"></span></div>
+                        <div class="mb-3"><label asp-for="MoTa" class="form-label"></label><textarea asp-for="MoTa" class="form-control" rows="5"></textarea><span asp-validation-for="MoTa" class="text-danger"></span></div>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header">Thông tin Người đại diện & Liên hệ</div>
+                    <div class="card-body">
+                        <div class="mb-3"><label asp-for="SoDienThoaiLienHe" class="form-label required-field"></label><input asp-for="SoDienThoaiLienHe" class="form-control" type="tel" /><span asp-validation-for="SoDienThoaiLienHe" class="text-danger"></span></div>
+                        <div class="row"><div class="col-md-6 mb-3"><label asp-for="ThanhPhoId" class="form-label required-field"></label><select asp-for="ThanhPhoId" asp-items="@(ViewBag.ThanhPhoList as SelectList)" class="form-select" id="thanhPhoDropdown"><option value="">--- Chọn Tỉnh/Thành phố ---</option></select><span asp-validation-for="ThanhPhoId" class="text-danger"></span></div><div class="col-md-6 mb-3"><label asp-for="QuanHuyenId" class="form-label required-field"></label><select asp-for="QuanHuyenId" asp-items="@(ViewBag.QuanHuyenList as SelectList ?? Enumerable.Empty<SelectListItem>())" class="form-select" id="quanHuyenDropdown" disabled><option value="">--- Chọn Quận/Huyện ---</option></select><span asp-validation-for="QuanHuyenId" class="text-danger"></span></div></div>
+                        <div class="mb-3"><label asp-for="DiaChiChiTietNguoiDung" class="form-label required-field"></label><input asp-for="DiaChiChiTietNguoiDung" class="form-control" /><span asp-validation-for="DiaChiChiTietNguoiDung" class="text-danger"></span></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Cột phải: Logo -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">Logo Công ty</div>
+                    <div class="card-body text-center">
+                        @if (!string.IsNullOrEmpty(Model.CurrentUrlLogo)) {
+                            <img src="@Url.Content(Model.CurrentUrlLogo)" alt="Logo hiện tại" class="current-logo-preview" id="currentLogoPreview"/>
+                        }
+                        <img src="#" alt="Xem trước logo mới" id="newLogoPreview" />
+                        <label asp-for="LogoFile" class="form-label mt-2"></label>
+                        <input asp-for="LogoFile" type="file" class="form-control" accept="image/*" id="logoFileInput" />
+                        <span asp-validation-for="LogoFile" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 d-flex justify-content-end gap-2">
+            <a asp-action="HoSo" class="btn btn-outline-secondary">Hủy</a>
+            <button type="submit" class="btn btn-primary px-4">Lưu thay đổi</button>
+        </div>
+    </form>
+</div>
+
+
+@* ======================= SCRIPTS SECTION ======================= *@
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} @* Script validation chuẩn *@
+
+    <script>
+        // Đảm bảo code chạy sau khi DOM đã sẵn sàng
+        $(document).ready(function () {
+            console.log("[ChinhSuaHoSo] Trang đã tải xong và sẵn sàng.");
+
+            // === KHỞI TẠO BIẾN ===
+            var thanhPhoDropdown = $('#thanhPhoDropdown');
+            var quanHuyenDropdown = $('#quanHuyenDropdown');
+            var logoFileInput = $('#logoFileInput');
+            var currentLogoPreview = $('#currentLogoPreview'); // Preview logo cũ
+            var newLogoPreview = $('#newLogoPreview');     // Preview logo mới
+            var initialQuanHuyenId = parseInt('@Model.QuanHuyenId') || null; // Lấy ID QH ban đầu (nếu có)
+            var initialThanhPhoId = parseInt(thanhPhoDropdown.val()) || 0;    // Lấy ID TP ban đầu (nếu có)
+
+            console.log("[Init] ID Thành Phố ban đầu:", initialThanhPhoId);
+            console.log("[Init] ID Quận/Huyện ban đầu:", initialQuanHuyenId);
+
+
+            // === HÀM TẢI QUẬN/HUYỆN (AJAX) ===
+            function loadQuanHuyen(selectedThanhPhoId, selectedQuanHuyenId) {
+                console.log(`[loadQuanHuyen] Bắt đầu tải QH cho TP_ID: ${selectedThanhPhoId}, cần chọn QH_ID: ${selectedQuanHuyenId}`);
+
+                // Reset và vô hiệu hóa dropdown Quận/Huyện
+                quanHuyenDropdown.prop('disabled', true).empty().append($('<option>', {
+                    value: '', text: '--- Đang tải Quận/Huyện ---', disabled: true
+                }));
+
+                // Chỉ gọi API nếu có Thành Phố ID hợp lệ
+                if (selectedThanhPhoId && selectedThanhPhoId > 0) {
+                    var apiUrl = `/api/diachi/quanhuyen/${selectedThanhPhoId}`;
+                    console.log("[loadQuanHuyen] Gọi API:", apiUrl);
+
+                    $.getJSON(apiUrl)
+                        .done(function (data) {
+                            console.log("[loadQuanHuyen] API trả về:", data);
+                            quanHuyenDropdown.empty(); // Xóa option "Đang tải..."
+
+                            if (data && Array.isArray(data)) {
+                                // Thêm option mặc định
+                                quanHuyenDropdown.append($('<option>', { value: '', text: '--- Chọn Quận/Huyện ---' }));
+
+                                if (data.length > 0) {
+                                    // Thêm các Quận/Huyện vào dropdown
+                                    $.each(data, function (index, item) {
+                                        var isSelected = item.id === selectedQuanHuyenId;
+                                        quanHuyenDropdown.append($('<option>', {
+                                            value: item.id,
+                                            text: item.ten,
+                                            selected: isSelected
+                                        }));
+                                    });
+                                    quanHuyenDropdown.prop('disabled', false); // Kích hoạt lại
+                                    console.log(`[loadQuanHuyen] Đã tải ${data.length} Quận/Huyện.`);
+                                    // Trigger change để update validation nếu cần (ví dụ: nếu Quận Huyện là bắt buộc)
+                                    quanHuyenDropdown.trigger('change');
+                                } else {
+                                    // API trả về mảng rỗng
+                                    quanHuyenDropdown.append($('<option>', { value: '', text: '--- Không tìm thấy Quận/Huyện ---', disabled: true }));
+                                    quanHuyenDropdown.prop('disabled', true); // Giữ disabled
+                                    console.log("[loadQuanHuyen] API trả về rỗng.");
+                                }
+                            } else {
+                                // Dữ liệu không hợp lệ
+                                quanHuyenDropdown.append($('<option>', { value: '', text: '--- Lỗi định dạng dữ liệu ---', disabled: true }));
+                                quanHuyenDropdown.prop('disabled', true);
+                                console.error("[loadQuanHuyen] Lỗi: Dữ liệu API không phải mảng.", data);
+                            }
+                        })
+                        .fail(function (jqXHR, textStatus, errorThrown) {
+                             quanHuyenDropdown.empty().append($('<option>', { value: '', text: '--- Lỗi tải dữ liệu ---', disabled: true }));
+                             quanHuyenDropdown.prop('disabled', true);
+                             console.error('[loadQuanHuyen] Lỗi AJAX:', { status: jqXHR.status, statusText: jqXHR.statusText, response: jqXHR.responseText, error: errorThrown });
+                        });
+                } else {
+                     // Không có Thành Phố ID hợp lệ
+                     console.log("[loadQuanHuyen] Không có TP ID hợp lệ, reset Quận/Huyện.");
+                     quanHuyenDropdown.empty().append($('<option>', { value: '', text: '--- Vui lòng chọn Tỉnh/Thành phố ---', disabled: true }));
+                     quanHuyenDropdown.prop('disabled', true);
+                }
+            } // --- Kết thúc hàm loadQuanHuyen ---
+
+
+            // === HÀM XEM TRƯỚC LOGO MỚI ===
+           // === HÀM XEM TRƯỚC LOGO MỚI (ĐÃ NÂNG CẤP) ===
+function previewNewLogo(input) {
+    // Lấy label của vùng preview mới
+    var newLogoLabel = $('#newLogoLabel');
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            // Hiển thị cả label và ảnh preview mới
+            newLogoLabel.show();
+            newLogoPreview.attr('src', e.target.result).show();
+            
+            // Ẩn logo cũ đi để tránh nhầm lẫn
+            $('#currentLogoPreview').hide();
+            // Nếu có label cho logo cũ, cũng có thể ẩn đi
+            $('#logoDisplayArea .text-muted:first').hide();
+            
+            console.log("[previewNewLogo] Đã hiển thị xem trước logo mới.");
+        }
+        reader.readAsDataURL(input.files[0]); // Đọc file thành data URL
+    } else {
+        // Nếu người dùng hủy chọn file (input.files rỗng)
+        // Ẩn cả label và ảnh preview mới đi
+        newLogoLabel.hide();
+        newLogoPreview.hide().attr('src', '#');
+        
+        // Hiển thị lại logo cũ nếu có
+        $('#currentLogoPreview').show();
+        $('#logoDisplayArea .text-muted:first').show();
+        
+        console.log("[previewNewLogo] Không có file nào được chọn, đã ẩn xem trước mới và hiện lại logo cũ.");
+    }
+}
+
+            // === GẮN SỰ KIỆN (EVENT LISTENERS) ===
+
+            // 1. Khi thay đổi Tỉnh/Thành phố
+            thanhPhoDropdown.on('change', function () {
+                var selectedThanhPhoId = parseInt($(this).val()) || 0;
+                console.log("[Event] Thay đổi Tỉnh/Thành phố -> ID:", selectedThanhPhoId);
+                loadQuanHuyen(selectedThanhPhoId, null); // Tải QH mới, không cần chọn sẵn QH cũ
+            });
+
+            // 2. Khi chọn file Logo mới
+            logoFileInput.on('change', function() {
+                console.log("[Event] Đã chọn file logo mới.");
+                previewNewLogo(this); // Gọi hàm xem trước
+            });
+
+
+            // === KHỞI TẠO KHI TẢI TRANG ===
+
+            // Tải Quận/Huyện lần đầu nếu đã có Tỉnh/Thành phố được chọn sẵn
+            if (initialThanhPhoId > 0) {
+                console.log("[Init] Có TP ban đầu, bắt đầu tải Quận/Huyện...");
+                loadQuanHuyen(initialThanhPhoId, initialQuanHuyenId);
+            } else {
+                 // Nếu không có TP ban đầu, đảm bảo QH bị disable
+                 quanHuyenDropdown.empty().append($('<option>', { value: '', text: '--- Vui lòng chọn Tỉnh/Thành phố ---', disabled: true })).prop('disabled', true);
+                 console.log("[Init] Không có TP ban đầu, Quận/Huyện bị vô hiệu hóa.");
+            }
+
+             // Hiển thị preview logo mới nếu có lỗi validation và người dùng đã chọn file trước đó
+             // (Trình duyệt thường giữ lại file đã chọn khi postback lỗi)
+             if (logoFileInput[0].files && logoFileInput[0].files[0]) {
+                 console.log("[Init] Phát hiện file logo đã chọn trước đó (có thể do lỗi validation), hiển thị preview.");
+                 previewNewLogo(logoFileInput[0]);
+             }
+
+
+        }); // --- Kết thúc $(document).ready ---
+    </script>
+}

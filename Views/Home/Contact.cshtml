@@ -1,0 +1,301 @@
+@model HeThongTimViec.ViewModels.TrangChu.ContactFormViewModel
+@{
+    ViewData["Title"] = "Liên Hệ Với Chúng Tôi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* Link CSS cho trang tĩnh *@
+<link rel="stylesheet" href="~/css/home-styles.css" asp-append-version="true" />
+
+<!-- Hero Section cho trang Contact với styling nhất quán -->
+<section class="hero-section contact-hero-section text-white">
+    <div class="hero-overlay"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-10 text-center">
+                <div class="contact-hero-icon mb-4">
+                    <i class="fas fa-headset" style="font-size: 4rem; color: var(--secondary-color);"></i>
+                </div>
+                <span class="tagline">Hỗ trợ & Liên hệ</span>
+                <h1 class="display-4 fw-bold mb-3 fade-in-up">@ViewData["Title"]</h1>
+                <p class="lead mb-0 fade-in-up" style="animation-delay: 0.2s;">
+                    Chúng tôi luôn sẵn lòng lắng nghe và giải đáp mọi thắc mắc của bạn. <br class="d-none d-md-block" />
+                    Hãy kết nối với JOXFLEX ngay hôm nay!
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics Section nhỏ cho Contact -->
+<section class="statistics-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Hỗ trợ</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-value">&lt;24h</div>
+                    <div class="stat-label">Phản hồi</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Tư vấn miễn phí</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-value">5★</div>
+                    <div class="stat-label">Đánh giá</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content Area với section-padding -->
+<div class="container section-padding">
+
+    @if (TempData["ContactMessage"] != null)
+    {
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10">
+                <div class="alert alert-@TempData["ContactStatus"] alert-dismissible fade show shadow-lg scale-in" role="alert" style="border-radius: 15px;">
+                    @Html.Raw(TempData["ContactMessage"])
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row gy-5">
+        <!-- Contact Form Column -->
+        <div class="col-lg-7">
+            <div class="card shadow-lg border-0 fade-in-up" style="border-radius: 20px;">
+                <div class="card-body p-4 p-md-5">
+                    <div class="section-title text-left mb-4">
+                        <span class="tagline">Liên hệ ngay</span>
+                        <h2 class="mb-3">Gửi tin nhắn cho chúng tôi</h2>
+                        <p class="mb-0">Điền vào biểu mẫu dưới đây, chúng tôi sẽ liên hệ lại với bạn sớm nhất.</p>
+                    </div>
+                    
+                    <form asp-action="Contact" method="post" id="contactForm">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        <div class="row gx-3">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Name" class="form-label fw-medium"></label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-0"><i class="fas fa-user text-primary"></i></span>
+                                    <input asp-for="Name" class="form-control border-0 bg-light" placeholder="Ví dụ: Nguyễn Văn A" style="border-radius: 0 10px 10px 0;" />
+                                </div>
+                                <span asp-validation-for="Name" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Email" class="form-label fw-medium"></label>
+                                 <div class="input-group">
+                                    <span class="input-group-text bg-light border-0"><i class="fas fa-envelope text-primary"></i></span>
+                                    <input asp-for="Email" class="form-control border-0 bg-light" placeholder="vidu@email.com" style="border-radius: 0 10px 10px 0;" />
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label fw-medium"></label>
+                             <div class="input-group">
+                                <span class="input-group-text bg-light border-0"><i class="fas fa-phone text-primary"></i></span>
+                                <input asp-for="PhoneNumber" class="form-control border-0 bg-light" placeholder="09xxxxxxxx" style="border-radius: 0 10px 10px 0;" />
+                            </div>
+                            <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Subject" class="form-label fw-medium"></label>
+                             <div class="input-group">
+                                <span class="input-group-text bg-light border-0"><i class="fas fa-tag text-primary"></i></span>
+                                <input asp-for="Subject" class="form-control border-0 bg-light" placeholder="Về vấn đề..." style="border-radius: 0 10px 10px 0;" />
+                            </div>
+                            <span asp-validation-for="Subject" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Message" class="form-label fw-medium"></label>
+                            <textarea asp-for="Message" class="form-control border-0 bg-light" rows="6" placeholder="Nội dung chi tiết..." style="border-radius: 10px;"></textarea>
+                            <span asp-validation-for="Message" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg" style="border-radius: 50px; padding: 15px 30px; background: var(--gradient-primary); border: none; transition: all 0.3s ease;">
+                                <i class="fas fa-paper-plane me-2"></i>Gửi Liên Hệ
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Info Column -->
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-lg fade-in-up" style="border-radius: 20px; animation-delay: 0.2s;">
+                <div class="card-body p-4 p-md-5" style="background: var(--gradient-bg); border-radius: 20px;">
+                    <div class="section-title text-left mb-4">
+                        <span class="tagline">Thông tin</span>
+                        <h2 class="mb-3">Liên hệ trực tiếp</h2>
+                        <p class="mb-0">Hoặc bạn có thể liên hệ trực tiếp với chúng tôi qua các kênh sau:</p>
+                    </div>
+
+                    <div class="contact-details">
+                        <div class="contact-item d-flex align-items-start mb-4 p-3 rounded" style="background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                            <div class="contact-icon me-3">
+                                <i class="fas fa-map-marker-alt fa-lg" style="color: var(--secondary-color); background: rgba(255, 193, 7, 0.1); padding: 12px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-semibold mb-1" style="color: var(--primary-color);">Địa chỉ văn phòng</h6>
+                                <p class="text-muted mb-0 small">123 Đường ABC, Phường XYZ, Quận 1, TP. Hồ Chí Minh, Việt Nam</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item d-flex align-items-start mb-4 p-3 rounded" style="background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                            <div class="contact-icon me-3">
+                                <i class="fas fa-phone fa-lg" style="color: var(--secondary-color); background: rgba(255, 193, 7, 0.1); padding: 12px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-semibold mb-1" style="color: var(--primary-color);">Hotline hỗ trợ</h6>
+                                <p class="text-muted mb-0 small"><a href="tel:19001234" class="text-decoration-none" style="color: var(--primary-color); font-weight: 600;">1900 1234</a> (Hỗ trợ 24/7)</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item d-flex align-items-start mb-4 p-3 rounded" style="background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                            <div class="contact-icon me-3">
+                                <i class="fas fa-envelope fa-lg" style="color: var(--secondary-color); background: rgba(255, 193, 7, 0.1); padding: 12px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-semibold mb-1" style="color: var(--primary-color);">Địa chỉ Email</h6>
+                                <p class="text-muted mb-1 small">
+                                    <a href="mailto:support@joxflex.com" class="text-decoration-none d-block" style="color: var(--primary-color); font-weight: 500;">support@joxflex.com</a>
+                                    <span style="font-size: 0.8rem;">(Hỗ trợ chung)</span>
+                                </p>
+                                <p class="text-muted mb-0 small">
+                                    <a href="mailto:business@joxflex.com" class="text-decoration-none d-block" style="color: var(--primary-color); font-weight: 500;">business@joxflex.com</a>
+                                    <span style="font-size: 0.8rem;">(Hợp tác & Doanh nghiệp)</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item d-flex align-items-start mb-4 p-3 rounded" style="background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                            <div class="contact-icon me-3">
+                                <i class="fas fa-clock fa-lg" style="color: var(--secondary-color); background: rgba(255, 193, 7, 0.1); padding: 12px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-semibold mb-1" style="color: var(--primary-color);">Giờ làm việc</h6>
+                                <p class="text-muted mb-0 small">Thứ 2 - Thứ 6: 08:00 - 17:30</p>
+                                <p class="text-muted mb-0 small">Thứ 7: 08:00 - 12:00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4" style="border-color: rgba(0,0,0,0.1);">
+
+                    <h6 class="fw-semibold mb-3" style="color: var(--primary-color);">Kết nối trên mạng xã hội:</h6>
+                    <div class="social-icons-contact d-flex gap-2">
+                        <a href="#" class="btn btn-sm" title="Facebook" style="background: var(--gradient-primary); color: white; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm" title="Twitter" style="background: var(--gradient-primary); color: white; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm" title="Instagram" style="background: var(--gradient-primary); color: white; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm" title="LinkedIn" style="background: var(--gradient-primary); color: white; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Section với styling cải tiến -->
+    <div class="row mt-5 pt-5">
+        <div class="col-12">
+            <div class="section-title text-center mb-5">
+                <span class="tagline">Vị trí</span>
+                <h2 class="mb-3">Tìm chúng tôi trên bản đồ</h2>
+                <p class="mb-0">Ghé thăm văn phòng JOXFLEX tại địa chỉ dưới đây.</p>
+            </div>
+            <div class="map-container fade-in-up" style="border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); animation-delay: 0.4s;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.447022723768!2d106.6971304153099!3d10.776995392321094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f38b39589e5%3A0x9cc33296731d27de!2zQml0ZXhjbyBGaW5hbmNpYWwgVG93ZXIsIFThuqduZyAxLCBI4buTIMOgaSBLaMOhbmcsIEThu6ljSCBW4bulbmcsIFF14bqtbiAxLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1623827589123!5m2!1svi!2s"
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Enhanced form styling and interactions
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add hover effects to contact items
+            const contactItems = document.querySelectorAll('.contact-item');
+            contactItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(10px)';
+                });
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+
+            // Add hover effects to social icons
+            const socialIcons = document.querySelectorAll('.social-icons-contact a');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.1)';
+                    this.style.background = 'var(--gradient-secondary)';
+                    this.style.color = 'var(--primary-color)';
+                });
+                icon.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.background = 'var(--gradient-primary)';
+                    this.style.color = 'white';
+                });
+            });
+
+            // Enhanced submit button hover effect
+            const submitBtn = document.querySelector('#contactForm button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 10px 25px rgba(0, 51, 102, 0.3)';
+                });
+                submitBtn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            }
+
+            // Input focus effects
+            const inputs = document.querySelectorAll('#contactForm .form-control');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.02)';
+                    this.parentElement.style.boxShadow = '0 5px 15px rgba(0, 51, 102, 0.1)';
+                });
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                    this.parentElement.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+}

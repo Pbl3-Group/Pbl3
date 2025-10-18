@@ -1,0 +1,24 @@
+@* Generic Modal for Rejecting an Item *@
+<div class="modal fade" id="tuChoiTinModal" tabindex="-1" aria-labelledby="tuChoiTinModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tuChoiTinModalLabel">Từ chối tin đăng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formTuChoiTin">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label for="lyDoTuChoiInput" class="form-label">Lý do từ chối (bắt buộc):</label>
+                        <textarea class="form-control" id="lyDoTuChoiInput" rows="3" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmTuChoiTin">Xác nhận từ chối</button>
+            </div>
+        </div>
+    </div>
+</div>

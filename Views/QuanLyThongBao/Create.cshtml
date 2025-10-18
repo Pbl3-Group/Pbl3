@@ -1,0 +1,408 @@
+@model HeThongTimViec.ViewModels.QuanLyThongBao.CampaignCreateViewModel
+@using HeThongTimViec.ViewModels.QuanLyThongBao
+
+@{
+    ViewData["Title"] = "Soạn thảo Thông báo";
+}
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+        --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        --danger-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        --info-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.15);
+        --shadow-medium: 0 15px 35px rgba(31, 38, 135, 0.2);
+        --shadow-heavy: 0 20px 40px rgba(31, 38, 135, 0.3);
+    }
+
+    * {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 24px;
+        box-shadow: var(--shadow-light);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-heavy);
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .header-section {
+        background: linear-gradient(135deg, #112e58 0%, #366bb8 100%);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 24px;
+        margin-bottom: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header-title {
+        background: linear-gradient(135deg, #f1f5f9, #ced4da);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .header-subtitle {
+        color: #f1f5f9;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .back-btn {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
+        padding: 0.8rem 1.5rem;
+        color: #e2e8f0;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-light);
+        color: #333;
+    }
+
+    .form-label {
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 12px;
+        border-color: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--primary-gradient);
+        box-shadow: 0 0 0 0.25rem rgba(103, 126, 234, 0.25);
+    }
+
+    .gradient-btn {
+        border: none;
+        border-radius: 12px;
+        padding: 0.8rem 1.5rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-light);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .gradient-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .gradient-btn:hover::before {
+        left: 100%;
+    }
+
+    .gradient-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-medium);
+    }
+
+    .btn-primary.gradient-btn {
+        background: var(--primary-gradient);
+        color: white;
+    }
+
+    .btn-secondary.gradient-btn {
+        background: var(--secondary-gradient);
+        color: white;
+    }
+
+    .alert-danger {
+        background: var(--danger-gradient);
+        color: white;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: var(--shadow-light);
+    }
+
+    .alert-danger strong {
+        color: #fff;
+    }
+
+    .select2-container .select2-selection--multiple {
+        border-radius: 12px;
+        border-color: rgba(0, 0, 0, 0.1);
+        min-height: 38px;
+    }
+
+    .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice {
+        background: var(--primary-gradient);
+        color: white;
+        border: none;
+        border-radius: 10px;
+    }
+
+    .section-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(103, 126, 234, 0.3), transparent);
+        margin: 2rem 0;
+    }
+
+    @@media (max-width: 768px) {
+        .header-title {
+            font-size: 2rem;
+        }
+        
+        .glass-card {
+            margin-bottom: 1rem;
+        }
+        
+        .row.mb-3 {
+            flex-direction: column;
+        }
+        
+        .col-md-6 {
+            width: 100%;
+        }
+        
+        .card-footer {
+            text-align: center;
+        }
+        
+        .gradient-btn {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .loading-shimmer {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0f0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 2s infinite;
+    }
+
+    @@keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+</style>
+
+<div class="container-fluid py-4">
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div class="glass-card">
+            <div class="header-section">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <div>
+                        <h1 class="header-title">
+                            <i class="fas fa-edit me-2"></i>@ViewData["Title"]
+                        </h1>
+                        <p class="header-subtitle mb-0">Tạo và gửi thông báo mới đến người dùng.</p>
+                    </div>
+                    <a asp-action="Index" class="back-btn">
+                        <i class="fas fa-arrow-left me-2"></i>Quay lại danh sách
+                    </a>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Vui lòng sửa các lỗi sau:</strong>
+                        <div asp-validation-summary="ModelOnly" class="mt-2"></div>
+                    </div>
+                }
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="TieuDe" class="form-label"></label>
+                        <input asp-for="TieuDe" class="form-control" placeholder="Ví dụ: Thông báo bảo trì hệ thống định kỳ" />
+                        <span asp-validation-for="TieuDe" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="LoaiThongBao" class="form-label"></label>
+                        <select asp-for="LoaiThongBao" asp-items="Model.LoaiThongBaoOptions" class="form-select"></select>
+                        <span asp-validation-for="LoaiThongBao" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="TargetType" class="form-label"></label>
+                    <select asp-for="TargetType" asp-items="Html.GetEnumSelectList<NotificationTargetType>()" class="form-select" id="targetTypeSelect"></select>
+                    <span asp-validation-for="TargetType" class="text-danger small"></span>
+                </div>
+                
+                @* KHU VỰC CHỌN NGƯỜI DÙNG - SẼ ẨN/HIỆN *@
+                <div class="mb-3" id="specificUserSection" style="display:none;">
+                    <label asp-for="SpecificUserIds" class="form-label"></label>
+                    <div class="p-2 border rounded bg-white" style="background: rgba(255, 255, 255, 0.95);">
+                        <select asp-for="SpecificUserIds" class="form-control" id="specificUserSelect" multiple="multiple" style="width: 100%;">
+                            @if (Model.PreSelectedUsers != null)
+                            {
+                                foreach (var user in Model.PreSelectedUsers)
+                                {
+                                    <option value="@user.Value" selected="selected">@user.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-text">Bắt đầu gõ tên hoặc email để tìm kiếm và thêm người nhận.</div>
+                    <span asp-validation-for="SpecificUserIds" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="NoiDung" class="form-label"></label>
+                    <textarea asp-for="NoiDung" class="form-control" rows="10" placeholder="Nhập nội dung thông báo tại đây..."></textarea>
+                    <span asp-validation-for="NoiDung" class="text-danger small"></span>
+                </div>
+            </div>
+            <div class="card-footer text-end bg-light">
+                <a asp-action="Index" class="btn gradient-btn btn-secondary">Hủy bỏ</a>
+                <button type="submit" class="btn gradient-btn btn-primary btn-lg">
+                    <i class="fas fa-paper-plane me-2"></i>Gửi ngay
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    
+    <!-- Tải các thư viện cần thiết cho Select2 từ CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+
+    <script>
+        $(document).ready(function() {
+            // Hàm định dạng cho mỗi KẾT QUẢ trong danh sách dropdown
+            function formatUserResult (user) {
+                if (user.loading) {
+                    return user.text;
+                }
+                
+                var $container = $(
+                    "<div class='select2-result-user clearfix'>" +
+                        "<div class='select2-result-user__avatar'><img src='" + user.avatar + "' /></div>" +
+                        "<div class='select2-result-user__meta'>" +
+                            "<div class='select2-result-user__title'></div>" +
+                            "<div class='select2-result-user__email'></div>" +
+                        "</div>" +
+                    "</div>"
+                );
+
+                $container.find(".select2-result-user__title").text(user.text);
+                $container.find(".select2-result-user__email").text(user.email);
+
+                return $container;
+            }
+
+            // Hàm định dạng cho mục ĐÃ ĐƯỢC CHỌN hiển thị trong ô input
+            function formatUserSelection (user) {
+                return user.text || user.placeholder;
+            }
+
+            $('#specificUserSelect').select2({
+                placeholder: 'Bắt đầu gõ tên hoặc email để tìm kiếm...',
+                dropdownParent: $(document.body), 
+                minimumInputLength: 2,
+                theme: 'bootstrap-5',
+                allowClear: true,
+                ajax: {
+                    url: '@Url.Action("SearchUsers", "QuanLyThongBao")',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) { return { term: params.term }; },
+                    processResults: function (data) { return { results: data.results }; },
+                    cache: true
+                },
+                templateResult: formatUserResult,
+                templateSelection: formatUserSelection,
+                escapeMarkup: function (markup) { return markup; }
+            });
+
+            function toggleSpecificUserSection() {
+                var targetType = $('#targetTypeSelect').val();
+                var specificUserSection = $('#specificUserSection');
+                var specificUserValue = '@((int)NotificationTargetType.SpecificUser)';
+
+                if (targetType === specificUserValue) {
+                    if (!specificUserSection.is(':visible')) {
+                        specificUserSection.slideDown(); 
+                    }
+                } else {
+                    if (specificUserSection.is(':visible')) {
+                        specificUserSection.slideUp(function() {
+                            $('#specificUserSelect').val(null).trigger('change');
+                        });
+                    }
+                }
+            }
+
+            toggleSpecificUserSection();
+            $('#targetTypeSelect').on('change', toggleSpecificUserSection);
+        });
+    </script>
+
+    <style>
+        .select2-result-user {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+        .select2-result-user__avatar {
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+        .select2-result-user__avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .select2-result-user__meta {
+            display: flex;
+            flex-direction: column;
+        }
+        .select2-result-user__title {
+            font-weight: 600;
+            color: #333;
+            line-height: 1.2;
+        }
+        .select2-result-user__email {
+            font-size: 0.85em;
+            color: #777;
+        }
+    </style>
+}

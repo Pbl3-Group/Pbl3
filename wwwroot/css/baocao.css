@@ -1,0 +1,364 @@
+
+    /* Base Layout Styles */
+    .page-container-custom {
+        padding: 2rem 0 3rem;
+        background-color: #f8f9fa; /* Consistent background */
+        min-height: calc(100vh - 250px); /* Ensure it takes up space */
+    }
+    
+    .content-wrapper {
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+        padding: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .page-container-custom {
+        padding: 2rem 0 3rem; /* Bạn có thể giữ lại 2rem 0 3rem hoặc đổi thành 2rem để giống DaLuu hơn nếu DaLuu không có padding ngang */
+        background-color: #f8f9fa; 
+        min-height: calc(100vh - 250px); 
+    }
+    
+    .content-wrapper { /* Thẻ này có thể không cần thiết nếu page-container-custom đã xử lý nền và padding cho toàn trang */
+        background-color: #fff;
+        border-radius: 12px; /* Giữ bo góc này nếu bạn thích */
+        box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+        padding: 1.75rem; /* Padding cho nội dung bên trong content-wrapper */
+        margin-bottom: 1.5rem;
+    }
+    
+    /* --- Page Header (Điều chỉnh cho giống page-header-saved) --- */
+    .page-header-custom { /* Class này bạn đang dùng trong HTML */
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;  /* Giống DaLuu */
+        border-bottom: 1px solid #e0e0e0; /* Giống DaLuu */
+        padding-bottom: 1rem;  /* Giống DaLuu */
+    }
+    
+    .header-icon-custom { /* Class này bạn đang dùng trong HTML */
+        width: 55px;           /* Giống DaLuu */
+        height: 55px;          /* Giống DaLuu */
+        font-size: 1.6rem;     /* Giống DaLuu (tương đương fa-2x tùy font gốc) */
+        margin-right: 1rem;    /* Giống DaLuu */
+        background-color: rgba(var(--bs-primary-rgb), 0.1); /* Giống DaLuu */
+        border-radius: 12px;   /* Giống DaLuu */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--bs-primary); /* Giống DaLuu */
+        /* box-shadow: 0 3px 6px rgba(var(--bs-primary-rgb), 0.08); */ /* Bỏ shadow này nếu DaLuu không có */
+    }
+    
+    .page-header-custom h1 { /* Target h1 bên trong page-header-custom */
+        font-size: 1.75rem; /* Hoặc 2rem nếu bạn dùng h1 bên DaLuu là 2rem */
+        color: var(--bs-primary); /* Giống DaLuu */
+        font-weight: 700;         /* Giống DaLuu */
+        margin-bottom: 0;      /* Giống DaLuu (H1 trong DaLuu là .h3.mb-0) */
+    }
+    
+    .page-header-custom p { /* Target p bên trong page-header-custom */
+        font-size: 1rem;       /* Giống DaLuu */
+        color: #6c757d;       /* Hoặc #555 nếu DaLuu dùng màu này */
+        margin-bottom: 0;      /* Giống DaLuu */
+        line-height: 1.4;      /* Thêm line-height cho dễ đọc */
+    }
+    
+    /* --- Filter Card (Giữ nguyên style bạn đã có, hoặc điều chỉnh nếu muốn giống DaLuu hơn) --- */
+    .filter-card {
+        background-color: #f8fafc; /* Hoặc #ffffff nếu filter của DaLuu nền trắng */
+        border-radius: 0.75rem; /* Giống DaLuu filter */
+        border: 1px solid #e9ecef;
+        padding: 1.5rem; /* Giống DaLuu filter */
+        margin-bottom: 1.75rem; /* Hoặc 2rem nếu DaLuu filter có margin lớn hơn */
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05); /* Giống DaLuu filter */
+    }
+    
+    /* Style cho form elements bên trong .filter-card để giống .filter-section-reports */
+    .filter-card .form-label {
+        font-weight: 500;
+        color: #495057;
+        margin-bottom: 0.3rem;
+        font-size: 0.875rem;
+    }
+    .filter-card .input-group-sm > .form-control,
+    .filter-card .input-group-sm > .input-group-text,
+    .filter-card .form-select-sm {
+        padding-top: 0.25rem; 
+        padding-bottom: 0.25rem;
+        font-size: 0.875rem;
+        height: calc(1.5em + (0.25rem * 2) + 2px + 2px); 
+    }
+    .filter-card .input-group-text {
+        display: flex;
+        align-items: center;
+    }
+    .filter-card .btn-sm { 
+        height: calc(1.5em + (0.25rem * 2) + 2px + 2px); 
+        display: inline-flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-weight: 500;
+    }
+    /* Filter Section */
+
+    
+    .filter-section .form-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #495057;
+    }
+    
+    .filter-section input,
+    .filter-section select,
+    .filter-section .btn {
+        font-size: 0.85rem;
+        border-radius: 8px;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .filter-section .btn-primary {
+        padding: 0.5rem 1.25rem;
+        font-weight: 500;
+    }
+    
+    /* Report Cards */
+    .reports-container {
+        margin-top: 1.5rem;
+    }
+    
+    .report-item-card {
+        transition: all 0.25s ease-out;
+        margin-bottom: 1rem !important;
+        border-radius: 10px;
+        border: 1px solid #ebedf2;
+        overflow: hidden;
+    }
+    
+    .report-item-card .card-body {
+        padding: 1.25rem;
+    }
+    
+    .report-item-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.07) !important;
+    }
+    
+    .logo-container {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+    }
+    
+    .logo-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .report-job-title a {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--bs-primary);
+        text-decoration: none;
+    }
+    
+    .report-job-title a:hover {
+        color: var(--bs-link-hover-color);
+        text-decoration: underline;
+    }
+    
+    .report-item-card .job-info-muted {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+    
+    .job-meta-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin: 0.5rem 0;
+    }
+    
+    .job-meta-info span {
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.8rem;
+    }
+    
+    .job-meta-info i {
+        margin-right: 0.35rem;
+    }
+    
+    .report-tag {
+        font-size: 0.75rem;
+        padding: 0.25em 0.75em;
+        margin-right: 0.35rem;
+        margin-bottom: 0.35rem;
+        border-radius: 20px;
+        background-color: #f0f2f5;
+        color: #4e5d78;
+        display: inline-block;
+        border: 1px solid #e9ecef;
+    }
+    
+    .report-reason-section {
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid #eef0f3;
+        background-color: #fafbfc;
+        border-radius: 8px;
+        padding: 0.75rem;
+    }
+    
+    .report-reason-text {
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: #dc3545;
+    }
+    
+    .report-detail-text {
+        background-color: #f8f9fa;
+        padding: 0.75rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        border-left: 3px solid #dee2e6;
+        max-height: 80px;
+        overflow-y: auto;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin-top: 0.5rem;
+    }
+    
+    .report-time {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-top: 0.5rem;
+    }
+    
+    /* Admin Reply Section */
+    .admin-reply-section {
+        background-color: #e8f4fc;
+        border-radius: 8px;
+        padding: 0.75rem;
+        margin-top: 0.75rem;
+        border-left: 3px solid #0d6efd;
+    }
+    
+    .admin-reply-section p.small {
+        margin-bottom: 0.25rem;
+    }
+    
+    .admin-reply-section .admin-message {
+        font-style: italic;
+        padding: 0.5rem;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 4px;
+        margin-top: 0.25rem;
+    }
+    
+    .report-actions {
+        margin-top: 0.75rem;
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .report-actions .btn {
+        border-radius: 6px;
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+    
+    /* Status Badges */
+    .status-badge {
+        padding: 0.35em 0.75em;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .status-badge i {
+        margin-right: 0.35rem;
+        font-size: 0.7rem;
+    }
+    
+    /* Empty State */
+    .empty-state-custom {
+        padding: 3rem 1.5rem;
+        text-align: center;
+        background-color: #fff;
+        border-radius: 12px;
+        border: 1px dashed #d1d9e1;
+    }
+    
+    .empty-state-custom .icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: rgba(var(--bs-primary-rgb), 0.08);
+        color: var(--bs-primary);
+    }
+    
+    .empty-state-custom .lead {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Pagination */
+    .pagination-container {
+        margin-top: 2rem;
+    }
+    
+    .pagination .page-link {
+        border-radius: 6px;
+        margin: 0 0.15rem;
+        color: var(--bs-primary);
+        border-color: #e9ecef;
+    }
+    
+    .pagination .page-item.active .page-link {
+        background-color: var(--bs-primary);
+        border-color: var(--bs-primary);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 767.98px) {
+        .content-wrapper {
+            padding: 1.25rem;
+        }
+        
+        .page-header-custom {
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+        }
+        
+        .header-icon-custom {
+            margin-right: 0;
+            margin-bottom: 0.75rem;
+        }
+        
+        .report-item-card .card-body {
+            padding: 1rem;
+        }
+        
+        .job-meta-info {
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+    }

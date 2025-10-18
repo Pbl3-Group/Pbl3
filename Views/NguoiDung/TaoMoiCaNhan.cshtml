@@ -1,0 +1,376 @@
+@model HeThongTimViec.ViewModels.NguoiDungCaNhanCreateViewModel
+@{
+    ViewData["Title"] = "Tạo mới Người dùng Cá nhân";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .modern-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        overflow: hidden;
+        margin-bottom: 2rem;
+    }
+
+    .card-header-modern {
+        background: linear-gradient(135deg, #2a4265 0%, #084298 100%);
+        backdrop-filter: blur(10px);
+        border: none;
+        padding: 2rem;
+        text-align: left; /* Thay đổi từ center thành left */
+    }
+
+    .card-header-modern h2 {
+        color: white;
+        font-weight: 600;
+        font-size: 1.8rem;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem; /* Khoảng cách giữa icon và text */
+    }
+
+    .card-header-modern p {
+        color: rgba(255, 255, 255, 0.8);
+        margin: 0.5rem 0 0 0;
+        font-size: 1rem;
+    }
+
+    .card-body-modern {
+        background: white;
+        padding: 3rem;
+        border-radius: 0;
+    }
+
+    .form-section {
+        background: #f8faff;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-left: 4px solid #084298;
+    }
+
+    .section-title {
+        color: #4a5568;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .section-icon {
+        width: 24px;
+        height: 24px;
+        background: linear-gradient(135deg, #c1d2ea 0%, #f1f4f7 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+    }
+
+    .form-group-modern {
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+
+    .form-label-modern {
+        color: #4a5568;
+        font-weight: 500;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .form-control-modern {
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: white;
+    }
+
+    .form-control-modern:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        outline: none;
+    }
+
+    .form-control-modern:hover {
+        border-color: #cbd5e0;
+    }
+
+    .btn-primary-modern {
+       background: linear-gradient(135deg, #2a4265 0%, #084298 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 0.875rem 2rem;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-primary-modern:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        background: linear-gradient(135deg, #2b369a 0%, #6b46c1 100%);
+    }
+
+    .btn-secondary-modern {
+        background: #f7fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 0.875rem 2rem;
+        font-weight: 500;
+        color: #4a5568;
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary-modern:hover {
+        background: #edf2f7;
+        border-color: #cbd5e0;
+        color: #2d3748;
+        text-decoration: none;
+    }
+
+    .text-danger {
+        color: #e53e3e !important;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        font-weight: 500;
+    }
+
+    .alert-danger {
+        background: #fed7d7;
+        border: 1px solid #feb2b2;
+        color: #c53030;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .row-modern {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    @@media (max-width: 768px) {
+        .row-modern {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .card-body-modern {
+            padding: 2rem 1.5rem;
+        }
+        
+        .form-section {
+            padding: 1.5rem;
+        }
+    }
+
+    .input-icon {
+        position: relative;
+    }
+
+    .input-icon i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #a0aec0;
+        z-index: 1;
+    }
+
+    .input-icon .form-control-modern {
+        padding-left: 2.5rem;
+    }
+</style>
+
+<div class="modern-card">
+    <div class="card-header-modern">
+        <h2><i class="fas fa-user-plus"></i> @ViewData["Title"]</h2>
+        <p>Điền thông tin chi tiết để tạo tài khoản người dùng mới</p>
+    </div>
+    <div class="card-body-modern">
+        <form asp-action="TaoMoiCaNhan" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="row-modern">
+                <!-- Thông tin cá nhân -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <div class="section-icon">👤</div>
+                        Thông tin cá nhân
+                    </div>
+
+                    <div class="form-group-modern">
+                        <label asp-for="HoTen" class="form-label-modern">Họ và tên</label>
+                        <div class="input-icon">
+                            <input asp-for="HoTen" class="form-control form-control-modern" placeholder="Nhập họ và tên đầy đủ" />
+                        </div>
+                        <span asp-validation-for="HoTen" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group-modern">
+                        <label asp-for="Email" class="form-label-modern">Email</label>
+                        <div class="input-icon">
+                            <input asp-for="Email" class="form-control form-control-modern" placeholder="example@email.com" />
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group-modern">
+                        <label asp-for="Sdt" class="form-label-modern">Số điện thoại</label>
+                        <div class="input-icon">
+                            <input asp-for="Sdt" class="form-control form-control-modern" placeholder="0xxx xxx xxx" />
+                        </div>
+                        <span asp-validation-for="Sdt" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group-modern">
+                        <label asp-for="NgaySinh" class="form-label-modern">Ngày sinh</label>
+                        <input asp-for="NgaySinh" class="form-control form-control-modern" type="date"/>
+                        <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group-modern">
+                        <label asp-for="GioiTinh" class="form-label-modern">Giới tính</label>
+                        <select asp-for="GioiTinh" asp-items="Model.GioiTinhList" class="form-control form-control-modern">
+                            <option value="">-- Chọn giới tính --</option>
+                        </select>
+                        <span asp-validation-for="GioiTinh" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Thông tin địa chỉ và bảo mật -->
+                <div>
+                    <!-- Địa chỉ -->
+                    <div class="form-section">
+                        <div class="section-title">
+                            <div class="section-icon">📍</div>
+                            Thông tin địa chỉ
+                        </div>
+
+                        <div class="form-group-modern">
+                            <label asp-for="ThanhPhoId" class="form-label-modern">Tỉnh/Thành phố</label>
+                            <select asp-for="ThanhPhoId" asp-items="Model.ThanhPhoList" id="thanhPhoDropdown" class="form-control form-control-modern">
+                                <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                            </select>
+                            <span asp-validation-for="ThanhPhoId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group-modern">
+                            <label asp-for="QuanHuyenId" class="form-label-modern">Quận/Huyện</label>
+                            <select asp-for="QuanHuyenId" asp-items="Model.QuanHuyenList" id="quanHuyenDropdown" class="form-control form-control-modern">
+                                <option value="">-- Chọn Quận/Huyện --</option>
+                            </select>
+                            <span asp-validation-for="QuanHuyenId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group-modern">
+                            <label asp-for="DiaChiChiTiet" class="form-label-modern">Địa chỉ chi tiết</label>
+                            <input asp-for="DiaChiChiTiet" class="form-control form-control-modern" placeholder="Số nhà, tên đường..." />
+                            <span asp-validation-for="DiaChiChiTiet" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Bảo mật -->
+                    <div class="form-section">
+                        <div class="section-title">
+                            <div class="section-icon">🔒</div>
+                            Thông tin bảo mật
+                        </div>
+
+                        <div class="form-group-modern">
+                            <label asp-for="Password" class="form-label-modern">Mật khẩu</label>
+                            <input asp-for="Password" class="form-control form-control-modern" type="password" placeholder="Nhập mật khẩu" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group-modern">
+                            <label asp-for="ConfirmPassword" class="form-label-modern">Xác nhận mật khẩu</label>
+                            <input asp-for="ConfirmPassword" class="form-control form-control-modern" type="password" placeholder="Nhập lại mật khẩu" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary-modern me-3">
+                    ✨ Tạo tài khoản
+                </button>
+                <a asp-action="CaNhan" class="btn btn-secondary-modern">
+                    ← Quay lại danh sách
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            const thanhPhoDropdown = $('#thanhPhoDropdown');
+            const quanHuyenDropdown = $('#quanHuyenDropdown');
+
+            function loadQuanHuyen() {
+                const thanhPhoId = thanhPhoDropdown.val();
+                quanHuyenDropdown.empty();
+                quanHuyenDropdown.append($('<option>', {
+                    value: '',
+                    text: '-- Chọn Quận/Huyện --'
+                }));
+
+                if (thanhPhoId) {
+                    quanHuyenDropdown.prop('disabled', true);
+                    quanHuyenDropdown.find('option:first').text('⏳ Đang tải...');
+
+                    $.getJSON(`/api/DiaChi/GetQuanHuyenByThanhPho?thanhPhoId=${thanhPhoId}`, function (data) {
+                        $.each(data, function (index, item) {
+                            quanHuyenDropdown.append($('<option>', {
+                                value: item.id,
+                                text: item.ten
+                            }));
+                        });
+                    }).fail(function() {
+                        console.error("Lỗi khi tải danh sách quận/huyện.");
+                        quanHuyenDropdown.find('option:first').text('❌ Lỗi tải dữ liệu');
+                    }).always(function() {
+                         quanHuyenDropdown.prop('disabled', false);
+                         const selectedQuanHuyenId = '@Model.QuanHuyenId';
+                         if (selectedQuanHuyenId) {
+                             quanHuyenDropdown.val(selectedQuanHuyenId);
+                         }
+                    });
+                }
+            }
+
+            thanhPhoDropdown.on('change', loadQuanHuyen);
+
+            if (thanhPhoDropdown.val()) {
+                loadQuanHuyen();
+            }
+
+            // Thêm hiệu ứng focus cho form controls
+            $('.form-control-modern').on('focus', function() {
+                $(this).closest('.form-group-modern').addClass('focused');
+            }).on('blur', function() {
+                $(this).closest('.form-group-modern').removeClass('focused');
+            });
+        });
+    </script>
+}

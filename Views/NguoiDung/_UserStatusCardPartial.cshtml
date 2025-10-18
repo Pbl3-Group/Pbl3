@@ -1,0 +1,94 @@
+@model HeThongTimViec.Models.NguoiDung
+@using HeThongTimViec.Extensions
+@using HeThongTimViec.Models
+
+@{
+    var redirectUrl = Context.Request.Path + Context.Request.QueryString;
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Trạng thái & Hành động</h6>
+    </div>
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="fw-bold">Trạng thái hiện tại:</span>
+            <span class="badge fs-6 @(Model.TrangThaiTk == TrangThaiTaiKhoan.kichhoat ? "bg-success" : (Model.TrangThaiTk == TrangThaiTaiKhoan.bidinhchi ? "bg-danger" : "bg-warning text-dark"))">
+                @Model.TrangThaiTk.GetDisplayName()
+            </span>
+        </div>
+        <hr />
+        <p class="text-muted small">Chọn hành động để cập nhật trạng thái tài khoản.</p>
+
+        <div class="d-grid gap-2">
+            @if (Model.TrangThaiTk != TrangThaiTaiKhoan.kichhoat)
+            {
+                <form asp-action="CapNhatTrangThai" method="post" class="d-grid">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" name="newStatus" value="@TrangThaiTaiKhoan.kichhoat" />
+                    <input type="hidden" name="redirectUrl" value="@redirectUrl" />
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check-circle me-2"></i> Kích hoạt lại
+                    </button>
+                </form>
+            }
+
+            @if (Model.TrangThaiTk != TrangThaiTaiKhoan.tamdung)
+            {
+                <form asp-action="CapNhatTrangThai" method="post" class="d-grid">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" name="newStatus" value="@TrangThaiTaiKhoan.tamdung" />
+                    <input type="hidden" name="redirectUrl" value="@redirectUrl" />
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-warning text-dark">
+                        <i class="fas fa-pause-circle me-2"></i> Tạm dừng
+                    </button>
+                </form>
+            }
+
+            @if (Model.TrangThaiTk != TrangThaiTaiKhoan.bidinhchi)
+            {
+                <form asp-action="CapNhatTrangThai" method="post" class="d-grid">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" name="newStatus" value="@TrangThaiTaiKhoan.bidinhchi" />
+                    <input type="hidden" name="redirectUrl" value="@redirectUrl" />
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-user-lock me-2"></i> Đình chỉ
+                    </button>
+                </form>
+            }
+        </div>
+        <hr />
+        <!-- Nút Xóa -->
+        <div class="d-grid">
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal">
+                <i class="fas fa-trash-alt me-2"></i> Xóa vĩnh viễn
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal xác nhận xóa -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteUserModalLabel">Xác nhận xóa người dùng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa vĩnh viễn người dùng <strong>@Model.HoTen</strong>? Hành động này không thể hoàn tác và sẽ xóa tất cả dữ liệu liên quan nếu có thể.
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Xoa" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    @Html.AntiForgeryToken()
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">Xóa vĩnh viễn</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

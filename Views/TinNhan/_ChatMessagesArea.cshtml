@@ -1,0 +1,83 @@
+@model HeThongTimViec.ViewModels.TinNhan.QuanLyTinNhanViewModel
+
+@if (Model.NguoiLienHeIdHienTai.HasValue)
+{
+    <div class="chat-header">
+        <div class="d-flex align-items-center flex-grow-1">
+            <img src="@(Model.AvatarUrlNguoiLienHeHienTai ?? "/images/default-avatar.png")" alt="@Model.TenNguoiLienHeHienTai" class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover;">
+            <div>
+                <h5 class="mb-0">@Model.TenNguoiLienHeHienTai</h5>
+                @if (!string.IsNullOrEmpty(Model.TieuDeCongViecLienQuanHienTai))
+                {
+                    <small class="text-muted">
+                        Về:
+                        @if (!string.IsNullOrEmpty(Model.UrlChiTietCongViecLienQuanHienTai))
+                        {
+                            <a href="@Model.UrlChiTietCongViecLienQuanHienTai" target="_blank" class="text-decoration-none">@Model.TieuDeCongViecLienQuanHienTai</a>
+                        }
+                        else
+                        {
+                            @Model.TieuDeCongViecLienQuanHienTai
+                        }
+                    </small>
+                }
+            </div>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary" id="chatHeaderInfoTrigger" title="Xem thông tin chi tiết">
+            <i class="fas fa-info-circle"></i>
+        </button>
+    </div>
+
+    <div class="chat-messages scrollable-div">
+        @if (Model.TinNhanTrongHoiThoaiHienTai.Any())
+        {
+            @foreach (var message in Model.TinNhanTrongHoiThoaiHienTai)
+            {
+                var alignmentClass = message.LaCuaToi ? "message-sent" : "message-received";
+                <div class="message-item @alignmentClass">
+                    @if (!message.LaCuaToi)
+                    {
+                        <img src="@(message.AvatarUrlNguoiGui ?? "/images/default-avatar.png")" alt="@message.TenNguoiGui" class="avatar" title="@message.TenNguoiGui">
+                    }
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            @Html.Raw(message.NoiDung.Replace("\n", "<br />"))
+                        </div>
+                        <div class="message-time" title="@message.NgayGui.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss")">@message.ThoiGianGuiDisplay</div>
+                    </div>
+                    @if (message.LaCuaToi)
+                    {
+                        <img src="@(Model.CurrentUserAvatarUrl ?? "/images/default-avatar.png")" alt="@(Model.CurrentUserDisplayName ?? "Bạn")" class="avatar" title="@(Model.CurrentUserDisplayName ?? "Bạn")">
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-center text-muted p-3">Chưa có tin nhắn nào. Hãy bắt đầu cuộc trò chuyện!</p>
+        }
+    </div>
+
+    <div class="chat-input-area">
+        <form asp-action="GuiTinNhan" method="post" id="sendMessageForm" class="d-flex">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="NguoiLienHeIdHienTai" value="@Model.NguoiLienHeIdHienTai" />
+            <input type="hidden" name="UngTuyenIdChoTinNhanMoi" value="@Model.UngTuyenIdChoTinNhanMoi" />
+            <input type="hidden" name="TinTuyenDungIdChoTinNhanMoi" value="@Model.TinTuyenDungIdChoTinNhanMoi" />
+
+            <textarea name="NoiDungTinNhanMoi" class="form-control me-2" rows="2" placeholder="Nhập tin nhắn..." autofocus></textarea>
+            <button type="submit" class="btn btn-primary" title="Gửi tin nhắn"><i class="fas fa-paper-plane"></i></button>
+        </form>
+    </div>
+}
+else // Không có NguoiLienHeIdHienTai => hiển thị placeholder (được quản lý bởi Index.cshtml)
+{
+    <div class="no-chat-selected">
+        <i class="far fa-comments fa-5x text-muted"></i>
+        <p class="mt-3">Chọn một hội thoại để bắt đầu nhắn tin.</p>
+        @if (!Model.DanhSachHoiThoai.Any() && !string.IsNullOrEmpty(Context.Request.Query["nguoiLienHeId"]))
+        {
+             <p class="text-muted small">Hoặc bắt đầu cuộc trò chuyện mới.</p>
+        }
+    </div>
+}

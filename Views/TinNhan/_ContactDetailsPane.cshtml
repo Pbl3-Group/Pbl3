@@ -1,0 +1,65 @@
+@model HeThongTimViec.ViewModels.TinNhan.ContactDetailsPaneViewModel
+@using HeThongTimViec.Extensions
+
+@if (Model != null)
+{
+    <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+        <img src="@(Model.AvatarUrl ?? "/images/default-avatar.png")" alt="@Model.DisplayName" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;" />
+        <div>
+            <h5 class="mb-0">@Model.DisplayName</h5>
+            <small class="text-muted">@Model.UserType</small>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @if (Model.UserType == "Doanh nghiệp")
+        {
+            @if (!string.IsNullOrEmpty(Model.CompanyName))
+            { <p class="mb-1"><small class="text-muted">Tên công ty:</small><br><strong>@Model.CompanyName</strong></p> }
+            @if (!string.IsNullOrEmpty(Model.CompanyWebsite))
+            { <p class="mb-1"><small class="text-muted">Website:</small><br><a href="@Model.CompanyWebsite" target="_blank" rel="noopener noreferrer">@Model.CompanyWebsite</a></p> }
+            @if (!string.IsNullOrEmpty(Model.CompanyTaxCode))
+            { <p class="mb-1"><small class="text-muted">Mã số thuế:</small><br>@Model.CompanyTaxCode</p> }
+            @if (!string.IsNullOrEmpty(Model.CompanyDescription))
+            { <p class="mb-1"><small class="text-muted">Giới thiệu:</small><br><span class="small">@Html.Raw(Model.CompanyDescription.Replace("\n", "<br/>"))</span></p> }
+        }
+        else if (Model.UserType == "Ứng viên" || Model.UserType == "Cá nhân")
+        {
+            @if (!string.IsNullOrEmpty(Model.CandidateProfileTitle))
+            { <p class="mb-1"><small class="text-muted">Tiêu đề hồ sơ:</small><br><strong>@Model.CandidateProfileTitle</strong></p> }
+            @if (!string.IsNullOrEmpty(Model.CandidateDesiredPosition))
+            { <p class="mb-1"><small class="text-muted">Vị trí mong muốn:</small><br>@Model.CandidateDesiredPosition</p> }
+            @if (!string.IsNullOrEmpty(Model.CandidateIntroduction))
+            { <p class="mb-1"><small class="text-muted">Giới thiệu bản thân:</small><br><span class="small">@Html.Raw(Model.CandidateIntroduction.Replace("\n", "<br/>"))</span></p> }
+        }
+    </div>
+
+
+    @if (!string.IsNullOrEmpty(Model.RelatedJobTitle))
+    {
+        <div class="pt-3 border-top">
+            <h6 class="mb-2">Thông tin công việc liên quan</h6>
+            <p class="mb-1">
+                <small class="text-muted">Vị trí:</small><br>
+                @if (!string.IsNullOrEmpty(Model.RelatedJobUrl))
+                {
+                    <a href="@Model.RelatedJobUrl" target="_blank" rel="noopener noreferrer"><strong>@Model.RelatedJobTitle</strong></a>
+                }
+                else
+                {
+                    <strong>@Model.RelatedJobTitle</strong>
+                }
+            </p>
+            @if (Model.RelatedUngTuyenId.HasValue && !string.IsNullOrEmpty(Model.ApplicationStatus))
+            {
+                <p class="mb-1"><small class="text-muted">Trạng thái ứng tuyển:</small><br>@Model.ApplicationStatus</p>
+            }
+             @if (!string.IsNullOrEmpty(Model.JobDescriptionSummary))
+            { <p class="mb-1"><small class="text-muted">Mô tả tóm tắt:</small><br><span class="small">@Html.Raw(Model.JobDescriptionSummary.Replace("\n", "<br/>"))</span></p> }
+        </div>
+    }
+}
+else
+{
+    <p class="text-muted p-3">Không có thông tin chi tiết để hiển thị.</p>
+}

@@ -1,0 +1,191 @@
+@* File: Views/IndividualPosting/Index.cshtml (Phiên bản có bộ lọc và phân trang) *@
+@model HeThongTimViec.ViewModels.JobPosting.JobPostingIndexViewModel
+@using HeThongTimViec.Models
+@using HeThongTimViec.Extensions
+@using HeThongTimViec.ViewModels.TimViec
+
+@{
+    ViewData["Title"] = "Quản lý Tin tuyển dụng (Cá nhân)";
+}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="Dashboard" asp-action="Index">Bảng điều khiển NTD</a></li>
+    <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+  </ol>
+</nav>
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus me-1"></i> Đăng tin mới</a>
+</p>
+
+<!-- Form bộ lọc (giữ nguyên) -->
+<div class="accordion mb-4" id="filterAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+                <i class="fas fa-filter me-2"></i> Bộ lọc tìm kiếm
+            </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#filterAccordion">
+            <div class="accordion-body">
+                <form asp-action="Index" method="get">
+                    <div class="row g-3">
+                        <div class="col-md-12"><label asp-for="Filter.Keyword" class="form-label"></label><input asp-for="Filter.Keyword" class="form-control" placeholder="Nhập tiêu đề công việc..."/></div>
+                        <div class="col-md-6"><label asp-for="Filter.NganhNgheId" class="form-label"></label><select asp-for="Filter.NganhNgheId" class="form-select" asp-items="@ViewBag.NganhNgheList"><option value="">Tất cả ngành nghề</option></select></div>
+                        <div class="col-md-6"><label asp-for="Filter.TrangThai" class="form-label"></label><select asp-for="Filter.TrangThai" class="form-select" asp-items="ViewBag.TrangThaiSelectList"></select></div>
+                        <div class="col-md-6"><label asp-for="Filter.ThanhPhoId" class="form-label"></label><select asp-for="Filter.ThanhPhoId" class="form-select" asp-items="@ViewBag.ThanhPhoList" id="FilterThanhPhoDropdown"><option value="">Tất cả tỉnh/thành</option></select></div>
+                        <div class="col-md-6"><label asp-for="Filter.QuanHuyenId" class="form-label"></label><select asp-for="Filter.QuanHuyenId" class="form-select" asp-items="@ViewBag.QuanHuyenList" id="FilterQuanHuyenDropdown"><option value="">Tất cả quận/huyện</option></select></div>
+                    </div>
+                    <div class="d-flex justify-content-end gap-2 mt-3">
+                        <a asp-action="Index" class="btn btn-secondary">Xóa bộ lọc</a>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search me-1"></i> Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* TempData Messages (giữ nguyên) *@
+@if (TempData["SuccessMessage"] != null) { <div class="alert alert-success alert-dismissible fade show" role="alert">@TempData["SuccessMessage"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div> }
+@if (TempData["ErrorMessage"] != null) { <div class="alert alert-danger alert-dismissible fade show" role="alert">@TempData["ErrorMessage"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div> }
+@if (TempData["InfoMessage"] != null) { <div class="alert alert-info alert-dismissible fade show" role="alert">@TempData["InfoMessage"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div> }
+
+<div class="table-responsive shadow-sm rounded">
+    <table class="table table-striped table-hover align-middle caption-top mb-0">
+         @* Cập nhật caption để hiển thị tổng số kết quả từ PaginatedList *@
+         <caption class="px-3 pt-2">Tìm thấy @Model.Postings?.TotalCount kết quả</caption>
+        <thead class="table-light">
+            <tr>
+                <th>Tiêu đề</th><th>Trạng thái</th><th>Ngày đăng</th><th>Ngày hết hạn</th>
+                <th class="text-center">Ứng viên</th><th class="text-center" style="min-width: 200px;">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+    @if (Model.Postings != null && Model.Postings.Any()) {
+        @foreach (var item in Model.Postings) {
+            @* Nội dung vòng lặp foreach giữ nguyên không đổi *@
+            <tr>
+                <td><a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none fw-medium">@item.TieuDe</a></td>
+                <td><span class="badge @GetStatusBadgeClass(item.TrangThai)">@GetStatusDisplayName(item.TrangThai)</span></td>
+                <td>@item.NgayDang.ToString("dd/MM/yyyy")</td>
+                <td>@(item.NgayHetHan.HasValue ? item.NgayHetHan.Value.ToString("dd/MM/yyyy") : "Không")</td>
+                <td class="text-center">@item.SoUngVien</td>
+                <td class="text-center">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info" title="Xem chi tiết"><i class="fas fa-file-alt"></i></a>
+                        @if (CanRepost(item.TrangThai)) {
+                            <button type="button" class="btn btn-info repost-btn" data-bs-toggle="modal" data-bs-target="#repostModal" data-posting-id="@item.Id" data-posting-title="@item.TieuDe" title="Đăng lại"><i class="fas fa-redo-alt"></i></button>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" title="Xóa vĩnh viễn"><i class="fas fa-trash-alt"></i></a>
+                        } else {
+                            @if (CanEdit(item.TrangThai)) { <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary" title="Sửa tin"><i class="fas fa-edit"></i></a> }
+                            @if (CanToggleVisibility(item.TrangThai)) { var isHidden = item.TrangThai == TrangThaiTinTuyenDung.taman; <form asp-action="ToggleVisibility" asp-route-id="@item.Id" method="post" class="d-inline">@Html.AntiForgeryToken()<button type="submit" class="btn @(isHidden ? "btn-outline-success" : "btn-outline-warning")" title="@(isHidden ? "Hiện lại" : "Ẩn tin")"><i class="fas @(isHidden ? "fa-eye" : "fa-eye-slash")"></i></button></form> }
+                            @if (CanMarkAsFilled(item.TrangThai)) { <form asp-action="MarkAsFilled" asp-route-id="@item.Id" method="post" class="d-inline" onsubmit="return confirm('Bạn chắc chắn muốn đánh dấu tin này là Đã Tuyển?');">@Html.AntiForgeryToken()<button type="submit" class="btn btn-outline-success" title="Đã tuyển"><i class="fas fa-user-check"></i></button></form> }
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" title="Xóa logic"><i class="fas fa-trash-alt"></i></a>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    } else {
+        <tr><td colspan="6" class="text-center fst-italic py-4">Không tìm thấy tin tuyển dụng nào phù hợp.</td></tr>
+    }
+        </tbody>
+    </table>
+</div>
+
+<!-- ==================================================================== -->
+<!-- ===               ĐIỀU KHIỂN PHÂN TRANG MỚI                     === -->
+<!-- ==================================================================== -->
+@{
+    var prevDisabled = Model.Postings == null || !Model.Postings.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = Model.Postings == null || !Model.Postings.HasNextPage ? "disabled" : "";
+}
+
+<nav aria-label="Page navigation" class="mt-4 d-flex justify-content-between align-items-center">
+    @if (Model.Postings != null && Model.Postings.TotalCount > 0)
+    {
+        <div class="text-muted">
+            Hiển thị trang @Model.Postings.PageIndex / @Model.Postings.TotalPages (Tổng số @Model.Postings.TotalCount tin)
+        </div>
+        <ul class="pagination mb-0">
+            <li class="page-item @prevDisabled">
+                <a asp-action="Index"
+                   asp-route-pageNumber="@(Model.Postings.PageIndex - 1)"
+                   asp-route-Keyword="@Model.Filter.Keyword"
+                   asp-route-ThanhPhoId="@Model.Filter.ThanhPhoId"
+                   asp-route-QuanHuyenId="@Model.Filter.QuanHuyenId"
+                   asp-route-NganhNgheId="@Model.Filter.NganhNgheId"
+                   asp-route-TrangThai="@Model.Filter.TrangThai"
+                   class="page-link">Trước</a>
+            </li>
+            <li class="page-item @nextDisabled">
+                <a asp-action="Index"
+                   asp-route-pageNumber="@(Model.Postings.PageIndex + 1)"
+                   asp-route-Keyword="@Model.Filter.Keyword"
+                   asp-route-ThanhPhoId="@Model.Filter.ThanhPhoId"
+                   asp-route-QuanHuyenId="@Model.Filter.QuanHuyenId"
+                   asp-route-NganhNgheId="@Model.Filter.NganhNgheId"
+                   asp-route-TrangThai="@Model.Filter.TrangThai"
+                   class="page-link">Sau</a>
+            </li>
+        </ul>
+    }
+</nav>
+
+<!-- Modal đăng lại nhanh (giữ nguyên) -->
+@if (Model.Postings != null && Model.Postings.Any(p => CanRepost(p.TrangThai)))
+{
+    @await Html.PartialAsync("_RepostModalPartial")
+}
+
+@functions {
+    string GetStatusDisplayName(TrangThaiTinTuyenDung status) => status.GetDisplayName();
+    string GetStatusBadgeClass(TrangThaiTinTuyenDung status) => status switch {
+        TrangThaiTinTuyenDung.choduyet => "bg-warning text-dark", TrangThaiTinTuyenDung.daduyet => "bg-success", TrangThaiTinTuyenDung.taman => "bg-secondary",
+        TrangThaiTinTuyenDung.hethan => "bg-info text-dark", TrangThaiTinTuyenDung.datuyen => "bg-primary", TrangThaiTinTuyenDung.bituchoi => "bg-danger",
+        TrangThaiTinTuyenDung.daxoa => "bg-dark", _ => "bg-light text-dark",
+    };
+    bool CanRepost(TrangThaiTinTuyenDung status) => status == TrangThaiTinTuyenDung.hethan || status == TrangThaiTinTuyenDung.datuyen;
+    bool CanEdit(TrangThaiTinTuyenDung status) => status == TrangThaiTinTuyenDung.daduyet || status == TrangThaiTinTuyenDung.taman;
+    bool CanToggleVisibility(TrangThaiTinTuyenDung status) => status == TrangThaiTinTuyenDung.daduyet || status == TrangThaiTinTuyenDung.taman;
+    bool CanMarkAsFilled(TrangThaiTinTuyenDung status) => status == TrangThaiTinTuyenDung.daduyet;
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Script cho modal đăng lại (giữ nguyên)
+            const repostModal = document.getElementById('repostModal');
+            if (repostModal) {
+                repostModal.addEventListener('show.bs.modal', function (event) {
+                    const button = event.relatedTarget;
+                    document.getElementById('postingIdInput').value = button.getAttribute('data-posting-id');
+                    document.getElementById('postingTitleInModal').textContent = button.getAttribute('data-posting-title');
+                    document.getElementById('newExpiryDateInput').value = '';
+                });
+            }
+
+            // Script cho bộ lọc (giữ nguyên)
+            const filterThanhPho = document.getElementById('FilterThanhPhoDropdown');
+            const filterQuanHuyen = document.getElementById('FilterQuanHuyenDropdown');
+            if(filterThanhPho && filterQuanHuyen) {
+                filterThanhPho.addEventListener('change', function() {
+                    const thanhPhoId = this.value;
+                    filterQuanHuyen.innerHTML = '<option value="">Đang tải...</option>';
+                    if (!thanhPhoId) { filterQuanHuyen.innerHTML = '<option value="">Tất cả quận/huyện</option>'; return; }
+                    fetch(`/api/DiaChi/GetQuanHuyenByThanhPho?thanhPhoId=${thanhPhoId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            filterQuanHuyen.innerHTML = '<option value="">Tất cả quận/huyện</option>';
+                            data.forEach(function (quanHuyen) { filterQuanHuyen.add(new Option(quanHuyen.ten, quanHuyen.id)); });
+                        })
+                        .catch(error => { console.error('Lỗi tải quận/huyện:', error); filterQuanHuyen.innerHTML = '<option value="">Lỗi tải dữ liệu</option>'; });
+                });
+            }
+        });
+    </script>
+}

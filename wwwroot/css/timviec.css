@@ -1,0 +1,840 @@
+/* File: wwwroot/css/timviec.css */
+
+:root {
+    /* Base Palette */
+    --color-cream: #FFFFFF;
+    --color-light-teal: #0071CE; /* Primary Blue */
+    --color-dark-teal: #041E42;  /* Dark Blue/Navy */
+    --color-coral: #FFC220;      /* Accent Yellow/Orange */
+    --color-cream-dark: #F2F2F2; /* Light Gray */
+
+    /* Derived/Supporting Colors */
+    --color-light-teal-darker: #00529E; /* Darker primary for hover/active */
+    --color-dark-teal-lighter: #1A345A; /* Lighter navy for secondary text */
+    --color-coral-darker: #E5A800;    /* Darker accent */
+    --color-coral-light: rgba(255, 194, 32, 0.15); /* Light coral for badges */
+
+    --color-text-primary: var(--color-dark-teal);
+    --color-text-secondary: #5a6e82; /* Gray for secondary text */
+    --color-text-accent: var(--color-light-teal);
+
+    --color-background-body: #f7f9fc;
+    --color-background-card: var(--color-cream);
+    --color-background-header-filter: #f8f9fc;
+
+    --color-border-light: #e3e7ed;
+    --color-border-medium: #ced4da;
+    --color-border-dashed: #dce0e5;
+
+    --color-success: #198754;
+    --color-danger: #dc3545;
+    --color-warning: #ffc107;
+    --color-info: #0dcaf0;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(40, 50, 70, 0.05);
+    --shadow-md: 0 10px 20px rgba(0,0,0,0.1);
+    --shadow-lg: 0 12px 28px rgba(40, 50, 70, 0.12), 0 4px 10px rgba(40, 50, 70, 0.08);
+    
+    /* Animations */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+body {
+    background-color: var(--color-background-body);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: var(--color-text-secondary);
+}
+
+/* --- Tiêu đề trang --- */
+.job-search-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.job-search-header .page-main-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-dark-teal);
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.job-search-header .page-main-title:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-coral);
+    border-radius: 2px;
+}
+
+.job-search-header .page-sub-title {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 1.5rem auto 0;
+}
+
+/* --- Cột Bộ lọc (Sidebar) --- */
+.filter-sidebar {
+    background-color: var(--color-background-card);
+    border-radius: 12px;
+    border: 1px solid var(--color-border-light);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-medium);
+    animation: slideInLeft 0.5s ease-out;
+}
+
+.filter-sidebar:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.filter-header {
+    background-color: var(--color-background-header-filter);
+    border-bottom: 1px solid var(--color-border-light);
+    border-radius: 12px 12px 0 0;
+    padding: 1rem;
+}
+
+.filter-header h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 0;
+}
+
+.reset-filter-btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    color: var(--color-text-secondary);
+    border-color: var(--color-border-medium);
+    border-radius: 20px;
+    transition: var(--transition-fast);
+}
+
+.reset-filter-btn:hover {
+    color: var(--color-cream);
+    background-color: var(--color-text-secondary);
+    border-color: var(--color-text-secondary);
+    transform: translateY(-2px);
+}
+
+.filter-item-collapsible hr.filter-divider {
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+    border-top: 1px solid var(--color-border-light);
+}
+
+.filter-item-collapsible:last-of-type hr.filter-divider { 
+    display: none; 
+}
+
+.filter-toggle-btn {
+    padding: 0.7rem 0;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    transition: var(--transition-fast);
+    border-radius: 6px;
+    margin: -0.3rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filter-toggle-btn:hover,
+.filter-toggle-btn[aria-expanded="true"] {
+    color: var(--color-light-teal);
+}
+
+.filter-toggle-btn[aria-expanded="true"] {
+    background-color: rgba(0, 113, 206, 0.05);
+    font-weight: 600;
+}
+
+.filter-toggle-btn i.fas {
+    font-size: 0.7em;
+    transition: transform var(--transition-bounce);
+    color: var(--color-text-secondary);
+}
+
+.filter-toggle-btn[aria-expanded="true"] i.fas,
+.filter-toggle-btn:hover i.fas {
+    color: var(--color-light-teal);
+}
+
+.filter-toggle-btn[aria-expanded="true"] i.fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.filter-options-group { 
+    padding-left: 0.75rem; 
+    padding-top: 0.25rem; 
+    animation: fadeIn 0.3s ease-out;
+}
+
+.filter-checkbox-scroll { 
+    max-height: 160px; 
+    overflow-y: auto; 
+    padding-right: 0.5rem; 
+    scrollbar-width: thin; 
+    scrollbar-color: var(--color-border-medium) var(--color-background-header-filter); 
+}
+
+.filter-checkbox-scroll::-webkit-scrollbar { 
+    width: 6px; 
+}
+
+.filter-checkbox-scroll::-webkit-scrollbar-track { 
+    background: var(--color-background-header-filter); 
+    border-radius: 3px; 
+}
+
+.filter-checkbox-scroll::-webkit-scrollbar-thumb { 
+    background-color: var(--color-border-medium); 
+    border-radius: 3px; 
+}
+
+.filter-checkbox-scroll::-webkit-scrollbar-thumb:hover { 
+    background-color: #adb5bd; 
+}
+
+.filter-checkbox-group .form-check-sm, 
+.filter-options-group .form-check-sm { 
+    margin-bottom: 0.5rem; 
+}
+
+.filter-checkbox-group .form-check-label.small, 
+.filter-options-group .form-check-label.small { 
+    font-size: 0.85rem; 
+    color: var(--color-text-primary); 
+    cursor: pointer; 
+    transition: var(--transition-fast);
+}
+
+.filter-checkbox-group .form-check-label.small:hover,
+.filter-options-group .form-check-label.small:hover {
+    color: var(--color-light-teal);
+}
+
+.filter-checkbox-group .form-check-input, 
+.filter-options-group .form-check-input { 
+    margin-top: 0.2rem; 
+    cursor: pointer; 
+}
+
+.form-check-input:checked { 
+    background-color: var(--color-light-teal); 
+    border-color: var(--color-light-teal); 
+}
+
+.filter-body .form-control-sm, 
+.filter-body .form-select-sm { 
+    font-size: 0.85rem; 
+    padding: 0.4rem 0.75rem; 
+    border-color: var(--color-border-dashed);
+    border-radius: 6px;
+    transition: var(--transition-fast);
+}
+
+.filter-body .form-control-sm:focus, 
+.filter-body .form-select-sm:focus { 
+    border-color: var(--color-light-teal); 
+    box-shadow: 0 0 0 0.2rem rgba(0, 113, 206, 0.25); 
+}
+
+.filter-body .input-group-text { 
+    background-color: var(--color-background-header-filter); 
+    border-color: var(--color-border-dashed); 
+}
+
+.filter-body .btn-primary { 
+    background-color: var(--color-light-teal); 
+    border-color: var(--color-light-teal); 
+    font-weight: 500; 
+    border-radius: 6px;
+    transition: var(--transition-fast);
+}
+
+.filter-body .btn-primary:hover { 
+    background-color: var(--color-light-teal-darker); 
+    border-color: var(--color-light-teal-darker);
+    transform: translateY(-2px);
+}
+
+/* --- Cột Kết quả --- */
+.results-header { 
+    background-color: var(--color-background-card);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--color-border-light);
+    animation: fadeIn 0.6s ease-out;
+}
+
+.results-count { 
+    font-size: 0.9rem; 
+    font-weight: 500; 
+    color: var(--color-text-primary); 
+}
+
+.page-info { 
+    font-size: 0.8rem; 
+    color: var(--color-text-secondary); 
+}
+
+#SapXepSelectDisplay.form-select-sm { 
+    border-left: 1px solid var(--color-border-medium) !important; 
+    border-top-left-radius: 0.2rem !important; 
+    border-bottom-left-radius: 0.2rem !important;
+    transition: var(--transition-fast);
+}
+
+#SapXepSelectDisplay.form-select-sm:focus { 
+    border-color: var(--color-light-teal); 
+    box-shadow: 0 0 0 0.2rem rgba(0, 113, 206, 0.25); 
+}
+
+.results-header .input-group-text { 
+    background-color: var(--color-background-header-filter); 
+    border-color: var(--color-border-medium); 
+}
+
+.results-header .input-group-text i { 
+    color: var(--color-light-teal) !important;
+}
+
+/* Job Card Item */
+.job-card-redesign {
+    background-color: var(--color-background-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    animation: fadeIn 0.6s ease-out;
+    overflow: hidden;
+}
+
+.job-card-redesign:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-light-teal);
+}
+
+.job-card-redesign:hover:before {
+    opacity: 1;
+}
+
+.job-card-redesign:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-light-teal), var(--color-coral));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.job-card-urgent-badge {
+    position: absolute; 
+    top: -4px; 
+    right: 16px;
+    padding: 0.4em 1em; 
+    font-size: 0.7rem; 
+    font-weight: 700;
+    border-radius: 50px; 
+    background-color: var(--color-danger); 
+    color: var(--color-cream);
+    box-shadow: 0 3px 8px rgba(220, 53, 69, 0.3);
+    text-transform: uppercase; 
+    letter-spacing: 0.5px; 
+    z-index: 1;
+    animation: pulse 2s infinite;
+}
+
+.job-card-logo-col { 
+    flex: 0 0 80px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.job-card-logo-img {
+    width: 70px; 
+    height: 70px; 
+    object-fit: cover; /* Changed from contain to cover */
+    border-radius: 50%; /* Changed to 50% for circular avatar */
+    border: 2px solid var(--color-cream-dark);
+    background-color: var(--color-cream); 
+    padding: 0; /* Removed padding */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-card-logo-img:hover { 
+    transform: scale(1.1); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    border-color: var(--color-light-teal);
+}
+
+.job-card-title a {
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    color: var(--color-text-primary);
+    line-height: 1.4; 
+    display: inline-block; 
+    margin-bottom: 0.3rem;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+.job-card-title a:hover { 
+    color: var(--color-light-teal); 
+    text-decoration: none; 
+}
+
+.job-card-company-location {
+    font-size: 0.9rem; 
+    color: var(--color-text-secondary); 
+    margin-bottom: 0.75rem;
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 1rem;
+    align-items: center;
+}
+
+.job-card-company-location .company-name { 
+    font-weight: 600; 
+    color: var(--color-dark-teal-lighter); 
+    transition: var(--transition-fast);
+}
+
+.job-card-company-location .company-name:hover {
+    color: var(--color-light-teal);
+}
+
+.job-card-company-location .fa-fw { 
+    opacity: 0.8; 
+    color: var(--color-light-teal); 
+    margin-right: 0.3rem; 
+}
+
+.job-card-company-location .location .fa-fw { 
+    color: var(--color-danger); 
+}
+
+.job-card-salary {
+    font-size: 1.05rem; 
+    margin-bottom: 0.75rem !important; 
+    font-weight: 600;
+    color: var(--color-success);
+    display: flex;
+    align-items: center;
+}
+
+.job-card-salary i.fa-fw { 
+    opacity: 1; 
+    color: var(--color-success); 
+    margin-right: 0.5rem; 
+    font-size: 0.9rem;
+}
+
+.job-card-tags { 
+    margin-bottom: 0.75rem; 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 0.6rem; 
+}
+
+.job-card-tags .badge.job-card-tag {
+    font-size: 0.75rem; 
+    font-weight: 500; 
+    padding: 0.4em 0.9em;
+    background-color: rgba(0, 113, 206, 0.1) !important;
+    color: var(--color-light-teal-darker) !important;
+    border: 1px solid rgba(0, 113, 206, 0.2) !important;
+    border-radius: 20px; 
+    transition: all 0.25s ease;
+}
+
+.job-card-tags .badge.job-card-tag:hover { 
+    background-color: rgba(0, 113, 206, 0.15) !important; 
+    transform: translateY(-2px); 
+    box-shadow: 0 3px 6px rgba(0, 113, 206, 0.1);
+}
+
+.job-card-tags .badge.job-card-tag-type {
+    background-color: rgba(255, 194, 32, 0.15) !important;
+    color: var(--color-coral-darker) !important;
+    border-color: rgba(255, 194, 32, 0.25) !important;
+}
+
+.job-card-tags .badge.job-card-tag-type:hover {
+    background-color: rgba(255, 194, 32, 0.25) !important;
+    box-shadow: 0 3px 6px rgba(255, 194, 32, 0.2);
+}
+
+.job-card-requirements {
+    font-size: 0.85rem; 
+    color: var(--color-text-secondary); 
+    margin-bottom: 0.75rem;
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 1.25rem;
+    padding: 0.75rem 0;
+    border-top: 1px dashed var(--color-border-light);
+}
+
+.job-card-requirements span { 
+    white-space: nowrap; 
+    display: flex; 
+    align-items: center; 
+}
+
+.job-card-requirements i.fa-fw { 
+    margin-right: 0.35rem; 
+    color: var(--color-light-teal); 
+    opacity: 0.8;
+}
+
+.job-card-requirements strong {
+    margin-right: 0.3rem;
+    color: var(--color-text-primary);
+}
+
+.job-card-actions-col {
+    flex-basis: 180px; 
+    flex-grow: 0; 
+    flex-shrink: 0;
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-end;
+    justify-content: space-between; 
+    padding-left: 1.5rem;
+    border-left: 1px dashed var(--color-border-light);
+}
+
+/* Responsive cho cột actions */
+@media (max-width: 767.98px) {
+    .job-card-actions-col {
+        flex-basis: 100%; 
+        margin-top: 1.25rem; 
+        padding-top: 1.25rem; 
+        padding-left: 0;
+        border-left: none; 
+        border-top: 1px dashed var(--color-border-light);
+        flex-direction: row !important; 
+        align-items: center !important;
+        justify-content: space-between !important;
+    }
+    
+    .job-card-actions-col .job-card-meta { 
+        margin-bottom: 0 !important; 
+        margin-right: auto; 
+        text-align: left !important; 
+    }
+    
+    .job-card-actions-col .action-buttons-group { 
+        width: auto !important; 
+        margin-left: auto; 
+        flex-direction: row; 
+        gap: 0.5rem;
+    }
+    
+    .job-card-actions-col .action-buttons-group .btn { 
+        flex-grow: 0 !important; 
+        margin-bottom: 0 !important; 
+        width: auto;
+        padding: 0.5rem;
+    }
+    
+    .job-card-actions-col .action-buttons-group .btn .btn-action-text { 
+        display: none; 
+    }
+    
+    .job-card-actions-col .action-buttons-group .btn i.fa-fw { 
+        margin-right: 0; 
+    }
+    
+    .job-card-actions-col .phu-hop-indicator { 
+        margin-right: 0.75rem; 
+    }
+}
+
+.job-card-meta { 
+    text-align: right; 
+    margin-bottom: 0.75rem; 
+}
+
+.job-card-meta .post-date { 
+    font-size: 0.8rem; 
+    color: var(--color-text-secondary); 
+    margin-bottom: 0.5rem; 
+    display: block; 
+}
+
+.job-card-meta .post-date .days-ago { 
+    font-weight: 600; 
+    color: var(--color-dark-teal-lighter);
+}
+
+.phu-hop-indicator { 
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-end; 
+    margin-bottom: 0.75rem; 
+}
+
+.phu-hop-indicator .phu-hop-text { 
+    font-size: 0.8rem; 
+    font-weight: 600; 
+    margin-right: 0.5rem; 
+    white-space: nowrap; 
+}
+
+.phu-hop-indicator .progress { 
+    height: 6px; 
+    border-radius: 10px; 
+    width: 60px; 
+    background-color: var(--color-cream-dark); 
+    overflow: hidden;
+}
+
+.phu-hop-indicator .progress-bar { 
+    transition: width 1s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.phu-hop-indicator .progress-bar:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: linear-gradient(
+        -45deg, 
+        rgba(255, 255, 255, 0.2) 25%, 
+        transparent 25%, 
+        transparent 50%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        rgba(255, 255, 255, 0.2) 75%, 
+        transparent 75%, 
+        transparent
+    );
+    background-size: 15px 15px;
+    animation: progressStripes 1s linear infinite;
+}
+
+.phu-hop-indicator .progress-bar.bg-success { 
+    background-color: var(--color-success) !important; 
+}
+
+.phu-hop-indicator .progress-bar.bg-warning { 
+    background-color: var(--color-coral) !important; 
+}
+
+.phu-hop-indicator .progress-bar.bg-primary { 
+    background-color: var(--color-light-teal) !important; 
+}
+
+.action-buttons-group { 
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.action-buttons-group .btn {
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    padding: 0.5rem 1rem;
+    border-radius: 50px; 
+    transition: all 0.3s ease;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    width: 100%;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.action-buttons-group .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.action-buttons-group .btn i.fa-fw { 
+    margin-right: 0.5rem; 
+    font-size: 0.9rem; 
+}
+
+.action-buttons-group .btn:active { 
+    transform: translateY(0) scale(0.98); 
+}
+
+.job-btn-save { 
+    background-color: var(--color-cream); 
+    border: 1.5px #ff4647; 
+    color: #ff4647;     
+}
+
+.job-btn-save:hover { 
+    background-color: #ff4647; 
+    color: var(--color-background-body); 
+    border-color: var(--color-light-teal-darker); 
+    box-shadow: 0 4px 10px rgba(0, 113, 206, 0.15); 
+}
+
+.job-btn-saved { 
+    background-color: #ff4647; 
+    border-color:#ff4647; 
+    color: #ffffff; 
+}
+
+.job-btn-saved:hover { 
+    background-color: #ff4647; 
+    border-color: #ff4647; 
+    box-shadow: 0 4px 10px rgba(25, 135, 84, 0.2); 
+}
+
+.job-btn-apply { 
+    background-color: var(--color-dark-teal); 
+    border-color: var(--color-dark-teal); 
+    color: var(--color-cream); 
+    font-weight: 700; 
+}
+
+.job-btn-apply:hover { 
+    background-color: var(--color-dark-teal); 
+    border-color: var(--color-background-body); 
+    color: var(--color-cream); 
+}
+
+.job-btn-applied { 
+    background-color: var(--color-text-secondary); 
+    border-color: var(--color-text-secondary); 
+    color: var(--color-cream); 
+    opacity: 0.85; 
+}
+
+.job-btn-applied:hover { 
+    opacity: 1; 
+    box-shadow: 0 4px 10px rgba(90, 110, 130, 0.25); 
+}
+
+/* Button Ripple Effect */
+.action-buttons-group .btn:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.action-buttons-group .btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+/* Pagination */
+.pagination { 
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.pagination .page-item .page-link { 
+    border-radius: 6px !important; 
+    margin: 0 3px; 
+    color: var(--color-light-teal); 
+    border: 1px solid var(--color-border-medium); 
+    font-size: 0.875rem; 
+    padding: 0.4rem 0.75rem; 
+    transition: var(--transition-fast);
+}
+
+.pagination .page-item.active .page-link { 
+    background-color: var(--color-light-teal); 
+    border-color: var(--color-light-teal); 
+    color: var(--color-cream); 
+    box-shadow: 0 3px 6px rgba(0,113,206,0.2); 
+}
+
+.pagination .page-item.disabled .page-link { 
+    color: #adb5bd; 
+    background-color: var(--color-cream-dark); 
+}
+
+.pagination .page-item .page-link:hover { 
+    background-color: var(--color-cream-dark); 
+    border-color: var(--color-border-medium); 
+    color: var(--color-light-teal-darker); 
+    transform: translateY(-2px);
+}
+
+.pagination .page-item.active .page-link:hover { 
+    background-color: var(--color-light-teal-darker); 
+    border-color: var(--color-light-teal-darker); 
+}
+
+/* Nút Back to Top */
+#backToTopBtn { 
+    background-color: var(--color-light-teal); 
+    border-color: var(--color-light-teal);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 113, 206, 0.2);
+}
+
+.job-item-custom {
+    /* ... (các style khác của job-item-custom) ... */
+    position: relative; /* Quan trọng để định vị badge "GẤP" */
+    overflow: visible; /* Cho phép badge tràn ra ngoài nếu cần */
+}
+
+.job-item-urgent-badge { /* Đổi tên class từ job-card-urgent-badge cho nhất quán */
+    position: absolute;
+    top: -10px; /* Điều chỉnh để badge nằm lên trên viền card một chút */
+    right: -5px; /* Điều chỉnh để badge lệch ra phải một chút */
+    background-color: #dc3545; /* Màu đỏ của Bootstrap cho danger */
+    color: white;
+    padding: 0.3em 0.8em; /* Padding cho badge */
+    font-size: 0.7rem;    /* Kích thước chữ nhỏ hơn */
+    font-weight: bold;
+    border-radius: 20px; /* Bo tròn nhiều hơn */
+    z-index: 10;          /* Đảm bảo badge nổi lên trên */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Thêm bóng đổ nhẹ */
+    text-transform: uppercase;
+}

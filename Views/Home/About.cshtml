@@ -1,0 +1,366 @@
+@model List<HeThongTimViec.ViewModels.TrangChu.FounderViewModel>
+@{
+    ViewData["Title"] = "Về Chúng Tôi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* Link CSS cho trang tĩnh *@
+<link rel="stylesheet" href="~/css/home-styles.css" asp-append-version="true" />
+
+<!-- Hero Section cho trang About - Sử dụng pattern từ privacy hero -->
+<section class="hero-section text-white position-relative">
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center align-items-center min-vh-60">
+            <div class="col-lg-10 text-center fade-in-up">
+                
+                <span class="section-title">
+                    <span class="tagline">Câu Chuyện JOXFLEX</span>
+                </span>
+                <h1 class="display-3 fw-bolder mb-4">@ViewData["Title"]</h1>
+                <p class="lead mb-4" style="font-size: 1.3rem;">
+                    Khám phá hành trình, sứ mệnh và những con người đằng sau JOXFLEX - Nền tảng kết nối cơ hội việc làm linh hoạt hàng đầu.
+                </p>
+                <div class="mt-4">
+                    <a href="#our-story" class="btn btn-warning btn-lg me-3">
+                        <i class="fas fa-arrow-down me-2"></i>Khám phá thêm
+                    </a>
+                    <a asp-controller="TimViec" asp-action="Index" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-search me-2"></i>Tìm việc ngay
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="statistics-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-value">10K+</div>
+                    <div class="stat-label">Ứng viên tin tưởng</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-value">500+</div>
+                    <div class="stat-label">Doanh nghiệp đối tác</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-value">50K+</div>
+                    <div class="stat-label">Việc làm đã kết nối</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-value">98%</div>
+                    <div class="stat-label">Hài lòng</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content Area -->
+<div class="container section-padding">
+    <!-- Our Story Section -->
+    <section id="our-story" class="mb-5">
+        <div class="section-title">
+            <span class="tagline">Hành trình của chúng tôi</span>
+            <h2>Câu chuyện JOXFLEX</h2>
+        </div>
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    <img src="@Url.Content("~/file/img/about/joxflex-team-working.jpg")" 
+                         alt="Đội ngũ JOXFLEX làm việc" 
+                         class="img-fluid rounded-3 shadow-lg"
+                         style="border-radius: 20px !important;"
+                         onerror="this.onerror=null; this.src='@Url.Content("~/file/img/Picture/construction-9045703_1280.jpg")';" />
+                    <div class="position-absolute top-0 start-0 w-100 h-100 rounded-3" 
+                         style="background: linear-gradient(45deg, rgba(0,51,102,0.1), rgba(0,212,170,0.1)); border-radius: 20px;"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="ps-lg-4">
+                    <p class="lead text-muted mb-4">
+                        JOXFLEX được thành lập với một niềm tin mãnh liệt: mọi cá nhân đều xứng đáng có cơ hội tiếp cận những công việc phù hợp với kỹ năng, đam mê và quan trọng nhất là lịch trình cuộc sống của họ.
+                    </p>
+                    <p class="text-muted mb-4">
+                        Chúng tôi nhận thấy một khoảng trống lớn trong thị trường lao động Việt Nam, nơi những người tìm kiếm sự linh hoạt – từ sinh viên, người làm tự do, đến những ai muốn có thêm thu nhập – thường gặp khó khăn trong việc tìm kiếm cơ hội chất lượng và đáng tin cậy.
+                    </p>
+                    <blockquote class="border-start border-5 border-warning ps-4 fst-italic text-primary mb-4" 
+                                style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); padding: 20px; border-radius: 15px;">
+                        "Chúng tôi không chỉ xây dựng một nền tảng, chúng tôi kiến tạo một cộng đồng nơi sự linh hoạt và cơ hội song hành."
+                    </blockquote>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0 me-3">
+                            <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="fas fa-rocket text-primary"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-primary">Khởi đầu từ 2023</h6>
+                            <small class="text-muted">Với tầm nhìn thay đổi thị trường lao động Việt Nam</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section id="mission-vision" class="section-padding bg-light">
+        <div class="container">
+            <div class="section-title">
+                <span class="tagline">Định hướng phát triển</span>
+                <h2>Sứ mệnh & Tầm nhìn</h2>
+                <p>Những giá trị cốt lõi định hướng mọi hoạt động của JOXFLEX</p>
+            </div>
+            <div class="row gy-4">
+                <div class="col-lg-6">
+                    <div class="benefit-item card h-100">
+                        <div class="card-body text-center">
+                            <div class="benefit-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3 class="card-title">Sứ mệnh</h3>
+                            <p class="text-muted">
+                                Trao quyền cho mỗi cá nhân và doanh nghiệp bằng cách cung cấp một nền tảng kết nối việc làm linh hoạt, minh bạch và hiệu quả. JOXFLEX cam kết đơn giản hóa quy trình tìm việc và tuyển dụng.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="benefit-item card h-100">
+                        <div class="card-body text-center">
+                            <div class="benefit-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="card-title">Tầm nhìn</h3>
+                            <p class="text-muted">
+                                Trở thành nền tảng số một tại Việt Nam và vươn tầm khu vực về giải pháp việc làm linh hoạt, được tin cậy bởi hàng triệu người dùng và doanh nghiệp.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section id="core-values" class="section-padding">
+        <div class="section-title">
+            <span class="tagline">Nguyên tắc hoạt động</span>
+            <h2>Giá trị cốt lõi</h2>
+            <p>Những nguyên tắc định hướng mọi hoạt động và quyết định của chúng tôi</p>
+        </div>
+        <div class="row gy-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="benefit-item card h-100">
+                    <div class="card-body text-center">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h5 class="card-title">Người dùng là trung tâm</h5>
+                        <p class="card-text text-muted">
+                            Mọi sản phẩm và dịch vụ đều được thiết kế dựa trên nhu cầu và trải nghiệm của bạn.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="benefit-item card h-100">
+                    <div class="card-body text-center">
+                        <div class="benefit-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h5 class="card-title">Minh bạch & Tin cậy</h5>
+                        <p class="card-text text-muted">
+                            Xây dựng niềm tin thông qua thông tin rõ ràng và quy trình xác thực nghiêm ngặt.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="benefit-item card h-100">
+                    <div class="card-body text-center">
+                        <div class="benefit-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h5 class="card-title">Đổi mới không ngừng</h5>
+                        <p class="card-text text-muted">
+                            Luôn tìm tòi, ứng dụng công nghệ mới để mang lại giải pháp tối ưu.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="benefit-item card h-100">
+                    <div class="card-body text-center">
+                        <div class="benefit-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h5 class="card-title">Kết nối & Hợp tác</h5>
+                        <p class="card-text text-muted">
+                            Tạo dựng cộng đồng gắn kết, thúc đẩy sự hợp tác cùng phát triển.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<section class="founders-section section-padding bg-light">
+    <div class="container">
+        <div class="section-title text-center">
+            <span class="tagline">Đội ngũ sáng lập</span>
+            <h2>Gặp gỡ những người sáng lập</h2>
+            <p>Những người đã xây dựng nên JOXFLEX với tầm nhìn kết nối cộng đồng việc làm bán thời gian</p>
+        </div>
+        <div class="row justify-content-center">
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var founder in Model)
+                {
+                    <div class="col-md-6 col-lg-4 col-xl-3 mb-4 d-flex align-items-stretch">
+                        <div class="founder-item card text-center h-100">
+                            <img src="@(string.IsNullOrEmpty(founder.AvatarUrl) ? Url.Content("~/file/img/founders/founder1.png") : Url.Content("~" + founder.AvatarUrl))"
+                                alt="Ảnh đại diện của @founder.Name" class="founder-avatar card-img-top"
+                                onerror="this.onerror=null; this.src='@Url.Content("/file/img/founders/founder1.png")';">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="founder-name">@founder.Name</h5>
+                                <p class="founder-title text-muted">@founder.Title</p>
+                                <p class="founder-quote mt-2 mb-3">"@founder.Quote"</p>
+                                <div class="founder-social mt-auto">
+                                    @if (!string.IsNullOrEmpty(founder.TwitterUrl) && founder.TwitterUrl != "#")
+                                    {
+                                        <a href="@founder.TwitterUrl" target="_blank" class="social-icon"
+                                            title="Twitter của @founder.Name"><i class="fab fa-twitter"></i></a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(founder.GithubUrl) && founder.GithubUrl != "#")
+                                    {
+                                        <a href="@founder.GithubUrl" target="_blank" class="social-icon"
+                                            title="GitHub của @founder.Name"><i class="fab fa-github"></i></a>
+                                    }
+                                    @* <!-- Add more social icons as needed -->
+                                    @if (!string.IsNullOrEmpty(founder.LinkedInUrl) && founder.LinkedInUrl != "#")
+                                    {
+                                        <a href="@founder.LinkedInUrl" target="_blank" class="social-icon" title="LinkedIn của @founder.Name"><i class="fab fa-linkedin"></i></a>
+                                    } *@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p>Thông tin về đội ngũ sáng lập đang được cập nhật.</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="section-title">
+            <span class="tagline">Quy trình đơn giản</span>
+            <h2>Cách thức hoạt động</h2>
+            <p>JOXFLEX hoạt động như thế nào để kết nối bạn với cơ hội việc làm phù hợp</p>
+        </div>
+        <div class="row gy-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="how-it-works-item">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h4 class="step-title">Đăng ký tài khoản</h4>
+                    <p class="step-description">
+                        Tạo hồ sơ cá nhân miễn phí và hoàn thiện thông tin của bạn
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="how-it-works-item">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4 class="step-title">Tìm kiếm việc làm</h4>
+                    <p class="step-description">
+                        Khám phá hàng ngàn cơ hội việc làm phù hợp với kỹ năng của bạn
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="how-it-works-item">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <h4 class="step-title">Ứng tuyển</h4>
+                    <p class="step-description">
+                        Gửi hồ sơ một cách nhanh chóng và theo dõi tiến trình ứng tuyển
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="how-it-works-item">
+                    <div class="step-number">04</div>
+                    <div class="step-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4 class="step-title">Kết nối thành công</h4>
+                    <p class="step-description">
+                        Nhận được phản hồi từ nhà tuyển dụng và bắt đầu công việc mới
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.benefit-item, .founder-item, .how-it-works-item');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('fade-in-up');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run on page load
+    </script>
+}

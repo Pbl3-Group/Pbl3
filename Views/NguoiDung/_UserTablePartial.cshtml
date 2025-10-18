@@ -1,0 +1,622 @@
+@model List<HeThongTimViec.ViewModels.NguoiDungCaNhanItem>
+@using HeThongTimViec.Models
+@using HeThongTimViec.Extensions
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+        --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --danger-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        --info-gradient: linear-gradient(135deg, #3742fa 0%, #2f3542 100%);
+        --glass-bg: rgba(255, 255, 255, 0.95);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --shadow-soft: 0 8px 32px rgba(31, 38, 135, 0.37);
+        --shadow-hover: 0 12px 40px rgba(31, 38, 135, 0.5);
+        --border-radius: 16px;
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .modern-table-container {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        margin: 2rem 0;
+    }
+
+    .table-header {
+        background: var(--primary-gradient);
+        color: white;
+        padding: 1.5rem 2rem;
+        border: none;
+    }
+
+    .table-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .modern-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: transparent;
+        margin: 0;
+    }
+
+    .modern-table thead {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .modern-table th {
+        padding: 1.25rem 1.5rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #495057;
+        border: none;
+        position: relative;
+    }
+
+    .modern-table th::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--primary-gradient);
+        transform: scaleX(0);
+        transition: var(--transition);
+    }
+
+    .modern-table th:hover::after {
+        transform: scaleX(1);
+    }
+
+    .modern-table tbody tr {
+        transition: var(--transition);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .modern-table tbody tr:hover {
+        background: rgba(102, 126, 234, 0.05);
+        transform: scale(1.01);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .modern-table td {
+        padding: 1.25rem 1.5rem;
+        vertical-align: middle;
+        border: none;
+        position: relative;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .avatar-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+    .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: var(--transition);
+    }
+
+    .user-avatar:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    .user-name {
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 1rem;
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .contact-email {
+        font-weight: 500;
+        color: #4a5568;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .contact-phone {
+        font-size: 0.85rem;
+        color: #718096;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .location-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #4a5568;
+        font-weight: 500;
+    }
+
+    .date-info {
+        color: #4a5568;
+        font-weight: 500;
+    }
+
+    .status-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .status-active {
+        background: var(--success-gradient);
+        color: white;
+        box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+    }
+
+    .status-inactive {
+        background: var(--danger-gradient);
+        color: white;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    .status-badge::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .status-badge:hover::before {
+        left: 100%;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .action-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        font-size: 0.85rem;
+    }
+
+    .action-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255,255,255,0.2);
+        transform: scale(0);
+        transition: var(--transition);
+        border-radius: 50%;
+    }
+
+    .action-btn:hover::before {
+        transform: scale(1);
+    }
+
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .btn-view {
+        background: var(--info-gradient);
+        color: white;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        color: #8b4513;
+    }
+
+    .btn-suspend {
+        background: var(--danger-gradient);
+        color: white;
+    }
+
+    .btn-activate {
+        background: var(--success-gradient);
+        color: white;
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+        color: white;
+    }
+
+    .modal-content {
+        border-radius: var(--border-radius);
+        border: none;
+        overflow: hidden;
+        backdrop-filter: blur(20px);
+        background: var(--glass-bg);
+    }
+
+    .modal-header {
+        background: var(--danger-gradient);
+        color: white;
+        border: none;
+        padding: 1.5rem 2rem;
+    }
+
+    .modal-title {
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .modal-body {
+        padding: 2rem;
+    }
+
+    .modal-footer {
+        border: none;
+        background: rgba(0,0,0,0.02);
+        padding: 1rem 2rem 1.5rem;
+    }
+
+    .btn-modal {
+        border-radius: 25px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-cancel {
+        background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+        color: #4a5568;
+    }
+
+    .btn-confirm {
+        background: var(--danger-gradient);
+        color: white;
+    }
+
+    .btn-modal:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .warning-icon {
+        font-size: 3rem;
+        color: #ff6b6b;
+        margin-bottom: 1rem;
+    }
+
+    .alert-modern {
+        background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(238, 90, 36, 0.1) 100%);
+        border: 1px solid rgba(255, 107, 107, 0.2);
+        border-radius: 12px;
+        padding: 1rem;
+        color: #c53030;
+    }
+
+    .contact-icon {
+        color: #084298;
+        font-size: 0.8rem;
+    }
+
+    .location-icon {
+        color: #840d0d;
+        font-size: 0.9rem;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #718096;
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+        color: #a0aec0;
+    }
+
+    @@media (max-width: 992px) {
+        .modern-table th,
+        .modern-table td {
+            padding: 1rem;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .action-btn {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .table-responsive {
+            font-size: 0.9rem;
+        }
+        
+        .user-info {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .contact-info {
+            font-size: 0.85rem;
+        }
+        
+        .action-buttons {
+            flex-direction: row;
+            justify-content: center;
+        }
+    }
+</style>
+
+@* <div class="modern-table-container"> *@
+    @* <div class="table-header">
+        <h2 class="table-title">
+            <i class="fas fa-users"></i>
+            Danh sách người dùng
+        </h2>
+    </div> *@
+    
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <i class="fas fa-user me-2"></i>
+                            Họ Tên
+                        </th>
+                        <th>
+                            <i class="fas fa-address-book me-2"></i>
+                            Thông tin liên hệ
+                        </th>
+                        <th>
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Địa chỉ
+                        </th>
+                        <th>
+                            <i class="fas fa-calendar me-2"></i>
+                            Ngày tạo
+                        </th>
+                        <th>
+                            <i class="fas fa-toggle-on me-2"></i>
+                            Trạng thái
+                        </th>
+                        <th class="text-end">
+                            <i class="fas fa-cogs me-2"></i>
+                            Hành động
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="user-info">
+                                    <div class="avatar-wrapper">
+                                        <img src="@(user.UrlAvatar ?? "/images/default-avatar.png")" 
+                                             class="user-avatar" 
+                                             alt="Avatar" />
+                                    </div>
+                                    <span class="user-name">@user.HoTen</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="contact-info">
+                                    <div class="contact-email">
+                                        <i class="fas fa-envelope contact-icon"></i>
+                                        @user.Email
+                                    </div>
+                                    <div class="contact-phone">
+                                        <i class="fas fa-phone contact-icon"></i>
+                                        @(user.Sdt ?? "N/A")
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="location-info">
+                                    <i class="fas fa-map-marker-alt location-icon"></i>
+                                    @user.ThanhPho
+                                </div>
+                            </td>
+                            <td>
+                                <div class="date-info">
+                                    @user.NgayTao.ToString("dd/MM/yyyy")
+                                </div>
+                            </td>
+                            <td>
+                                <span class="status-badge @(user.TrangThaiTk == TrangThaiTaiKhoan.kichhoat ? "status-active" : "status-inactive")">
+                                    <i class="fas fa-@(user.TrangThaiTk == TrangThaiTaiKhoan.kichhoat ? "check-circle" : "times-circle")"></i>
+                                    @user.TrangThaiTk.GetDisplayName()
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a asp-controller="NguoiDung" 
+                                       asp-action="ChiTietCaNhan" 
+                                       asp-route-id="@user.Id" 
+                                       class="action-btn btn-view" 
+                                       title="Xem chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    
+                                    <a asp-controller="NguoiDung" 
+                                       asp-action="ChinhSuaCaNhan" 
+                                       asp-route-id="@user.Id" 
+                                       class="action-btn btn-edit" 
+                                       title="Chỉnh sửa">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    
+                                    @if (user.TrangThaiTk == TrangThaiTaiKhoan.kichhoat)
+                                    {
+                                        <form asp-controller="NguoiDung" 
+                                              asp-action="CapNhatTrangThai" 
+                                              asp-route-id="@user.Id" 
+                                              asp-route-newStatus="@TrangThaiTaiKhoan.bidinhchi" 
+                                              asp-route-redirectUrl="@(Context.Request.Path + Context.Request.QueryString)" 
+                                              method="post" 
+                                              class="d-inline" 
+                                              onsubmit="return confirm('Bạn có chắc muốn đình chỉ tài khoản này?');">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" 
+                                                    class="action-btn btn-suspend" 
+                                                    title="Đình chỉ">
+                                                <i class="fas fa-user-lock"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form asp-controller="NguoiDung" 
+                                              asp-action="CapNhatTrangThai" 
+                                              asp-route-id="@user.Id" 
+                                              asp-route-newStatus="@TrangThaiTaiKhoan.kichhoat" 
+                                              asp-route-redirectUrl="@(Context.Request.Path + Context.Request.QueryString)" 
+                                              method="post" 
+                                              class="d-inline" 
+                                              onsubmit="return confirm('Bạn có chắc muốn kích hoạt lại tài khoản này?');">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" 
+                                                    class="action-btn btn-activate" 
+                                                    title="Kích hoạt">
+                                                <i class="fas fa-user-check"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                    
+                                    <button type="button" 
+                                            class="action-btn btn-delete" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#deleteUserModal-@user.Id" 
+                                            title="Xóa">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="deleteUserModal-@user.Id" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <form asp-controller="NguoiDung" 
+                                          asp-action="XoaCaNhan" 
+                                          asp-route-id="@user.Id" 
+                                          method="post">
+                                        @Html.AntiForgeryToken()
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                                Xác nhận xóa
+                                            </h5>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="text-center mb-3">
+                                                <i class="fas fa-user-times warning-icon"></i>
+                                            </div>
+                                            <p class="text-center mb-3">
+                                                Bạn có chắc muốn xóa vĩnh viễn người dùng 
+                                                <strong class="text-primary">@user.HoTen</strong>?
+                                            </p>
+                                            <div class="alert-modern">
+                                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                                <strong>Cảnh báo:</strong> Hành động này không thể hoàn tác.
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-modal btn-cancel" data-bs-dismiss="modal">
+                                                <i class="fas fa-times"></i>
+                                                Hủy
+                                            </button>
+                                            <button type="submit" class="btn btn-modal btn-confirm">
+                                                <i class="fas fa-trash"></i>
+                                                Xóa vĩnh viễn
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="fas fa-table"></i>
+            </div>
+            <h3>Không có dữ liệu</h3>
+            <p>Danh sách người dùng hiện đang trống.</p>
+        </div>
+    }
+</div>

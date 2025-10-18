@@ -1,0 +1,364 @@
+@model HeThongTimViec.ViewModels.BaoCaoThongKeViewModel
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Thống Kê - Hệ Thống Tìm Việc</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+           --primary-gradient: linear-gradient(135deg, #667eea 0%, #2b5189 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --info-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --hover-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            --border-radius: 15px;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            padding: 2rem 0;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-subtitle {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        /* KPI Cards Styling */
+        .kpi-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            height: 100%;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .kpi-card.primary::before { background: var(--primary-gradient); }
+        .kpi-card.success::before { background: var(--success-gradient); }
+        .kpi-card.info::before { background: var(--info-gradient); }
+        .kpi-card.warning::before { background: var(--warning-gradient); }
+
+        .kpi-card-body {
+            padding: 1.5rem;
+        }
+
+        .kpi-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .kpi-icon.primary { background: var(--primary-gradient); }
+        .kpi-icon.success { background: var(--success-gradient); }
+        .kpi-icon.info { background: var(--info-gradient); }
+        .kpi-icon.warning { background: var(--warning-gradient); }
+
+        .kpi-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #f8f9fa;
+    background-color: var(--bs-nav-tabs-link-active-bg);
+    border-color: var(--bs-nav-tabs-link-active-border-color);
+}
+
+        /* Stats Cards */
+        .stats-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            border: none;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .stats-card-body {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stats-subtitle {
+            color: #6c757d;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .stats-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .stats-unit {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 400;
+        }
+
+        /* Chart Cards */
+        .chart-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .chart-card:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+        .chart-header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .chart-title {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .chart-body {
+            padding: 1.5rem;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .dashboard-title {
+                font-size: 2rem;
+            }
+            
+            .kpi-value {
+                font-size: 1.5rem;
+            }
+            
+            .stats-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid dashboard-container">
+
+
+        <!-- KPI Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-xl-3 col-md-6">
+                <div class="kpi-card primary">
+                    <div class="kpi-card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <div class="kpi-label text-primary">Tổng công việc</div>
+                                <div class="kpi-value">@Model.TongSoCongViec.ToString("N0")</div>
+                            </div>
+                            <div class="kpi-icon primary">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xl-3 col-md-6">
+                <div class="kpi-card success">
+                    <div class="kpi-card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <div class="kpi-label text-success">Tổng người dùng</div>
+                                <div class="kpi-value">@Model.TongSoNguoiDung.ToString("N0")</div>
+                            </div>
+                            <div class="kpi-icon success">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xl-3 col-md-6">
+                <div class="kpi-card info">
+                    <div class="kpi-card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <div class="kpi-label text-info">Tỉ lệ tuyển dụng</div>
+                                <div class="kpi-value">@Model.TiLeTuyenDung.ToString("F1")%</div>
+                            </div>
+                            <div class="kpi-icon info">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xl-3 col-md-6">
+                <div class="kpi-card warning">
+                    <div class="kpi-card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <div class="kpi-label text-warning">Báo cáo mới</div>
+                                <div class="kpi-value">@Model.BaoCaoViPhamMoi.ToString("N0")</div>
+                            </div>
+                            <div class="kpi-icon warning">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <div class="stats-card-body">
+                        <h6 class="stats-subtitle">Thời gian trung bình để tuyển</h6>
+                        <p class="stats-value">@Model.ThoiGianTrungBinhTuyenDung.ToString("F1") <span class="stats-unit">ngày</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <div class="stats-card-body">
+                        <h6 class="stats-subtitle">Người dùng hoạt động (30 ngày)</h6>
+                        <p class="stats-value">@Model.NguoiDungHoatDong30Ngay.ToString("N0")</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <div class="stats-card-body">
+                        <h6 class="stats-subtitle">NTD chờ xác minh</h6>
+                        <p class="stats-value">@Model.SoHoSoDoanhNghiepChoXacMinh.ToString("N0")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row g-4">
+            <div class="col-lg-7 mb-4">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h6 class="chart-title">Xu hướng công việc (6 tháng gần nhất)</h6>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="jobTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 mb-4">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h6 class="chart-title">Phân loại trạng thái công việc</h6>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="jobStatusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-5 mb-4">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h6 class="chart-title">Phân bố địa lý (Top 5)</h6>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="jobLocationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 mb-4">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h6 class="chart-title">Xu hướng người dùng (6 tháng gần nhất)</h6>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="candidateTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

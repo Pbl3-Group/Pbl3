@@ -1,0 +1,43 @@
+@model HeThongTimViec.Models.ThanhPho
+
+@{
+    // ViewData["Title"] is set in the Controller
+    Layout = "_LayoutAdmin"; // Or your admin area layout
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-danger">@ViewData["Title"]</h2>
+    <h3 class="text-danger">Bạn có chắc chắn muốn xóa Tỉnh/Thành phố này không?</h3>
+
+    <div class="alert alert-warning" role="alert">
+        <strong>Cảnh báo:</strong> Hành động này không thể hoàn tác.
+        Nếu Tỉnh/Thành phố này đang được sử dụng hoặc có Quận/Huyện phụ thuộc, bạn sẽ không thể xóa (thông báo lỗi sẽ hiển thị trên trang danh sách).
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            Thông tin Tỉnh/Thành phố sẽ bị xóa
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Ten)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Ten)
+                </dd>
+            </dl>
+
+            <form asp-action="ThanhPho_DeleteConfirmed" asp-route-id="@Model.Id" method="post" class="mt-3">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i> Xóa Vĩnh Viễn
+                </button>
+                <a asp-action="ThanhPho_Index" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Hủy Bỏ
+                </a>
+            </form>
+        </div>
+    </div>
+</div>

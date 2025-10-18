@@ -1,0 +1,196 @@
+@model HeThongTimViec.ViewModels.QuanLyTinDang.PostingStatusSection
+
+<div class="card shadow-sm border-0 rounded-3 sticky-top" style="top: 20px;">
+    <div class="card-header bg-primary text-white py-3">
+        <h5 class="mb-0">
+            <i class="bi bi-info-circle me-2" aria-hidden="true"></i>
+            <span>Thông tin đăng tin</span>
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="fw-medium text-muted small">ID Tin</div>
+            <div class="font-monospace fw-medium">@Model.JobPostingId</div>
+        </div>
+        
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="fw-medium text-muted small">Trạng thái</div>
+            <div>
+                <span class="badge @Model.TrangThaiTinChiTietCssClass">
+                    <i class="@GetStatusIcon(Model.TrangThaiTinChiTiet) me-1" aria-hidden="true"></i>
+                    @Model.TrangThaiTinChiTiet
+                </span>
+            </div>
+        </div>
+        
+        <hr class="my-3">
+        
+        <div class="row row-cols-2 g-3 text-center mb-3">
+            <div class="col">
+                <div class="card h-100 border-0 bg-light rounded-3">
+                    <div class="card-body py-2 px-2">
+                        <div class="fs-4 fw-bold text-primary">@Model.LuotXem</div>
+                        <div class="small text-muted">Lượt xem</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 border-0 bg-light rounded-3">
+                    <div class="card-body py-2 px-2">
+                        <div class="fs-4 fw-bold text-primary">@Model.LuotUngTuyen</div>
+                        <div class="small text-muted">Lượt ứng tuyển</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-3">
+        
+        <div class="small">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="fw-medium text-muted">Thời gian đăng:</div>
+                <div>@Model.ThoiGianDangDisplay</div>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="fw-medium text-muted">Người đăng:</div>
+                <div>@Model.NguoiDangDisplay</div>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="fw-medium text-muted">Ngày tạo:</div>
+                <div>@Model.NgayTaoDisplay</div>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="fw-medium text-muted">Cập nhật cuối:</div>
+                <div>@Model.CapNhatLanCuoiDisplay</div>
+            </div>
+        </div>
+    </div>
+    
+    @if(Model.CanDuyet || Model.CanTuChoi)
+    {
+        <div class="card-footer bg-light py-3">
+            <div class="d-grid gap-2">
+                @if (Model.CanDuyet)
+                {
+                    <button type="button" class="btn btn-primary" onclick="duyetTin('@Model.JobPostingId', '@Model.JobPostingTitle')">
+                        <i class="bi bi-check-circle me-1" aria-hidden="true"></i> Duyệt tin đăng
+                    </button>
+                }
+                @if (Model.CanTuChoi)
+                {
+                    <button type="button" class="btn btn-outline-primary" onclick="openTuophosphateModal('@Model.JobPostingId', '@Model.JobPostingTitle')">
+                        <i class="bi bi-x-circle me-1" aria-hidden="true"></i> Từ chối đăng tin
+                    </button>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    /* Styles for status badges */
+    .badge.bg-waiting {
+        background-color: rgba(0, 58, 146, 0.2) !important;
+        color: #002a6a !important;
+    }
+    
+    .badge.bg-approved {
+        background-color: rgba(0, 58, 146, 0.4) !important;
+        color: #002a6a !important;
+    }
+    
+    .badge.bg-rejected {
+        background-color: rgba(0, 58, 146, 0.3) !important;
+        color: #002a6a !important;
+    }
+    
+    .badge.bg-expired {
+        background-color: #e9ecef !important;
+        color: #4a4a4a !important;
+    }
+    
+    .badge.bg-draft {
+        background-color: rgba(0, 58, 146, 0.1) !important;
+        color: #002a6a !important;
+    }
+    
+    .badge.bg-paused {
+        background-color: #f8f9fa !important;
+        color: #002a6a !important;
+        border: 1px solid rgba(0, 58, 146, 0.2) !important;
+    }
+    
+    .bg-primary {
+        background: #003a92 !important;
+    }
+    
+    .text-primary {
+        color: #003a92 !important;
+    }
+    
+    .btn-primary {
+        background-color: #003a92;
+        border-color: #003a92;
+    }
+    
+    .btn-primary:hover {
+        background-color: #002a6a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-outline-primary {
+        border-color: #003a92;
+        color: #003a92;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: rgba(0, 58, 146, 0.1);
+        color: #002a6a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card.h-100:hover {
+        background-color: rgba(0, 58, 146, 0.05) !important;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    /* Responsive adjustments */
+    @@media (max-width: 576px) {
+        .card {
+            position: static !important;
+        }
+        .fs-4 {
+            font-size: 1.5rem !important;
+        }
+        .small {
+            font-size: 0.8rem;
+        }
+    }
+</style>
+
+@functions {
+    public string GetStatusIcon(string status)
+    {
+        return status.ToLower() switch
+        {
+            var s when s.Contains("chờ duyệt") => "bi bi-clock",
+            var s when s.Contains("đã duyệt") => "bi bi-check-circle",
+            var s when s.Contains("từ chối") => "bi bi-x-circle",
+            var s when s.Contains("hết hạn") => "bi bi-calendar-x",
+            var s when s.Contains("nháp") => "bi bi-pencil",
+            var s when s.Contains("tạm dừng") => "bi bi-pause-circle",
+            _ => "bi bi-info-circle"
+        };
+    }
+}
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">

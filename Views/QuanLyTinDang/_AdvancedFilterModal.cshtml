@@ -1,0 +1,511 @@
+@model HeThongTimViec.ViewModels.QuanLyTinDang.QuanLyTinDangIndexViewModel
+@using HeThongTimViec.Models
+
+<div class="modal fade" id="advancedFilterModal" tabindex="-1" aria-labelledby="advancedFilterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+        <form asp-action="Index" method="get" id="advancedFilterForm">
+            <input type="hidden" name="currentTab" value="@(Model.CurrentTab ?? "tatca")" />
+            <input type="hidden" name="viewMode" value="@(Model.ViewMode ?? "list")" />
+            <input type="hidden" name="sortBy" value="@(Model.SortBy ?? "moinhat")" />
+            <input type="hidden" name="keyword" value="@(Model.Keyword ?? "")" />
+
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <!-- Enhanced Modal Header -->
+                <div class="modal-header bg-primary py-3 position-relative overflow-hidden">
+                    <div class="modal-header-content position-relative z-1 d-flex w-100 align-items-center">
+                        <div class="modal-title-icon bg-white bg-opacity-25 rounded-circle p-2 me-3 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-filter text-white fs-5"></i>
+                        </div>
+                        <h5 class="modal-title fw-bold text-white mb-0" id="advancedFilterModalLabel">
+                            Lọc nâng cao
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-header-bg position-absolute top-0 start-0 w-100 h-100 bg-gradient opacity-50"></div>
+                </div>
+
+                <!-- Filter Summary Bar with Badge Count and Close Button -->
+                <div class="bg-light border-bottom py-2 px-3 d-flex align-items-center">
+                    <div class="filter-summary flex-grow-1 d-flex align-items-center">
+                        <i class="fas fa-info-circle me-2 text-primary"></i>
+                        <span class="small text-secondary">Đang áp dụng:</span>
+                        <div class="active-filters d-flex flex-wrap gap-1 ms-2" id="activeFilterCount">
+                            <span class="badge bg-primary rounded-pill fw-normal filter-counter">
+                                <span id="filterCount">0</span> bộ lọc
+                            </span>
+                        </div>
+                    </div>
+                    <div class="filter-actions d-flex align-items-center gap-2">
+                        <button type="button" class="btn btn-sm btn-link text-decoration-none p-0 text-danger filter-clear-all" id="clearAllFilters">
+                            <i class="fas fa-times-circle me-1"></i>Xóa tất cả
+                        </button>
+                        <button type="button" class="btn-close btn-close-filter" aria-label="Close Modal"></button>
+                    </div>
+                </div>
+
+                <div class="modal-body p-0">
+                    <div class="filter-container">
+                        <!-- Tabs for Filter Categories -->
+                        <div class="filter-tabs">
+                            <ul class="nav nav-pills nav-fill border-bottom" id="filterTabsNav" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active rounded-0 border-0 px-4 py-3" id="primary-filters-tab" data-bs-toggle="tab" data-bs-target="#primary-filters" type="button" role="tab" aria-selected="true">
+                                        <i class="fas fa-sliders-h text-primary me-2"></i>Bộ lọc chính
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link rounded-0 border-0 px-4 py-3" id="location-tab" data-bs-toggle="tab" data-bs-target="#location-filters" type="button" role="tab" aria-selected="false">
+                                        <i class="fas fa-map-marker-alt text-danger me-2"></i>Khu vực
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link rounded-0 border-0 px-4 py-3" id="job-details-tab" data-bs-toggle="tab" data-bs-target="#job-details-filters" type="button" role="tab" aria-selected="false">
+                                        <i class="fas fa-clipboard-list text-success me-2"></i>Chi tiết công việc
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content p-4" id="filterTabsContent">
+                            <!-- Primary Filters -->
+                            <div class="tab-pane fade show active" id="primary-filters" role="tabpanel" aria-labelledby="primary-filters-tab">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select asp-for="FilterTrangThai" class="form-select filter-select" asp-items="Model.TrangThaiOptions" id="filterTrangThai">
+                                                <option value="">Tất cả trạng thái</option>
+                                            </select>
+                                            <label for="filterTrangThai">
+                                                <i class="fas fa-tag text-primary me-2"></i>Trạng thái
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select asp-for="FilterLoaiCongViec" class="form-select filter-select" asp-items="Model.LoaiCongViecOptions" id="filterLoaiCongViec">
+                                                <option value="">Tất cả loại công việc</option>
+                                            </select>
+                                            <label for="filterLoaiCongViec">
+                                                <i class="fas fa-briefcase text-primary me-2"></i>Loại công việc
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select asp-for="FilterLoaiNguoiDang" class="form-select filter-select" asp-items="Model.LoaiNguoiDangOptions" id="filterLoaiNguoiDang">
+                                                <option value="">Tất cả</option>
+                                            </select>
+                                            <label for="filterLoaiNguoiDang">
+                                                <i class="fas fa-user-tag text-primary me-2"></i>Loại người đăng
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="card h-100 border-0 shadow-sm rounded-4 filter-card">
+                                            <div class="card-body d-flex align-items-center">
+                                                <div class="form-check form-switch ps-0 d-flex align-items-center w-100">
+                                                    <div class="me-auto">
+                                                        <label class="form-check-label d-flex flex-column" for="filterTinGap">
+                                                            <span class="fw-medium mb-1">Tin tuyển dụng khẩn cấp</span>
+                                                            <span class="text-muted small">Chỉ hiển thị tin đăng gấp</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="ms-3 d-flex">
+                                                        <span class="badge bg-danger rounded-pill me-3 d-flex align-items-center">
+                                                            <i class="fas fa-bolt"></i>
+                                                        </span>
+                                                        <input asp-for="FilterTinGapCheckbox" type="checkbox" class="form-check-input m-0" id="filterTinGap" style="width: 3em; height: 1.5em;" role="switch">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Location Filters -->
+                            <div class="tab-pane fade" id="location-filters" role="tabpanel" aria-labelledby="location-tab">
+                                <div class="row g-4">
+                                    <div class="col-12 mb-2">
+                                        <div class="location-map bg-light rounded-4 p-3 text-center" style="height: 120px; display: flex; align-items: center; justify-content: center;">
+                                            <div class="location-icon text-danger">
+                                                <i class="fas fa-map-marked-alt fa-3x mb-2"></i>
+                                                <p class="mb-0 text-secondary">Chọn khu vực làm việc mong muốn</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select asp-for="FilterThanhPhoId" id="FilterThanhPhoId" class="form-select filter-select" asp-items="Model.ThanhPhoOptions">
+                                                <option value="">Tất cả Tỉnh/Thành</option>
+                                            </select>
+                                            <label for="FilterThanhPhoId">
+                                                <i class="fas fa-city text-danger me-2"></i>Tỉnh/Thành phố
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select asp-for="FilterQuanHuyenId" id="FilterQuanHuyenId" class="form-select filter-select" asp-items="Model.QuanHuyenOptions">
+                                                <option value="">Tất cả Quận/Huyện</option>
+                                            </select>
+                                            <label for="FilterQuanHuyenId">
+                                                <i class="fas fa-map-pin text-danger me-2"></i>Quận/Huyện
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Job Details Filters -->
+                            <div class="tab-pane fade" id="job-details-filters" role="tabpanel" aria-labelledby="job-details-tab">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label asp-for="FilterNganhNgheIds" class="form-label mb-2">
+                                            <i class="fas fa-briefcase text-success me-2"></i>Ngành nghề
+                                        </label>
+                                        <div class="position-relative">
+                                            <select asp-for="FilterNganhNgheIds" class="form-select select2-tags h-100" 
+                                                    asp-items="Model.NganhNgheOptions" multiple="multiple" 
+                                                    data-placeholder="Chọn ngành nghề">
+                                            </select>
+                                            <div class="position-absolute top-0 end-0 h-100 d-flex align-items-center pe-3 filter-select-icon">
+                                                <i class="fas fa-chevron-down text-muted small"></i>
+                                            </div>
+                                        </div>
+                                        <small class="form-text text-muted mt-2 d-block">
+                                            <i class="fas fa-info-circle me-1"></i>Giữ Ctrl (hoặc Cmd trên Mac) để chọn nhiều.
+                                        </small>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label class="form-label mb-2">
+                                            <i class="fas fa-dollar-sign text-success me-2"></i>Mức lương (nghìn VNĐ)
+                                        </label>
+                                        <div class="salary-range card border-0 shadow-sm rounded-4">
+                                            <div class="card-body">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text">Từ</span>
+                                                    <input asp-for="FilterLuongMin" type="number" class="form-control" placeholder="0" min="0">
+                                                    <span class="input-group-text">nghìn</span>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">Đến</span>
+                                                    <input asp-for="FilterLuongMax" type="number" class="form-control" placeholder="Không giới hạn" min="0">
+                                                    <span class="input-group-text">nghìn</span>
+                                                </div>
+                                                <small class="form-text text-muted mt-2 d-block">
+                                                    <i class="fas fa-info-circle me-1"></i>Đơn vị theo loại hình công việc (giờ, ngày, ca, tháng).
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-light py-3 px-4 border-top">
+                    <div class="d-flex w-100 justify-content-between gap-2">
+                        <a asp-action="Index" asp-route-currentTab="@Model.CurrentTab" asp-route-viewMode="@Model.ViewMode" class="btn btn-outline-secondary">
+                            <i class="fas fa-undo me-2"></i>Xóa bộ lọc
+                        </a>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-light border" data-bs-dismiss="modal">
+                                <i class="fas fa-times me-2"></i>Đóng
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-filter me-2"></i>Áp dụng bộ lọc
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Enhanced Modal Styling */
+    #advancedFilterModal .modal-content {
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    
+    /* Header with gradient background */
+    .modal-header-bg {
+        background: linear-gradient(135deg, #4361ee, #3f37c9);
+        z-index: 0;
+    }
+    
+    .modal-title-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* Tab Navigation Styling */
+    #filterTabsNav .nav-link {
+        color: #6c757d;
+        font-weight: 500;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    #filterTabsNav .nav-link:hover {
+        color: #495057;
+        background-color: rgba(13, 110, 253, 0.04);
+    }
+    
+    #filterTabsNav .nav-link.active {
+        color: #0d6efd;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    
+    #filterTabsNav .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #0d6efd;
+    }
+    
+    /* Filter Counter Badge */
+    .filter-counter {
+        background-color: rgba(13, 110, 253, 0.7);
+        font-size: 0.8em;
+        padding: 0.35em 0.65em;
+    }
+    
+    /* Form Control Styling */
+    .form-floating > .form-select,
+    .form-floating > .form-control {
+        border-radius: 8px;
+        border-color: #e0e0e0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        transition: all 0.3s ease;
+    }
+    
+    .form-floating > .form-select:focus,
+    .form-floating > .form-control:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    .form-floating > label {
+        padding-left: 1rem;
+        color: #6c757d;
+    }
+    
+    /* Card for switches and special inputs */
+    .filter-card {
+        transition: all 0.3s ease;
+        background-color: #fff;
+    }
+    
+    .filter-card:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08) !important;
+    }
+    
+    /* Custom form switch */
+    .form-check-input[type="checkbox"] {
+        background-image: linear-gradient(to right, #e9ecef, #e9ecef);
+        border-color: #ced4da;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .form-check-input:checked[type="checkbox"] {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        background-image: linear-gradient(to right, #0d6efd, #0d6efd);
+    }
+    
+    .form-check-input:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    /* Select2 Integration Styling */
+    .select2-container--default .select2-selection--multiple {
+        border-color: #e0e0e0;
+        border-radius: 8px;
+        min-height: 42px;
+        padding: 3px;
+    }
+    
+    .select2-container--default.select2-container--focus .select2-selection--multiple {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 20px;
+        padding: 2px 10px;
+        margin-right: 5px;
+        margin-top: 5px;
+    }
+    
+    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+        border-right: none;
+        color: #6c757d;
+        margin-right: 5px;
+    }
+    
+    /* Input group styling */
+    .input-group-text {
+        background-color: #f8f9fa;
+        border-color: #e0e0e0;
+    }
+    
+    /* Filter Summary Bar Close Button */
+    .btn-close-filter {
+        width: 1em;
+        height: 1em;
+        background: none;
+        border: none;
+        color: #dc3545;
+        font-size: 1.2em;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+    }
+    
+    .btn-close-filter:hover {
+        opacity: 1;
+        color: #c82333;
+    }
+    
+    /* Responsive design improvements */
+    @@media (max-width: 767.98px) {
+        .modal-footer {
+            flex-direction: column-reverse;
+            gap: 10px;
+        }
+        
+        .modal-footer > div {
+            width: 100%;
+            flex-direction: column;
+        }
+        
+        .modal-footer .btn {
+            width: 100%;
+            margin: 5px 0 !important;
+        }
+        
+        .filter-tabs {
+            overflow-x: auto;
+            white-space: nowrap;
+            width: 100%;
+        }
+        
+        #filterTabsNav {
+            display: flex;
+            flex-wrap: nowrap;
+            width: max-content;
+            min-width: 100%;
+        }
+        
+        .tab-content {
+            padding: 15px !important;
+        }
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Initialize Select2 for multi-select elements
+            if ($.fn.select2) {
+                $('.select2-tags').select2({
+                    theme: 'bootstrap-5',
+                    width: '100%',
+                    placeholder: $(this).data('placeholder'),
+                    closeOnSelect: false,
+                    allowClear: true
+                });
+            }
+            
+            // Filter count update function
+            function updateFilterCount() {
+                let count = 0;
+                
+                // Check each filter value
+                if ($('#filterTrangThai').val()) count++;
+                if ($('#filterLoaiCongViec').val()) count++;
+                if ($('#filterLoaiNguoiDang').val()) count++;
+                if ($('#filterTinGap').is(':checked')) count++;
+                if ($('#FilterThanhPhoId').val()) count++;
+                if ($('#FilterQuanHuyenId').val()) count++;
+                if ($('#FilterNganhNgheIds').val() && $('#FilterNganhNgheIds').val().length > 0) count++;
+                if ($('#FilterLuongMin').val() || $('#FilterLuongMax').val()) count++;
+                
+                // Update count display
+                $('#filterCount').text(count);
+                
+                // Change badge color based on count
+                if (count > 0) {
+                    $('.filter-counter').removeClass('bg-primary').addClass('bg-success');
+                } else {
+                    $('.filter-counter').removeClass('bg-success').addClass('bg-primary');
+                }
+            }
+            
+            // Update count on filter change
+            $('.filter-select, #filterTinGap, #FilterNganhNgheIds, #FilterLuongMin, #FilterLuongMax').on('change', function() {
+                updateFilterCount();
+            });
+            
+            // Clear all filters
+            $('#clearAllFilters').click(function() {
+                $('.filter-select').val('').trigger('change');
+                $('#filterTinGap').prop('checked', false);
+                $('#FilterNganhNgheIds').val(null).trigger('change');
+                $('#FilterLuongMin, #FilterLuongMax').val('');
+                updateFilterCount();
+            });
+
+            // Province-district dependency
+            $('#FilterThanhPhoId').change(function() {
+                var provinceId = $(this).val();
+                if (provinceId) {
+                    $.ajax({
+                        url: '/api/locations/districts/' + provinceId,
+                        type: 'GET',
+                        success: function(data) {
+                            var districtSelect = $('#FilterQuanHuyenId');
+                            districtSelect.empty();
+                            districtSelect.append('<option value="">Tất cả Quận/Huyện</option>');
+                            $.each(data, function(index, item) {
+                                districtSelect.append('<option value="' + item.value + '">' + item.text + '</option>');
+                            });
+                            updateFilterCount();
+                        }
+                    });
+                } else {
+                    $('#FilterQuanHuyenId').empty();
+                    $('#FilterQuanHuyenId').append('<option value="">Tất cả Quận/Huyện</option>');
+                    updateFilterCount();
+                }
+            });
+            
+            // Handle modal close from header and filter bar
+            $('.btn-close, .btn-close-filter').on('click', function() {
+                $('#advancedFilterModal').modal('hide');
+            });
+
+            // Initialize filter count on page load
+            updateFilterCount();
+        });
+    </script>
+}

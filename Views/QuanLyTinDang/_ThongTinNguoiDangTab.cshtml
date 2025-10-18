@@ -1,0 +1,192 @@
+@model HeThongTimViec.ViewModels.QuanLyTinDang.RecruiterInfoSection
+
+<div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+    <div class="card-header bg-primary text-white py-3">
+        <h5 class="mb-0">Thông tin nhà tuyển dụng</h5>
+    </div>
+    <div class="card-body p-4">
+        <div class="d-flex flex-column flex-md-row align-items-md-center mb-4">
+            <div class="position-relative me-md-4 mb-3 mb-md-0">
+                <img src="@(Model.AvatarUrl ?? "/images/default-avatar.png")" alt="Avatar" 
+                     class="rounded-3 shadow-sm" 
+                     style="width: 100px; height: 100px; object-fit: cover;">
+                @if (Model.LoaiHinhTaiKhoanDisplay == "Doanh nghiệp" && Model.CongTyDaXacMinh == true)
+                {
+                    <div class="position-absolute bottom-0 end-0 bg-success text-white rounded-circle p-1" 
+                         data-bs-toggle="tooltip" title="Đã xác minh">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                }
+            </div>
+            <div>
+                <h4 class="mb-1 fw-bold">@Model.TenNguoiHoacCongTy</h4>
+                <div class="d-flex align-items-center mb-2">
+                    <span class="badge bg-secondary me-2">@Model.LoaiHinhTaiKhoanDisplay</span>
+                    @if (Model.LoaiHinhTaiKhoanDisplay == "Doanh nghiệp" && !string.IsNullOrWhiteSpace(Model.QuyMoCongTy))
+                    {
+                        <span class="badge bg-light text-dark">@Model.QuyMoCongTy</span>
+                    }
+                </div>
+                @if (!string.IsNullOrWhiteSpace(Model.WebsiteUrl))
+                {
+                    <a href="@Model.WebsiteUrl" target="_blank" rel="noopener noreferrer" 
+                       class="btn btn-sm btn-outline-primary mt-1">
+                        <i class="bi bi-globe me-1"></i> Website
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div class="bg-light p-3 rounded-3 mb-4">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 me-2">
+                            <i class="bi bi-envelope text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="text-muted small">Email</div>
+                            <a href="mailto:@Model.Email" class="text-break">@Model.Email</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 me-2">
+                            <i class="bi bi-telephone text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="text-muted small">Số điện thoại</div>
+                            <div>@Model.SoDienThoai</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 me-2">
+                            <i class="bi bi-geo-alt text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="text-muted small">Địa chỉ liên hệ</div>
+                            <div>@Model.DiaChiLienHeFull</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.LoaiHinhTaiKhoanDisplay == "Doanh nghiệp")
+        {
+            <div>
+                <h5 class="border-bottom pb-2 mb-3">
+                    <i class="bi bi-building me-2 text-primary"></i>Thông tin doanh nghiệp
+                </h5>
+                
+                @if (!string.IsNullOrWhiteSpace(Model.MoTaCongTyHtml))
+                {
+                    <div class="card-text mb-4">
+                        <div class="fw-medium text-primary mb-2">Giới thiệu công ty</div>
+                        <div class="company-description">@Html.Raw(Model.MoTaCongTyHtml)</div>
+                    </div>
+                }
+
+                <div class="row g-3">
+                    @if (!string.IsNullOrWhiteSpace(Model.DiaChiDangKyKinhDoanh))
+                    {
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-2">
+                                    <i class="bi bi-pin-map text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-muted small">Địa chỉ ĐKKD</div>
+                                    <div>@Model.DiaChiDangKyKinhDoanh</div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                    @if (!string.IsNullOrWhiteSpace(Model.MaSoThue))
+                    {
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-2">
+                                    <i class="bi bi-hash text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-muted small">Mã số thuế</div>
+                                    <div class="font-monospace">@Model.MaSoThue</div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                    @if (Model.CongTyDaXacMinh.HasValue)
+                    {
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-2">
+                                    <i class="bi bi-patch-check text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-muted small">Trạng thái xác minh</div>
+                                    @if (Model.CongTyDaXacMinh.Value)
+                                    {
+                                        <div class="text-success">
+                                            <i class="bi bi-check-circle-fill me-1"></i>Đã xác minh
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="text-secondary">
+                                            <i class="bi bi-clock-history me-1"></i>Chưa xác minh
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .company-description {
+        max-height: 300px;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+    
+    .company-description::-webkit-scrollbar {
+        width: 5px;
+    }
+    
+    .company-description::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    
+    .company-description::-webkit-scrollbar-thumb {
+        background: #ddd;
+        border-radius: 10px;
+    }
+
+    .badge {
+        color:#003a92 !important;
+    }
+    
+    .company-description::-webkit-scrollbar-thumb:hover {
+        background: #ccc;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>

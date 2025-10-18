@@ -1,0 +1,92 @@
+@* File: Views/Shared/_PagingPartial.cshtml *@
+@* Giả sử model là một đối tượng có các thuộc tính tương tự PaginatedList *@
+@* Ví dụ: model ở đây là Model.UngVienItems từ Index.cshtml *@
+@model HeThongTimViec.ViewModels.TimViec.PaginatedList<HeThongTimViec.ViewModels.QuanLyUngVien.UngVienItemViewModel> 
+
+@{
+    // Kiểm tra model có null không trước khi truy cập
+    if (Model == null || Model.TotalPages <= 1)
+    {
+        return; // Không hiển thị gì nếu không có trang nào hoặc chỉ có 1 trang
+    }
+
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    int currentPage = Model.PageIndex;
+    int totalPages = Model.TotalPages;
+    int startPage = Math.Max(1, currentPage - 2);
+    int endPage = Math.Min(totalPages, currentPage + 2);
+
+    if (totalPages <= 5)
+    {
+        startPage = 1;
+        endPage = totalPages;
+    }
+    else
+    {
+        if (currentPage <= 3)
+        {
+            startPage = 1;
+            endPage = 5;
+        }
+        else if (currentPage + 2 >= totalPages)
+        {
+            startPage = totalPages - 4;
+            endPage = totalPages;
+        }
+    }
+
+    // Lấy các tham số query hiện tại để giữ lại khi chuyển trang
+    var queryParams = new Dictionary<string, string>();
+    var requestQuery = ViewContext.HttpContext.Request.Query;
+
+    if (requestQuery.ContainsKey("TinTuyenDungFilterId"))
+        queryParams["TinTuyenDungFilterId"] = requestQuery["TinTuyenDungFilterId"];
+    if (requestQuery.ContainsKey("TrangThaiFilter"))
+        queryParams["TrangThaiFilter"] = requestQuery["TrangThaiFilter"];
+    if (requestQuery.ContainsKey("TuKhoa"))
+        queryParams["TuKhoa"] = requestQuery["TuKhoa"];
+    if (requestQuery.ContainsKey("SapXep"))
+        queryParams["SapXep"] = requestQuery["SapXep"];
+}
+
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination pagination-sm justify-content-center flex-wrap">
+        <li class="page-item @prevDisabled">
+            <a class="page-link" asp-all-route-data="@queryParams" asp-route-page="@(currentPage - 1)" aria-label="Previous">
+                <span aria-hidden="true">«</span>
+            </a>
+        </li>
+
+        @if (startPage > 1)
+        {
+            <li class="page-item"><a class="page-link" asp-all-route-data="@queryParams" asp-route-page="1">1</a></li>
+            @if (startPage > 2)
+            {
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            }
+        }
+
+        @for (int i = startPage; i <= endPage; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link" asp-all-route-data="@queryParams" asp-route-page="@i">@i</a>
+            </li>
+        }
+
+        @if (endPage < totalPages)
+        {
+            @if (endPage < totalPages - 1)
+            {
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            }
+            <li class="page-item"><a class="page-link" asp-all-route-data="@queryParams" asp-route-page="@totalPages">@totalPages</a></li>
+        }
+
+        <li class="page-item @nextDisabled">
+            <a class="page-link" asp-all-route-data="@queryParams" asp-route-page="@(currentPage + 1)" aria-label="Next">
+                <span aria-hidden="true">»</span>
+            </a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Không Tìm Thấy Tin Tuyển Dụng";
+}
+
+<div class="container mt-5 mb-5 text-center">
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i> Rất tiếc, không tìm thấy!</h4>
+        <p>Tin tuyển dụng bạn đang tìm kiếm không tồn tại, đã bị xóa, chưa được duyệt hoặc đã hết hạn.</p>
+        <hr>
+        <p class="mb-0">Vui lòng quay lại trang tìm kiếm để tìm các cơ hội việc làm khác.</p>
+    </div>
+    <a asp-action="Index" asp-controller="TimViec" class="btn btn-primary mt-3">
+        <i class="fas fa-search me-2"></i> Quay lại Tìm việc
+    </a>
+</div>

@@ -1,0 +1,283 @@
+@model HeThongTimViec.ViewModels.CongTy.CompanyDetailViewModel
+@using HeThongTimViec.Extensions
+@using HeThongTimViec.Utils
+
+@{
+    ViewData["Title"] = $"Chi tiết công ty - {Model.TenCongTy}";
+}
+
+@* Không cần @section HeadStyles vì CSS đã có trong file site.css chung *@
+
+<style>
+    /* CSS BỔ SUNG CHỈ DÀNH RIÊNG CHO TRANG NÀY */
+
+    /* 1. Banner đầu trang */
+    .company-profile-header {
+        position: relative;
+        padding: 4rem 0;
+        background-color: var(--color-dark-teal-light);
+        color: var(--color-cream);
+        text-align: center;
+        overflow: hidden;
+    }
+    .company-profile-header::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.95), rgba(var(--color-dark-teal-dark-rgb, 4), 0.85)); /* Thêm fallback cho biến màu */
+        z-index: 1;
+    }
+    .company-profile-header .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* 2. Logo */
+    .company-profile-logo {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 6px solid var(--color-cream);
+        box-shadow: var(--shadow-lg);
+        background-color: var(--color-cream);
+    }
+
+    /* 3. Tên công ty và thông tin phụ */
+    .company-profile-name {
+        color: var(--color-cream);
+        font-weight: 700;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    .verification-badge-sm {
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 0.3em 0.7em;
+        vertical-align: super;
+    }
+    .company-profile-meta {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .company-profile-meta a {
+        color: var(--color-cream);
+        text-decoration: none;
+    }
+    .company-profile-meta a:hover {
+        color: var(--color-accent);
+        text-decoration: underline;
+    }
+    .company-profile-meta .meta-item:not(:last-child)::after {
+        content: '•';
+        margin: 0 0.75rem;
+    }
+
+    /* 4. Khối thông tin chính */
+    .main-content-area {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+    .detail-card {
+        margin-bottom: 2rem;
+    }
+    .detail-card .card-header {
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    /* 5. Danh sách việc làm */
+    .job-listing .list-group-item {
+        border: 0;
+        border-bottom: 1px solid var(--bs-border-color-translucent);
+        padding: 1rem 0.25rem;
+    }
+     .job-listing .list-group-item:last-child {
+        border-bottom: 0;
+     }
+    .job-listing .job-title {
+        color: var(--bs-primary);
+        font-weight: 600;
+        transition: color var(--transition-medium);
+    }
+     .job-listing a:hover .job-title {
+        color: var(--bs-link-hover-color);
+     }
+    .job-listing .job-location {
+        color: var(--color-neutral-600);
+        font-size: 0.9rem;
+    }
+    .job-listing .job-salary {
+        color: var(--bs-success);
+        font-weight: 500;
+    }
+
+    /* 6. Sidebar thông tin */
+    .sidebar-info .info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    .sidebar-info .info-item i {
+        color: var(--color-light-teal);
+        margin-top: 0.25rem;
+        flex-shrink: 0;
+    }
+    .sidebar-info .info-item strong {
+        display: block;
+        color: var(--color-neutral-800);
+        font-weight: 600;
+        margin-bottom: 0.1rem;
+    }
+    .sidebar-info .info-item span {
+        color: var(--color-neutral-700);
+    }
+</style>
+
+<!-- ======================= BANNER ĐẦU TRANG ======================= -->
+<header class="company-profile-header">
+    <div class="container">
+        <img src="@(string.IsNullOrEmpty(Model.UrlLogo) ? "/images/company-logo-placeholder.png" : Model.UrlLogo)" alt="Logo @Model.TenCongTy" class="company-profile-logo" />
+
+        <h1 class="company-profile-name display-5">
+            @Model.TenCongTy
+            @if (Model.DaXacMinh)
+            {
+                <span class="badge rounded-pill bg-success verification-badge-sm ms-2"><i class="fas fa-check-circle me-1"></i>Đã xác minh</span>
+            }
+        </h1>
+
+        <div class="company-profile-meta d-flex justify-content-center flex-wrap">
+            <span class="meta-item"><i class="fas fa-map-marker-alt me-2"></i>@Model.DiaDiemLienHe</span>
+            @if (!string.IsNullOrEmpty(Model.UrlWebsite))
+            {
+                <span class="meta-item">
+                    <a href="@Model.UrlWebsite" target="_blank" rel="noopener noreferrer"><i class="fas fa-link me-2"></i>Website</a>
+                </span>
+            }
+        </div>
+        
+        @* Nút chỉnh sửa đã được loại bỏ theo yêu cầu "công khai hoàn toàn" và không cần IsOwner *@
+
+    </div>
+</header>
+
+<!-- ======================= NỘI DUNG CHÍNH ======================= -->
+<div class="main-content-area">
+    <div class="container">
+        <div class="row g-4 g-lg-5">
+            <!-- Cột trái: Giới thiệu và Việc làm -->
+            <div class="col-lg-8">
+                <!-- GIỚI THIỆU CÔNG TY -->
+                <div class="card detail-card">
+                    <div class="card-header">
+                        <i class="fas fa-info-circle"></i> Giới thiệu công ty
+                    </div>
+                    <div class="card-body" style="white-space: pre-wrap; line-height: 1.8;">
+                        @(!string.IsNullOrEmpty(Model.MoTa) ? Html.Raw(Model.MoTa) : Html.Raw("<p class='text-muted'>Công ty chưa cập nhật thông tin giới thiệu.</p>"))
+                    </div>
+                </div>
+
+                <!-- VIỆC LÀM ĐANG TUYỂN (CÓ PHÂN TRANG) -->
+                <div id="job-listings" class="card detail-card job-listing">
+                    <div class="card-header">
+                        <i class="fas fa-briefcase"></i> Việc làm đang tuyển (@Model.TotalJobsCount)
+                    </div>
+                    <div class="card-body">
+                        @if (Model.ViecLamDangTuyen.Any())
+                        {
+                            <div class="list-group list-group-flush">
+                                @foreach (var job in Model.ViecLamDangTuyen)
+                                {
+                                    <a asp-controller="TimViec" asp-action="ChiTiet" asp-route-id="@job.Id" asp-route-tieuDeSeo="@SeoUrlHelper.GenerateSlug(job.TieuDe)" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <h5 class="job-title mb-1">@job.TieuDe</h5>
+                                            <span class="job-salary">@job.MucLuongDisplay</span>
+                                        </div>
+                                        <p class="job-location mb-0"><i class="fas fa-map-marker-alt me-2"></i>@job.DiaDiem</p>
+                                    </a>
+                                }
+                            </div>
+
+                            <!-- === THÊM KHỐI PHÂN TRANG VÀO ĐÂY === -->
+                            @if (Model.JobTotalPages > 1)
+                            {
+                                <nav aria-label="Job pagination" class="mt-4">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item @(!Model.HasPreviousJobPage ? "disabled" : "")">
+                                            <a class="page-link" asp-action="ChiTiet" asp-route-slug="@Model.Slug" asp-route-jobPage="@(Model.JobPageNumber - 1)" asp-fragment="job-listings">«</a>
+                                        </li>
+                                        @for (int i = 1; i <= Model.JobTotalPages; i++)
+                                        {
+                                            <li class="page-item @(i == Model.JobPageNumber ? "active" : "")">
+                                                <a class="page-link" asp-action="ChiTiet" asp-route-slug="@Model.Slug" asp-route-jobPage="@i" asp-fragment="job-listings">@i</a>
+                                            </li>
+                                        }
+                                        <li class="page-item @(!Model.HasNextJobPage ? "disabled" : "")">
+                                            <a class="page-link" asp-action="ChiTiet" asp-route-slug="@Model.Slug" asp-route-jobPage="@(Model.JobPageNumber + 1)" asp-fragment="job-listings">»</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-muted">Công ty hiện không có vị trí nào đang tuyển dụng.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải: Thông tin chi tiết -->
+            <div class="col-lg-4">
+                <div class="card detail-card sidebar-info sticky-lg-top">
+                    <div class="card-header">
+                        <i class="fas fa-building"></i> Thông tin Doanh nghiệp
+                    </div>
+                    <div class="card-body">
+                        <div class="info-item">
+                            <i class="fas fa-users fa-fw"></i>
+                            <div><strong>Quy mô</strong><span>@(!string.IsNullOrEmpty(Model.QuyMoCongTy) ? Model.QuyMoCongTy : "Chưa cập nhật")</span></div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marked-alt fa-fw"></i>
+                            <div><strong>Địa chỉ ĐKKD</strong><span>@(!string.IsNullOrEmpty(Model.DiaChiDangKy) ? Model.DiaChiDangKy : "Chưa cập nhật")</span></div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-barcode fa-fw"></i>
+                            <div><strong>Mã số thuế</strong><span>@(!string.IsNullOrEmpty(Model.MaSoThue) ? Model.MaSoThue : "Chưa cập nhật")</span></div>
+                        </div>
+                    </div>
+
+                    <div class="card-header border-top">
+                        <i class="fas fa-user-tie"></i> Thông tin Người đại diện
+                    </div>
+                    <div class="card-body">
+                        <div class="info-item">
+                            <i class="fas fa-user fa-fw"></i>
+                            <div><strong>Họ tên</strong><span>@Model.HoTenNguoiDaiDien</span></div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-venus-mars fa-fw"></i>
+                            <div><strong>Giới tính</strong><span>@(Model.GioiTinhNguoiDaiDien?.GetDisplayName() ?? "Chưa cập nhật")</span></div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-birthday-cake fa-fw"></i>
+                            <div><strong>Ngày sinh</strong><span>@(Model.NgaySinhNguoiDaiDien?.ToString("dd/MM/yyyy") ?? "Chưa cập nhật")</span></div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope fa-fw"></i>
+                            <div><strong>Email liên hệ</strong><span>@Model.EmailLienHe</span></div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone fa-fw"></i>
+                            <div><strong>Số điện thoại</strong><span>@(!string.IsNullOrEmpty(Model.SoDienThoaiLienHe) ? Model.SoDienThoaiLienHe : "Chưa cập nhật")</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1620 @@
+@using HeThongTimViec.Models
+@model HeThongTimViec.ViewModels.Dashboard.AdminDashboardViewModel
+@using HeThongTimViec.Extensions
+@{
+    ViewData["Title"] = "Bảng điều khiển Quản trị";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var trangThaiMap = Enum.GetValues(typeof(TrangThaiTinTuyenDung))
+                           .Cast<TrangThaiTinTuyenDung>()
+                           .ToDictionary(t => t, t => t.ToString().ToLowerInvariant());
+
+    var baoCaoMap = Enum.GetValues(typeof(TrangThaiXuLyBaoCao))
+                       .Cast<TrangThaiXuLyBaoCao>()
+                       .ToDictionary(b => b, b => b.ToString().ToLowerInvariant());
+
+    Func<double?, string, (string text, string cssClass, string iconClass)> GetChangeDisplayInfo = (changeValue, metricNameForZeroPrev) =>
+    {
+        if (!changeValue.HasValue)
+        {
+            return ($"Lỗi dữ liệu so sánh", "text-warning", "fas fa-exclamation-triangle");
+        }
+
+        double change = changeValue.Value;
+        string css, icon, text;
+
+        if (ViewBag.PreviousMonthCountForJobs == 0 && metricNameForZeroPrev == "công việc")
+        {
+            if (change == 0)
+            {
+                css = "text-muted"; icon = "fas fa-minus"; text = "Không có công việc mới (tháng trước cũng 0)";
+            }
+            else
+            {
+                css = "text-success"; icon = "fas fa-star"; text = "Công việc mới (từ 0 tháng trước)";
+            }
+        }
+        else if (ViewBag.PreviousMonthCountForEmployers == 0 && metricNameForZeroPrev == "nhà tuyển dụng")
+        {
+            if (change == 0)
+            {
+                css = "text-muted"; icon = "fas fa-minus"; text = "Không có NTD mới (tháng trước cũng 0)";
+            }
+            else
+            {
+                css = "text-success"; icon = "fas fa-star"; text = "NTD mới (từ 0 tháng trước)";
+            }
+        }
+        else
+        {
+            css = change > 0 ? "text-success" : (change < 0 ? "text-danger" : "text-muted");
+            icon = change > 0 ? "fas fa-arrow-up" : (change < 0 ? "fas fa-arrow-down" : "fas fa-minus");
+            text = $"{Math.Abs(change)}% so với tháng trước";
+            if (change == 0) text = "Không thay đổi so với tháng trước";
+        }
+        return (text, css, icon);
+    };
+}
+
+<!-- === PAGE HEADER === -->
+<div class="page-header animate-fade-in">
+    <div class="d-flex justify-content-between align-items-center">
+       <h1>🗂️  @ViewData["Title"]</h1>
+    </div>
+</div>
+
+<!-- === NOTIFICATIONS === -->
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        @ViewBag.ErrorMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<!-- === OVERVIEW CARDS === -->
+<div class="row mb-4 animate-fade-in">
+    <!-- Card 1: Tổng số công việc -->
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card stats-card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold stats-card-title text-uppercase mb-1">Tổng số công việc</div>
+                        <div class="stats-number">@(((int?)ViewBag.TotalJobPostings ?? 0).ToString("N0"))</div>
+                        @{
+                            var jobChangeInfo = GetChangeDisplayInfo(ViewBag.TotalJobPostingsChange as double?, "công việc");
+                        }
+                        <div class="text-xs mt-1">
+                            <span class="@jobChangeInfo.cssClass me-1"><i class="@jobChangeInfo.iconClass"></i> @jobChangeInfo.text</span>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-briefcase fa-2x text-success opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="QuanLyTinDang" asp-action="Index" class="text-success small">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 2: Tổng số người dùng -->
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card stats-card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold stats-card-title text-uppercase mb-1">Tổng số người dùng</div>
+                        <div class="stats-number">@(((int?)ViewBag.TotalUsers ?? 0).ToString("N0"))</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-primary opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-area="" asp-controller="NguoiDung" asp-action="CaNhan" class="text-primary small">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 3: Nhà tuyển dụng -->
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card stats-card border-left-purple shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold stats-card-title text-uppercase mb-1">Tổng số doanh nghiệp</div>
+                        <div class="stats-number">@(((int?)ViewBag.TotalEmployers ?? 0).ToString("N0"))</div>
+                        @{
+                            var employerChangeInfo = GetChangeDisplayInfo(ViewBag.TotalEmployersChange as double?, "nhà tuyển dụng");
+                        }
+                        <div class="text-xs mt-1">
+                            <span class="@employerChangeInfo.cssClass me-1"><i class="@employerChangeInfo.iconClass"></i> @employerChangeInfo.text</span>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-user-tie fa-2x text-purple opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="NguoiDung" asp-action="DoanhNghiep" asp-route-accountType="doanhnghiep" class="text-purple small">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 4: Báo cáo chờ xử lý -->
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card stats-card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold stats-card-title text-uppercase mb-1">Báo cáo chờ xử lý</div>
+                        <div class="stats-number">@(((int?)ViewBag.PendingReports ?? 0).ToString("N0"))</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-exclamation-triangle fa-2x text-warning opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="QuanLyBaoCao" asp-action="Index" asp-route-statusFilter="@baoCaoMap[TrangThaiXuLyBaoCao.moi]" class="text-warning small">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- === CHARTS ROW: Xu hướng công việc & Phân loại công việc === -->
+<div class="row mb-4">
+    <!-- Xu hướng công việc Chart -->
+    <div class="col-xl-8 col-lg-7 mb-4">
+        <div class="card results-card shadow chart-card animate-fade-in">
+            <div class="card-header results-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div>
+                    <h6 class="m-0 font-weight-bold text-dark">Xu hướng công việc</h6>
+                    <small class="text-muted">Số lượng công việc đăng tuyển theo thời gian</small>
+                </div>
+                <div class="dropdown no-arrow">
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="jobTrendPeriodDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="jobTrendPeriodButtonText">Năm nay</span>
+                        <i class="fas fa-chevron-down fa-xs ms-1"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end shadow animated--fade-in" aria-labelledby="jobTrendPeriodDropdownButton">
+                        <div class="dropdown-header">Chọn giai đoạn:</div>
+                        <a class="dropdown-item job-trend-period" href="#" data-period="week" data-displaytext="8 tuần qua">8 tuần qua</a>
+                        <a class="dropdown-item job-trend-period" href="#" data-period="month" data-displaytext="30 ngày qua">30 ngày qua</a>
+                        <a class="dropdown-item job-trend-period active" href="#" data-period="year" data-displaytext="12 tháng qua">12 tháng qua</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-area" style="height: 360px; position: relative;">
+                    <div id="jobTrendChartLoading" class="chart-loading-overlay">
+                        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Đang tải...</span></div>
+                    </div>
+                    <canvas id="jobTrendChart"></canvas>
+                </div>
+                <div id="jobTrendChartLegend" class="chart-legend-container text-center small">
+                    <div class="text-center small text-muted p-2">Đang tải chú thích...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phân loại công việc Chart -->
+    <div class="col-xl-4 col-lg-5 mb-4">
+        <div class="card results-card shadow chart-card animate-fade-in">
+            <div class="card-header results-header py-3">
+                <div>
+                    <h6 class="m-0 font-weight-bold text-dark">Phân loại công việc</h6>
+                    <small class="text-muted">Phân bố công việc theo loại hình</small>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="jobStatusChartContainer" class="chart-pie pt-4 pb-2" style="height: 305px; position: relative;">
+                    <div id="jobStatusChartLoading" class="chart-loading-overlay">
+                        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Đang tải...</span></div>
+                    </div>
+                    <canvas id="jobStatusDoughnutChart" style="display: none;"></canvas>
+                </div>
+                <div id="jobStatusDoughnutChartLegend" class="mt-1 text-center small chart-legend-container">
+                    <div class="text-center small text-muted p-2">Đang tải chú thích...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- === CHARTS ROW: Tăng trưởng người dùng & Việc làm theo lĩnh vực === -->
+<div class="row mb-4">
+    <!-- Tăng trưởng người dùng Chart -->
+    <div class="col-xl-8 col-lg-7 mb-4">
+        <div class="card results-card shadow chart-card animate-fade-in">
+            <div class="card-header results-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-dark">Tăng trưởng người dùng (Cá nhân, Doanh nghiệp)</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle btn btn-sm btn-primary" href="#" role="button" id="userGrowthDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end shadow animated--fade-in" aria-labelledby="userGrowthDropdown">
+                        <div class="dropdown-header">Chọn giai đoạn:</div>
+                        <a class="dropdown-item user-growth-period" href="#" data-period="week" data-displaytext="8 tuần qua">8 tuần qua</a>
+                        <a class="dropdown-item user-growth-period" href="#" data-period="month" data-displaytext="30 ngày qua">30 ngày qua</a>
+                        <a class="dropdown-item user-growth-period active" href="#" data-period="year" data-displaytext="12 tháng qua">12 tháng qua</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-area" style="height: 360px; position: relative;">
+                    <div id="userGrowthChartLoading" class="chart-loading-overlay">
+                        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Đang tải...</span></div>
+                    </div>
+                    <canvas id="userGrowthChart"></canvas>
+                </div>
+                <div id="userGrowthChartLegend" class="chart-legend-container text-center small">
+                    <div class="text-center small text-muted p-2">Đang tải chú thích...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Việc làm theo lĩnh vực Chart -->
+    <div class="col-xl-4 col-lg-5 mb-4">
+        <div class="card results-card shadow chart-card animate-fade-in">
+            <div class="card-header results-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-dark">Việc làm theo lĩnh vực (Hoạt động)</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle btn btn-sm btn-primary" href="#" role="button" id="industryDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end shadow animated--fade-in" aria-labelledby="industryDropdown">
+                        <div class="dropdown-header">Hiển thị Top:</div>
+                        <a class="dropdown-item industry-topN active" href="#" data-topn="5">Top 5</a>
+                        <a class="dropdown-item industry-topN" href="#" data-topn="7">Top 7</a>
+                        <a class="dropdown-item industry-topN" href="#" data-topn="10">Top 10</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="jobsByIndustryChartContainer" class="chart-pie pt-4" style="height: 360px; position: relative;">
+                    <div id="jobsByIndustryChartLoading" class="chart-loading-overlay">
+                        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Đang tải...</span></div>
+                    </div>
+                    <canvas id="jobsByIndustryDoughnutChart" style="display: none;"></canvas>
+                </div>
+                <div id="jobsByIndustryDoughnutChartLegend" class="chart-legend-container text-center small">
+                    <div class="text-center small text-muted p-2">Đang tải chú thích...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- === CONTENT ROW: Công việc mới nhất & Hoạt động gần đây === -->
+<div class="row mb-4">
+    <!-- Công việc mới nhất -->
+    <div class="col-lg-7 mb-4">
+        <div class="card results-card shadow content-card animate-fade-in">
+            <div class="card-header results-header py-3 d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="m-0 font-weight-bold content-card-title">Công việc mới nhất</h6>
+                    <small class="content-card-text">Danh sách các công việc mới đang tuyển</small>
+                </div>
+                <div>
+                    <a asp-controller="QuanLyTinDang" asp-action="Index" class="small text-decoration-none me-2">Xem tất cả <i class="fas fa-angle-right fa-sm"></i></a>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="latest-jobs-header d-none d-md-flex align-items-center px-3 py-2 border-bottom bg-light fw-bold content-card-text small">
+                    <div class="col-md-4">Công việc</div>
+                    <div class="col-md-2 text-center">Loại</div>
+                    <div class="col-md-3 text-center">Lương</div>
+                    <div class="col-md-1 text-center">Ứng viên</div>
+                    <div class="col-md-1 text-center">Trạng thái</div>
+                    <div class="col-md-1 text-center">Thao tác</div>
+                </div>
+                <div id="latestJobsList" class="list-group list-group-flush scrollable-list" style="max-height: 500px;">
+                    <div class="list-group-item text-center p-3 loading-placeholder">
+                        <span>Đang tải công việc...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hoạt động gần đây -->
+    <div class="col-lg-5 mb-4">
+        <div class="card results-card shadow content-card animate-fade-in">
+            <div class="card-header results-header py-3 d-flex justify-content-between align-items-center">
+                <h6 class="m-0 font-weight-bold content-card-title">Hoạt động gần đây</h6>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs nav-fill mb-3" id="activityTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="applications-tab" data-bs-toggle="tab" data-bs-target="#applications-tab-pane" type="button" role="tab" aria-controls="applications-tab-pane" aria-selected="true">
+                            <i class="fas fa-file-signature me-1"></i> Ứng tuyển
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="general-activity-tab" data-bs-toggle="tab" data-bs-target="#general-activity-tab-pane" type="button" role="tab" aria-controls="general-activity-tab-pane" aria-selected="false">
+                            <i class="fas fa-history me-1"></i> Hoạt động chung
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="activityTabContent" style="max-height: 500px; overflow-y: auto;">
+                    <div class="tab-pane fade show active" id="applications-tab-pane" role="tabpanel" aria-labelledby="applications-tab" tabindex="0">
+                        <ul id="recentApplicationsList" class="list-unstyled">
+                            <li class="text-center p-3 loading-placeholder">
+                                <span>Đang tải ứng tuyển...</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="general-activity-tab-pane" role="tabpanel" aria-labelledby="general-activity-tab" tabindex="0">
+                        <ul id="generalActivityList" class="list-unstyled">
+                            <li class="text-center p-3 loading-placeholder">
+                                <span>Đang tải hoạt động...</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+        --success-gradient: linear-gradient(135deg, #0f897f 0%, #7dcb9a 100%);
+        --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        --warning-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Modernized Page Header */
+    .page-header {
+        background: linear-gradient(135deg, #112e58 0%, #366bb8 100%); /* Preserve specified gradient */
+        border-radius: 20px; /* Match BaoCaoThongKe rounded corners */
+        padding: 2rem; /* Match BaoCaoThongKe padding */
+        margin-bottom: 2rem; /* Match BaoCaoThongKe spacing */
+        color: white;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Preserve original shadow */
+        animation: fadeInUp 0.6s ease-out; /* Retain animation */
+    }
+
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); /* Match BaoCaoThongKe effect */
+        animation: float 6s ease-in-out infinite; /* Match BaoCaoThongKe animation */
+        opacity: 0.3;
+    }
+
+    @@keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .page-header h1 {
+        position: relative;
+        z-index: 2;
+        margin: 0;
+        font-size: 2.5rem; /* Match BaoCaoThongKe font size */
+        font-weight: 700; /* Match BaoCaoThongKe font weight */
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Match BaoCaoThongKe text shadow */
+    }
+
+    /* Original styles unchanged below */
+    .stats-card {
+        background: white;
+        border-radius: 15px;
+        padding: 15px;
+        min-height: 120px;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+
+    .stats-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--primary-gradient);
+        border-radius: 0 8px 8px 0;
+    }
+
+    .stats-card.border-left-success::before {
+        background: var(--success-gradient);
+    }
+
+    .stats-card.border-left-danger::before {
+        background: var(--danger-gradient);
+    }
+
+    .stats-card.border-left-warning::before {
+        background: var(--warning-gradient);
+    }
+
+    .stats-card.border-left-purple::before {
+        background: linear-gradient(135deg, #6f42c1 0%, #9f6cff 100%);
+    }
+
+    .stats-card:hover {
+        transform: translateY(-5px) scale(1.01);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .stats-number {
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0;
+    }
+
+    .stats-card.border-left-success .stats-number {
+        background: var(--success-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stats-card.border-left-warning .stats-number {
+        background: var(--warning-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stats-card.border-left-purple .stats-number {
+        background: linear-gradient(135deg, #6f42c1 0%, #9f6cff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stats-card-title {
+        color: #4e4e4e !important;
+        opacity: 1;
+    }
+
+    .results-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+
+    .results-header {
+        background: linear-gradient(135deg, #084298 0%, #e9ecef 100%);
+        padding: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .content-card-title {
+        color: #ffffff !important;
+        opacity: 1;
+    }
+
+    .content-card-text {
+        color: #d1d3e2 !important;
+        opacity: 1;
+    }
+
+    .text-dark {
+        --bs-text-opacity: 1;
+        color: #f9fafb !important;
+    }
+
+    .text-muted {
+        --bs-text-opacity: 1;
+        color: #fff !important;
+    }
+
+    .btn-primary {
+        background: var(--dark-gradient);
+        border: none;
+        border-radius: 12px;
+        padding: 12px 24px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+        filter: brightness(1.1);
+    }
+
+    .alert {
+        border: none;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(10px);
+        animation: slideInDown 0.5s ease;
+    }
+
+    .alert-success {
+        background: linear-gradient(135deg, rgba(40, 167, 69, 0.15) 0%, rgba(40, 167, 69, 0.1) 100%);
+        border-left: 4px solid #28a745;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background: linear-gradient(135deg, rgba(220, 53, 69, 0.15) 0%, rgba(220, 53, 69, 0.1) 100%);
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+    }
+
+    .chart-card .card-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chart-area, .chart-pie {
+        position: relative;
+        width: 100%;
+    }
+
+    .chart-loading-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .scrollable-list, .tab-content {
+        overflow-y: auto;
+    }
+
+    .scrollable-list::-webkit-scrollbar, .tab-content::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .scrollable-list::-webkit-scrollbar-track, .tab-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+
+    .scrollable-list::-webkit-scrollbar-thumb, .tab-content::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+    }
+
+    .scrollable-list::-webkit-scrollbar-thumb:hover, .tab-content::-webkit-scrollbar-thumb:hover {
+        background: #a1a1a1;
+    }
+
+    .chart-legend-container {
+        min-height: 40px;
+        padding: 8px 0;
+        font-size: 0.8rem;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .legend-item {
+        margin: 0 10px 5px;
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+
+    .legend-item:hover {
+        opacity: 0.8;
+    }
+
+    .legend-color-box {
+        width: 12px;
+        height: 12px;
+        margin-right: 5px;
+        border-radius: 2px;
+    }
+
+    .legend-item.hidden {
+        text-decoration: line-through;
+        opacity: 0.5;
+    }
+
+    .list-group-item:hover {
+        background-color: #f8f9fc;
+    }
+
+    .card-footer {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 15px;
+    }
+
+    .nav-tabs .nav-link {
+        border-radius: 10px;
+        margin: 0 2px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-tabs .nav-link.active {
+        background: var(--dark-gradient);
+        color: white;
+    }
+
+    /* Ensure the main content container has proper height management */
+    .container-fluid, .content-wrapper {
+        min-height: calc(100vh - 150px);
+        padding-bottom: 20px;
+    }
+
+    /* Adjust the row and card layout to prevent overflow */
+    .row.mb-4 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* Ensure the latest jobs and activity cards have proper max height and scrolling */
+    .content-card {
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    #latestJobsList, .tab-content {
+        max-height: 500px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #latestJobsList .list-group-item,
+    .tab-content .list-group-item,
+    .tab-content li {
+        padding: 0.75rem 1rem;
+    }
+
+    /* Ensure the header and footer of cards don't interfere with content */
+    .card-header, .card-footer {
+        z-index: 1;
+        position: relative;
+    }
+
+    /* Adjust for smaller screens */
+    @@media (max-width: 768px) {
+        #latestJobsList, .tab-content {
+            max-height: 400px;
+        }
+
+        .col-lg-7, .col-lg-5 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .content-card {
+            margin-bottom: 1rem;
+        }
+
+        .page-header {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .stats-number {
+            font-size: 1.5rem;
+        }
+    }
+
+    /* Fix overlapping issues with fixed elements */
+    body {
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* Ensure cards stack properly without overlap */
+    .results-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .latest-jobs-header .col-md-4,
+    .latest-jobs-header .col-md-2,
+    .latest-jobs-header .col-md-3,
+    .latest-jobs-header .col-md-1 {
+        color: #1e88e5;
+    }
+
+    .list-group-item .text-primary {
+        color: #1976d2 !important;
+    }
+
+    .list-group-item .content-card-text {
+        color: #455a64 !important;
+    }
+
+    .badge.bg-light {
+        color: #37474f !important;
+    }
+
+    .badge.bg-success,
+    .badge.bg-warning,
+    .badge.bg-danger,
+    .badge.bg-secondary,
+    .badge.bg-info,
+    .badge.bg-primary,
+    .badge.bg-dark {
+        color: #ffffff !important;
+    }
+
+    /* CSS for Recent Activity */
+    .nav-tabs .nav-link {
+        color: #78909c !important;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #ffffff !important;
+    }
+
+    #recentApplicationsList .content-card-title,
+    #generalActivityList .content-card-title {
+        color: #263238 !important;
+    }
+
+    #recentApplicationsList .content-card-text,
+    #generalActivityList .content-card-text {
+        color: #607d8b !important;
+    }
+
+    #recentApplicationsList .float-end,
+    #generalActivityList .float-end {
+        color: #90a4ae !important;
+    }
+
+    @@keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .text-purple {
+        color: #6f42c1 !important;
+    }
+</style>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script>
+        // Utility functions
+        function showLoading(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) el.style.display = 'flex';
+        }
+        function hideLoading(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) el.style.display = 'none';
+        }
+        function showListPlaceholder(containerId, message = "Đang tải...") {
+            const listContainer = document.getElementById(containerId);
+            if (!listContainer) return;
+            listContainer.innerHTML = `
+                <li class="list-group-item text-center p-3 loading-placeholder">
+                    <span>${message}</span>
+                </li>`;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("[Dashboard Script] DOMContentLoaded fired.");
+
+            let jobTrendChartInstance, userGrowthChartInstance, jobsByIndustryChartInstance, jobStatusChartInstance;
+
+            // --- Helper function to create legends (for both doughnut and line charts) ---
+            function createLegend(chartInstance, legendContainerId, isDoughnut = false) {
+                const legendContainer = document.getElementById(legendContainerId);
+                if (!legendContainer) {
+                    console.error(`[createLegend] Legend container #${legendContainerId} not found!`);
+                    return;
+                }
+                legendContainer.innerHTML = '';
+
+                if (!chartInstance || !chartInstance.data || !chartInstance.data.labels || !chartInstance.data.datasets) {
+                    console.warn(`[createLegend] Chart data for ${legendContainerId} not found or incomplete.`);
+                    legendContainer.innerHTML = '<p class="text-warning small">Không có dữ liệu chú thích.</p>';
+                    return;
+                }
+
+                const labels = chartInstance.data.labels;
+                const datasets = chartInstance.data.datasets;
+                const legendWrapper = document.createElement('div');
+                legendWrapper.className = 'd-flex flex-wrap justify-content-center align-items-center';
+
+                if (isDoughnut) {
+                    const colors = datasets[0].backgroundColor;
+                    const dataValues = datasets[0].data;
+                    const total = dataValues.reduce((sum, val) => (Number(val) || 0) + sum, 0);
+
+                    labels.forEach((label, index) => {
+                        const percentage = total > 0 ? ((Number(dataValues[index]) || 0) / total * 100).toFixed(0) : 0;
+                        const legendItem = document.createElement('div');
+                        legendItem.classList.add('legend-item');
+                        if (!chartInstance.getDataVisibility(index)) {
+                            legendItem.classList.add('hidden');
+                        }
+
+                        const colorBox = document.createElement('span');
+                        colorBox.classList.add('legend-color-box');
+                        colorBox.style.backgroundColor = colors[index % colors.length];
+
+                        const textNode = document.createTextNode(`${label} ${percentage}%`);
+                        legendItem.appendChild(colorBox);
+                        legendItem.appendChild(textNode);
+
+                        legendItem.onclick = () => {
+                            chartInstance.toggleDataVisibility(index);
+                            legendItem.classList.toggle('hidden');
+                            chartInstance.update();
+                            chartInstance.draw();
+                        };
+                        legendWrapper.appendChild(legendItem);
+                    });
+                } else {
+                    datasets.forEach((dataset, index) => {
+                        const total = dataset.data.reduce((sum, val) => (Number(val) || 0) + sum, 0);
+                        const overallTotal = datasets.reduce((sum, ds) => sum + ds.data.reduce((s, v) => s + (Number(v) || 0), 0), 0);
+                        const percentage = overallTotal > 0 ? (total / overallTotal * 100).toFixed(0) : 0;
+
+                        const legendItem = document.createElement('div');
+                        legendItem.classList.add('legend-item');
+                        if (dataset.hidden) {
+                            legendItem.classList.add('hidden');
+                        }
+
+                        const colorBox = document.createElement('span');
+                        colorBox.classList.add('legend-color-box');
+                        colorBox.style.backgroundColor = dataset.backgroundColor;
+
+                        const textNode = document.createTextNode(`${dataset.label} ${percentage}%`);
+                        legendItem.appendChild(colorBox);
+                        legendItem.appendChild(textNode);
+
+                        legendItem.onclick = () => {
+                            dataset.hidden = !dataset.hidden;
+                            legendItem.classList.toggle('hidden');
+                            chartInstance.update();
+                        };
+                        legendWrapper.appendChild(legendItem);
+                    });
+                }
+
+                legendContainer.appendChild(legendWrapper);
+            }
+
+            // --- Helper function to draw text in the center of a doughnut chart ---
+            function drawDoughnutCenterText(chart, label = "Tổng cộng") {
+                if (!chart || chart.config.type !== 'doughnut' || !chart.data.datasets || chart.data.datasets.length === 0) return;
+                const ctx = chart.ctx;
+                const width = chart.width;
+                const height = chart.height;
+                const dataset = chart.data.datasets[0];
+
+                const total = dataset.data.reduce((sum, current, index) => {
+                    return chart.getDataVisibility(index) ? sum + (Number(current) || 0) : sum;
+                }, 0);
+
+                ctx.save();
+                let fontSize = (height / 115).toFixed(2);
+                fontSize = Math.min(fontSize, 1.5);
+                ctx.font = `bold ${fontSize}em sans-serif`;
+                ctx.textBaseline = "middle";
+                ctx.textAlign = "center";
+                ctx.fillStyle = '#5a5c69';
+
+                const text = total.toLocaleString('vi-VN');
+                const textX = width / 2;
+                let textY = height / 2;
+                if (label) textY = height / 2 - (parseFloat(fontSize) * 5);
+                ctx.fillText(text, textX, textY);
+
+                if (label) {
+                    let labelFontSize = (height / 190).toFixed(2);
+                    labelFontSize = Math.min(labelFontSize, 0.8);
+                    ctx.font = `${labelFontSize}em sans-serif`;
+                    ctx.fillStyle = '#858796';
+                    const labelTextY = textY + (parseFloat(fontSize) * 12) + 5;
+                    ctx.fillText(label, textX, labelTextY);
+                }
+                ctx.restore();
+            }
+
+            // Default chart options
+            const defaultLineChartOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    x: {
+                        grid: { display: false, drawBorder: false },
+                        ticks: { autoSkip: true, maxTicksLimit: 7, color: '#858796', padding: 10 }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0,
+                            color: '#858796',
+                            padding: 10,
+                            callback: function(value) { return value.toLocaleString('vi-VN'); },
+                            maxTicksLimit: 5
+                        },
+                        grid: { color: '#e3e6f0', borderDash: [2], drawBorder: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: 'rgba(0,0,0,0.1)',
+                        borderWidth: 1,
+                        padding: 10,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y.toLocaleString('vi-VN');
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                elements: { line: { tension: 0.3 }, point: { radius: 2, hoverRadius: 3 } }
+            };
+            const defaultDoughnutChartOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                cutout: '70%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: 'rgba(0,0,0,0.1)',
+                        borderWidth: 1,
+                        padding: 10,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) { label += ': '; }
+                                let value = context.parsed || 0;
+                                const visibleData = context.dataset.data.filter((_, index) => context.chart.getDataVisibility(index));
+                                const totalVisible = visibleData.reduce((a, b) => a + (Number(b) || 0), 0);
+                                const percentage = totalVisible > 0 ? ((value / totalVisible) * 100).toFixed(0) + '%' : '0%';
+                                return `${label}: ${value.toLocaleString('vi-VN')} (${percentage})`;
+                            }
+                        }
+                    }
+                }
+            };
+
+            // --- Function to load Job Trend Chart ---
+            async function loadJobTrendChart(period = 'year') {
+                console.log(`[loadJobTrendChart] Attempting to load period: ${period}`);
+                showLoading('jobTrendChartLoading');
+                const canvas = document.getElementById('jobTrendChart');
+                if (canvas) canvas.style.opacity = '0.3';
+
+                try {
+                    const response = await fetch(`/admin/dashboard/job-trend-data?period=${period}`);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const serverData = await response.json();
+                    console.log("[loadJobTrendChart] Data received:", serverData);
+
+                    if (!serverData || !serverData.labels || !Array.isArray(serverData.datasets)) {
+                        throw new Error("Invalid data structure from job-trend-data endpoint.");
+                    }
+
+                    const imageColors = {
+                        bottom: 'rgba(138, 93, 234, 0.8)',
+                        middle: 'rgba(102, 187, 106, 0.8)',
+                        top: 'rgba(255, 202, 40, 0.8)'
+                    };
+                    const imageBorderColors = {
+                        bottom: 'rgb(138, 93, 234)',
+                        middle: 'rgb(102, 187, 106)',
+                        top: 'rgb(255, 202, 40)'
+                    };
+
+                    const adaptedDatasets = [];
+                    if (serverData.datasets[0]) {
+                        adaptedDatasets.push({
+                            label: serverData.datasets[0].label,
+                            data: serverData.datasets[0].data,
+                            backgroundColor: imageColors.bottom,
+                            borderColor: imageBorderColors.bottom,
+                            fill: true,
+                            stack: 'Stack 0',
+                            order: 2
+                        });
+                    }
+                    if (serverData.datasets[1]) {
+                        adaptedDatasets.push({
+                            label: serverData.datasets[1].label,
+                            data: serverData.datasets[1].data,
+                            backgroundColor: imageColors.middle,
+                            borderColor: imageBorderColors.middle,
+                            fill: true,
+                            stack: 'Stack 0',
+                            order: 1
+                        });
+                    }
+                    if (serverData.datasets[2]) {
+                        adaptedDatasets.push({
+                            label: serverData.datasets[2].label,
+                            data: serverData.datasets[2].data,
+                            backgroundColor: imageColors.top,
+                            borderColor: imageBorderColors.top,
+                            fill: true,
+                            stack: 'Stack 0',
+                            order: 0
+                        });
+                    }
+                    if (adaptedDatasets.length === 0 && serverData.datasets.length > 0) {
+                        serverData.datasets.forEach(ds => adaptedDatasets.push({ ...ds, fill: true, stack: 'Stack 0' }));
+                    }
+
+                    const chartData = {
+                        labels: serverData.labels,
+                        datasets: adaptedDatasets
+                    };
+
+                    let maxY = 0;
+                    if (chartData.labels && chartData.datasets.length > 0) {
+                        chartData.labels.forEach((_, i) => {
+                            let sumAtIndex = 0;
+                            chartData.datasets.forEach(ds => {
+                                if (ds.data && ds.data[i] !== null && ds.data[i] !== undefined) {
+                                    sumAtIndex += Number(ds.data[i]);
+                                }
+                            });
+                            if (sumAtIndex > maxY) maxY = sumAtIndex;
+                        });
+                    }
+
+                    const dynamicLineOptions = JSON.parse(JSON.stringify(defaultLineChartOptions));
+                    dynamicLineOptions.scales.y.suggestedMax = maxY > 0 ? maxY * 1.1 : 10;
+
+                    if (jobTrendChartInstance) jobTrendChartInstance.destroy();
+                    if (!canvas) throw new Error("Canvas #jobTrendChart not found");
+
+                    jobTrendChartInstance = new Chart(canvas, {
+                        type: 'line',
+                        data: chartData,
+                        options: dynamicLineOptions
+                    });
+
+                    createLegend(jobTrendChartInstance, 'jobTrendChartLegend', false);
+
+                    document.querySelectorAll('.job-trend-period').forEach(el => el.classList.remove('active'));
+                    const activePeriodEl = document.querySelector(`.job-trend-period[data-period="${period}"]`);
+                    if (activePeriodEl) {
+                        activePeriodEl.classList.add('active');
+                        document.getElementById('jobTrendPeriodButtonText').textContent = activePeriodEl.dataset.displaytext || activePeriodEl.textContent.split('(')[0].trim();
+                    } else {
+                        document.getElementById('jobTrendPeriodButtonText').textContent = "Năm nay";
+                    }
+
+                    console.log(`[loadJobTrendChart] Loaded successfully for period: ${period}`);
+                } catch (error) {
+                    console.error('[loadJobTrendChart] Error loading chart:', error);
+                    const container = canvas?.parentElement;
+                    if (container) container.innerHTML = `<p class="text-danger text-center p-3">Lỗi tải biểu đồ xu hướng công việc. ${error.message}</p>`;
+                } finally {
+                    hideLoading('jobTrendChartLoading');
+                    if (canvas) canvas.style.opacity = '1';
+                }
+            }
+            document.querySelectorAll('.job-trend-period').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loadJobTrendChart(this.dataset.period);
+                });
+            });
+
+            // --- Function to load User Growth Chart ---
+            async function loadUserGrowthChart(period = 'year') {
+                console.log(`[loadUserGrowthChart] Attempting to load period: ${period}`);
+                showLoading('userGrowthChartLoading');
+                const canvas = document.getElementById('userGrowthChart');
+                if (canvas) canvas.style.opacity = '0.3';
+
+                try {
+                    const response = await fetch(`/admin/dashboard/user-growth-data?period=${period}`);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const serverData = await response.json();
+                    console.log("[loadUserGrowthChart] Data received:", serverData);
+
+                    if (!serverData || !serverData.labels || !Array.isArray(serverData.datasets)) {
+                        throw new Error("Invalid data structure from user-growth-data endpoint.");
+                    }
+
+                    const imageColors = {
+                        bottom: 'rgba(41, 182, 246, 0.8)', // Blue for Individuals
+                        top: 'rgba(255, 99, 132, 0.8)'   // Red for Businesses
+                    };
+                    const imageBorderColors = {
+                        bottom: 'rgb(41, 182, 246)',
+                        top: 'rgb(255, 99, 132)'
+                    };
+
+                    const adaptedDatasets = [];
+                    if (serverData.datasets[0]) {
+                        adaptedDatasets.push({
+                            label: serverData.datasets[0].label, // e.g., "Cá nhân"
+                            data: serverData.datasets[0].data,
+                            backgroundColor: imageColors.bottom,
+                            borderColor: imageBorderColors.bottom,
+                            fill: true,
+                            stack: 'Stack 0',
+                            order: 1
+                        });
+                    }
+                    if (serverData.datasets[1]) {
+                        adaptedDatasets.push({
+                            label: serverData.datasets[1].label, // e.g., "Doanh nghiệp"
+                            data: serverData.datasets[1].data,
+                            backgroundColor: imageColors.top,
+                            borderColor: imageBorderColors.top,
+                            fill: true,
+                            stack: 'Stack 0',
+                            order: 0
+                        });
+                    }
+                    if (adaptedDatasets.length === 0 && serverData.datasets.length > 0) {
+                        serverData.datasets.forEach(ds => adaptedDatasets.push({ ...ds, fill: true, stack: 'Stack 0' }));
+                    }
+
+                    const chartData = {
+                        labels: serverData.labels,
+                        datasets: adaptedDatasets
+                    };
+
+                    let maxY = 0;
+                    if (chartData.labels && chartData.datasets.length > 0) {
+                        chartData.labels.forEach((_, i) => {
+                            let sumAtIndex = 0;
+                            chartData.datasets.forEach(ds => {
+                                if (ds.data && ds.data[i] !== null && ds.data[i] !== undefined) {
+                                    sumAtIndex += Number(ds.data[i]);
+                                }
+                            });
+                            if (sumAtIndex > maxY) maxY = sumAtIndex;
+                        });
+                    }
+
+                    const dynamicLineOptions = JSON.parse(JSON.stringify(defaultLineChartOptions));
+                    dynamicLineOptions.scales.y.suggestedMax = maxY > 0 ? maxY * 1.1 : 10;
+
+                    if (userGrowthChartInstance) userGrowthChartInstance.destroy();
+                    if (!canvas) throw new Error("Canvas #userGrowthChart not found");
+
+                    userGrowthChartInstance = new Chart(canvas, {
+                        type: 'line',
+                        data: chartData,
+                        options: dynamicLineOptions
+                    });
+
+                    createLegend(userGrowthChartInstance, 'userGrowthChartLegend', false);
+
+                    document.querySelectorAll('.user-growth-period').forEach(el => el.classList.remove('active'));
+                    const activePeriodEl = document.querySelector(`.user-growth-period[data-period="${period}"]`);
+                    if (activePeriodEl) {
+                        activePeriodEl.classList.add('active');
+                    }
+
+                    console.log(`[loadUserGrowthChart] Loaded successfully for period: ${period}`);
+                } catch (error) {
+                    console.error('[loadUserGrowthChart] Error loading chart:', error);
+                    const container = canvas?.parentElement;
+                    if (container) container.innerHTML = '<p class="text-danger text-center p-3">Lỗi tải biểu đồ tăng trưởng người dùng.</p>';
+                } finally {
+                    hideLoading('userGrowthChartLoading');
+                    if (canvas) canvas.style.opacity = '1';
+                }
+            }
+            document.querySelectorAll('.user-growth-period').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loadUserGrowthChart(this.dataset.period);
+                });
+            });
+
+            // --- Function to load Jobs By Industry Doughnut Chart ---
+            async function loadJobsByIndustryChart(topN = 5) {
+                console.log(`[loadJobsByIndustryChart] Attempting to load top ${topN}...`);
+                const legendContainerId = 'jobsByIndustryDoughnutChartLegend';
+                const chartContainer = document.getElementById('jobsByIndustryChartContainer');
+                const canvas = document.getElementById('jobsByIndustryDoughnutChart');
+                const loadingSpinnerId = 'jobsByIndustryChartLoading';
+
+                showLoading(loadingSpinnerId);
+                if (canvas) canvas.style.display = 'none';
+                const legendContainer = document.getElementById(legendContainerId);
+                if (legendContainer) legendContainer.innerHTML = '<div class="text-center small text-muted p-2">Đang tải chú thích...</div>';
+
+                try {
+                    const response = await fetch(`/admin/dashboard/jobs-by-industry?topN=${topN}`);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const serverData = await response.json();
+                    console.log("[loadJobsByIndustryChart] Data received:", serverData);
+
+                    if (!serverData || !serverData.labels || !serverData.datasets || serverData.datasets.length === 0) {
+                        throw new Error('Invalid data format for JobsByIndustry.');
+                    }
+
+                    const imagePalette = [
+                        'rgb(138, 93, 234)',
+                        'rgb(102, 187, 106)',
+                        'rgb(254, 193, 7)',
+                        'rgb(255, 143, 0)',
+                        'rgb(41, 182, 246)',
+                        'rgb(210, 210, 210)',
+                        'rgb(110, 110, 110)'
+                    ];
+                    const adaptedData = JSON.parse(JSON.stringify(serverData));
+                    adaptedData.datasets[0].backgroundColor = adaptedData.datasets[0].backgroundColor.map((_, i) => imagePalette[i % imagePalette.length]);
+
+                    if (jobsByIndustryChartInstance) jobsByIndustryChartInstance.destroy();
+                    if (!canvas) throw new Error("Canvas #jobsByIndustryDoughnutChart not found.");
+                    canvas.style.display = 'block';
+
+                    jobsByIndustryChartInstance = new Chart(canvas, {
+                        type: 'doughnut',
+                        data: adaptedData,
+                        options: defaultDoughnutChartOptions,
+                        plugins: [{
+                            id: 'afterDrawCenterTextLegendIndustry',
+                            afterDraw: function(chart) {
+                                drawDoughnutCenterText(chart, "Tổng việc làm");
+                                createLegend(chart, legendContainerId, true);
+                            }
+                        }]
+                    });
+
+                    document.querySelectorAll('.industry-topN').forEach(el => el.classList.remove('active'));
+                    document.querySelector(`.industry-topN[data-topn="${topN}"]`)?.classList.add('active');
+
+                    console.log(`[loadJobsByIndustryChart] Loaded successfully for top ${topN}`);
+                } catch (error) {
+                    console.error(`[loadJobsByIndustryChart] Error loading chart (top ${topN}):`, error);
+                    if (chartContainer) {
+                        chartContainer.innerHTML = '<p class="text-danger text-center p-3">Lỗi tải biểu đồ việc làm theo lĩnh vực.</p>';
+                    }
+                    if (legendContainer) legendContainer.innerHTML = '';
+                } finally {
+                    hideLoading(loadingSpinnerId);
+                }
+            }
+            document.querySelectorAll('.industry-topN').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loadJobsByIndustryChart(this.dataset.topn);
+                });
+            });
+
+            // --- Function to load Job Posting Status Doughnut Chart ---
+            async function loadJobStatusDoughnutChart() {
+                console.log("[loadJobStatusDoughnutChart] Attempting to load...");
+                const legendContainerId = 'jobStatusDoughnutChartLegend';
+                const chartContainer = document.getElementById('jobStatusChartContainer');
+                const canvas = document.getElementById('jobStatusDoughnutChart');
+                const loadingSpinnerId = 'jobStatusChartLoading';
+
+                showLoading(loadingSpinnerId);
+                if (canvas) canvas.style.display = 'none';
+                const legendContainer = document.getElementById(legendContainerId);
+                if (legendContainer) legendContainer.innerHTML = '<div class="text-center small text-muted p-2">Đang tải chú thích...</div>';
+
+                try {
+                    const response = await fetch('/admin/dashboard/job-status-distribution');
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const serverData = await response.json();
+                    console.log("[loadJobStatusDoughnutChart] Data received:", serverData);
+
+                    if (!serverData || !serverData.labels || !Array.isArray(serverData.datasets) || serverData.datasets.length === 0 || !Array.isArray(serverData.datasets[0].backgroundColor) || !Array.isArray(serverData.datasets[0].data)) {
+                        throw new Error('Invalid data format for JobStatus.');
+                    }
+
+                    const imagePalette = [
+                        'rgb(138, 93, 234)',
+                        'rgb(102, 187, 106)',
+                        'rgb(254, 193, 7)',
+                        'rgb(255, 143, 0)',
+                        'rgb(41, 182, 246)',
+                        'rgb(210, 210, 210)',
+                        'rgb(110, 110, 110)'
+                    ];
+                    const adaptedData = JSON.parse(JSON.stringify(serverData));
+                    adaptedData.datasets[0].backgroundColor = adaptedData.datasets[0].backgroundColor.map((_, i) => imagePalette[i % imagePalette.length]);
+
+                    if (jobStatusChartInstance) jobStatusChartInstance.destroy();
+                    if (!canvas) throw new Error("Canvas #jobStatusDoughnutChart not found.");
+                    canvas.style.display = 'block';
+
+                    jobStatusChartInstance = new Chart(canvas, {
+                        type: 'doughnut',
+                        data: adaptedData,
+                        options: defaultDoughnutChartOptions,
+                        plugins: [{
+                            id: 'afterDrawCenterTextLegendStatus',
+                            afterDraw: function(chart) {
+                                drawDoughnutCenterText(chart, "Tổng tin đăng");
+                                createLegend(chart, legendContainerId, true);
+                            }
+                        }]
+                    });
+
+                    console.log("[loadJobStatusDoughnutChart] Chart created successfully.");
+                } catch (error) {
+                    console.error('[loadJobStatusDoughnutChart] Error loading chart:', error);
+                    if (chartContainer) {
+                        chartContainer.innerHTML = '<p class="text-danger text-center p-3">Lỗi tải biểu đồ trạng thái tin đăng.</p>';
+                    }
+                    if (legendContainer) legendContainer.innerHTML = '';
+                } finally {
+                    hideLoading(loadingSpinnerId);
+                }
+            }
+
+            // --- Function to load Latest Jobs ---
+            function getJobStatusBadgeClass(statusEnumString) {
+                const status = statusEnumString ? statusEnumString.toLowerCase() : '';
+                switch (status) {
+                    case 'choduyet': return 'bg-warning text-dark';
+                    case 'daduyet': return 'bg-success text-white';
+                    case 'bituchoi': return 'bg-danger text-white';
+                    case 'hethan': return 'bg-secondary text-white';
+                    case 'taman': return 'bg-info text-dark';
+                    case 'datuyen': return 'bg-primary text-white';
+                    case 'daxoa': return 'bg-dark text-white';
+                    default: return 'bg-light text-dark';
+                }
+            }
+            const jobStatusDisplayNames = {
+                'choduyet': 'Chờ duyệt', 'daduyet': 'Đã duyệt', 'taman': 'Tạm ẩn', 'hethan': 'Hết hạn',
+                'datuyen': 'Đã tuyển', 'bituchoi': 'Bị từ chối', 'daxoa': 'Đã xóa'
+            };
+            async function loadLatestJobs() {
+                console.log("[loadLatestJobs] Attempting to load...");
+                const listContainer = document.getElementById('latestJobsList');
+                const headerElement = document.querySelector('.latest-jobs-header');
+                listContainer.innerHTML = `<div class="list-group-item text-center p-5 loading-placeholder"><p class="mt-2 mb-0">Đang tải công việc...</p></div>`;
+                if (headerElement) headerElement.classList.add('d-none');
+                try {
+                    const response = await fetch('/admin/dashboard/latest-jobs?count=7');
+                    if (!response.ok) { throw new Error(`HTTP error ${response.status}`); }
+                    const contentType = response.headers.get("content-type");
+                    if (!contentType || !contentType.includes("application/json")) { throw new TypeError("Received non-JSON response."); }
+                    const jobs = await response.json();
+                    listContainer.innerHTML = '';
+                    if (!Array.isArray(jobs) || jobs.length === 0) {
+                        listContainer.innerHTML = `<div class="list-group-item text-muted text-center p-5"><i class="fas fa-briefcase fa-3x mb-3 text-gray-400"></i><p class="mb-0">Không có công việc mới.</p></div>`;
+                        if (headerElement) headerElement.classList.add('d-none');
+                        return;
+                    }
+                    if (headerElement) headerElement.classList.remove('d-none');
+                    jobs.forEach(job => {
+                        if (!job || typeof job !== 'object') return;
+                        const jobId = job.id ?? 0;
+                        const jobTitle = job.tieuDe || 'N/A';
+                        const jobStatusEnumString = job.trangThai || '';
+                        const postDate = job.ngayDang ? new Date(job.ngayDang) : null;
+                        const applicantCount = job.soUngVien ?? 0;
+                        const jobLink = jobId ? `/Admin/QuanLyTinDang/ChiTiet/${jobId}` : '#';
+
+                        const jobStatusDisplay = jobStatusDisplayNames[jobStatusEnumString.toLowerCase()] || jobStatusEnumString;
+                        const statusBadgeClass = getJobStatusBadgeClass(jobStatusEnumString);
+
+                        const companyName = job.tenCongTyHoacNguoiDang || "N/A";
+                        const location = job.diaDiemDisplay || "N/A";
+                        const jobTypeDisplay = job.loaiHinhDisplay || "N/A";
+                        const salaryDisplay = job.mucLuongDisplay || "N/A";
+
+                        let relativePostTime = 'N/A';
+                        if (postDate) {
+                            const seconds = Math.round((new Date() - postDate) / 1000);
+                            if (seconds < 60) relativePostTime = `${seconds} giây trước`;
+                            else if (seconds < 3600) relativePostTime = `${Math.round(seconds / 60)} phút trước`;
+                            else if (seconds < 86400) relativePostTime = `${Math.round(seconds / 3600)} giờ trước`;
+                            else relativePostTime = `${Math.round(seconds / 86400)} ngày trước`;
+                        }
+                        const itemHtml = `
+                            <div class="list-group-item list-group-item-action border-bottom px-3 py-3">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-md-4 mb-2 mb-md-0">
+                                        <a href="${jobLink}" class="text-decoration-none"><h6 class="mb-0 text-primary fw-bold text-truncate">${jobTitle}</h6></a>
+                                        <div class="small content-card-text d-flex align-items-center flex-wrap">
+                                            <span class="me-2"><i class="fas fa-building opacity-75 me-1"></i>${companyName}</span>
+                                            <span class="me-2"><i class="fas fa-map-marker-alt opacity-75 me-1"></i>${location}</span>
+                                            <span><i class="far fa-clock opacity-75 me-1"></i>${relativePostTime}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-2 text-md-center mb-2 mb-md-0"><span class="badge bg-light text-dark border rounded-pill px-2 py-1 small">${jobTypeDisplay}</span></div>
+                                    <div class="col-6 col-md-3 text-md-center mb-2 mb-md-0"><span class="content-card-text small">${salaryDisplay}</span></div>
+                                    <div class="col-4 col-md-1 text-md-center mb-2 mb-md-0"><span class="fw-bold">${applicantCount}</span></div>
+                                    <div class="col-4 col-md-1 text-md-center mb-2 mb-md-0"><span class="badge ${statusBadgeClass} rounded-pill px-2 py-1 small">${jobStatusDisplay}</span></div>
+                                    <div class="col-4 col-md-1 text-md-center">
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li><a class="dropdown-item" href="${jobLink}"><i class="fas fa-eye fa-fw me-2"></i>Xem</a></li>
+                                                <li><a class="dropdown-item" href="/Admin/QuanLyTinDang/ChinhSua/${jobId}"><i class="fas fa-edit fa-fw me-2"></i>Sửa</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item text-danger" href="#" onclick="confirmDeleteJob(${jobId})"><i class="fas fa-trash-alt fa-fw me-2"></i>Xóa</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                        listContainer.insertAdjacentHTML('beforeend', itemHtml);
+                    });
+                } catch (error) {
+                    console.error('[loadLatestJobs] Error:', error);
+                    listContainer.innerHTML = `<div class="list-group-item text-center p-5"><div class="text-danger"><i class="fas fa-exclamation-triangle fa-2x mb-2"></i><h6 class="fw-bold">Lỗi tải công việc</h6></div><p class="small text-muted mt-2 mb-2">${error.message}</p><button onclick="loadLatestJobs()" class="btn btn-sm btn-primary mt-1"><i class="fas fa-redo me-1"></i> Thử lại</button></div>`;
+                    if (headerElement) headerElement.classList.add('d-none');
+                }
+            }
+            function confirmDeleteJob(jobId) {
+                if (confirm(`Bạn muốn xóa công việc ID: ${jobId}?`)) {
+                    console.log(`Xóa ID: ${jobId}`);
+                    // TODO: Implement actual delete call
+                }
+            }
+
+            // --- Function to load Recent Activity ---
+            function createActivityItemHtml(activity) {
+                const iconClass = activity?.icon || 'fas fa-info-circle';
+                const relativeTime = activity?.relativeTime || '';
+                const type = activity?.type || 'Hoạt động';
+                const description = activity?.description || '';
+                const link = activity?.link && activity.link !== '#' ? activity.link : null;
+                return `<li class="mb-3 pb-3 border-bottom"><div class="d-flex align-items-start"><div class="me-3 pt-1"><span class="fa-stack fa-1x"><i class="fas fa-circle fa-stack-2x text-gray-200"></i><i class="${iconClass} fa-stack-1x"></i></span></div><div class="flex-grow-1"><small class="content-card-text float-end" style="font-size: 0.75rem;">${relativeTime}</small><h6 class="mt-0 mb-1 fw-normal" style="font-size: 0.9rem;">${link ? `<a href="${link}" class="text-decoration-none content-card-title">` : '<span class="content-card-title">'}${type}${link ? `</a>` : '</span>'}</h6><p class="mb-0 content-card-text small">${description}</p></div></div></li>`;
+            }
+            async function loadRecentActivity() {
+                console.log("[loadRecentActivity] Attempting to load...");
+                showListPlaceholder('recentApplicationsList', 'Đang tải ứng tuyển...');
+                showListPlaceholder('generalActivityList', 'Đang tải hoạt động...');
+                try {
+                    const response = await fetch('/admin/dashboard/recent-activity?countPerType=7');
+                    if (!response.ok) { throw new Error(`HTTP error ${response.status}`); }
+                    const contentType = response.headers.get("content-type");
+                    if (!contentType || !contentType.includes("application/json")) { throw new TypeError("Received non-JSON response."); }
+                    const activityData = await response.json();
+                    const appListContainer = document.getElementById('recentApplicationsList');
+                    appListContainer.innerHTML = '';
+                    if (!activityData || !Array.isArray(activityData.applications) || activityData.applications.length === 0) {
+                        appListContainer.innerHTML = '<li class="text-muted text-center p-3">Không có ứng tuyển nào.</li>';
+                    } else {
+                        activityData.applications.forEach(activity => appListContainer.insertAdjacentHTML('beforeend', createActivityItemHtml(activity)));
+                    }
+                    const generalListContainer = document.getElementById('generalActivityList');
+                    generalListContainer.innerHTML = '';
+                    if (!activityData || !Array.isArray(activityData.generalActivity) || activityData.generalActivity.length === 0) {
+                        generalListContainer.innerHTML = '<li class="text-muted text-center p-3">Không có hoạt động nào.</li>';
+                    } else {
+                        activityData.generalActivity.forEach(activity => generalListContainer.insertAdjacentHTML('beforeend', createActivityItemHtml(activity)));
+                    }
+                } catch (error) {
+                    console.error('[loadRecentActivity] Error:', error);
+                    const errorMsg = '<li class="text-danger text-center p-3">Lỗi tải hoạt động.</li>';
+                    document.getElementById('recentApplicationsList').innerHTML = errorMsg;
+                    document.getElementById('generalActivityList').innerHTML = errorMsg;
+                }
+            }
+
+            // --- Initial Load ---
+            console.log("[Dashboard Script] Starting initial data load...");
+            loadJobTrendChart();
+            loadUserGrowthChart();
+            loadJobsByIndustryChart();
+            loadJobStatusDoughnutChart();
+            loadLatestJobs();
+            loadRecentActivity();
+
+            const initialActiveTrend = document.querySelector('.job-trend-period.active');
+            if (initialActiveTrend) {
+                document.getElementById('jobTrendPeriodButtonText').textContent = initialActiveTrend.dataset.displaytext || initialActiveTrend.textContent.split('(')[0].trim();
+                loadJobTrendChart(initialActiveTrend.dataset.period);
+            } else {
+                loadJobTrendChart();
+            }
+            console.log("[Dashboard Script] Initial data load calls initiated.");
+
+            // --- Additional JavaScript for Animations and Interactions ---
+            const statsCards = document.querySelectorAll('.stats-card');
+            statsCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate-fade-in');
+            });
+
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    if (!this.disabled) {
+                        this.style.transform = 'translateY(-2px)';
+                    }
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    if (alert.style.display !== 'none') {
+                        alert.style.opacity = '0';
+                        alert.style.transform = 'translateY(-20px)';
+                        setTimeout(() => {
+                            alert.style.display = 'none';
+                        }, 300);
+                    }
+                }, 5000);
+            });
+        });
+    </script>
+}

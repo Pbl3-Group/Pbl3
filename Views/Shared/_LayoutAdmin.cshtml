@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - JobFlex Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* CSS của bạn giữ nguyên */
+        :root {
+            --sidebar-bg: #041E42;
+            --sidebar-text: #a0aec0;
+            --sidebar-active: #2e3642;
+            --sidebar-active-text: #ffffff;
+            --primary-blue: #4a6cf7;
+            --green: #4CAF50;
+            --purple: #8260c3;
+            --orange: #FF9800;
+            --blue: #2196F3;
+            --body-bg: #f3f6f9;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styles */
+        #sidebar-wrapper {
+            min-height: 100vh;
+            width: 240px;
+            background-color: #1A345A;
+            transition: all 0.3s;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #sidebar-wrapper .list-group {
+            padding: 12px 0;
+        }
+
+        #sidebar-wrapper .list-group-item {
+            background-color: transparent;
+            color: var(--sidebar-text);
+            border: none;
+            border-radius: 0;
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        #sidebar-wrapper .list-group-item:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        #sidebar-wrapper .list-group-item.active {
+            background-color: var(--sidebar-active);
+            color: var(--sidebar-active-text);
+            border-left: 3px solid var(--primary-blue);
+        }
+
+        #sidebar-wrapper .list-group-item i {
+            width: 22px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        /* Page Content */
+        #page-content-wrapper {
+            width: 100%;
+            margin-left: 240px;
+            transition: all 0.3s;
+        }
+
+        .navbar {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 20px;
+            height: 60px;
+        }
+
+        .navbar .btn-primary {
+            background-color: var(--primary-blue);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 180px;
+        }
+
+        .search-box input {
+            border-radius: 20px;
+            background-color: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding-left: 35px;
+            font-size: 0.9rem;
+            height: 36px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        /* Dashboard Stats Cards */
+        .stats-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #4a6cf7;
+        }
+
+        .stats-card.green::before {
+            background-color: var(--green);
+        }
+
+        .stats-card.blue::before {
+            background-color: var(--blue);
+        }
+
+        .stats-card.purple::before {
+            background-color: var(--purple);
+        }
+
+        .stats-card.orange::before {
+            background-color: var(--orange);
+        }
+
+        .stats-card .card-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .stats-card .card-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .stats-card .change {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .stats-card .change.positive {
+            color: var(--green);
+        }
+
+        .stats-card .change.negative {
+            color: #dc3545;
+        }
+
+        .stats-card .change i {
+            margin-right: 4px;
+        }
+
+        /* Chart Containers */
+        .chart-container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .chart-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .dropdown-period {
+            background-color: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Recent Jobs Table */
+        .table-container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .table-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .view-all {
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .view-all i {
+            margin-left: 4px;
+            font-size: 0.8rem;
+        }
+
+        .table-responsive {
+            margin: 0;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table th {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-top: none;
+            padding: 10px 15px;
+        }
+
+        .table td {
+            font-size: 0.9rem;
+            padding: 15px;
+            vertical-align: middle;
+        }
+
+        /* Activity Section */
+        .activity-container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+
+        .nav-tabs {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 10px 15px;
+            margin-right: 5px;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+            font-weight: 500;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: 600;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-user {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .activity-action {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: #a0aec0;
+        }
+
+        .activity-badge {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        .activity-badge.new {
+            background-color: #ebf5ff;
+            color: #3182ce;
+        }
+
+        /* User Dropdown */
+        .user-dropdown .dropdown-toggle {
+            background: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .user-dropdown .dropdown-menu {
+            min-width: 180px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 8px 0;
+        }
+
+        .user-dropdown .dropdown-item {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .user-dropdown .dropdown-item:hover {
+            background-color: #f1f5f9;
+            color: var(--text-primary);
+        }
+
+        /* Responsive Adjustments */
+        @@media (max-width: 991.98px) {
+            #sidebar-wrapper {
+                margin-left: -240px;
+            }
+
+            #page-content-wrapper {
+                margin-left: 0;
+            }
+
+            #wrapper.toggled #sidebar-wrapper {
+                margin-left: 0;
+            }
+
+            #wrapper.toggled #page-content-wrapper {
+                margin-left: 240px;
+            }
+        }
+
+        /* For toggled state */
+        #wrapper.toggled #sidebar-wrapper {
+            margin-left: -240px;
+        }
+
+        #wrapper.toggled #page-content-wrapper {
+            margin-left: 0;
+        }
+
+        /* Submenu styling */
+        #userSubmenu {
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+
+        #userSubmenu .list-group-item {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            transition: all 0.2s;
+        }
+
+        #userSubmenu .list-group-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Section title */
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .date-picker {
+            background-color: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .date-picker i {
+            margin-left: 4px;
+        }
+
+        /* Utility Classes */
+        .mb-24 {
+            margin-bottom: 24px;
+        }
+
+        .mb-16 {
+            margin-bottom: 16px;
+        }
+
+        /* Notification dot for unread messages */
+        .notification-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #FF5252; /* Màu đỏ cho thông báo */
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <i class="fas fa-briefcase me-2"></i> JobFlex Admin
+            </div>
+            <div class="list-group list-group-flush">
+                <!-- SỬA ĐƯỜNG DẪN CHO "TỔNG QUAN" ĐỂ TRỎ ĐẾN ACTION Overview của AdminDashboardController -->
+                <!-- Giả sử AdminDashboardController có [Route("admin/dashboard")] -->
+                <a asp-controller="AdminDashboard" asp-action="Overview" class="list-group-item list-group-item-action">
+                    <i class="fas fa-tachometer-alt"></i> Tổng quan
+                </a>
+
+                <a href="#userSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action">
+                    <i class="fas fa-users"></i> Quản lý người dùng
+                    <i class="fas fa-chevron-down ms-auto" style="font-size: 0.8rem;"></i>
+                </a>
+                <div class="collapse" id="userSubmenu">
+                    <!-- Các controller NguoiDung, QuanLyTinDang, v.v. cần có [Route("prefix/controller-name")]
+                         hoặc bạn cần điều chỉnh tên controller để URL mong muốn được tạo ra.
+                         Ví dụ: NguoiDungController có thể có [Route("admin/nguoi-dung")]
+                         hoặc tên là AdminNguoiDungController -->
+                    <a asp-controller="NguoiDung" asp-action="CaNhan" class="list-group-item list-group-item-action" style="padding-left: 50px; font-size: 0.85rem;">
+                        <i class="fas fa-user me-2"></i> Cá nhân
+                    </a>
+                    <a asp-controller="NguoiDung" asp-action="DoanhNghiep" class="list-group-item list-group-item-action" style="padding-left: 50px; font-size: 0.85rem;">
+                        <i class="fas fa-building me-2"></i> Doanh nghiệp
+                    </a>
+                </div>
+
+                <a asp-controller="QuanLyTinDang" asp-action="Index" class="list-group-item list-group-item-action">
+                    <i class="fas fa-briefcase"></i> Quản lý tin đăng
+                </a>
+                <a asp-controller="CauHinhHeThong" asp-action="Index" class="list-group-item list-group-item-action">
+                    <i class="fas fa-list"></i> Quản lý danh mục
+                </a>
+                <a asp-controller="QuanLyBaoCao" asp-action="Index" class="list-group-item list-group-item-action">
+                    <i class="fas fa-flag"></i> Báo cáo vi phạm
+                </a>
+                <a asp-controller="QuanLyThongBao" asp-action="Index" class="list-group-item list-group-item-action">
+                    <i class="fas fa-bullhorn"></i> Gửi thông báo
+                </a>
+                <a asp-controller="BaoCaoThongKe" asp-action="Index" class="list-group-item list-group-item-action">
+                    <i class="fas fa-chart-bar"></i> Báo cáo & Thống kê
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content Wrapper -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid px-0">
+                    <button class="btn btn-primary" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="search-box me-3">
+                            <i class="fas fa-search"></i>
+                            <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                        </div>
+
+                        <div class="dropdown user-dropdown">
+                            <button class="dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="me-2">Tài khoản của tôi</span>
+                                <i class="fas fa-user-circle"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Xem trang chính</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form asp-area="" asp-controller="TaiKhoan" asp-action="DangXuat" method="post">
+                                        <button type="submit" class="dropdown-item">Đăng xuất</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4 py-4">
+                <main role="main">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", event => {
+            const sidebarToggle = document.body.querySelector('#sidebarToggle');
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', event => {
+                    event.preventDefault();
+                    document.body.querySelector('#wrapper').classList.toggle('toggled');
+                });
+            }
+
+            const currentLocation = window.location.pathname;
+            const menuItems = document.querySelectorAll('#sidebar-wrapper .list-group-item');
+
+            // --- Cập nhật logic active state cho menu ---
+
+            // 1. Xóa class 'active' khỏi tất cả các item menu và đóng submenu
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-bs-toggle') === 'collapse') {
+                    item.setAttribute('aria-expanded', 'false');
+                    const targetCollapseId = item.getAttribute('href');
+                    if (targetCollapseId && targetCollapseId.startsWith('#')) {
+                        const targetCollapseEl = document.querySelector(targetCollapseId);
+                        if (targetCollapseEl && targetCollapseEl.classList.contains('show')) {
+                             const bsCollapse = bootstrap.Collapse.getInstance(targetCollapseEl) || new bootstrap.Collapse(targetCollapseEl);
+                             bsCollapse.hide(); // Đóng submenu
+                        }
+                    }
+                }
+            });
+
+            let bestMatchItem = null;
+            let longestMatchLength = 0;
+
+            // Chuẩn hóa currentLocation một lần
+            let normalizedCurrentLocation = currentLocation;
+            if (normalizedCurrentLocation.endsWith('/Index')) { // Giả sử Index là action mặc định
+                normalizedCurrentLocation = normalizedCurrentLocation.substring(0, normalizedCurrentLocation.length - 'Index'.length);
+            }
+            if (normalizedCurrentLocation.endsWith('/Overview')) { // Cho trang Tổng quan
+                normalizedCurrentLocation = normalizedCurrentLocation.substring(0, normalizedCurrentLocation.length - 'Overview'.length);
+            }
+             if (normalizedCurrentLocation.endsWith('/')) {
+                normalizedCurrentLocation = normalizedCurrentLocation.substring(0, normalizedCurrentLocation.length - 1);
+            }
+            if (normalizedCurrentLocation === "") normalizedCurrentLocation = "/"; // Trang chủ
+
+
+            menuItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href && href !== '#' && !href.startsWith('#')) {
+                    // Chuẩn hóa href từ link
+                    let normalizedHref = href;
+                    if (normalizedHref.endsWith('/Index')) {
+                        normalizedHref = normalizedHref.substring(0, normalizedHref.length - 'Index'.length);
+                    }
+                    if (normalizedHref.endsWith('/Overview')) {
+                        normalizedHref = normalizedHref.substring(0, normalizedHref.length - 'Overview'.length);
+                    }
+                    if (normalizedHref.endsWith('/')) {
+                        normalizedHref = normalizedHref.substring(0, normalizedHref.length - 1);
+                    }
+                     if (normalizedHref === "") normalizedHref = "/";
+
+
+                    // So sánh chính xác hoặc so sánh prefix (cho submenu)
+                    if (normalizedCurrentLocation === normalizedHref) {
+                        // Ưu tiên khớp chính xác dài nhất
+                        if (normalizedHref.length >= longestMatchLength) {
+                            bestMatchItem = item;
+                            longestMatchLength = normalizedHref.length;
+                        }
+                    } else if (normalizedCurrentLocation.startsWith(normalizedHref + '/') && normalizedHref !== "/") {
+                        // Đây có thể là một mục cha của submenu
+                        // Chỉ chọn nếu nó dài hơn match hiện tại (để ưu tiên con hơn cha nếu cả hai đều khớp prefix)
+                        if (normalizedHref.length > longestMatchLength) {
+                             // Không đặt bestMatchItem ở đây ngay, mà để logic dưới xử lý parent
+                        }
+                    }
+                }
+            });
+            
+            // Xử lý trường hợp trang dashboard là /admin/dashboard (không có /Overview)
+             if (!bestMatchItem && normalizedCurrentLocation === '/admin/dashboard') {
+                const dashboardLink = document.querySelector('a[asp-controller="AdminDashboard"][asp-action="Overview"]');
+                if (dashboardLink) {
+                    bestMatchItem = dashboardLink;
+                }
+            }
+
+
+            // Kích hoạt item khớp nhất và parent của nó nếu có
+            if (bestMatchItem) {
+                bestMatchItem.classList.add('active');
+
+                const parentCollapseDiv = bestMatchItem.closest('.collapse');
+                if (parentCollapseDiv) {
+                    // Mở submenu
+                    if (!parentCollapseDiv.classList.contains('show')) {
+                         const bsCollapse = bootstrap.Collapse.getInstance(parentCollapseDiv) || new bootstrap.Collapse(parentCollapseDiv);
+                         bsCollapse.show();
+                    }
+                    // Kích hoạt link trigger của submenu
+                    const triggerLink = document.querySelector(`a[data-bs-toggle="collapse"][href="#${parentCollapseDiv.id}"]`);
+                    if (triggerLink) {
+                        triggerLink.classList.add('active');
+                        triggerLink.setAttribute('aria-expanded', 'true');
+                    }
+                }
+            } else {
+                // Fallback: Nếu không có bestMatchItem (ví dụ, trang Details không có link trực tiếp trong menu)
+                // Cố gắng tìm mục cha gần nhất dựa trên URL
+                let potentialParent = null;
+                let potentialParentMatchLength = 0;
+
+                menuItems.forEach(item => {
+                    const href = item.getAttribute('href');
+                     if (href && href !== '#' && !href.startsWith('#')) {
+                        let normalizedHref = href;
+                        if (normalizedHref.endsWith('/Index')) normalizedHref = normalizedHref.substring(0, normalizedHref.length - 'Index'.length);
+                        if (normalizedHref.endsWith('/Overview')) normalizedHref = normalizedHref.substring(0, normalizedHref.length - 'Overview'.length);
+                        if (normalizedHref.endsWith('/')) normalizedHref = normalizedHref.substring(0, normalizedHref.length - 1);
+                        if (normalizedHref === "") normalizedHref = "/";
+
+                        if (normalizedCurrentLocation.startsWith(normalizedHref + '/') && normalizedHref !== "/") {
+                            if (normalizedHref.length > potentialParentMatchLength) {
+                                potentialParent = item;
+                                potentialParentMatchLength = normalizedHref.length;
+                            }
+                        }
+                    }
+                });
+
+                if (potentialParent) {
+                    // Kiểm tra xem potentialParent có phải là toggle của submenu không
+                     if (potentialParent.getAttribute('data-bs-toggle') === 'collapse') {
+                        potentialParent.classList.add('active');
+                        potentialParent.setAttribute('aria-expanded', 'true');
+                        const targetCollapseId = potentialParent.getAttribute('href');
+                        if (targetCollapseId && targetCollapseId.startsWith('#')) {
+                            const targetCollapseEl = document.querySelector(targetCollapseId);
+                            if (targetCollapseEl && !targetCollapseEl.classList.contains('show')) {
+                                const bsCollapse = bootstrap.Collapse.getInstance(targetCollapseEl) || new bootstrap.Collapse(targetCollapseEl);
+                                bsCollapse.show();
+                            }
+                        }
+                    } else {
+                        // Nếu potentialParent không phải là toggle, mà là một link thường, nhưng không khớp chính xác
+                        // (ví dụ /admin/dashboard khi đang ở /admin/dashboard/overview và link là /admin/dashboard)
+                        // Thì có thể active nó nếu nó là link tổng quan mặc định
+                        if (potentialParent.getAttribute('asp-controller') === 'AdminDashboard' &&
+                            (potentialParent.getAttribute('asp-action') === 'Overview' || potentialParent.getAttribute('asp-action') === 'AdminDashboard')) {
+                             potentialParent.classList.add('active');
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,631 @@
+@model IEnumerable<HeThongTimViec.Models.QuanHuyen>
+@{
+    ViewData["Title"] = "Quản Lý Quận/Huyện";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var thanhPhoFilterList = ViewData["ThanhPhoIdFilter"] as SelectList;
+}
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+        --success-gradient: linear-gradient(135deg, #0f897f 0%, #7dcb9a 100%);
+        --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+.text-dark {
+    --bs-text-opacity: 1;
+    color: #44a1ff !important;
+}
+
+.table th {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #f8f9fa;
+    border-top: none;
+    padding: 10px 15px;
+}
+
+    .page-header {
+        background: linear-gradient(135deg, #112e58 0%, #366bb8 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+    }
+
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+    }
+
+    .page-header h1 {
+        position: relative;
+        z-index: 2;
+        margin: 0;
+        font-weight: 300;
+        font-size: 2.5rem;
+    }
+
+    .create-btn {
+        background: var(--success-gradient);
+        border: none;
+        padding: 12px 24px;
+        border-radius: 50px;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 2;
+        font-weight: 500;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .create-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        color: white;
+        filter: brightness(1.1);
+    }
+
+    .filter-card {
+        background: white;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+
+    .filter-header {
+        background: var(--dark-gradient);
+        color: white;
+        padding: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: block;
+    }
+
+    .filter-header:hover {
+        background: linear-gradient(135deg, #34495e 0%, #2980b9 100%);
+        color: white;
+        text-decoration: none;
+    }
+
+    .results-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+    }
+
+    .results-header {
+        background: linear-gradient(135deg, #153566 0%, #e9ecef 100%);
+        padding: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .alert {
+        border: none;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(10px);
+        animation: slideInDown 0.5s ease;
+    }
+
+    .alert-success {
+        background: linear-gradient(135deg, rgba(40, 167, 69, 0.15) 0%, rgba(40, 167, 69, 0.1) 100%);
+        border-left: 4px solid #28a745;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background: linear-gradient(135deg, rgba(220, 53, 69, 0.15) 0%, rgba(220, 53, 69, 0.1) 100%);
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+    }
+
+    .btn-primary {
+        background: var(--dark-gradient);
+        border: none;
+        border-radius: 12px;
+        padding: 12px 24px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+        filter: brightness(1.1);
+    }
+
+    .btn-outline-secondary {
+        border: 2px solid #6c757d;
+        border-radius: 12px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-sm {
+        border-radius: 10px;
+        padding: 8px 12px;
+    }
+
+    .table {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .table thead {
+        background: var(--dark-gradient);
+        color: white;
+    }
+
+    .table th, .table td {
+        padding: 15px;
+        vertical-align: middle;
+    }
+
+    .table tbody tr {
+        transition: all 0.3s ease;
+    }
+
+    .table tbody tr:hover {
+        background: rgba(0, 212, 255, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: #6c757d;
+    }
+
+    .no-results i {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        opacity: 0.5;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .floating-action {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+    }
+
+    .fab {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--success-gradient);
+        border: none;
+        color: white;
+        font-size: 24px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .fab:hover {
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        color: white;
+    }
+
+    .modal-content {
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        border: none;
+    }
+
+    .modal-header {
+        background: var(--danger-gradient);
+        color: white;
+        border-radius: 15px 15px 0 0;
+        padding: 15px 20px;
+    }
+
+    .modal-body {
+        padding: 20px;
+        background: white;
+    }
+
+    .modal-footer {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 0 0 15px 15px;
+        padding: 15px 20px;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #00D4FF;
+        box-shadow: 0 0 0 0.2rem rgba(0, 212, 255, 0.25);
+        background: white;
+    }
+
+    .input-group-text {
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-right: none;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px 0 0 12px;
+    }
+
+    .badge {
+        border-radius: 10px;
+        padding: 8px 12px;
+        font-weight: 500;
+    }
+
+    @@keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .card-footer {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    @@media (max-width: 768px) {
+        .page-header h1 {
+            font-size: 2rem;
+        }
+
+        .floating-action {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .fab {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+        }
+    }
+</style>
+
+<!-- === THÔNG BÁO === -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<!-- === TIÊU ĐỀ VÀ NÚT TẠO MỚI === -->
+<div class="page-header animate-fade-in">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1><i class="fas fa-map me-3"></i>@ViewData["Title"]</h1>
+        <a asp-action="QuanHuyen_Create" class="create-btn">
+            <i class="fas fa-plus me-2"></i>Tạo mới
+        </a>
+    </div>
+</div>
+
+<!-- === BỘ LỌC TÌM KIẾM === -->
+<div class="card filter-card shadow mb-4 animate-fade-in">
+    <a href="#collapseFilter" class="filter-header" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseFilter">
+        <h6 class="m-0 font-weight-bold"><i class="fas fa-filter me-2"></i>Bộ lọc tìm kiếm</h6>
+    </a>
+    <div class="collapse show" id="collapseFilter">
+        <div class="card-body">
+            <form asp-action="QuanHuyen_Index" method="get" id="filterForm">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-6 col-lg-4">
+                        <label for="thanhPhoIdFilter" class="form-label fw-bold">Tỉnh/Thành Phố</label>
+                        <select name="thanhPhoIdFilter" id="thanhPhoIdFilter" asp-items="thanhPhoFilterList" class="form-select">
+                            <option value="">-- Tất cả Tỉnh/Thành Phố --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <label for="searchInput" class="form-label fw-bold">Tìm kiếm</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Tìm theo tên quận/huyện...">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-5 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary flex-grow-1">
+                            <i class="fas fa-filter me-2"></i>Áp dụng
+                        </button>
+                        <a asp-action="QuanHuyen_Index" class="btn btn-outline-secondary" title="Xóa bộ lọc">
+                            <i class="fas fa-redo-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- === HIỂN THỊ KẾT QUẢ === -->
+<div class="card results-card shadow mb-4 animate-fade-in">
+    <div class="card-header results-header py-3">
+        <h6 class="m-0 font-weight-bold text-dark">
+            Danh sách Quận/Huyện
+            @if (Context.Request.Query.ContainsKey("thanhPhoIdFilter") && !string.IsNullOrEmpty(Context.Request.Query["thanhPhoIdFilter"].ToString()))
+            {
+                var selectedCityName = thanhPhoFilterList.FirstOrDefault(x => x.Value == Context.Request.Query["thanhPhoIdFilter"].ToString())?.Text;
+                if (!string.IsNullOrEmpty(selectedCityName))
+                {
+                    <span class="badge bg-info ms-2">@selectedCityName</span>
+                }
+            }
+        </h6>
+        <span class="badge bg-secondary">@Model.Count() kết quả</span>
+    </div>
+    <div class="card-body">
+        @if (!Model.Any())
+        {
+            <div class="no-results">
+                <i class="fas fa-map"></i>
+                <p class="mb-0">Không tìm thấy Quận/Huyện nào phù hợp với bộ lọc.</p>
+                <div class="mt-3">
+                    <a asp-action="QuanHuyen_Index" class="btn btn-outline-secondary me-2">
+                        <i class="fas fa-redo-alt me-1"></i>Xóa bộ lọc
+                    </a>
+                    <a asp-action="QuanHuyen_Create" class="create-btn">
+                        <i class="fas fa-plus me-2"></i>Thêm Quận/Huyện
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle" id="districtTable">
+                    <thead>
+                        <tr>
+                            <th class="fw-bold">@Html.DisplayNameFor(model => model.FirstOrDefault().Ten)</th>
+                            <th class="fw-bold">@Html.DisplayNameFor(model => model.FirstOrDefault().ThanhPho)</th>
+                            <th style="width: 150px;" class="text-center">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="district-row">
+                                <td class="align-middle fw-medium">@Html.DisplayFor(modelItem => item.Ten)</td>
+                                <td class="align-middle">
+                                    <span class="badge bg-light text-dark p-2">
+                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                        @Html.DisplayFor(modelItem => item.ThanhPho.Ten)
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a asp-action="QuanHuyen_Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Chỉnh sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="QuanHuyen_Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Xem chi tiết">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger delete-btn" data-id="@item.Id" data-name="@item.Ten" data-city="@item.ThanhPho.Ten" data-bs-toggle="tooltip" title="Xóa">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+    <div class="card-footer">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="text-muted small">
+                <i class="fas fa-info-circle me-1"></i> Tổng số: <span class="fw-medium">@Model.Count()</span> quận/huyện
+            </div>
+            <a asp-action="Index" asp-controller="CauHinhHeThong" class="btn btn-sm btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i>Quay lại
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa Quận/Huyện <strong id="districtName"></strong> thuộc <strong id="cityName"></strong>?</p>
+                <p class="text-danger mb-0"><i class="fas fa-exclamation-triangle me-1"></i> Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                <a href="#" id="confirmDelete" class="btn btn-primary">Xác nhận xóa</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Floating Action Button -->
+<div class="floating-action">
+    <a asp-action="QuanHuyen_Create" class="fab" title="Thêm Quận/Huyện mới">
+        <i class="fas fa-plus"></i>
+    </a>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Kích hoạt tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+
+            // Animation cho cards
+            const cards = document.querySelectorAll('.filter-card, .results-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate-fade-in');
+            });
+
+            // Enhanced city select with auto-submit
+            const thanhPhoSelect = document.querySelector("#thanhPhoIdFilter");
+            thanhPhoSelect.addEventListener("change", function() {
+                if (this.dataset.autoSubmit === "true") {
+                    document.querySelector("#filterForm").submit();
+                }
+            });
+
+            // Client-side search functionality
+            document.querySelector("#searchInput").addEventListener("keyup", function() {
+                var value = this.value.toLowerCase();
+                var rows = document.querySelectorAll(".district-row");
+                var noResultsRow = document.querySelector("#noResults");
+
+                rows.forEach(function(row) {
+                    row.style.display = row.textContent.toLowerCase().indexOf(value) > -1 ? "" : "none";
+                });
+
+                // Show no results message
+                if (document.querySelectorAll(".district-row:not([style*='display: none'])").length === 0) {
+                    if (!noResultsRow) {
+                        var tableBody = document.querySelector("#districtTable tbody");
+                        tableBody.insertAdjacentHTML('beforeend', '<tr id="noResults"><td colspan="3" class="text-center py-3 text-muted">Không tìm thấy kết quả phù hợp</td></tr>');
+                    }
+                } else {
+                    if (noResultsRow) {
+                        noResultsRow.remove();
+                    }
+                }
+            });
+
+            // Delete confirmation modal
+            document.querySelectorAll(".delete-btn").forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    var id = this.getAttribute("data-id");
+                    var name = this.getAttribute("data-name");
+                    var city = this.getAttribute("data-city");
+                    document.querySelector("#districtName").textContent = name;
+                    document.querySelector("#cityName").textContent = city;
+                    document.querySelector("#confirmDelete").setAttribute("href", "/Admin/QuanHuyen_Delete/" + id);
+                    new bootstrap.Modal(document.querySelector("#deleteModal")).show();
+                });
+            });
+
+            // Button hover effects
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function () {
+                    if (!this.classList.contains('disabled')) {
+                        this.style.transform = 'translateY(-2px)';
+                    }
+                });
+
+                btn.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Enhanced form interactions
+            document.querySelectorAll('.form-control, .form-select').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentNode.style.transform = 'scale(1.02)';
+                    this.parentNode.style.transition = 'transform 0.2s ease';
+                });
+
+                input.addEventListener('blur', function() {
+                    this.parentNode.style.transform = 'scale(1)';
+                });
+            });
+
+            // Auto-hide alerts
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    if (alert.style.display !== 'none') {
+                        alert.style.opacity = '0';
+                        alert.style.transform = 'translateY(-20px)';
+                        setTimeout(() => {
+                            alert.style.display = 'none';
+                        }, 300);
+                    }
+                }, 5000);
+            });
+        });
+    </script>
+}
