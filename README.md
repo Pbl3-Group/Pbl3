@@ -229,11 +229,25 @@ Dự án được phát triển bởi nhóm "Pbl3-Group", bao gồm các thành 
 
 🔮 **Cải tiến trong tương lai**
 
-*   **Tích hợp Real-time:** Nâng cấp hệ thống nhắn tin và thông báo sử dụng SignalR để có trải nghiệm tức thì.
-*   **Ứng dụng Di động:** Phát triển ứng dụng native cho iOS và Android.
-*   **Gợi ý việc làm bằng AI:** Xây dựng hệ thống gợi ý thông minh hơn dựa trên hành vi và nội dung hồ sơ.
-*   **Đánh giá Nhà tuyển dụng:** Cho phép ứng viên đánh giá công ty sau khi ứng tuyển hoặc làm việc.
-*   **Hỗ trợ Đa ngôn ngữ:** Mở rộng để hỗ trợ người dùng quốc tế.
+Dựa trên nền tảng vững chắc đã xây dựng, đây là những tính năng thực tế và khả thi mà chúng tôi dự định phát triển trong các phiên bản tiếp theo để nâng cao giá trị cho người dùng:
+
+*   **🔗 Tích hợp Đăng nhập Mạng xã hội (Social Login)**
+    *   Cho phép người dùng đăng ký và đăng nhập nhanh chóng chỉ với một cú nhấp chuột thông qua tài khoản **Google** hoặc **Facebook**, giảm thiểu rào cản và tăng tốc độ tiếp cận nền tảng.
+
+*   **📧 Hệ thống Gửi Email Thông báo Tự động**
+    *   Ngoài thông báo trong ứng dụng, hệ thống sẽ tự động gửi email cho người dùng khi có các cập nhật quan trọng như: có **tin nhắn mới**, trạng thái hồ sơ ứng tuyển thay đổi (NTD đã xem, chấp nhận, từ chối), hoặc khi có **việc làm mới phù hợp** với hồ sơ.
+
+*   **🤖 Nâng cấp AI: Phân tích & Tự động điền Hồ sơ từ CV (CV Parsing)**
+    *   Xây dựng tính năng AI có khả năng "đọc" file CV (PDF, Word) do người dùng tải lên, tự động bóc tách và điền các thông tin như kinh nghiệm làm việc, kỹ năng, học vấn vào hồ sơ trên web. Điều này giúp người dùng, đặc biệt là những người không rành công nghệ, tiết kiệm thời gian tối đa.
+
+*   **💡 Cải tiến Hệ thống Gợi ý (Recommendation Engine)**
+    *   Sử dụng thuật toán Machine Learning để phân tích sâu hơn hành vi người dùng (các việc làm đã xem, đã ứng tuyển, từ khóa tìm kiếm) và nội dung hồ sơ để đưa ra những gợi ý việc làm chính xác và được cá nhân hóa hơn nữa.
+
+*   **⚡ Nâng cấp Chat & Thông báo Real-time với SignalR**
+    *   Chuyển đổi từ cơ chế hỏi-đáp (polling) hiện tại sang kết nối thời gian thực bằng **SignalR**. Điều này sẽ giúp tin nhắn và thông báo xuất hiện ngay lập tức mà không cần người dùng phải tải lại trang, mang lại trải nghiệm mượt mà như các ứng dụng chat phổ biến.
+
+*   **⭐ Hệ thống Đánh giá Nhà tuyển dụng**
+    *   Cho phép ứng viên (sau khi đã ứng tuyển) để lại đánh giá và xếp hạng (rating) về nhà tuyển dụng. Tính năng này giúp xây dựng một cộng đồng minh bạch, tin cậy hơn và cung cấp thông tin giá trị cho những người tìm việc khác.
 
 🤝 **Đóng góp**
 
