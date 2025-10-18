@@ -14,10 +14,9 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 
 Dự án được phát triển bởi nhóm "Pbl3-Group", bao gồm các thành viên:
 
-*   [@nhhuynh](https://github.com/nhhuynh) - [Họ và Tên]
-*   [@D-dat](https://github.com/D-dat) - [Họ và Tên]
-*   [@bichuyen](https://github.com/bichuyen) - [Họ và Tên]
-*   [@phuongdeptrai](https://github.com/phuongdeptrai) - [Họ và Tên]
+*   [@Nguyễn Thanh Huyền](https://github.com/Chizk23)- Nguyễn Thanh Huyền
+*   [@Bích Uyên](https://github.com/BichUyen2609)- Nguyễn Thị Bích Uyên
+*   [@Phượng Trần](https://github.com/PhuongTran2212)- Trần Thị Phượng
 
 ---
 
@@ -26,7 +25,7 @@ Dự án được phát triển bởi nhóm "Pbl3-Group", bao gồm các thành 
 ### Backend
 
 *   **Ngôn ngữ:** C#
-*   **Framework:** ASP.NET Core MVC (.NET 6.0)
+*   **Framework:** ASP.NET Core MVC (.NET 8.0)
 *   **Database:** **MySQL** (v8.0+)
 *   **ORM:** Entity Framework Core (sử dụng `Pomelo.EntityFrameworkCore.MySql`)
 *   **Authentication:** ASP.NET Core Identity, Cookie Authentication
@@ -171,7 +170,7 @@ Dự án được phát triển bởi nhóm "Pbl3-Group", bao gồm các thành 
 🚦 **Bắt đầu**
 
 ### Yêu cầu
-*   **.NET 6.0 SDK**
+*   **.NET 8.0 SDK**
 *   **MySQL Server** (phiên bản 8.0 hoặc cao hơn được khuyến nghị)
 *   Visual Studio 2022 hoặc Visual Studio Code
 *   Git
@@ -247,7 +246,7 @@ Dự án này được cấp phép theo Giấy phép MIT - xem file [LICENSE](ht
 📞 **Liên hệ**
 
 *   [@Nguyễn Thanh Huyền](https://github.com/Chizk23)
-*   [@Bich Uyen](https://github.com/BichUyen2609)
+*   [@Bích Uyên](https://github.com/BichUyen2609)
 *   [@Phượng Trần](https://github.com/PhuongTran2212)
 
 ⭐ **Nếu bạn thấy dự án này hữu ích, hãy cân nhắc tặng nó một ngôi sao!**
