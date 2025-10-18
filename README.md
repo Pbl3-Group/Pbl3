@@ -188,7 +188,7 @@ Dự án được phát triển bởi nhóm "Pbl3-Group", bao gồm các thành 
     *   Cập nhật chuỗi `ConnectionStrings` để trỏ đến instance **MySQL** của bạn. Ví dụ:
         ```json
         "ConnectionStrings": {
-          "DefaultConnection": "Server=localhost;Port=3306;Database=ten_database_cua_ban;Uid=ten_user;Pwd=mat_khau_cua_ban;"
+           "DefaultConnection": "Server=localhost;Database=JOBFLEX;User=YOUR_DB_USER;Password=YOUR_DB_PASSWORD;CharSet=utf8mb4;"
         }
         ```
     *   Mở Package Manager Console (trong Visual Studio) hoặc Terminal và chạy lệnh migration của Entity Framework để tạo cơ sở dữ liệu và các bảng:
