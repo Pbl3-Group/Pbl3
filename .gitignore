@@ -5,3 +5,4 @@ appsettings.Development.json
 *.log
 .vscode/
 .idea/
+appsettings.json
