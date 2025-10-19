@@ -41,7 +41,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Theo dõi & Tương tác thông minh:** Theo dõi trạng thái chi tiết của đơn ứng tuyển, rút đơn và **hoàn tác việc rút đơn**.
 *   *Trang dashboard cá nhân của ứng viên, quản lý hồ sơ và các đơn ứng tuyển.*
 
-    ![Giao diện quản lý việc đã ứng tuyển](www-root/images/README/viecdaungtuyen.png)
+    ![Giao diện quản lý việc đã ứng tuyển](wwwroot/images/README/viecdaungtuyen.png)
 
 ### 🏢 3. Quản lý Tuyển dụng cho Nhà tuyển dụng
 *   **Đăng & Quản lý tin tuyển dụng:** Giao diện đăng tin trực quan cùng bộ công cụ quản lý mạnh mẽ (Sửa, Xóa, Tạm ẩn, Đăng lại nhanh).
@@ -49,7 +49,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Chuyển đổi vai trò linh hoạt:** Dễ dàng chuyển đổi giữa giao diện tìm việc và tuyển dụng trên cùng một tài khoản cá nhân.
 *   *Giao diện quản lý tin tuyển dụng và danh sách ứng viên của Nhà tuyển dụng.*
 
-    ![Giao diện quản lý ứng viên](www-root/images/README/quanlyungvien.png)
+    ![Giao diện quản lý ứng viên](wwwroot/images/README/quanlyungvien.png)
 
 ### 💬 4. Hệ thống Nhắn tin theo Ngữ cảnh
 *   **Trò chuyện trực tiếp:** Giao tiếp hiệu quả giữa nhà tuyển dụng và ứng viên.
@@ -57,7 +57,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Giao diện trực quan:** Giao diện chat quen thuộc, dễ sử dụng, hiển thị thông tin chi tiết của người liên hệ.
 *   *Giao diện nhắn tin chi tiết, hiển thị cuộc hội thoại trong ngữ cảnh công việc cụ thể.*
 
-    ![Giao diện nhắn tin](www-root/images/README/Tinnhan.png)
+    ![Giao diện nhắn tin](wwwroot/images/README/Tinnhan.png)
 
 ### 🔔 5. Hệ thống Thông báo Tự động
 *   **Thông báo tự động theo quy trình:** Tự động thông báo khi có cập nhật trạng thái ứng tuyển, tin nhắn mới, tin đăng được duyệt...
@@ -65,7 +65,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Cập nhật số lượng thông báo:** Hiển thị số lượng thông báo chưa đọc trên giao diện chính.
 *   *Trung tâm thông báo của người dùng với danh sách các cập nhật mới nhất.*
   
-    ![Giao diện thông báo](www-root/images/README/Thongbao.png)
+    ![Giao diện thông báo](wwwroot/images/README/Thongbao.png)
 
 ### ⚠️ 6. Hệ thống Báo cáo & Kiểm duyệt
 *   **Báo cáo vi phạm từ người dùng:** Dễ dàng báo cáo các tin tuyển dụng có dấu hiệu lừa đảo, sai sự thật và theo dõi trạng thái báo cáo.
@@ -73,9 +73,9 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Phản hồi tự động hai chiều:** Gửi thông báo kết quả xử lý cho cả người báo cáo và người bị báo cáo.
 *   *Quy trình xử lý báo cáo vi phạm từ góc nhìn của Admin và Người dùng.*
 
-    ![Giao diện báo cáo của người dùng](www-root/images/README/baocao.png)
+    ![Giao diện báo cáo của người dùng](wwwroot/images/README/baocao.png)
     
-    ![Giao diện quản lý báo cáo của Admin](www-root/images/README/baocaoadmin.png)
+    ![Giao diện quản lý báo cáo của Admin](wwwroot/images/README/baocaoadmin.png)
 
 ### 🛡️ 7. Bảng điều khiển Quản trị viên (Admin Panel)
 *   **Dashboard Phân tích & Thống kê:** Biểu đồ động về sức khỏe hệ thống, có thể lọc theo tuần/tháng/năm và theo dõi KPIs chuyên sâu.
@@ -83,7 +83,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Công cụ Admin mạnh mẽ:** Gửi thông báo hàng loạt đến các nhóm người dùng và **xuất dữ liệu ra file Excel**.
 *   *Dashboard tổng quan của Admin với các biểu đồ phân tích và số liệu thống kê.*
 
-    ![Dashboard của Admin](www-root/images/README/dashboardadmin.png)
+    ![Dashboard của Admin](wwwroot/images/README/dashboardadmin.png)
     
     *Giao diện quản lý báo cáo của Admin.*
     
