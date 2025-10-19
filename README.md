@@ -33,7 +33,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Gợi ý việc làm phù hợp:** Hệ thống tự động chấm điểm (%) độ tương thích của ứng viên với tin tuyển dụng.
 *   *Giao diện tìm kiếm việc làm với bộ lọc chi tiết và kết quả được sắp xếp.*
 
-    ![Giao diện tìm việc](www-root/images/README/TimViec.png)
+    ![Giao diện tìm việc](wwwroot/images/README/TimViec.png)
 
 ### 👤 2. Quản lý Hồ sơ & Ứng tuyển
 *   **Hồ sơ cá nhân toàn diện:** Quản lý thông tin, CV, lịch rảnh, và khu vực làm việc mong muốn.
