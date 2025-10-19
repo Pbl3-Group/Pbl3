@@ -22,104 +22,72 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 
 Để giải quyết những thách thức trên, chúng tôi đã phát triển một ứng dụng web full-stack với mục tiêu tạo ra một sân chơi công bằng và minh bạch, nơi mọi người, **dù có kinh nghiệm hay không**, đều có thể tìm thấy cơ hội phù hợp. Nền tảng được trang bị các tính năng cốt lõi như đăng tin, tìm kiếm, quản lý hồ sơ, cùng với **hệ thống nhắn tin theo ngữ cảnh** và **hệ thống thông báo toàn diện** để xóa bỏ rào cản giao tiếp và nâng cao trải nghiệm người dùng.
 
+
 ---
 
 ## ✨ Các chức năng chính
 
-Hệ thống được thiết kế với ba vai trò người dùng chính, mỗi vai trò có một bộ công cụ chuyên biệt để phục vụ đúng nhu cầu.
+### 🔍 1. Tìm kiếm & Khám phá việc làm
+*   **Tìm kiếm Nâng cao:** Tìm việc làm theo từ khóa, địa điểm, ngành nghề.
+*   **Bộ lọc Thông minh:** Lọc kết quả theo khoảng lương, loại hình công việc, kinh nghiệm, ca làm việc, và tin tuyển gấp.
+*   **Gợi ý việc làm phù hợp:** Hệ thống tự động chấm điểm (%) độ tương thích của ứng viên với tin tuyển dụng.
+*   *Giao diện tìm kiếm việc làm với bộ lọc chi tiết và kết quả được sắp xếp.*
 
-<details>
-<summary><b>👨‍💻 1. Dành cho Người Tìm Việc (Ứng viên)</b></summary>
-<br>
+    ![Giao diện tìm việc](www-root/images/README/TimViec.png)
 
-  #### 🔍 **Tìm kiếm & Khám phá việc làm**
-  *   **Tìm kiếm & Lọc nâng cao:** Dễ dàng tìm kiếm công việc với bộ lọc đa dạng từ địa điểm, ngành nghề đến khoảng lương, loại hình công việc, giúp nhanh chóng khoanh vùng các cơ hội phù hợp nhất.
-      
-      *[Ảnh chụp màn hình trang tìm việc với các bộ lọc đang được sử dụng]*
+### 👤 2. Quản lý Hồ sơ & Ứng tuyển
+*   **Hồ sơ cá nhân toàn diện:** Quản lý thông tin, CV, lịch rảnh, và khu vực làm việc mong muốn.
+*   **Hệ thống ứng tuyển linh hoạt:** Cho phép nộp CV mặc định hoặc tải lên một CV mới cho từng công việc.
+*   **Theo dõi & Tương tác thông minh:** Theo dõi trạng thái chi tiết của đơn ứng tuyển, rút đơn và **hoàn tác việc rút đơn**.
+*   *Trang dashboard cá nhân của ứng viên, quản lý hồ sơ và các đơn ứng tuyển.*
 
-  *   **Gợi ý việc làm phù hợp:** Hệ thống tự động phân tích và chấm điểm độ tương thích (%) giữa hồ sơ của bạn (kỹ năng, lịch rảnh, địa điểm, lương mong muốn) với các tin tuyển dụng, giúp bạn không bỏ lỡ những cơ hội vàng.
+    ![Giao diện quản lý việc đã ứng tuyển](www-root/images/README/viecdaungtuyen.png)
 
-      *[Ảnh chụp màn hình một tin tuyển dụng có hiển thị điểm phù hợp]*
+### 🏢 3. Quản lý Tuyển dụng cho Nhà tuyển dụng
+*   **Đăng & Quản lý tin tuyển dụng:** Giao diện đăng tin trực quan cùng bộ công cụ quản lý mạnh mẽ (Sửa, Xóa, Tạm ẩn, Đăng lại nhanh).
+*   **Quản lý & Sàng lọc ứng viên:** Xem danh sách ứng viên theo từng tin, lọc hồ sơ, và thay đổi trạng thái (chấp nhận/từ chối).
+*   **Chuyển đổi vai trò linh hoạt:** Dễ dàng chuyển đổi giữa giao diện tìm việc và tuyển dụng trên cùng một tài khoản cá nhân.
+*   *Giao diện quản lý tin tuyển dụng và danh sách ứng viên của Nhà tuyển dụng.*
 
-  #### 👤 **Quản lý Hồ sơ & CV toàn diện**
-  *   **Hồ sơ đa thành phần:** Quản lý tập trung và riêng biệt thông tin tài khoản, hồ sơ chuyên môn, lịch làm việc mong muốn và các khu vực làm việc yêu thích.
-  *   **Xây dựng hồ sơ chuyên nghiệp:** Tải lên CV, giới thiệu bản thân, thiết lập các kỳ vọng về công việc để thu hút nhà tuyển dụng.
+    ![Giao diện quản lý ứng viên](www-root/images/README/quanlyungvien.png)
 
-      *[Ảnh chụp màn hình trang dashboard hoặc trang hồ sơ cá nhân của ứng viên]*
+### 💬 4. Hệ thống Nhắn tin theo Ngữ cảnh
+*   **Trò chuyện trực tiếp:** Giao tiếp hiệu quả giữa nhà tuyển dụng và ứng viên.
+*   **Ngữ cảnh hội thoại rõ ràng:** Mỗi cuộc hội thoại được gắn với một tin tuyển dụng hoặc đơn ứng tuyển cụ thể.
+*   **Giao diện trực quan:** Giao diện chat quen thuộc, dễ sử dụng, hiển thị thông tin chi tiết của người liên hệ.
+*   *Giao diện nhắn tin chi tiết, hiển thị cuộc hội thoại trong ngữ cảnh công việc cụ thể.*
 
-  #### ✍️ **Quản lý Ứng tuyển thông minh**
-  *   **Theo dõi trạng thái chi tiết:** Nắm bắt toàn bộ hành trình ứng tuyển, từ lúc "Đã nộp" đến khi "NTD đã xem", "Chấp nhận" hoặc "Từ chối".
-  *   **Tương tác linh hoạt:** Dễ dàng sửa đổi thông tin ứng tuyển, rút lại hồ sơ khi cần thiết, và đặc biệt là có thể **hoàn tác việc rút đơn** trong một khoảng thời gian nhất định.
+    ![Giao diện nhắn tin](www-root/images/README/Tinnhan.png)
 
-      *[Ảnh chụp màn hình trang "Việc đã ứng tuyển" với các trạng thái khác nhau]*
-      
-</details>
-
-<details>
-<summary><b>🏢 2. Dành cho Nhà Tuyển Dụng (Cá nhân & Doanh nghiệp)</b></summary>
-<br>
-
-  #### 📋 **Đăng & Quản lý tin tuyển dụng chuyên nghiệp**
-  *   **Giao diện đăng tin trực quan:** Form đăng tin chi tiết, khoa học, giúp nhà tuyển dụng cung cấp đầy đủ thông tin nhất có thể.
-  *   **Bộ công cụ quản lý mạnh mẽ:** Toàn quyền kiểm soát các tin đã đăng với các chức năng: Sửa, Xóa (ẩn), **Đăng lại nhanh (Repost)** để làm mới tin, Tạm ẩn/Hiện, và Đánh dấu đã tuyển.
+### 🔔 5. Hệ thống Thông báo Tự động
+*   **Thông báo tự động theo quy trình:** Tự động thông báo khi có cập nhật trạng thái ứng tuyển, tin nhắn mới, tin đăng được duyệt...
+*   **Trung tâm thông báo:** Giao diện tập trung để người dùng quản lý, đánh dấu đã đọc, và xóa thông báo.
+*   **Cập nhật số lượng thông báo:** Hiển thị số lượng thông báo chưa đọc trên giao diện chính.
+*   *Trung tâm thông báo của người dùng với danh sách các cập nhật mới nhất.*
   
-      *[Ảnh chụp màn hình trang quản lý tin tuyển dụng của NTD]*
+    ![Giao diện thông báo](www-root/images/README/Thongbao.png)
 
-  #### 👨‍💼 **Quản lý Ứng viên hiệu quả**
-  *   **Sàng lọc ứng viên dễ dàng:** Xem danh sách ứng viên theo từng tin tuyển dụng, lọc và tìm kiếm hồ sơ nhanh chóng.
-  *   **Tương tác và ra quyết định:** Xem chi tiết hồ sơ ứng viên, CV, thư giới thiệu và thay đổi trạng thái ứng tuyển (chấp nhận/từ chối). Mọi thay đổi sẽ được **thông báo tự động** đến ứng viên.
+### ⚠️ 6. Hệ thống Báo cáo & Kiểm duyệt
+*   **Báo cáo vi phạm từ người dùng:** Dễ dàng báo cáo các tin tuyển dụng có dấu hiệu lừa đảo, sai sự thật và theo dõi trạng thái báo cáo.
+*   **Quy trình xử lý khép kín cho Admin:** Tiếp nhận, xem xét (tự động cập nhật trạng thái), và xử lý báo cáo.
+*   **Phản hồi tự động hai chiều:** Gửi thông báo kết quả xử lý cho cả người báo cáo và người bị báo cáo.
+*   *Quy trình xử lý báo cáo vi phạm từ góc nhìn của Admin và Người dùng.*
 
-      *[Ảnh chụp màn hình trang quản lý ứng viên của NTD, có các nút thay đổi trạng thái]*
-  
-  #### 🔄 **Chuyển đổi vai trò linh hoạt**
-  *   Người dùng có vai trò "Cá nhân" có thể dễ dàng chuyển đổi qua lại giữa giao diện **Tìm việc** và **Tuyển dụng** chỉ với một cú nhấp chuột, phục vụ cho cả hai nhu cầu trên cùng một tài khoản.
+    ![Giao diện báo cáo của người dùng](www-root/images/README/baocao.png)
+    
+    ![Giao diện quản lý báo cáo của Admin](www-root/images/README/baocaoadmin.png)
 
-      *[Ảnh chụp màn hình nút chuyển đổi vai trò trên giao diện]*
+### 🛡️ 7. Bảng điều khiển Quản trị viên (Admin Panel)
+*   **Dashboard Phân tích & Thống kê:** Biểu đồ động về sức khỏe hệ thống, có thể lọc theo tuần/tháng/năm và theo dõi KPIs chuyên sâu.
+*   **Quản lý người dùng toàn diện:** Quản lý tất cả tài khoản, xác minh doanh nghiệp, thay đổi trạng thái tài khoản.
+*   **Công cụ Admin mạnh mẽ:** Gửi thông báo hàng loạt đến các nhóm người dùng và **xuất dữ liệu ra file Excel**.
+*   *Dashboard tổng quan của Admin với các biểu đồ phân tích và số liệu thống kê.*
 
-</details>
+    ![Dashboard của Admin](www-root/images/README/dashboardadmin.png)
+    
+    *Giao diện quản lý báo cáo của Admin.*
+    
 
-<details>
-<summary><b>🛡️ 3. Dành cho Quản trị viên (Admin)</b></summary>
-<br>
-
-  #### 📊 **Dashboard Phân tích & Thống kê chuyên sâu**
-  *   **Bảng điều khiển trực quan:** Cung cấp cái nhìn tổng quan về sức khỏe của hệ thống qua các biểu đồ động (có thể **lọc theo tuần/tháng/năm**), KPIs quan trọng và luồng hoạt động mới nhất.
-  
-      *[Ảnh chụp màn hình Dashboard của Admin với các biểu đồ]*
-
-  #### 👥 **Quản lý người dùng toàn diện**
-  *   **Quản lý tài khoản tập trung:** Giao diện quản lý tất cả người dùng với các công cụ tìm kiếm, lọc, và tùy chọn hiển thị dạng lưới hoặc bảng.
-  *   **Thực thi quyền hạn:** Admin có toàn quyền xem chi tiết, chỉnh sửa, tạo mới, và thay đổi trạng thái tài khoản (kích hoạt, đình chỉ, tạm dừng).
-
-      *[Ảnh chụp màn hình trang quản lý người dùng của Admin]*
-
-  #### ⚠️ **Hệ thống Kiểm duyệt & Xử lý Báo cáo**
-  *   **Quy trình kiểm duyệt nội dung:** Giao diện chuyên biệt để duyệt hoặc từ chối các tin tuyển dụng đang chờ, đảm bảo chất lượng nội dung trên toàn hệ thống.
-  *   **Xử lý báo cáo vi phạm:** Quy trình xử lý báo cáo khép kín, từ việc tiếp nhận, xem xét, đến ra quyết định xử lý và **tự động gửi thông báo** kết quả đến các bên liên quan.
-
-      *[Ảnh chụp màn hình trang quản lý báo cáo vi phạm]*
-      
-  #### 🚀 **Công cụ Admin mạnh mẽ**
-  *   **Gửi Thông báo Hàng loạt:** Tạo và gửi các thông báo quan trọng đến các nhóm đối tượng người dùng cụ thể.
-  *   **Xuất Dữ liệu ra Excel:** Tính năng xuất danh sách người dùng và tin tuyển dụng ra file Excel để phục vụ cho việc lưu trữ và phân tích ngoại tuyến.
-
-      *[Ảnh chụp màn hình trang gửi thông báo hàng loạt hoặc nút Xuất Excel]*
-
-</details>
-
-<details>
-<summary><b>💬 4. Các tính năng chung (Nhắn tin, Thông báo)</b></summary>
-<br>
-
-  *   **Hệ thống Nhắn tin theo Ngữ cảnh:** Trò chuyện trực tiếp với nhà tuyển dụng/ứng viên trong một giao diện quen thuộc. Mỗi cuộc hội thoại được gắn với một công việc hoặc đơn ứng tuyển cụ thể, giúp việc trao đổi luôn rõ ràng và đúng trọng tâm.
-  
-      *[Ảnh chụp màn hình giao diện nhắn tin chi tiết]*
-
-  *   **Hệ thống Thông báo Toàn diện:** Tự động thông báo cho người dùng về mọi cập nhật quan trọng (trạng thái ứng tuyển, tin nhắn mới, tin đăng được duyệt,...) và cho phép quản lý chúng tại một trung tâm thông báo duy nhất.
-
-      *[Ảnh chụp màn hình trung tâm thông báo của người dùng]*
-
-</details>
 
 ---
 
