@@ -29,24 +29,25 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 
 ### 🔍 1. Tìm kiếm & Khám phá việc làm
 *   **Tìm kiếm Nâng cao:** Tìm việc làm theo từ khóa, địa điểm, ngành nghề.
-*   **Bộ lọc Thông minh:** Lọc kết quả theo khoảng lương, loại hình công việc, kinh nghiệm, ca làm việc, và tin tuyển gấp.
+*   **Bộ lọc Thông minh:** Lọc kết quả theo khoảng lương, loại hình, ca làm việc, tin tuyển gấp, và **tìm kiếm văn bản trong yêu cầu kinh nghiệm/học vấn**.
+*   **Sắp xếp Linh hoạt:** Sắp xếp kết quả theo ngày đăng, mức lương (cao/thấp), hoặc hạn nộp hồ sơ.
 *   **Gợi ý việc làm phù hợp:** Hệ thống tự động chấm điểm (%) độ tương thích của ứng viên với tin tuyển dụng.
 
     ![Giao diện tìm việc](wwwroot/images/README/TimViec.png)
-    *Trang tìm kiếm việc làm với bộ lọc nâng cao giúp người dùng nhanh chóng tìm được công việc phù hợp.*
+    *Trang tìm kiếm việc làm với bộ lọc nâng cao và các tùy chọn sắp xếp, giúp người dùng nhanh chóng tìm được công việc phù hợp.*
 
 ### 👤 2. Quản lý Hồ sơ & Ứng tuyển
-*   **Hồ sơ cá nhân toàn diện:** Quản lý thông tin, CV, lịch rảnh, và khu vực làm việc mong muốn.
-*   **Hệ thống ứng tuyển linh hoạt:** Cho phép nộp CV mặc định hoặc tải lên một CV mới cho từng công việc.
-*   **Theo dõi & Tương tác thông minh:** Theo dõi trạng thái chi tiết của đơn ứng tuyển, rút đơn và **hoàn tác việc rút đơn**.
+*   **Hồ sơ cá nhân toàn diện:** Quản lý thông tin, CV mặc định, lịch rảnh, và khu vực làm việc mong muốn.
+*   **Ứng tuyển Linh hoạt:** Cho phép nộp hồ sơ với CV mặc định hoặc **tải lên một CV mới** dành riêng cho từng công việc.
+*   **Theo dõi & Tương tác thông minh:** Theo dõi trạng thái chi tiết của đơn ứng tuyển, sửa đổi thông tin, rút đơn và **hoàn tác việc rút đơn**.
 
     ![Giao diện quản lý việc đã ứng tuyển](wwwroot/images/README/viecdaungtuyen.png)
     *Giao diện quản lý các công việc đã ứng tuyển, cho phép theo dõi trạng thái và tương tác với từng đơn.*
 
 ### 🏢 3. Quản lý Tuyển dụng cho Nhà tuyển dụng
 *   **Đăng & Quản lý tin tuyển dụng:** Giao diện đăng tin trực quan cùng bộ công cụ quản lý mạnh mẽ (Sửa, Xóa, Tạm ẩn, Đăng lại nhanh).
-*   **Quản lý & Sàng lọc ứng viên:** Xem danh sách ứng viên theo từng tin, lọc hồ sơ, và thay đổi trạng thái (chấp nhận/từ chối).
-*   **Chuyển đổi vai trò linh hoạt:** Dễ dàng chuyển đổi giữa giao diện tìm việc và tuyển dụng trên cùng một tài khoản cá nhân.
+*   **Quy trình duyệt tin phân luồng:** Tin của **Doanh nghiệp** sẽ ở trạng thái "Chờ duyệt", trong khi tin của **NTD Cá nhân** được "Duyệt tự động".
+*   **Quản lý & Sàng lọc ứng viên:** Xem danh sách ứng viên theo từng tin, lọc hồ sơ, và thay đổi trạng thái. Hệ thống sẽ **tự động gửi thông báo** đến ứng viên.
 
     ![Giao diện quản lý ứng viên](wwwroot/images/README/quanlyungvien.png)
     *Dashboard quản lý ứng viên dành cho Nhà tuyển dụng, giúp sàng lọc và thay đổi trạng thái hồ sơ.*
@@ -67,25 +68,26 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
     ![Giao diện thông báo](wwwroot/images/README/Thongbao.png)
     *Trung tâm thông báo, nơi tập trung tất cả các cập nhật quan trọng của người dùng.*
 
-### ⚠️ 6. Hệ thống Báo cáo & Kiểm duyệt
-*   **Báo cáo vi phạm từ người dùng:** Dễ dàng báo cáo các tin tuyển dụng có dấu hiệu lừa đảo, sai sự thật và theo dõi trạng thái báo cáo.
-*   **Quy trình xử lý khép kín cho Admin:** Tiếp nhận, xem xét (tự động cập nhật trạng thái), và xử lý báo cáo.
-*   **Phản hồi tự động hai chiều:** Gửi thông báo kết quả xử lý cho cả người báo cáo và người bị báo cáo.
+### 🛡️ 6. Bảng điều khiển Quản trị viên (Admin Panel)
 
-    ![Giao diện quản lý báo cáo của Admin](wwwroot/images/README/baocaoadmin.png)
-    *Giao diện quản lý và xử lý báo cáo vi phạm của Admin, tích hợp các hành động xử lý nhanh.*
-
-    ![Giao diện báo cáo của người dùng](wwwroot/images/README/baocao.png)
-    *Người dùng có thể dễ dàng báo cáo vi phạm và theo dõi trạng thái xử lý.*
-
-### 🛡️ 7. Bảng điều khiển Quản trị viên (Admin Panel)
-*   **Dashboard Phân tích & Thống kê:** Biểu đồ động về sức khỏe hệ thống, có thể lọc theo tuần/tháng/năm và theo dõi KPIs chuyên sâu.
-*   **Quản lý người dùng toàn diện:** Quản lý tất cả tài khoản, xác minh doanh nghiệp, thay đổi trạng thái tài khoản.
-*   **Công cụ Admin mạnh mẽ:** Gửi thông báo hàng loạt đến các nhóm người dùng và **xuất dữ liệu ra file Excel**.
+*   #### **Dashboard Phân tích & Báo cáo**
+    Biểu đồ động về sức khỏe hệ thống (lọc theo tuần/tháng/năm), theo dõi KPIs chuyên sâu và tính năng **Xuất Dữ liệu ra Excel**.
 
     ![Dashboard của Admin](wwwroot/images/README/dashboardadmin.png)
     *Bảng điều khiển trung tâm của Quản trị viên với các biểu đồ phân tích và số liệu thống kê trực quan.*
-    
+
+*   #### **Quản lý Người dùng & Nội dung**
+    -   **Quản lý người dùng toàn diện:** Xem, tìm kiếm, lọc, **tạo mới, chỉnh sửa**, và thay đổi trạng thái của tất cả tài khoản.
+    -   **Kiểm duyệt tin đăng:** Giao diện chuyên biệt để duyệt hoặc từ chối các tin đăng đang chờ.
+    -   **Quản lý Danh mục Hệ thống:** Toàn quyền thêm, sửa, xóa các danh mục cốt lõi như Ngành nghề, Tỉnh/Thành, Quận/Huyện.
+
+*   #### **Hệ thống Xử lý Báo cáo & Giao tiếp**
+    -   **Quy trình xử lý báo cáo khép kín:** Tiếp nhận báo cáo, xem xét (tự động cập nhật trạng thái), và đưa ra các hành động xử lý mạnh mẽ: `Bỏ qua`, `Cảnh cáo & Ẩn tin`, hoặc `Đình chỉ tài khoản & Ẩn tin`.
+    -   **Phản hồi tự động:** Gửi thông báo kết quả xử lý cho cả người báo cáo và người bị báo cáo.
+    -   **Gửi Thông báo Chiến dịch (Campaigns):** Soạn và gửi thông báo hàng loạt đến các nhóm người dùng được nhắm mục tiêu.
+
+    ![Giao diện quản lý báo cáo của Admin](wwwroot/images/README/baocaoadmin.png)
+    *Giao diện quản lý và xử lý báo cáo vi phạm của Admin, tích hợp các hành động xử lý nhanh.*
 
 
 ---
