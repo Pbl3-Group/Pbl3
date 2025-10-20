@@ -16,13 +16,15 @@ Một ứng dụng web full-stack, được xây dựng trên nền tảng .NET 
 
 ## 🌟 Tổng quan dự án
 
-Là sản phẩm của học phần Lập trình dựa trên dự án 3 (PBL3), dự án này được xây dựng để giải quyết một thách thức thực tế: sự thiếu hụt một nền tảng tập trung, uy tín và dễ sử dụng cho thị trường việc làm linh hoạt.
+Là sản phẩm của học phần Lập trình dựa trên dự án 3 (PBL3), dự án này được xây dựng để lấp đầy một khoảng trống quan trọng trên thị trường lao động: một nền tảng chuyên biệt, nhanh chóng và đáng tin cậy cho các công việc **part-time** và **thời vụ**.
 
-Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm kiếm công việc đầu đời để tích lũy kinh nghiệm, cho đến những người lao động lành nghề muốn có thêm thu nhập, hay đơn giản là bất kỳ ai đang tìm kiếm sự linh hoạt trong công việc. Tuy nhiên, các nền tảng hiện tại thường rời rạc, thiếu thông tin xác thực, và chưa thực sự phục vụ tốt cho tất cả các đối tượng này. Trong khi đó, nhà tuyển dụng cũng cần một công cụ hiệu quả để tiếp cận và giao tiếp với đúng ứng viên.
+Nền tảng của chúng tôi không chỉ hướng đến một sự nghiệp dài hạn, mà tập trung vào các nhu cầu thực tế và cấp thiết hơn:
+*   **Việc làm part-time:** Dành cho sinh viên hoặc bất kỳ ai muốn có một công việc với lịch trình linh hoạt để cân bằng với việc học tập hoặc các cam kết khác.
+*   **Việc làm thời vụ & ngắn hạn:** Dành cho những người cần tìm việc gấp để **trang trải chi phí trước mắt**, hoặc muốn hoàn thành nhanh một vài công việc để có thêm thu nhập.
 
-Để giải quyết những thách thức trên, chúng tôi đã phát triển một ứng dụng web full-stack với mục tiêu tạo ra một sân chơi công bằng và minh bạch, nơi mọi người, **dù có kinh nghiệm hay không**, đều có thể tìm thấy cơ hội phù hợp. Nền tảng được trang bị các tính năng cốt lõi như đăng tin, tìm kiếm, quản lý hồ sơ, cùng với **hệ thống nhắn tin theo ngữ cảnh** và **hệ thống thông báo toàn diện** để xóa bỏ rào cản giao tiếp và nâng cao trải nghiệm người dùng.
+Đồng thời, chúng tôi cũng phục vụ cho cả các **nhà tuyển dụng cá nhân** có nhu cầu tìm người phụ giúp các công việc nhỏ lẻ, ngắn hạn, bên cạnh các doanh nghiệp truyền thống.
 
-
+Để đáp ứng các luồng nhu cầu này, chúng tôi đã tạo ra một nền tảng tối ưu cho tốc độ và sự tiện lợi. Điểm nổi bật là người dùng có thể **chuyển đổi linh hoạt giữa vai trò Người tìm việc và Nhà tuyển dụng**, cùng với các công cụ như **nhắn tin theo ngữ cảnh** và **thông báo tự động** để thúc đẩy quá trình kết nối một cách hiệu quả nhất.
 ---
 
 ## ✨ Các chức năng chính
