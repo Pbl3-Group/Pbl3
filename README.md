@@ -35,22 +35,36 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 
     ![Giao diện tìm việc](wwwroot/images/README/TimViec.png)
     *Trang tìm kiếm việc làm với bộ lọc nâng cao và các tùy chọn sắp xếp, giúp người dùng nhanh chóng tìm được công việc phù hợp.*
+    ![Chi tiết việc làm](wwwroot/images/README/chitiet-vieclam.png)
+    *Trang chi tiết cung cấp đầy đủ thông tin về công việc và nhà tuyển dụng.*
 
 ### 👤 2. Quản lý Hồ sơ & Ứng tuyển
 *   **Hồ sơ cá nhân toàn diện:** Quản lý thông tin, CV mặc định, lịch rảnh, và khu vực làm việc mong muốn.
 *   **Ứng tuyển Linh hoạt:** Cho phép nộp hồ sơ với CV mặc định hoặc **tải lên một CV mới** dành riêng cho từng công việc.
 *   **Theo dõi & Tương tác thông minh:** Theo dõi trạng thái chi tiết của đơn ứng tuyển, sửa đổi thông tin, rút đơn và **hoàn tác việc rút đơn**.
 
+    ![Form ứng tuyển](wwwroot/images/README/ungtuyen-form.png)
+    *Giao diện nộp hồ sơ, cho phép ứng viên viết thư giới thiệu và tùy chọn CV.*
+
+
     ![Giao diện quản lý việc đã ứng tuyển](wwwroot/images/README/viecdaungtuyen.png)
     *Giao diện quản lý các công việc đã ứng tuyển, cho phép theo dõi trạng thái và tương tác với từng đơn.*
 
 ### 🏢 3. Quản lý Tuyển dụng cho Nhà tuyển dụng
-*   **Đăng & Quản lý tin tuyển dụng:** Giao diện đăng tin trực quan cùng bộ công cụ quản lý mạnh mẽ (Sửa, Xóa, Tạm ẩn, Đăng lại nhanh).
+*   **Đăng & Quản lý tin tuyển dụng:** Giao diện đăng tin trực quan cùng bộ công cụ quản lý mạnh mẽ (Sửa, Xóa, Đăng lại nhanh).
 *   **Quy trình duyệt tin phân luồng:** Tin của **Doanh nghiệp** sẽ ở trạng thái "Chờ duyệt", trong khi tin của **NTD Cá nhân** được "Duyệt tự động".
-*   **Quản lý & Sàng lọc ứng viên:** Xem danh sách ứng viên theo từng tin, lọc hồ sơ, và thay đổi trạng thái. Hệ thống sẽ **tự động gửi thông báo** đến ứng viên.
+*   **Dashboard trung tâm:** Cung cấp cái nhìn tổng quan về hoạt động tuyển dụng với các số liệu thống kê nhanh.
+
+    ![Form đăng tin](wwwroot/images/README/dangtin-form.png)
+    *Form đăng tin tuyển dụng chi tiết dành cho Nhà tuyển dụng.*
+
+    ![Dashboard Nhà tuyển dụng](wwwroot/images/README/dashboard-ntd.png)
+    *Dashboard chính của Nhà tuyển dụng với các thống kê và hoạt động gần đây.*
+
+*   **Quản lý & Sàng lọc ứng viên:** Xem danh sách ứng viên theo từng tin, lọc hồ sơ, và thay đổi trạng thái (chấp nhận/từ chối). Hệ thống sẽ **tự động gửi thông báo** đến ứng viên.
 
     ![Giao diện quản lý ứng viên](wwwroot/images/README/quanlyungvien.png)
-    *Dashboard quản lý ứng viên dành cho Nhà tuyển dụng, giúp sàng lọc và thay đổi trạng thái hồ sơ.*
+    *Giao diện quản lý ứng viên, giúp sàng lọc và thay đổi trạng thái hồ sơ.*
 
 ### 💬 4. Hệ thống Nhắn tin theo Ngữ cảnh
 *   **Trò chuyện trực tiếp:** Giao tiếp hiệu quả giữa nhà tuyển dụng và ứng viên.
@@ -81,6 +95,9 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
     -   **Kiểm duyệt tin đăng:** Giao diện chuyên biệt để duyệt hoặc từ chối các tin đăng đang chờ.
     -   **Quản lý Danh mục Hệ thống:** Toàn quyền thêm, sửa, xóa các danh mục cốt lõi như Ngành nghề, Tỉnh/Thành, Quận/Huyện.
 
+    ![Quản lý danh mục](wwwroot/images/README/cauhinh-nganhnghe.png)
+    *Giao diện quản lý các danh mục cốt lõi của hệ thống, thể hiện khả năng cấu hình linh hoạt.*
+
 *   #### **Hệ thống Xử lý Báo cáo & Giao tiếp**
     -   **Quy trình xử lý báo cáo khép kín:** Tiếp nhận báo cáo, xem xét (tự động cập nhật trạng thái), và đưa ra các hành động xử lý mạnh mẽ: `Bỏ qua`, `Cảnh cáo & Ẩn tin`, hoặc `Đình chỉ tài khoản & Ẩn tin`.
     -   **Phản hồi tự động:** Gửi thông báo kết quả xử lý cho cả người báo cáo và người bị báo cáo.
@@ -88,6 +105,9 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 
     ![Giao diện quản lý báo cáo của Admin](wwwroot/images/README/baocaoadmin.png)
     *Giao diện quản lý và xử lý báo cáo vi phạm của Admin, tích hợp các hành động xử lý nhanh.*
+    
+      ![Gửi thông báo hàng loạt](wwwroot/images/README/gui-thongbao-hangloat.png)
+    *Công cụ cho phép Admin gửi thông báo chiến dịch đến các nhóm người dùng khác nhau.*
 
 
 ---
