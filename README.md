@@ -27,6 +27,8 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 
 ## ✨ Các chức năng chính
 
+## ✨ Các chức năng chính
+
 <details>
 <summary><b>🔍 1. Tìm kiếm & Khám phá việc làm</b></summary>
 <br>
@@ -37,10 +39,10 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Gợi ý việc làm phù hợp:** Hệ thống tự động chấm điểm (%) độ tương thích của ứng viên với tin tuyển dụng.
 
     ![Giao diện tìm việc](wwwroot/images/README/TimViec.png)
-    <center>*Trang tìm kiếm việc làm với bộ lọc nâng cao và các tùy chọn sắp xếp.*</center>
+    <p align="center"><em>Trang tìm kiếm việc làm với bộ lọc nâng cao và các tùy chọn sắp xếp.</em></p>
     
     ![Chi tiết việc làm](wwwroot/images/README/chitiet-vieclam.png)
-    <center>*Trang chi tiết cung cấp đầy đủ thông tin về công việc và nhà tuyển dụng.*</center>
+    <p align="center"><em>Trang chi tiết cung cấp đầy đủ thông tin về công việc và nhà tuyển dụng.</em></p>
 
 </details>
 
@@ -53,10 +55,10 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Theo dõi & Tương tác thông minh:** Theo dõi trạng thái chi tiết của đơn ứng tuyển, sửa đổi thông tin, rút đơn và **hoàn tác việc rút đơn**.
 
     ![Form ứng tuyển](wwwroot/images/README/ungtuyen-form.png)
-    <center>*Giao diện nộp hồ sơ, cho phép ứng viên viết thư giới thiệu và tùy chọn CV.*</center>
+    <p align="center"><em>Giao diện nộp hồ sơ, cho phép ứng viên viết thư giới thiệu và tùy chọn CV.</em></p>
 
     ![Giao diện quản lý việc đã ứng tuyển](wwwroot/images/README/viecdaungtuyen.png)
-    <center>*Giao diện quản lý các công việc đã ứng tuyển, cho phép theo dõi trạng thái và tương tác.*</center>
+    <p align="center"><em>Giao diện quản lý các công việc đã ứng tuyển, cho phép theo dõi trạng thái và tương tác.</em></p>
 
 </details>
 
@@ -69,15 +71,15 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Dashboard trung tâm:** Cung cấp cái nhìn tổng quan về hoạt động tuyển dụng với các số liệu thống kê nhanh.
 
     ![Form đăng tin](wwwroot/images/README/dangtin-form.png)
-    <center>*Form đăng tin tuyển dụng chi tiết dành cho Nhà tuyển dụng.*</center>
+    <p align="center"><em>Form đăng tin tuyển dụng chi tiết dành cho Nhà tuyển dụng.</em></p>
 
     ![Dashboard Nhà tuyển dụng](wwwroot/images/README/dashboard-ntd.png)
-    <center>*Dashboard chính của Nhà tuyển dụng với các thống kê và hoạt động gần đây.*</center>
+    <p align="center"><em>Dashboard chính của Nhà tuyển dụng với các thống kê và hoạt động gần đây.</em></p>
 
 *   **Quản lý & Sàng lọc ứng viên:** Xem danh sách ứng viên theo từng tin, lọc hồ sơ, và thay đổi trạng thái (chấp nhận/từ chối). Hệ thống sẽ **tự động gửi thông báo** đến ứng viên.
 
     ![Giao diện quản lý ứng viên](wwwroot/images/README/quanlyungvien.png)
-    <center>*Giao diện quản lý ứng viên, giúp sàng lọc và thay đổi trạng thái hồ sơ.*</center>
+    <p align="center"><em>Giao diện quản lý ứng viên, giúp sàng lọc và thay đổi trạng thái hồ sơ.</em></p>
 
 </details>
 
@@ -90,7 +92,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Giao diện trực quan:** Giao diện chat quen thuộc, dễ sử dụng, hiển thị thông tin chi tiết của người liên hệ.
 
     ![Giao diện nhắn tin](wwwroot/images/README/Tinnhan.png)
-    <center>*Hệ thống nhắn tin trực tiếp theo ngữ cảnh công việc.*</center>
+    <p align="center"><em>Hệ thống nhắn tin trực tiếp theo ngữ cảnh công việc.</em></p>
 
 </details>
 
@@ -103,7 +105,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Cập nhật số lượng thông báo:** Hiển thị số lượng thông báo chưa đọc trên giao diện chính.
   
     ![Giao diện thông báo](wwwroot/images/README/Thongbao.png)
-    <center>*Trung tâm thông báo, nơi tập trung tất cả các cập nhật quan trọng của người dùng.*</center>
+    <p align="center"><em>Trung tâm thông báo, nơi tập trung tất cả các cập nhật quan trọng của người dùng.</em></p>
 
 </details>
 
@@ -115,7 +117,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
     Biểu đồ động về sức khỏe hệ thống (lọc theo tuần/tháng/năm), theo dõi KPIs chuyên sâu và tính năng **Xuất Dữ liệu ra Excel**.
 
     ![Dashboard của Admin](wwwroot/images/README/dashboardadmin.png)
-    <center>*Bảng điều khiển trung tâm của Admin với các biểu đồ phân tích và số liệu thống kê.*</center>
+    <p align="center"><em>Bảng điều khiển trung tâm của Admin với các biểu đồ phân tích và số liệu thống kê.</em></p>
 
 *   #### **Quản lý Người dùng & Nội dung**
     -   **Quản lý người dùng toàn diện:** Xem, tìm kiếm, lọc, **tạo mới, chỉnh sửa**, và thay đổi trạng thái của tất cả tài khoản.
@@ -123,7 +125,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
     -   **Quản lý Danh mục Hệ thống:** Toàn quyền thêm, sửa, xóa các danh mục cốt lõi như Ngành nghề, Tỉnh/Thành, Quận/Huyện.
 
     ![Quản lý danh mục](wwwroot/images/README/cauhinh-nganhnghe.png)
-    <center>*Giao diện quản lý các danh mục cốt lõi của hệ thống.*</center>
+    <p align="center"><em>Giao diện quản lý các danh mục cốt lõi của hệ thống.</em></p>
 
 *   #### **Hệ thống Xử lý Báo cáo & Giao tiếp**
     -   **Quy trình xử lý báo cáo khép kín:** Tiếp nhận, xem xét, và đưa ra các hành động xử lý mạnh mẽ: `Bỏ qua`, `Cảnh cáo & Ẩn tin`, hoặc `Đình chỉ tài khoản & Ẩn tin`.
@@ -131,12 +133,13 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
     -   **Gửi Thông báo Chiến dịch (Campaigns):** Soạn và gửi thông báo hàng loạt đến các nhóm người dùng được nhắm mục tiêu.
 
     ![Giao diện quản lý báo cáo của Admin](wwwroot/images/README/baocaoadmin.png)
-    <center>*Giao diện quản lý và xử lý báo cáo vi phạm của Admin.*</center>
+    <p align="center"><em>Giao diện quản lý và xử lý báo cáo vi phạm của Admin.</em></p>
     
       ![Gửi thông báo hàng loạt](wwwroot/images/README/gui-thongbao-hangloat.png)
-    <center>*Công cụ cho phép Admin gửi thông báo chiến dịch đến các nhóm người dùng.*</center>
+    <p align="center"><em>Công cụ cho phép Admin gửi thông báo chiến dịch đến các nhóm người dùng.</em></p>
 
 </details>
+
 ---
 
 ## ⚙️ Công nghệ & Kiến trúc
