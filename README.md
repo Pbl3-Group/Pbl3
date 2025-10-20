@@ -18,14 +18,15 @@ Một ứng dụng web full-stack, được xây dựng trên nền tảng .NET 
 
 Là sản phẩm của học phần Lập trình dựa trên dự án 3 (PBL3), dự án này được xây dựng để lấp đầy một khoảng trống quan trọng trên thị trường lao động: một nền tảng chuyên biệt, nhanh chóng và đáng tin cậy cho các công việc **part-time** và **thời vụ**.
 
-Nền tảng của chúng tôi không chỉ hướng đến một sự nghiệp dài hạn, mà tập trung vào các nhu cầu thực tế và cấp thiết hơn:
-*   **Việc làm part-time:** Dành cho sinh viên hoặc bất kỳ ai muốn có một công việc với lịch trình linh hoạt để cân bằng với việc học tập hoặc các cam kết khác.
-*   **Việc làm thời vụ & ngắn hạn:** Dành cho những người cần tìm việc gấp để **trang trải chi phí trước mắt**, hoặc muốn hoàn thành nhanh một vài công việc để có thêm thu nhập.
+Nền tảng của chúng tôi được thiết kế để phục vụ song song hai luồng nhu cầu chính:
 
-Đồng thời, chúng tôi cũng phục vụ cho cả các **nhà tuyển dụng cá nhân** có nhu cầu tìm người phụ giúp các công việc nhỏ lẻ, ngắn hạn, bên cạnh các doanh nghiệp truyền thống.
+*   **Về phía Người tìm việc:** Chúng tôi hướng đến những người cần công việc **part-time** để cân bằng cuộc sống, hoặc cần một công việc thời vụ để **trang trải chi phí trước mắt**—từ sinh viên đến người lao động có kinh nghiệm.
 
-Để đáp ứng các luồng nhu cầu này, chúng tôi đã tạo ra một nền tảng tối ưu cho tốc độ và sự tiện lợi. Điểm nổi bật là người dùng có thể **chuyển đổi linh hoạt giữa vai trò Người tìm việc và Nhà tuyển dụng**, cùng với các công cụ như **nhắn tin theo ngữ cảnh** và **thông báo tự động** để thúc đẩy quá trình kết nối một cách hiệu quả nhất.
+*   **Về phía Nhà tuyển dụng:** Nền tảng đáp ứng nhu cầu của cả hai nhóm:
+    *   Các **doanh nghiệp truyền thống** cần tìm nhân sự linh hoạt cho giờ cao điểm, sự kiện, hoặc các dự án ngắn hạn.
+    *   Các **nhà tuyển dụng cá nhân** cần tìm người phụ giúp các công việc nhỏ lẻ, thời vụ.
 
+Để kết nối hiệu quả các nhóm đối tượng này, chúng tôi đã tạo ra một nền tảng tối ưu cho tốc độ và sự tiện lợi. Điểm nổi bật là người dùng có thể **chuyển đổi linh hoạt giữa vai trò Người tìm việc và Nhà tuyển dụng**, cùng với các công cụ như **nhắn tin theo ngữ cảnh** và **thông báo tự động** để thúc đẩy quá trình kết nối một cách hiệu quả nhất.
 ---
 
 ## ✨ Các chức năng chính
