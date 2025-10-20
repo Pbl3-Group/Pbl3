@@ -144,27 +144,20 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 
 ## ⚙️ Công nghệ & Kiến trúc
 
-<details>
-<summary>Xem chi tiết Công nghệ & Kiến trúc</summary>
-<br>
+Dự án được xây dựng trên nền tảng .NET hiện đại, tuân thủ các nguyên tắc thiết kế hướng dịch vụ và tự động hóa quy trình nghiệp vụ.
 
-*   **Backend:**
+*   **Nền tảng Backend:**
     *   **Ngôn ngữ & Framework:** C# trên nền tảng ASP.NET Core MVC (.NET 8.0).
-    *   **Database & ORM:** MySQL 8.0+ và Entity Framework Core với provider `Pomelo.EntityFrameworkCore.MySql`.
-    *   **Kiến trúc:** Thiết kế hướng dịch vụ (Service-Oriented Architecture) với các service riêng biệt cho các nghiệp vụ phức tạp (ví dụ: `IThongBaoService`).
-    *   **Bảo mật:** Sử dụng ASP.NET Core Identity kết hợp Cookie Authentication để xác thực và phân quyền dựa trên vai trò (Role-Based Access Control).
+    *   **Cơ sở dữ liệu:** MySQL 8.0+ và Entity Framework Core (sử dụng `Pomelo.EntityFrameworkCore.MySql`).
+    *   **Bảo mật & Phân quyền:** `ASP.NET Core Identity` để quản lý vai trò và quyền truy cập (Role-Based Access Control).
 
-*   **Frontend:**
-    *   **Nền tảng:** JavaScript (ES6+), jQuery & AJAX để tạo các tương tác động.
-    *   **Giao diện:** HTML5, CSS3 và Bootstrap 5 để xây dựng giao diện responsive và hiện đại.
-    *   **Thư viện:** Chart.js (biểu đồ), Select2 (tìm kiếm và chọn lựa nâng cao).
+*   **Giao diện & Tương tác:**
+    *   **Nền tảng:** HTML5, CSS3, JavaScript (ES6+), jQuery & AJAX.
+    *   **Framework & Thư viện:** Bootstrap 5 (Responsive Design), Chart.js (Biểu đồ), Select2 (Tìm kiếm nâng cao).
 
-*   **Quy trình & Tự động hóa:**
-    *   **Phân luồng Duyệt tin:** Tin đăng của **Doanh nghiệp** phải qua `chờ duyệt`, trong khi tin của **NTD Cá nhân** được `duyệt tự động` để cân bằng giữa kiểm soát và linh hoạt.
-    *   **Cập nhật trạng thái tự động:** Hệ thống tự động thay đổi trạng thái khi có tương tác mới (ví dụ: NTD xem hồ sơ, Admin xem báo cáo).
-    *   **Thông báo theo Quy trình:** Mọi bước quan trọng trong quy trình nghiệp vụ (ứng tuyển, duyệt tin, xử lý báo cáo) đều được tự động hóa bằng cách gửi thông báo đến các bên liên quan.
-
-</details>
+*   **Kiến trúc & Quy trình nghiệp vụ:**
+    *   **Kiến trúc hướng dịch vụ (SOA):** Tách biệt các nghiệp vụ phức tạp (ví dụ: `IThongBaoService`) giúp mã nguồn dễ bảo trì và mở rộng.
+    *   **Tự động hóa Quy trình:** Tự động hóa các luồng nghiệp vụ quan trọng như duyệt tin, xử lý báo cáo, và gửi thông báo theo ngữ cảnh để tăng hiệu quả và giảm thiểu thao tác thủ công.
 
 ---
 
