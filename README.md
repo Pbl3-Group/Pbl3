@@ -27,8 +27,6 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 
 ## ✨ Các chức năng chính
 
-## ✨ Các chức năng chính
-
 <details>
 <summary><b>🔍 1. Tìm kiếm & Khám phá việc làm</b></summary>
 <br>
