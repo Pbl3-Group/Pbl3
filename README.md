@@ -27,68 +27,95 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 
 ## ✨ Các chức năng chính
 
-### 🔍 1. Tìm kiếm & Khám phá việc làm
+<details>
+<summary><b>🔍 1. Tìm kiếm & Khám phá việc làm</b></summary>
+<br>
+
 *   **Tìm kiếm Nâng cao:** Tìm việc làm theo từ khóa, địa điểm, ngành nghề.
 *   **Bộ lọc Thông minh:** Lọc kết quả theo khoảng lương, loại hình, ca làm việc, tin tuyển gấp, và **tìm kiếm văn bản trong yêu cầu kinh nghiệm/học vấn**.
 *   **Sắp xếp Linh hoạt:** Sắp xếp kết quả theo ngày đăng, mức lương (cao/thấp), hoặc hạn nộp hồ sơ.
 *   **Gợi ý việc làm phù hợp:** Hệ thống tự động chấm điểm (%) độ tương thích của ứng viên với tin tuyển dụng.
 
     ![Giao diện tìm việc](wwwroot/images/README/TimViec.png)
-    *Trang tìm kiếm việc làm với bộ lọc nâng cao và các tùy chọn sắp xếp, giúp người dùng nhanh chóng tìm được công việc phù hợp.*
+    <center>*Trang tìm kiếm việc làm với bộ lọc nâng cao và các tùy chọn sắp xếp.*</center>
+    
     ![Chi tiết việc làm](wwwroot/images/README/chitiet-vieclam.png)
-    *Trang chi tiết cung cấp đầy đủ thông tin về công việc và nhà tuyển dụng.*
+    <center>*Trang chi tiết cung cấp đầy đủ thông tin về công việc và nhà tuyển dụng.*</center>
 
-### 👤 2. Quản lý Hồ sơ & Ứng tuyển
+</details>
+
+<details>
+<summary><b>👤 2. Quản lý Hồ sơ & Ứng tuyển</b></summary>
+<br>
+
 *   **Hồ sơ cá nhân toàn diện:** Quản lý thông tin, CV mặc định, lịch rảnh, và khu vực làm việc mong muốn.
 *   **Ứng tuyển Linh hoạt:** Cho phép nộp hồ sơ với CV mặc định hoặc **tải lên một CV mới** dành riêng cho từng công việc.
 *   **Theo dõi & Tương tác thông minh:** Theo dõi trạng thái chi tiết của đơn ứng tuyển, sửa đổi thông tin, rút đơn và **hoàn tác việc rút đơn**.
 
     ![Form ứng tuyển](wwwroot/images/README/ungtuyen-form.png)
-    *Giao diện nộp hồ sơ, cho phép ứng viên viết thư giới thiệu và tùy chọn CV.*
-
+    <center>*Giao diện nộp hồ sơ, cho phép ứng viên viết thư giới thiệu và tùy chọn CV.*</center>
 
     ![Giao diện quản lý việc đã ứng tuyển](wwwroot/images/README/viecdaungtuyen.png)
-    *Giao diện quản lý các công việc đã ứng tuyển, cho phép theo dõi trạng thái và tương tác với từng đơn.*
+    <center>*Giao diện quản lý các công việc đã ứng tuyển, cho phép theo dõi trạng thái và tương tác.*</center>
 
-### 🏢 3. Quản lý Tuyển dụng cho Nhà tuyển dụng
+</details>
+
+<details>
+<summary><b>🏢 3. Quản lý Tuyển dụng cho Nhà tuyển dụng</b></summary>
+<br>
+
 *   **Đăng & Quản lý tin tuyển dụng:** Giao diện đăng tin trực quan cùng bộ công cụ quản lý mạnh mẽ (Sửa, Xóa, Đăng lại nhanh).
 *   **Quy trình duyệt tin phân luồng:** Tin của **Doanh nghiệp** sẽ ở trạng thái "Chờ duyệt", trong khi tin của **NTD Cá nhân** được "Duyệt tự động".
 *   **Dashboard trung tâm:** Cung cấp cái nhìn tổng quan về hoạt động tuyển dụng với các số liệu thống kê nhanh.
 
     ![Form đăng tin](wwwroot/images/README/dangtin-form.png)
-    *Form đăng tin tuyển dụng chi tiết dành cho Nhà tuyển dụng.*
+    <center>*Form đăng tin tuyển dụng chi tiết dành cho Nhà tuyển dụng.*</center>
 
     ![Dashboard Nhà tuyển dụng](wwwroot/images/README/dashboard-ntd.png)
-    *Dashboard chính của Nhà tuyển dụng với các thống kê và hoạt động gần đây.*
+    <center>*Dashboard chính của Nhà tuyển dụng với các thống kê và hoạt động gần đây.*</center>
 
 *   **Quản lý & Sàng lọc ứng viên:** Xem danh sách ứng viên theo từng tin, lọc hồ sơ, và thay đổi trạng thái (chấp nhận/từ chối). Hệ thống sẽ **tự động gửi thông báo** đến ứng viên.
 
     ![Giao diện quản lý ứng viên](wwwroot/images/README/quanlyungvien.png)
-    *Giao diện quản lý ứng viên, giúp sàng lọc và thay đổi trạng thái hồ sơ.*
+    <center>*Giao diện quản lý ứng viên, giúp sàng lọc và thay đổi trạng thái hồ sơ.*</center>
 
-### 💬 4. Hệ thống Nhắn tin theo Ngữ cảnh
+</details>
+
+<details>
+<summary><b>💬 4. Hệ thống Nhắn tin theo Ngữ cảnh</b></summary>
+<br>
+
 *   **Trò chuyện trực tiếp:** Giao tiếp hiệu quả giữa nhà tuyển dụng và ứng viên.
 *   **Ngữ cảnh hội thoại rõ ràng:** Mỗi cuộc hội thoại được gắn với một tin tuyển dụng hoặc đơn ứng tuyển cụ thể.
 *   **Giao diện trực quan:** Giao diện chat quen thuộc, dễ sử dụng, hiển thị thông tin chi tiết của người liên hệ.
 
     ![Giao diện nhắn tin](wwwroot/images/README/Tinnhan.png)
-    *Hệ thống nhắn tin trực tiếp theo ngữ cảnh công việc, giúp giao tiếp giữa hai bên trở nên dễ dàng.*
+    <center>*Hệ thống nhắn tin trực tiếp theo ngữ cảnh công việc.*</center>
 
-### 🔔 5. Hệ thống Thông báo Tự động
+</details>
+
+<details>
+<summary><b>🔔 5. Hệ thống Thông báo Tự động</b></summary>
+<br>
+
 *   **Thông báo tự động theo quy trình:** Tự động thông báo khi có cập nhật trạng thái ứng tuyển, tin nhắn mới, tin đăng được duyệt...
 *   **Trung tâm thông báo:** Giao diện tập trung để người dùng quản lý, đánh dấu đã đọc, và xóa thông báo.
 *   **Cập nhật số lượng thông báo:** Hiển thị số lượng thông báo chưa đọc trên giao diện chính.
   
     ![Giao diện thông báo](wwwroot/images/README/Thongbao.png)
-    *Trung tâm thông báo, nơi tập trung tất cả các cập nhật quan trọng của người dùng.*
+    <center>*Trung tâm thông báo, nơi tập trung tất cả các cập nhật quan trọng của người dùng.*</center>
 
-### 🛡️ 6. Bảng điều khiển Quản trị viên (Admin Panel)
+</details>
+
+<details>
+<summary><b>🛡️ 6. Bảng điều khiển Quản trị viên (Admin Panel)</b></summary>
+<br>
 
 *   #### **Dashboard Phân tích & Báo cáo**
     Biểu đồ động về sức khỏe hệ thống (lọc theo tuần/tháng/năm), theo dõi KPIs chuyên sâu và tính năng **Xuất Dữ liệu ra Excel**.
 
     ![Dashboard của Admin](wwwroot/images/README/dashboardadmin.png)
-    *Bảng điều khiển trung tâm của Quản trị viên với các biểu đồ phân tích và số liệu thống kê trực quan.*
+    <center>*Bảng điều khiển trung tâm của Admin với các biểu đồ phân tích và số liệu thống kê.*</center>
 
 *   #### **Quản lý Người dùng & Nội dung**
     -   **Quản lý người dùng toàn diện:** Xem, tìm kiếm, lọc, **tạo mới, chỉnh sửa**, và thay đổi trạng thái của tất cả tài khoản.
@@ -96,20 +123,20 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
     -   **Quản lý Danh mục Hệ thống:** Toàn quyền thêm, sửa, xóa các danh mục cốt lõi như Ngành nghề, Tỉnh/Thành, Quận/Huyện.
 
     ![Quản lý danh mục](wwwroot/images/README/cauhinh-nganhnghe.png)
-    *Giao diện quản lý các danh mục cốt lõi của hệ thống, thể hiện khả năng cấu hình linh hoạt.*
+    <center>*Giao diện quản lý các danh mục cốt lõi của hệ thống.*</center>
 
 *   #### **Hệ thống Xử lý Báo cáo & Giao tiếp**
-    -   **Quy trình xử lý báo cáo khép kín:** Tiếp nhận báo cáo, xem xét (tự động cập nhật trạng thái), và đưa ra các hành động xử lý mạnh mẽ: `Bỏ qua`, `Cảnh cáo & Ẩn tin`, hoặc `Đình chỉ tài khoản & Ẩn tin`.
+    -   **Quy trình xử lý báo cáo khép kín:** Tiếp nhận, xem xét, và đưa ra các hành động xử lý mạnh mẽ: `Bỏ qua`, `Cảnh cáo & Ẩn tin`, hoặc `Đình chỉ tài khoản & Ẩn tin`.
     -   **Phản hồi tự động:** Gửi thông báo kết quả xử lý cho cả người báo cáo và người bị báo cáo.
     -   **Gửi Thông báo Chiến dịch (Campaigns):** Soạn và gửi thông báo hàng loạt đến các nhóm người dùng được nhắm mục tiêu.
 
     ![Giao diện quản lý báo cáo của Admin](wwwroot/images/README/baocaoadmin.png)
-    *Giao diện quản lý và xử lý báo cáo vi phạm của Admin, tích hợp các hành động xử lý nhanh.*
+    <center>*Giao diện quản lý và xử lý báo cáo vi phạm của Admin.*</center>
     
       ![Gửi thông báo hàng loạt](wwwroot/images/README/gui-thongbao-hangloat.png)
-    *Công cụ cho phép Admin gửi thông báo chiến dịch đến các nhóm người dùng khác nhau.*
+    <center>*Công cụ cho phép Admin gửi thông báo chiến dịch đến các nhóm người dùng.*</center>
 
-
+</details>
 ---
 
 ## ⚙️ Công nghệ & Kiến trúc
