@@ -1,4 +1,4 @@
-# HỆ THỐNG TÌM KIẾM VIỆC LÀM BÁN THỜI GIAN VÀ THỜI VỤ (PBL3)
+# PART-TIME AND TEMPORARY JOB SEARCH SYSTEM (PBL3)
 
 [![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)
 [![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
@@ -10,220 +10,220 @@
 
 ---
 
-Một ứng dụng web full-stack, được xây dựng trên nền tảng .NET 8 và MySQL, nhằm tạo ra một cầu nối hiệu quả giữa người tìm việc và nhà tuyển dụng trong thị trường việc làm linh hoạt (bán thời gian, thời vụ).
+A full-stack web application built on the .NET 8 and MySQL platform, aimed at creating an effective bridge between job seekers and employers in the dynamic market for part-time and temporary work.
 
-[![Demo Hệ thống Tìm kiếm Việc làm Bán thời gian và Thời vụ](wwwroot/images/README/thumbnail.png)](https://youtu.be/zwJa18qtiBQ)
-<p align="center"><em>Nhấp vào ảnh trên để xem video demo tổng quan về ứng dụng.</em></p>
+[![Demo of the Part-time and Temporary Job Search System](httpsroot/images/README/thumbnail.png)](https://youtu.be/zwJa18qtiBQ)
+<p align="center"><em>Click the image above to watch an overview demo of the application.</em></p>
 
-## 🌟 Tổng quan dự án
+## 🌟 Project Overview
 
-Là sản phẩm của học phần Lập trình dựa trên dự án 3 (PBL3), dự án này được xây dựng để lấp đầy một khoảng trống quan trọng trên thị trường lao động: một nền tảng chuyên biệt, nhanh chóng và đáng tin cậy cho các công việc **part-time** và **thời vụ**.
+As a product of the Project-Based Learning 3 (PBL3) course, this project was developed to fill a significant gap in the labor market: a specialized, fast, and reliable platform for **part-time** and **temporary** jobs.
 
-Nền tảng của chúng tôi được thiết kế để phục vụ song song hai luồng nhu cầu chính:
+Our platform is designed to serve two primary user flows:
 
-*   **Về phía Người tìm việc:** Chúng tôi hướng đến những người cần công việc **part-time** để cân bằng cuộc sống, hoặc cần một công việc thời vụ để **trang trải chi phí trước mắt**—từ sinh viên đến người lao động có kinh nghiệm.
+*   **For Job Seekers:** We cater to individuals seeking **part-time** work to balance their lifestyle or temporary jobs to **cover immediate expenses**—from students to experienced professionals.
 
-*   **Về phía Nhà tuyển dụng:** Nền tảng đáp ứng nhu cầu của cả hai nhóm:
-    *   Các **doanh nghiệp truyền thống** cần tìm nhân sự linh hoạt cho giờ cao điểm, sự kiện, hoặc các dự án ngắn hạn.
-    *   Các **nhà tuyển dụng cá nhân** cần tìm người phụ giúp các công việc nhỏ lẻ, thời vụ.
+*   **For Employers:** The platform meets the needs of two main groups:
+    *   **Traditional businesses** looking for flexible staff for peak hours, events, or short-term projects.
+    *   **Individual employers** seeking help with small-scale, temporary tasks.
 
-Để kết nối hiệu quả các nhóm đối tượng này, chúng tôi đã tạo ra một nền tảng tối ưu cho tốc độ và sự tiện lợi. Điểm nổi bật là người dùng có thể **chuyển đổi linh hoạt giữa vai trò Người tìm việc và Nhà tuyển dụng**, cùng với các công cụ như **nhắn tin theo ngữ cảnh** và **thông báo tự động** để thúc đẩy quá trình kết nối một cách hiệu quả nhất.
+To effectively connect these user groups, we have created a platform optimized for speed and convenience. A key feature is the ability for users to **flexibly switch between Job Seeker and Employer roles**, complemented by tools like **contextual messaging** and **automated notifications** to streamline the connection process efficiently.
 
 ---
 
-## ✨ Các chức năng chính
+## ✨ Core Features
 
 <details>
-<summary><b>🔍 1. Tìm kiếm & Khám phá việc làm</b></summary>
+<summary><b>🔍 1. Job Search & Discovery</b></summary>
 <br>
 
-*   **Tìm kiếm Nâng cao:** Tìm việc làm theo từ khóa, địa điểm, ngành nghề.
-*   **Bộ lọc Thông minh:** Lọc kết quả theo khoảng lương, loại hình, ca làm việc, tin tuyển gấp, và **tìm kiếm văn bản trong yêu cầu kinh nghiệm/học vấn**.
-*   **Sắp xếp Linh hoạt:** Sắp xếp kết quả theo ngày đăng, mức lương (cao/thấp), hoặc hạn nộp hồ sơ.
-*   **Gợi ý việc làm phù hợp:** Hệ thống tự động chấm điểm (%) độ tương thích của ứng viên với tin tuyển dụng.
+*   **Advanced Search:** Find jobs by keyword, location, and industry.
+*   **Smart Filters:** Filter results by salary range, job type, work shift, urgent postings, and **full-text search within experience/education requirements**.
+*   **Flexible Sorting:** Sort results by posting date, salary (high/low), or application deadline.
+*   **Job Matching Score:** The system automatically calculates a compatibility score (%) for candidates and job postings.
 
-    ![Giao diện tìm việc](wwwroot/images/README/TimViec.png)
-    <p align="center"><em>Trang tìm kiếm việc làm với bộ lọc nâng cao và các tùy chọn sắp xếp.</em></p>
+    ![Job Search Interface](wwwroot/images/README/TimViec.png)
+    <p align="center"><em>The job search page with advanced filters and sorting options.</em></p>
     
-    ![Chi tiết việc làm](wwwroot/images/README/chitiet-vieclam.png)
-    <p align="center"><em>Trang chi tiết cung cấp đầy đủ thông tin về công việc và nhà tuyển dụng.</em></p>
+    ![Job Details](wwwroot/images/README/chitiet-vieclam.png)
+    <p align="center"><em>The details page provides comprehensive information about the job and the employer.</em></p>
 
 </details>
 
 <details>
-<summary><b>👤 2. Quản lý Hồ sơ & Ứng tuyển</b></summary>
+<summary><b>👤 2. Profile & Application Management</b></summary>
 <br>
 
-*   **Hồ sơ cá nhân toàn diện:** Quản lý thông tin, CV mặc định, lịch rảnh, và khu vực làm việc mong muốn.
-*   **Ứng tuyển Linh hoạt:** Cho phép nộp hồ sơ với CV mặc định hoặc **tải lên một CV mới** dành riêng cho từng công việc.
-*   **Theo dõi & Tương tác thông minh:** Theo dõi trạng thái chi tiết của đơn ứng tuyển, sửa đổi thông tin, rút đơn và **hoàn tác việc rút đơn**.
+*   **Comprehensive Personal Profile:** Manage personal information, default CV, availability schedule, and desired work locations.
+*   **Flexible Application Process:** Apply with a default CV or **upload a new CV** tailored for a specific job.
+*   **Smart Tracking & Interaction:** Track the detailed status of applications, edit information, withdraw applications, and **undo withdrawals**.
 
-    ![Form ứng tuyển](wwwroot/images/README/ungtuyen-form.png)
-    <p align="center"><em>Giao diện nộp hồ sơ, cho phép ứng viên viết thư giới thiệu và tùy chọn CV.</em></p>
+    ![Application Form](wwwroot/images/README/ungtuyen-form.png)
+    <p align="center"><em>The application interface, allowing candidates to write a cover letter and select a CV.</em></p>
 
-    ![Giao diện quản lý việc đã ứng tuyển](wwwroot/images/README/viecdaungtuyen.png)
-    <p align="center"><em>Giao diện quản lý các công việc đã ứng tuyển, cho phép theo dõi trạng thái và tương tác.</em></p>
+    ![Applied Jobs Management Interface](wwwroot/images/README/viecdaungtuyen.png)
+    <p align="center"><em>The interface for managing applied jobs, enabling status tracking and interaction.</em></p>
 
 </details>
 
 <details>
-<summary><b>🏢 3. Quản lý Tuyển dụng cho Nhà tuyển dụng</b></summary>
+<summary><b>🏢 3. Employer Recruitment Management</b></summary>
 <br>
 
-*   **Đăng & Quản lý tin tuyển dụng:** Giao diện đăng tin trực quan cùng bộ công cụ quản lý mạnh mẽ (Sửa, Xóa, Đăng lại nhanh).
-*   **Quy trình duyệt tin phân luồng:** Tin của **Doanh nghiệp** sẽ ở trạng thái "Chờ duyệt", trong khi tin của **NTD Cá nhân** được "Duyệt tự động".
-*   **Dashboard trung tâm:** Cung cấp cái nhìn tổng quan về hoạt động tuyển dụng với các số liệu thống kê nhanh.
+*   **Post & Manage Job Listings:** An intuitive posting interface with powerful management tools (Edit, Delete, Quick Repost).
+*   **Differentiated Approval Workflow:** Postings from **Companies** are set to "Pending Approval," while those from **Individual Employers** are "Auto-Approved."
+*   **Centralized Dashboard:** Provides an overview of recruitment activities with quick statistics.
 
-    ![Form đăng tin](wwwroot/images/README/dangtin-form.png)
-    <p align="center"><em>Form đăng tin tuyển dụng chi tiết dành cho Nhà tuyển dụng.</em></p>
+    ![Job Posting Form](wwwroot/images/README/dangtin-form.png)
+    <p align="center"><em>A detailed job posting form for employers.</em></p>
 
-    ![Dashboard Nhà tuyển dụng](wwwroot/images/README/dashboard-ntd.png)
-    <p align="center"><em>Dashboard chính của Nhà tuyển dụng với các thống kê và hoạt động gần đây.</em></p>
+    ![Employer Dashboard](wwwroot/images/README/dashboard-ntd.png)
+    <p align="center"><em>The main dashboard for employers with statistics and recent activities.</em></p>
 
-*   **Quản lý & Sàng lọc ứng viên:** Xem danh sách ứng viên theo từng tin, lọc hồ sơ, và thay đổi trạng thái (chấp nhận/từ chối). Hệ thống sẽ **tự động gửi thông báo** đến ứng viên.
+*   **Applicant Management & Filtering:** View applicant lists for each posting, filter profiles, and change statuses (accepted/rejected). The system will **automatically send notifications** to candidates.
 
-    ![Giao diện quản lý ứng viên](wwwroot/images/README/quanlyungvien.png)
-    <p align="center"><em>Giao diện quản lý ứng viên, giúp sàng lọc và thay đổi trạng thái hồ sơ.</em></p>
+    ![Applicant Management Interface](wwwroot/images/README/quanlyungvien.png)
+    <p align="center"><em>The applicant management interface for filtering and updating application statuses.</em></p>
 
 </details>
 
 <details>
-<summary><b>💬 4. Hệ thống Nhắn tin theo Ngữ cảnh</b></summary>
+<summary><b>💬 4. Contextual Messaging System</b></summary>
 <br>
 
-*   **Trò chuyện trực tiếp:** Giao tiếp hiệu quả giữa nhà tuyển dụng và ứng viên.
-*   **Ngữ cảnh hội thoại rõ ràng:** Mỗi cuộc hội thoại được gắn với một tin tuyển dụng hoặc đơn ứng tuyển cụ thể.
-*   **Giao diện trực quan:** Giao diện chat quen thuộc, dễ sử dụng, hiển thị thông tin chi tiết của người liên hệ.
+*   **Direct Chat:** Facilitates effective communication between employers and candidates.
+*   **Clear Conversation Context:** Each conversation is linked to a specific job posting or application.
+*   **Intuitive Interface:** A familiar, user-friendly chat interface that displays the contact's detailed information.
 
-    ![Giao diện nhắn tin](wwwroot/images/README/Tinnhan.png)
-    <p align="center"><em>Hệ thống nhắn tin trực tiếp theo ngữ cảnh công việc.</em></p>
+    ![Messaging Interface](wwwroot/images/README/Tinnhan.png)
+    <p align="center"><em>The direct messaging system with job-related context.</em></p>
 
 </details>
 
 <details>
-<summary><b>🔔 5. Hệ thống Thông báo Tự động</b></summary>
+<summary><b>🔔 5. Automated Notification System</b></summary>
 <br>
 
-*   **Thông báo tự động theo quy trình:** Tự động thông báo khi có cập nhật trạng thái ứng tuyển, tin nhắn mới, tin đăng được duyệt...
-*   **Trung tâm thông báo:** Giao diện tập trung để người dùng quản lý, đánh dấu đã đọc, và xóa thông báo.
-*   **Cập nhật số lượng thông báo:** Hiển thị số lượng thông báo chưa đọc trên giao diện chính.
+*   **Workflow-based Automated Notifications:** Automatically sends alerts for application status updates, new messages, approved postings, and more.
+*   **Notification Center:** A centralized interface for users to manage, mark as read, and delete notifications.
+*   **Unread Count Badge:** Displays the number of unread notifications on the main interface.
   
-    ![Giao diện thông báo](wwwroot/images/README/Thongbao.png)
-    <p align="center"><em>Trung tâm thông báo, nơi tập trung tất cả các cập nhật quan trọng của người dùng.</em></p>
+    ![Notification Interface](wwwroot/images/README/Thongbao.png)
+    <p align="center"><em>The notification center, aggregating all important user updates.</em></p>
 
 </details>
 
 <details>
-<summary><b>🛡️ 6. Bảng điều khiển Quản trị viên (Admin Panel)</b></summary>
+<summary><b>🛡️ 6. Administrator Control Panel (Admin Panel)</b></summary>
 <br>
 
-*   #### **Dashboard Phân tích & Báo cáo**
-    Biểu đồ động về sức khỏe hệ thống (lọc theo tuần/tháng/năm), theo dõi KPIs chuyên sâu và tính năng **Xuất Dữ liệu ra Excel**.
+*   #### **Analytics & Reporting Dashboard**
+    Dynamic charts on system health (filterable by week/month/year), in-depth KPI tracking, and an **Export Data to Excel** feature.
 
-    ![Dashboard của Admin](wwwroot/images/README/dashboardadmin.png)
-    <p align="center"><em>Bảng điều khiển trung tâm của Admin với các biểu đồ phân tích và số liệu thống kê.</em></p>
+    ![Admin Dashboard](wwwroot/images/README/dashboardadmin.png)
+    <p align="center"><em>The central admin dashboard with analytical charts and statistics.</em></p>
 
-*   #### **Quản lý Người dùng & Nội dung**
-    -   **Quản lý người dùng toàn diện:** Xem, tìm kiếm, lọc, **tạo mới, chỉnh sửa**, và thay đổi trạng thái của tất cả tài khoản.
-    -   **Kiểm duyệt tin đăng:** Giao diện chuyên biệt để duyệt hoặc từ chối các tin đăng đang chờ.
-    -   **Quản lý Danh mục Hệ thống:** Toàn quyền thêm, sửa, xóa các danh mục cốt lõi như Ngành nghề, Tỉnh/Thành, Quận/Huyện.
+*   #### **User & Content Management**
+    -   **Comprehensive User Management:** View, search, filter, **create, edit**, and change the status of all user accounts.
+    -   **Job Posting Moderation:** A dedicated interface to approve or reject pending job postings.
+    -   **System Category Management:** Full control to add, edit, and delete core categories like Industries, Provinces/Cities, and Districts.
 
-    ![Quản lý danh mục](wwwroot/images/README/cauhinh-nganhnghe.png)
-    <p align="center"><em>Giao diện quản lý các danh mục cốt lõi của hệ thống.</em></p>
+    ![Category Management](wwwroot/images/README/cauhinh-nganhnghe.png)
+    <p align="center"><em>The interface for managing the system's core categories.</em></p>
 
-*   #### **Hệ thống Xử lý Báo cáo & Giao tiếp**
-    -   **Quy trình xử lý báo cáo khép kín:** Tiếp nhận, xem xét, và đưa ra các hành động xử lý mạnh mẽ: `Bỏ qua`, `Cảnh cáo & Ẩn tin`, hoặc `Đình chỉ tài khoản & Ẩn tin`.
-    -   **Phản hồi tự động:** Gửi thông báo kết quả xử lý cho cả người báo cáo và người bị báo cáo.
-    -   **Gửi Thông báo Chiến dịch (Campaigns):** Soạn và gửi thông báo hàng loạt đến các nhóm người dùng được nhắm mục tiêu.
+*   #### **Report Handling & Communication System**
+    -   **End-to-end Report Processing:** Receive, review, and take decisive actions: `Dismiss`, `Warn & Hide Posting`, or `Suspend Account & Hide Posting`.
+    -   **Automated Feedback:** Sends notifications about the resolution to both the reporter and the reported user.
+    -   **Send Campaign Notifications:** Compose and send bulk notifications to targeted user groups.
 
-    ![Giao diện quản lý báo cáo của Admin](wwwroot/images/README/baocaoadmin.png)
-    <p align="center"><em>Giao diện quản lý và xử lý báo cáo vi phạm của Admin.</em></p>
+    ![Admin Report Management Interface](wwwroot/images/README/baocaoadmin.png)
+    <p align="center"><em>The admin interface for managing and resolving violation reports.</em></p>
     
-      ![Gửi thông báo hàng loạt](wwwroot/images/README/gui-thongbao-hangloat.png)
-    <p align="center"><em>Công cụ cho phép Admin gửi thông báo chiến dịch đến các nhóm người dùng.</em></p>
+      ![Bulk Notification Sender](wwwroot/images/README/gui-thongbao-hangloat.png)
+    <p align="center"><em>A tool allowing admins to send campaign notifications to user groups.</em></p>
 
 </details>
 
 ---
 
-## ⚙️ Công nghệ & Kiến trúc
+## ⚙️ Technology & Architecture
 
-Dự án được xây dựng trên nền tảng .NET hiện đại, tuân thủ các nguyên tắc thiết kế hướng dịch vụ và tự động hóa quy trình nghiệp vụ.
+The project is built on a modern .NET stack, adhering to service-oriented design principles and business process automation.
 
-*   **Nền tảng Backend:**
-    *   **Ngôn ngữ & Framework:** C# trên nền tảng ASP.NET Core MVC (.NET 8.0).
-    *   **Cơ sở dữ liệu:** MySQL 8.0+ và Entity Framework Core (sử dụng `Pomelo.EntityFrameworkCore.MySql`).
-    *   **Bảo mật & Phân quyền:** `ASP.NET Core Identity` để quản lý vai trò và quyền truy cập (Role-Based Access Control).
+*   **Backend Platform:**
+    *   **Language & Framework:** C# on ASP.NET Core MVC (.NET 8.0).
+    *   **Database:** MySQL 8.0+ and Entity Framework Core (using `Pomelo.EntityFrameworkCore.MySql`).
+    *   **Security & Authorization:** `ASP.NET Core Identity` for Role-Based Access Control (RBAC).
 
-*   **Giao diện & Tương tác:**
-    *   **Nền tảng:** HTML5, CSS3, JavaScript (ES6+), jQuery & AJAX.
-    *   **Framework & Thư viện:** Bootstrap 5 (Responsive Design), Chart.js (Biểu đồ), Select2 (Tìm kiếm nâng cao).
+*   **Frontend & Interactivity:**
+    *   **Platform:** HTML5, CSS3, JavaScript (ES6+), jQuery & AJAX.
+    *   **Frameworks & Libraries:** Bootstrap 5 (Responsive Design), Chart.js (Charts), Select2 (Advanced Search).
 
-*   **Kiến trúc & Quy trình nghiệp vụ:**
-    *   **Kiến trúc hướng dịch vụ (SOA):** Tách biệt các nghiệp vụ phức tạp (ví dụ: `IThongBaoService`) giúp mã nguồn dễ bảo trì và mở rộng.
-    *   **Tự động hóa Quy trình:** Tự động hóa các luồng nghiệp vụ quan trọng như duyệt tin, xử lý báo cáo, và gửi thông báo theo ngữ cảnh để tăng hiệu quả và giảm thiểu thao tác thủ công.
+*   **Architecture & Business Logic:**
+    *   **Service-Oriented Architecture (SOA):** Decouples complex business logic (e.g., `IThongBaoService`) to enhance maintainability and scalability.
+    *   **Process Automation:** Automates critical workflows such as posting approvals, report handling, and contextual notifications to improve efficiency and reduce manual intervention.
 
 ---
 
-## 🚦 Bắt đầu
+## 🚦 Getting Started
 
-### Yêu cầu
+### Prerequisites
 *   **.NET 8.0 SDK**
-*   **MySQL Server** (phiên bản 8.0 hoặc cao hơn được khuyến nghị)
-*   Visual Studio 2022 hoặc Visual Studio Code
+*   **MySQL Server** (version 8.0 or higher is recommended)
+*   Visual Studio 2022 or Visual Studio Code
 *   Git
 
-### Các bước cài đặt
+### Installation Steps
 
-1.  **Clone a Repository**
+1.  **Clone the Repository**
     ```sh
     git clone https://github.com/Pbl3-Group/Pbl3.git
     cd Pbl3
     ```
 
-2.  **Thiết lập Cơ sở dữ liệu**
-    *   Mở file `appsettings.json` và cập nhật chuỗi `ConnectionStrings` cho MySQL.
+2.  **Database Setup**
+    *   Open the `appsettings.json` file and update the `ConnectionStrings` for MySQL.
         ```json
         "ConnectionStrings": {
            "DefaultConnection": "Server=localhost;Database=JOBFLEX;User=YOUR_DB_USER;Password=YOUR_DB_PASSWORD;CharSet=utf8mb4;"
         }
         ```
-    *   Chạy lệnh migration để tạo CSDL:
+    *   Run the migration command to create the database:
         ```sh
         Update-Database
         ```
 
-3.  **Chạy ứng dụng**
+3.  **Run the Application**
     ```sh
     dotnet run
     ```
-    *   Truy cập vào `http://localhost:5000` (hoặc cổng được chỉ định).
+    *   Access the application at `http://localhost:5000` (or the specified port).
 
 ---
 
-## 🔮 Cải tiến trong tương lai
+## 🔮 Future Improvements
 
-Dựa trên nền tảng vững chắc đã xây dựng, đây là những tính năng thực tế và khả thi mà chúng tôi dự định phát triển trong các phiên bản tiếp theo:
+Building on the solid foundation, here are practical and feasible features we plan to develop in future releases:
 
-*   **🔗 Tích hợp Đăng nhập Mạng xã hội (Social Login):** Cho phép người dùng đăng ký/đăng nhập nhanh qua tài khoản **Google** hoặc **Facebook**.
-*   **📧 Hệ thống Gửi Email Thông báo Tự động:** Gửi email thông báo về các cập nhật quan trọng (tin nhắn mới, trạng thái ứng tuyển, việc làm phù hợp).
-*   **🤖 Nâng cấp AI: Phân tích & Tự động điền Hồ sơ từ CV (CV Parsing):** Xây dựng tính năng AI "đọc" file CV và tự động điền thông tin vào hồ sơ trên web.
-*   **💡 Cải tiến Hệ thống Gợi ý (Recommendation Engine):** Sử dụng Machine Learning để phân tích hành vi người dùng và đưa ra gợi ý việc làm chính xác hơn.
-*   **⚡ Nâng cấp Chat & Thông báo Real-time với SignalR:** Chuyển sang kết nối thời gian thực để tin nhắn và thông báo xuất hiện ngay lập tức.
-*   **⭐ Hệ thống Đánh giá Nhà tuyển dụng:** Cho phép ứng viên để lại đánh giá và xếp hạng về nhà tuyển dụng.
+*   **🔗 Social Login Integration:** Allow users to quickly register/log in via their **Google** or **Facebook** accounts.
+*   **📧 Automated Email Notification System:** Send email alerts for important updates (new messages, application status changes, relevant job suggestions).
+*   **🤖 AI Upgrade: CV Parsing & Profile Autofill:** Develop an AI feature to "read" CV files and automatically populate the user's web profile.
+*   **💡 Improved Recommendation Engine:** Use Machine Learning to analyze user behavior and provide more accurate job recommendations.
+*   **⚡ Real-time Chat & Notifications with SignalR:** Upgrade to a real-time connection for instant message and notification delivery.
+*   **⭐ Employer Review System:** Allow candidates to leave ratings and reviews for employers.
 
 ---
 
-## 📄 Giấy phép
+## 📄 License
 
-Dự án được cấp phép theo Giấy phép MIT - xem file [LICENSE](https://github.com/Pbl3-Group/Pbl3/blob/main/LICENSE) để biết chi tiết.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Pbl3-Group/Pbl3/blob/main/LICENSE) file for details.
 
-## ⭐ Ủng hộ dự án
+## ⭐ Support the Project
 
-Nếu bạn thấy dự án này hữu ích, hãy cân nhắc tặng nó một ngôi sao trên GitHub!
+If you find this project useful, please consider giving it a star on GitHub!
 
-## 📞 Liên hệ
+## 📞 Contact
 
-*   [@Chizk23](https://github.com/Chizk23) - Nguyễn Thanh Huyền
-*   [@BichUyen2609](https://github.com/BichUyen2609) - Nguyễn Thị Bích Uyên
-*   [@PhuongTran2212](https://github.com/PhuongTran2212) - Trần Thị Phượng
+*   [@Chizk23](https://github.com/Chizk23) - Nguyen Thanh Huyen
+*   [@BichUyen2609](https://github.com/BichUyen2609) - Nguyen Thi Bich Uyen
+*   [@PhuongTran2212](https://github.com/PhuongTran2212) - Tran Thi Phuong
