@@ -12,7 +12,8 @@
 
 Một ứng dụng web full-stack, được xây dựng trên nền tảng .NET 8 và MySQL, nhằm tạo ra một cầu nối hiệu quả giữa người tìm việc và nhà tuyển dụng trong thị trường việc làm linh hoạt (bán thời gian, thời vụ).
 
-*[Ảnh bìa hoặc GIF demo tổng quan về ứng dụng của bạn]*
+[![Demo Hệ thống Tìm kiếm Việc làm Bán thời gian và Thời vụ](wwwroot/images/README/thumbnail.png)](https://youtu.be/zwJa18qtiBQ)
+<p align="center"><em>Nhấp vào ảnh trên để xem video demo tổng quan về ứng dụng.</em></p>
 
 ## 🌟 Tổng quan dự án
 

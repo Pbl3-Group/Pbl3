@@ -65,9 +65,9 @@ namespace HeThongTimViec.ViewModels.TrangChu
 
             Founders = new List<FounderViewModel> // Sample data
             {
-                new FounderViewModel { Name="Nguyễn Thanh Huyền", Title="Đồng sáng lập & CEO", Quote="Chúng tôi tin rằng mọi người đều xứng đáng có cơ hội việc làm phù hợp với lịch trình và kỹ năng của họ.",  AvatarUrl="/file/img/founders/founder1.jpg", TwitterUrl="#", GithubUrl="#" },
-                new FounderViewModel { Name="Nguyễn Thị Bích Uyên", Title="Đồng sáng lập & COO", Quote="JOXFLEX được tạo ra để giải quyết thách thức về việc làm linh hoạt, kết nối đúng người với đúng công việc.", AvatarUrl="/file/img/founders/founder22.jpg", TwitterUrl="#", GithubUrl="#" },
-                new FounderViewModel { Name="Trần Thị Phượng", Title="Đồng sáng lập & CTO", Quote="Công nghệ của chúng tôi được xây dựng để tạo ra trải nghiệm tìm việc và tuyển dụng đơn giản và hiệu quả nhất.", AvatarUrl="/file/img/founders/founder3.jpg", TwitterUrl="#", GithubUrl="#" }
+                new FounderViewModel { Name="Nguyễn Thanh Huyền", Title="Đồng sáng lập & CEO", Quote="Chúng tôi tin rằng mọi người đều xứng đáng có cơ hội việc làm phù hợp với lịch trình và kỹ năng của họ.",  AvatarUrl="/file/img/founders/huyen.jpg", TwitterUrl="#", GithubUrl="#" },
+                new FounderViewModel { Name="Nguyễn Thị Bích Uyên", Title="Đồng sáng lập & COO", Quote="JOXFLEX được tạo ra để giải quyết thách thức về việc làm linh hoạt, kết nối đúng người với đúng công việc.", AvatarUrl="/file/img/founders/uyen.jpg", TwitterUrl="#", GithubUrl="#" },
+                new FounderViewModel { Name="Trần Thị Phượng", Title="Đồng sáng lập & CTO", Quote="Công nghệ của chúng tôi được xây dựng để tạo ra trải nghiệm tìm việc và tuyển dụng đơn giản và hiệu quả nhất.", AvatarUrl="/file/img/founders/phuong.jpg", TwitterUrl="#", GithubUrl="#" }
             };
             HeroImageUrl = "/images/hero/joxflex-hero-bg.webp"; // Example path
         }
