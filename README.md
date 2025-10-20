@@ -32,7 +32,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Bộ lọc Thông minh:** Lọc kết quả theo khoảng lương, loại hình công việc, kinh nghiệm, ca làm việc, và tin tuyển gấp.
 *   **Gợi ý việc làm phù hợp:** Hệ thống tự động chấm điểm (%) độ tương thích của ứng viên với tin tuyển dụng.
 
-    ![Giao diện tìm việc](www-root/images/README/TimViec.png)
+    ![Giao diện tìm việc](wwwroot/images/README/TimViec.png)
     *Trang tìm kiếm việc làm với bộ lọc nâng cao giúp người dùng nhanh chóng tìm được công việc phù hợp.*
 
 ### 👤 2. Quản lý Hồ sơ & Ứng tuyển
@@ -40,7 +40,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Hệ thống ứng tuyển linh hoạt:** Cho phép nộp CV mặc định hoặc tải lên một CV mới cho từng công việc.
 *   **Theo dõi & Tương tác thông minh:** Theo dõi trạng thái chi tiết của đơn ứng tuyển, rút đơn và **hoàn tác việc rút đơn**.
 
-    ![Giao diện quản lý việc đã ứng tuyển](www-root/images/README/viecdaungtuyen.png)
+    ![Giao diện quản lý việc đã ứng tuyển](wwwroot/images/README/viecdaungtuyen.png)
     *Giao diện quản lý các công việc đã ứng tuyển, cho phép theo dõi trạng thái và tương tác với từng đơn.*
 
 ### 🏢 3. Quản lý Tuyển dụng cho Nhà tuyển dụng
@@ -48,7 +48,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Quản lý & Sàng lọc ứng viên:** Xem danh sách ứng viên theo từng tin, lọc hồ sơ, và thay đổi trạng thái (chấp nhận/từ chối).
 *   **Chuyển đổi vai trò linh hoạt:** Dễ dàng chuyển đổi giữa giao diện tìm việc và tuyển dụng trên cùng một tài khoản cá nhân.
 
-    ![Giao diện quản lý ứng viên](www-root/images/README/quanlyungvien.png)
+    ![Giao diện quản lý ứng viên](wwwroot/images/README/quanlyungvien.png)
     *Dashboard quản lý ứng viên dành cho Nhà tuyển dụng, giúp sàng lọc và thay đổi trạng thái hồ sơ.*
 
 ### 💬 4. Hệ thống Nhắn tin theo Ngữ cảnh
@@ -56,7 +56,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Ngữ cảnh hội thoại rõ ràng:** Mỗi cuộc hội thoại được gắn với một tin tuyển dụng hoặc đơn ứng tuyển cụ thể.
 *   **Giao diện trực quan:** Giao diện chat quen thuộc, dễ sử dụng, hiển thị thông tin chi tiết của người liên hệ.
 
-    ![Giao diện nhắn tin](www-root/images/README/Tinnhan.png)
+    ![Giao diện nhắn tin](wwwroot/images/README/Tinnhan.png)
     *Hệ thống nhắn tin trực tiếp theo ngữ cảnh công việc, giúp giao tiếp giữa hai bên trở nên dễ dàng.*
 
 ### 🔔 5. Hệ thống Thông báo Tự động
@@ -64,7 +64,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Trung tâm thông báo:** Giao diện tập trung để người dùng quản lý, đánh dấu đã đọc, và xóa thông báo.
 *   **Cập nhật số lượng thông báo:** Hiển thị số lượng thông báo chưa đọc trên giao diện chính.
   
-    ![Giao diện thông báo](www-root/images/README/Thongbao.png)
+    ![Giao diện thông báo](wwwroot/images/README/Thongbao.png)
     *Trung tâm thông báo, nơi tập trung tất cả các cập nhật quan trọng của người dùng.*
 
 ### ⚠️ 6. Hệ thống Báo cáo & Kiểm duyệt
@@ -72,7 +72,7 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Quy trình xử lý khép kín cho Admin:** Tiếp nhận, xem xét (tự động cập nhật trạng thái), và xử lý báo cáo.
 *   **Phản hồi tự động hai chiều:** Gửi thông báo kết quả xử lý cho cả người báo cáo và người bị báo cáo.
 
-    ![Giao diện báo cáo của người dùng](www-root/images/README/baocao.png)
+    ![Giao diện báo cáo của người dùng](wwwroot/images/README/baocao.png)
     *Người dùng có thể dễ dàng báo cáo vi phạm và theo dõi trạng thái xử lý.*
 
 ### 🛡️ 7. Bảng điều khiển Quản trị viên (Admin Panel)
@@ -80,10 +80,10 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Quản lý người dùng toàn diện:** Quản lý tất cả tài khoản, xác minh doanh nghiệp, thay đổi trạng thái tài khoản.
 *   **Công cụ Admin mạnh mẽ:** Gửi thông báo hàng loạt đến các nhóm người dùng và **xuất dữ liệu ra file Excel**.
 
-    ![Dashboard của Admin](www-root/images/README/dashboardadmin.png)
+    ![Dashboard của Admin](wwwroot/images/README/dashboardadmin.png)
     *Bảng điều khiển trung tâm của Quản trị viên với các biểu đồ phân tích và số liệu thống kê trực quan.*
     
-    ![Giao diện quản lý báo cáo của Admin](www-root/images/README/baocaoadmin.png)
+    ![Giao diện quản lý báo cáo của Admin](wwwroot/images/README/baocaoadmin.png)
     *Giao diện quản lý và xử lý báo cáo vi phạm của Admin, tích hợp các hành động xử lý nhanh.*
 
 
