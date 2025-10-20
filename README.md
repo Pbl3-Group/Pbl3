@@ -12,7 +12,7 @@
 
 A full-stack web application built on the .NET 8 and MySQL platform, aimed at creating an effective bridge between job seekers and employers in the dynamic market for part-time and temporary work.
 
-[![Demo of the Part-time and Temporary Job Search System](httpsroot/images/README/thumbnail.png)](https://youtu.be/zwJa18qtiBQ)
+[![Demo of the Part-time and Temporary Job Search System](wwwroot/images/README/thumbnail.png)](https://youtu.be/zwJa18qtiBQ)
 <p align="center"><em>Click the image above to watch an overview demo of the application.</em></p>
 
 ## 🌟 Project Overview
