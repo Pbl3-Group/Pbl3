@@ -27,6 +27,7 @@ Nền tảng của chúng tôi được thiết kế để phục vụ song song
     *   Các **nhà tuyển dụng cá nhân** cần tìm người phụ giúp các công việc nhỏ lẻ, thời vụ.
 
 Để kết nối hiệu quả các nhóm đối tượng này, chúng tôi đã tạo ra một nền tảng tối ưu cho tốc độ và sự tiện lợi. Điểm nổi bật là người dùng có thể **chuyển đổi linh hoạt giữa vai trò Người tìm việc và Nhà tuyển dụng**, cùng với các công cụ như **nhắn tin theo ngữ cảnh** và **thông báo tự động** để thúc đẩy quá trình kết nối một cách hiệu quả nhất.
+
 ---
 
 ## ✨ Các chức năng chính
