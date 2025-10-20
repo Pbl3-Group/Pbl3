@@ -72,6 +72,9 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
 *   **Quy trình xử lý khép kín cho Admin:** Tiếp nhận, xem xét (tự động cập nhật trạng thái), và xử lý báo cáo.
 *   **Phản hồi tự động hai chiều:** Gửi thông báo kết quả xử lý cho cả người báo cáo và người bị báo cáo.
 
+    ![Giao diện quản lý báo cáo của Admin](wwwroot/images/README/baocaoadmin.png)
+    *Giao diện quản lý và xử lý báo cáo vi phạm của Admin, tích hợp các hành động xử lý nhanh.*
+
     ![Giao diện báo cáo của người dùng](wwwroot/images/README/baocao.png)
     *Người dùng có thể dễ dàng báo cáo vi phạm và theo dõi trạng thái xử lý.*
 
@@ -83,8 +86,6 @@ Thị trường này vô cùng đa dạng, từ các bạn sinh viên đang tìm
     ![Dashboard của Admin](wwwroot/images/README/dashboardadmin.png)
     *Bảng điều khiển trung tâm của Quản trị viên với các biểu đồ phân tích và số liệu thống kê trực quan.*
     
-    ![Giao diện quản lý báo cáo của Admin](wwwroot/images/README/baocaoadmin.png)
-    *Giao diện quản lý và xử lý báo cáo vi phạm của Admin, tích hợp các hành động xử lý nhanh.*
 
 
 ---
